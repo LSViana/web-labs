@@ -1,42 +1,10 @@
-# Nuxt 3 Minimal Starter
+# Web Play
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This website was created with the main purpose of explore the Web platform features
+(and *not* the framework used to build it).
 
-## Setup
+It's continuously evolving and will never be ready. Clone and play with it.
 
-Make sure to install the dependencies:
+---
 
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Created and maintained by [Lucas Viana](https://github.com/LSViana/).
