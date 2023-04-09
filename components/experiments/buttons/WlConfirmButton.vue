@@ -5,6 +5,8 @@
     @mousedown="listeners.mousedown"
     @mouseup="listeners.mouseup"
     @mouseleave="listeners.mouseleave"
+    @touchstart="listeners.touchstart"
+    @touchend="listeners.touchend"
   >
     <span class="progress-container absolute top-0 bottom-0 left-0 right-0 rounded overflow-hidden">
       <span
@@ -47,6 +49,12 @@ const listeners = {
     loading.value = false
   },
   mouseleave (): void {
+    loading.value = false
+  },
+  touchstart (): void {
+    loading.value = true
+  },
+  touchend (): void {
     loading.value = false
   },
   transitionend (): void {

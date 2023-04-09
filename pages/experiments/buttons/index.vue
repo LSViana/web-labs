@@ -17,9 +17,6 @@
         <WlConfirmButton variant="danger" @confirm="methods.onConfirm">
           Hold to Delete
         </WlConfirmButton>
-        <div class="mt-3">
-          <code>TODO: Add support for mobile.</code>
-        </div>
         <template #caption>
           Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
         </template>
