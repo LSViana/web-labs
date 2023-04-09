@@ -3,9 +3,9 @@
     <Container class="p-3 flex flex-col gap-3">
       <p>The <code>primary</code> button:</p>
       <ExperimentCanvas>
-        <BtnButton variant="primary">
+        <WlButton variant="primary">
           Get Started
-        </BtnButton>
+        </WlButton>
         <template #caption>
           Used to perform the main actions.
         </template>
@@ -17,5 +17,5 @@
 <script lang="ts" setup>
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import BtnButton from '~/components/experiments/buttons/BtnButton.vue'
+import WlButton from '~/components/experiments/buttons/WlButton.vue'
 </script>
