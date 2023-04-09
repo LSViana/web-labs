@@ -13,7 +13,6 @@
 import { computed } from 'vue'
 
 const slots = useSlots()
-console.log(slots)
 const hasCaption = computed(() => Boolean(slots.caption))
 </script>
 
