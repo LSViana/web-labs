@@ -1,4 +1,4 @@
-# Web Play
+# Web Labs
 
 This website was created with the main purpose of explore the Web platform features
 (and *not* the framework used to build it).

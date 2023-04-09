@@ -3,7 +3,7 @@
     <Container class="p-3">
       <h2 class="text-2xl">
         <NuxtLink to="/">
-          Web Play
+          Web Labs
         </NuxtLink>
       </h2>
     </Container>

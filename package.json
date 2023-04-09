@@ -1,5 +1,10 @@
 {
-  "name": "nuxt-app",
+  "name": "web-labs",
+  "author": {
+    "email": "lv201122@gmail.com",
+    "name": "Lucas Viana",
+    "url": "https://lsviana.github.io"
+  },
   "private": true,
   "scripts": {
     "build": "nuxt build",
