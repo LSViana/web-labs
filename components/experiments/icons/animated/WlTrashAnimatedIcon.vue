@@ -22,9 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: 'md'
 })
 
-const lidStyles = computed(() => [
-  `--tw-rotate: ${props.progress * -24}deg`
-])
+const lidStyles = computed(() => `--tw-rotate: ${props.progress * -24}deg`)
 </script>
 
 <style lang="scss" scoped>
