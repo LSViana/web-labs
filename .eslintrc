@@ -2,7 +2,50 @@
   "extends": [
     "@nuxtjs/eslint-config-typescript"
   ],
+  "plugins": [
+    "import"
+  ],
   "rules": {
-    "vue/multi-word-component-names": "off"
+    "vue/multi-word-component-names": "off",
+    "import/order": [
+      "error",
+      {
+        // All the options provided below are documented here:
+        // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md#options
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "~/types/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "~/views/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "~/components/**",
+            "group": "internal",
+            "position": "before"
+          },
+          {
+            "pattern": "~/components/**",
+            "group": "internal",
+            "position": "before"
+          }
+        ],
+        "newlines-between": "always"
+      }
+    ]
   }
 }
