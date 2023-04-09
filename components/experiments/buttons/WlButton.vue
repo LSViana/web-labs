@@ -48,10 +48,10 @@ const listeners = {
     emits('mouseup', event)
   },
   mouseenter (event: MouseEvent): void {
-    emits('mouseup', event)
+    emits('mouseenter', event)
   },
   mouseleave (event: MouseEvent): void {
-    emits('mouseup', event)
+    emits('mouseleave', event)
   }
 }
 </script>
