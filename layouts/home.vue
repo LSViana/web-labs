@@ -16,6 +16,12 @@ import Footer from '~/components/shared/surroundings/Footer.vue'
 
 useHead({
   title: 'Web Labs',
+  meta: [
+    {
+      name: 'viewport',
+      content: 'width=device-width, user-scalable=no'
+    }
+  ],
   link: [
     {
       rel: 'icon',
