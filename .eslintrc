@@ -9,6 +9,7 @@
     // Vue
     "vue/multi-word-component-names": "off",
     // TypeScript
+    "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/member-delimiter-style": [
       "error",
       {
