@@ -16,6 +16,10 @@ useHead({
   title: 'Web Labs',
   link: [
     {
+      rel: 'icon',
+      href: '/img/test-tube.png'
+    },
+    {
       rel: 'preconnect',
       href: 'https://fonts.googleapis.com'
     },
