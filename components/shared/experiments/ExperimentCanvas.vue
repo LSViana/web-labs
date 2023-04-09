@@ -3,7 +3,7 @@
     <div class="canvas p-5">
       <slot />
     </div>
-    <div v-if="hasCaption" class="border-t p-3 text-sm text-muted">
+    <div v-if="hasCaption" class="border-t p-3 text-sm bg-slate-50 text-muted dark:bg-slate-700 dark:text-muted-dark">
       <slot name="caption" />
     </div>
   </div>
@@ -20,9 +20,11 @@ const hasCaption = computed(() => Boolean(slots.caption))
 @import 'tailwindcss/utilities.css';
 
 .canvas {
-  @apply bg-gray-50;
+  @apply bg-white;
+  @apply dark:bg-slate-900;
   @apply bg-[length:8px_8px];
-  @apply bg-[position:8px_8px];
-  @apply bg-[radial-gradient(#{theme('colors.gray.300')}_1px,transparent_0)];
+  @apply bg-[position:3px_3px];
+  @apply bg-[radial-gradient(#{theme('colors.slate.300')}_1px,transparent_0)];
+  @apply dark:bg-[radial-gradient(#{theme('colors.slate.700')}_1px,transparent_0)];
 }
 </style>

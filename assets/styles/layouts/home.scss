@@ -1,4 +1,9 @@
 #home {
   font-family: 'Lato';
   -webkit-tap-highlight-color: transparent;
+
+  :deep(*) {
+    @apply border-slate-300;
+    @apply dark:border-slate-500;
+  }
 }

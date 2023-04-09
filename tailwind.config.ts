@@ -7,7 +7,10 @@ export default <Partial<Config>>{
     extend: {
       colors: {
         primary: colors.sky,
-        muted: colors.slate[500]
+        muted: {
+          DEFAULT: colors.slate[500],
+          dark: colors.slate[300]
+        }
       }
     }
   }
