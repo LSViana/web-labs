@@ -1,6 +1,6 @@
 <template>
-  <header class="p-3 border-b">
-    <Container>
+  <header class="border-b">
+    <Container class="p-3">
       <h2 class="text-2xl">
         Web Play
       </h2>

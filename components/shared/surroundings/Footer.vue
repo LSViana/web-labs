@@ -1,6 +1,6 @@
 <template>
-  <footer class="p-3 border-t">
-    <Container>
+  <footer class="border-t">
+    <Container class="p-3">
       <span>Created by Lucas Viana.</span>
     </Container>
   </footer>
