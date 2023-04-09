@@ -13,6 +13,7 @@ import Header from '~/components/shared/surroundings/Header.vue'
 import Footer from '~/components/shared/surroundings/Footer.vue'
 
 useHead({
+  title: 'Web Play',
   link: [
     {
       rel: 'preconnect',
