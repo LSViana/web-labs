@@ -23,8 +23,6 @@ const hasCaption = computed(() => Boolean(slots.caption))
   @apply bg-gray-50;
   @apply bg-[length:8px_8px];
   @apply bg-[position:8px_8px];
-
-  //@apply bg-[radial-gradient(black 1px, transparent 0)];
-  background-image: radial-gradient(#{theme('colors.gray.300')} 0.5px, transparent 0);
+  @apply bg-[radial-gradient(#{theme('colors.gray.300')}_1px,transparent_0)];
 }
 </style>
