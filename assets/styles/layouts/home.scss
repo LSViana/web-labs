@@ -6,4 +6,8 @@
     @apply border-slate-300;
     @apply dark:border-slate-500;
   }
+
+  :deep(svg) {
+    @apply overflow-visible;
+  }
 }
