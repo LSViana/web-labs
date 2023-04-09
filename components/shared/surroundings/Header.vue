@@ -1,5 +1,5 @@
 <template>
-  <header class="p-3 border-b shadow-md">
+  <header class="p-3 border-b">
     <Container>
       <h2 class="text-2xl">
         Web Play
