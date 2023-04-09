@@ -3,11 +3,25 @@
     <Container class="p-3 flex flex-col gap-3">
       <p>The <code>primary</code> button:</p>
       <ExperimentCanvas>
-        <WlButton variant="primary" @click="onClick">
+        <WlButton variant="primary" @click="methods.onClick">
           Get Started
         </WlButton>
         <template #caption>
           Used to perform the main actions. Clicked <code>{{ counter }}</code> times.
+        </template>
+      </ExperimentCanvas>
+      <p>
+        The confirm button allows you to perform the main action with a confirmation step:
+      </p>
+      <ExperimentCanvas>
+        <WlConfirmButton variant="danger" @confirm="methods.onConfirm">
+          Hold to Delete
+        </WlConfirmButton>
+        <div class="mt-3">
+          <code>TODO: Add support for mobile.</code>
+        </div>
+        <template #caption>
+          Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
         </template>
       </ExperimentCanvas>
     </Container>
@@ -20,10 +34,17 @@ import { ref } from 'vue'
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
 import WlButton from '~/components/experiments/buttons/WlButton.vue'
+import WlConfirmButton from '~/components/experiments/buttons/WlConfirmButton.vue'
 
 const counter = ref(0)
+const confirmed = ref(false)
 
-function onClick () {
-  counter.value++
+const methods = {
+  onClick (): void {
+    counter.value++
+  },
+  onConfirm (): void {
+    confirmed.value = true
+  }
 }
 </script>
