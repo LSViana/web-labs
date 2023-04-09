@@ -6,7 +6,7 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {
-        primary: colors.violet,
+        primary: colors.sky,
         muted: colors.slate[500]
       }
     }
