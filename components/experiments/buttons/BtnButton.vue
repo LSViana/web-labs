@@ -20,13 +20,6 @@ const variantClasses: Record<ButtonVariant, string> = {
 }
 
 const classes = computed(() => ([
-  '',
   variantClasses[props.variant]
 ]))
 </script>
-
-<style lang="scss" scoped>
-.btn-button {
-
-}
-</style>
