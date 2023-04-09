@@ -29,6 +29,8 @@ type Props = {
 };
 type Events = {
   (e: 'confirm'): void;
+  (e: 'start-confirm'): void;
+  (e: 'stop-confirm'): void;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -43,19 +45,19 @@ const progressClasses = computed(() => ([
 
 const listeners = {
   mousedown (): void {
-    loading.value = true
+    methods.onStartConfirm()
   },
   mouseup (): void {
-    loading.value = false
+    methods.onStopConfirm()
   },
   mouseleave (): void {
-    loading.value = false
+    methods.onStopConfirm()
   },
   touchstart (): void {
-    loading.value = true
+    methods.onStartConfirm()
   },
   touchend (): void {
-    loading.value = false
+    methods.onStopConfirm()
   },
   transitionend (): void {
     if (loading.value) {
@@ -65,6 +67,14 @@ const listeners = {
 }
 
 const methods = {
+  onStartConfirm (): void {
+    loading.value = true
+    emits('start-confirm')
+  },
+  onStopConfirm (): void {
+    loading.value = false
+    emits('stop-confirm')
+  },
   onConfirm (): void {
     emits('confirm')
   }
