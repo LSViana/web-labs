@@ -15,7 +15,7 @@ const props = defineProps<{
 }>()
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-blue-500 text-blue-100 ring-blue-300 hover:bg-blue-600 active:bg-blue-700',
+  primary: 'bg-primary-500 text-primary-100 ring-primary-300 hover:bg-primary-600 active:bg-primary-700',
   secondary: 'bg-gray-500 text-gray-100 ring-gray-300 hover:bg-gray-600 active:bg-gray-700'
 }
 
