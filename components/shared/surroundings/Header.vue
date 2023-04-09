@@ -2,7 +2,9 @@
   <header class="border-b">
     <Container class="p-3">
       <h2 class="text-2xl">
-        Web Play
+        <NuxtLink to="/">
+          Web Play
+        </NuxtLink>
       </h2>
     </Container>
   </header>
