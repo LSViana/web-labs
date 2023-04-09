@@ -1,6 +1,6 @@
 <template>
   <button
-    class="btn-button px-4 py-2 rounded transition-[background-color,box-shadow] focus:ring-4"
+    class="wl-button px-4 py-2 rounded transition-[background-color,box-shadow] focus:ring-4"
     :class="classes"
     @click="onClick"
   >
