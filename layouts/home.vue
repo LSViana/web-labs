@@ -9,6 +9,8 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from '@vueuse/head'
+
 import Header from '~/components/shared/surroundings/Header.vue'
 import Footer from '~/components/shared/surroundings/Footer.vue'
 

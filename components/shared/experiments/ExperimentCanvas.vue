@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 
 const slots = useSlots()
 const hasCaption = computed(() => Boolean(slots.caption))
