@@ -11,7 +11,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "typecheck": "vue-tsc --noEmit"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
