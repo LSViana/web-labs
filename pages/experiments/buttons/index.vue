@@ -14,9 +14,7 @@
         The confirm button allows you to perform the main action with a confirmation step:
       </p>
       <ExperimentCanvas>
-        <WlConfirmButton variant="danger" @confirm="methods.onConfirm">
-          Hold to Delete
-        </WlConfirmButton>
+        <WlConfirmDeleteButton @confirm="methods.onConfirm" />
         <template #caption>
           Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
         </template>
@@ -31,7 +29,7 @@ import { ref } from 'vue'
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
 import WlButton from '~/components/experiments/buttons/WlButton.vue'
-import WlConfirmButton from '~/components/experiments/buttons/WlConfirmButton.vue'
+import WlConfirmDeleteButton from '~/components/experiments/buttons/WlConfirmDeleteButton.vue'
 
 const counter = ref(0)
 const confirmed = ref(false)
