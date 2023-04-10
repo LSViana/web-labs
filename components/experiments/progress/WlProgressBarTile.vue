@@ -3,7 +3,7 @@
     <div
       v-for="i in props.max"
       :key="i"
-      class="w-1.5 h-6 rounded-full"
+      class="w-1.5 h-10 rounded-full"
       :class="[ i <= value ? 'bg-green-500' : 'bg-green-900' ]"
     />
   </div>
