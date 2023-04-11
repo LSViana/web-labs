@@ -7,6 +7,8 @@
     @mouseleave="listeners.mouseleave"
     @touchstart="listeners.touchstart"
     @touchend="listeners.touchend"
+    @keydown="listeners.keydown"
+    @keyup="listeners.keyup"
   >
     <span class="progress-container absolute top-0 bottom-0 left-0 right-0 rounded overflow-hidden">
       <span
@@ -21,6 +23,8 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
+
+import { KeyboardCode } from '~/types/ui/keyboardEvent'
 
 import WlButton, { WlButtonVariant } from '~/components/experiments/buttons/WlButton.vue'
 
@@ -58,6 +62,16 @@ const listeners = {
   },
   touchend (): void {
     methods.onStopConfirm()
+  },
+  keydown (event: KeyboardEvent): void {
+    if (event.code === KeyboardCode.space) {
+      methods.onStartConfirm()
+    }
+  },
+  keyup (event: KeyboardEvent): void {
+    if (event.code === KeyboardCode.space) {
+      methods.onStopConfirm()
+    }
   },
   transitionend (): void {
     if (loading.value) {
