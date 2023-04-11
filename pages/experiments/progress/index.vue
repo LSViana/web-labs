@@ -10,6 +10,15 @@
           Used to show progress when the number of steps is known.
         </template>
       </ExperimentCanvas>
+      <p>The track progress bar:</p>
+      <ExperimentCanvas>
+        <div class="flex">
+          <WlProgressBarTrack :value="progressTile" :max="10" />
+        </div>
+        <template #caption>
+          Used to show progress when the precision is lower and/or the number of steps is unknown.
+        </template>
+      </ExperimentCanvas>
     </Container>
   </NuxtLayout>
 </template>
@@ -20,6 +29,7 @@ import { ref } from 'vue'
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
 import WlProgressBarTile from '~/components/experiments/progress/WlProgressBarTile.vue'
+import WlProgressBarTrack from '~/components/experiments/progress/WlProgressBarTrack.vue'
 
 const progressTile = ref(5)
 
