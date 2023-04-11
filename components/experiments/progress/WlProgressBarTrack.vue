@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, StyleValue } from 'vue'
 
 type Props = {
   value: number;
@@ -14,7 +14,7 @@ type Props = {
 
 const props = defineProps<Props>()
 
-const trackStyles = computed<Partial<CSSStyleDeclaration>>(() => ({
+const trackStyles = computed<StyleValue>(() => ({
   width: `${props.value / props.max * 100}%`
 }))
 </script>
