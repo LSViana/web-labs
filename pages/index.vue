@@ -20,7 +20,7 @@ import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCard from '~/components/shared/experiments/ExperimentCard.vue'
 
 const experiments: Experiment[] = [
-  { name: 'Buttons', route: '/experiments/buttons' },
+  { name: 'Button', route: '/experiments/button' },
   { name: 'Progress', route: '/experiments/progress' },
   { name: 'Drag & Drop', route: '/experiments/drag-n-drop' },
   { name: 'SVG', route: '/experiments/svg' }
