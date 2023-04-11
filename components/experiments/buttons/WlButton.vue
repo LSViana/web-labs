@@ -24,6 +24,8 @@ type Events = {
   (e: 'mouseleave', event: MouseEvent): void;
   (e: 'touchstart', event: TouchEvent): void;
   (e: 'touchend', event: TouchEvent): void;
+  (e: 'keydown', event: KeyboardEvent): void;
+  (e: 'keyup', event: KeyboardEvent): void;
 }
 
 const variantClasses: Record<WlButtonVariant, string> = {
@@ -66,6 +68,12 @@ const listeners = {
   },
   touchend (event: TouchEvent): void {
     emits('touchend', event)
+  },
+  keydown (event: KeyboardEvent): void {
+    emits('keydown', event)
+  },
+  keyup (event: KeyboardEvent): void {
+    emits('keyup', event)
   }
 }
 </script>
