@@ -1,12 +1,10 @@
-#home {
-  :deep(*) {
-    @apply border-slate-300;
-    @apply dark:border-slate-500;
+* {
+  @apply border-slate-300;
+  @apply dark:border-slate-500;
 
-    -webkit-tap-highlight-color: transparent;
-  }
+  -webkit-tap-highlight-color: transparent;
+}
 
-  :deep(svg) {
-    @apply overflow-visible;
-  }
+svg {
+  @apply overflow-visible;
 }
