@@ -18,6 +18,3 @@ const trackStyles = computed<StyleValue>(() => ({
   width: `${props.value / props.max * 100}%`
 }))
 </script>
-
-<style lang="scss" scoped>
-</style>
