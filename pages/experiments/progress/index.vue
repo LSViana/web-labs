@@ -19,6 +19,15 @@
           Used to show progress when the precision is lower and/or the number of steps is unknown.
         </template>
       </ExperimentCanvas>
+      <p>The track progress donut:</p>
+      <ExperimentCanvas>
+        <div class="flex">
+          <WlProgressDonutTrack :value="progressTile" :max="10" />
+        </div>
+        <template #caption>
+          Used to show progress when the precision is lower and/or the number of steps is unknown.
+        </template>
+      </ExperimentCanvas>
     </Container>
   </NuxtLayout>
 </template>
@@ -30,6 +39,7 @@ import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
 import WlProgressBarTile from '~/components/experiments/progress/WlProgressBarTile.vue'
 import WlProgressBarTrack from '~/components/experiments/progress/WlProgressBarTrack.vue'
+import WlProgressDonutTrack from '~/components/experiments/progress/WlProgressDonutTrack.vue'
 
 const progressTile = ref(5)
 
