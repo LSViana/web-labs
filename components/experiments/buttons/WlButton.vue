@@ -1,6 +1,6 @@
 <template>
   <button
-    class="wl-button px-4 py-2 rounded border outline-0 focus-visible:ring-4 transition-[background-color,box-shadow]"
+    class="wl-button px-4 py-2 rounded border outline-0 focus-visible:ring-4 focus-visible:z-10 transition-[background-color,box-shadow]"
     :class="classes"
     v-on="listeners"
   >
