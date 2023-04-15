@@ -10,7 +10,7 @@
     @keydown="listeners.keydown"
     @keyup="listeners.keyup"
   >
-    <span class="progress-container absolute top-0 bottom-0 left-0 right-0 rounded overflow-hidden">
+    <span class="progress-container absolute top-0 bottom-0 left-0 right-0 rounded-[inherit] overflow-hidden">
       <span
         class="progress block h-full bg-white opacity-20 mix-blend-plus-lighter transition-[width] duration-[1000ms]"
         :class="progressClasses"
