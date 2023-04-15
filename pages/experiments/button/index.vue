@@ -19,6 +19,20 @@
           Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
         </template>
       </ExperimentCanvas>
+      <p>
+        The button group allows putting multiple actions together.
+      </p>
+      <ExperimentCanvas>
+        <WlButtonGroup>
+          <WlButton variant="secondary">
+            Cancel
+          </WlButton>
+          <WlConfirmDeleteButton @confirm="methods.onConfirm" />
+        </WlButtonGroup>
+        <template #caption>
+          Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
+        </template>
+      </ExperimentCanvas>
     </Container>
   </NuxtLayout>
 </template>
@@ -30,6 +44,7 @@ import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
 import WlButton from '~/components/experiments/buttons/WlButton.vue'
 import WlConfirmDeleteButton from '~/components/experiments/buttons/WlConfirmDeleteButton.vue'
+import WlButtonGroup from '~/components/experiments/buttons/WlButtonGroup.vue'
 
 const counter = ref(0)
 const confirmed = ref(false)
