@@ -30,7 +30,16 @@
           <WlConfirmDeleteButton @confirm="methods.onConfirm" />
         </WlButtonGroup>
         <template #caption>
-          Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
+          Used to group actions.
+        </template>
+      </ExperimentCanvas>
+      <p>
+        The rating button allows the user to rate something.
+      </p>
+      <ExperimentCanvas>
+        <WlRatingButton v-model:value="rating" />
+        <template #caption>
+          Used to evaluate aspects of something. Rating: <code>{{ rating }}</code>.
         </template>
       </ExperimentCanvas>
     </Container>
@@ -45,9 +54,11 @@ import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.v
 import WlButton from '~/components/experiments/buttons/WlButton.vue'
 import WlConfirmDeleteButton from '~/components/experiments/buttons/WlConfirmDeleteButton.vue'
 import WlButtonGroup from '~/components/experiments/buttons/WlButtonGroup.vue'
+import WlRatingButton from '~/components/experiments/buttons/WlRatingButton.vue'
 
 const counter = ref(0)
 const confirmed = ref(false)
+const rating = ref(3)
 
 const methods = {
   onClick (): void {
