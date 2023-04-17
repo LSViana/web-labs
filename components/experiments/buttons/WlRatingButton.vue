@@ -1,6 +1,6 @@
 <template>
   <WlButtonGroup class="wl-rating-button inline-flex">
-    <WlButton v-for="i in 5" :key="i" :variant="props.variant" class="flex" @click="methods.onClick(i)">
+    <WlButton v-for="i in 5" :key="i" :variant="props.variant" class="flex !p-2" @click="methods.onClick(i)">
       <WlStarIcon :value="i <= props.value" />
     </WlButton>
   </WlButtonGroup>
