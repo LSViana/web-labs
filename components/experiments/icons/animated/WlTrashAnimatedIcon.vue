@@ -18,8 +18,7 @@ type Props = {
 };
 
 const props = withDefaults(defineProps<Props>(), {
-  progress: 0,
-  size: 'md'
+  progress: 0
 })
 
 const lidStyles = computed(() => `--tw-rotate: ${props.progress * -24}deg`)

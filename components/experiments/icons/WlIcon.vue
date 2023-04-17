@@ -10,7 +10,7 @@ import { computed } from 'vue'
 export type WlIconSize = 'md';
 
 type Props = {
-  size: WlIconSize;
+  size?: WlIconSize;
 };
 
 const props = withDefaults(defineProps<Props>(), {
