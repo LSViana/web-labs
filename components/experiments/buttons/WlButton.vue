@@ -1,6 +1,6 @@
 <template>
   <button
-    class="wl-button px-4 py-2 rounded border outline-0 focus-visible:ring-4 focus-visible:z-10 transition-[background-color,box-shadow]"
+    class="wl-button px-4 py-2 rounded outline-0 focus-visible:ring-4 focus-visible:z-10 transition-[background-color,box-shadow]"
     :class="classes"
     v-on="listeners"
   >
@@ -29,14 +29,14 @@ type Events = {
 }
 
 const variantClasses: Record<WlButtonVariant, string> = {
-  primary: 'bg-primary-500 text-primary-50 border-primary-600 ' +
-    'dark:border-primary-500 hover:bg-primary-600 active:bg-primary-700 ' +
+  primary: 'bg-primary-500 text-primary-50 ' +
+    'hover:bg-primary-600 active:bg-primary-700 ' +
     'focus:ring-primary-300',
-  secondary: 'bg-gray-500 text-gray-50 border-gray-600 ' +
-    'dark:border-gray-500 hover:bg-gray-600 active:bg-gray-700 ' +
+  secondary: 'bg-gray-500 text-gray-50 ' +
+    'hover:bg-gray-600 active:bg-gray-700 ' +
     'focus:ring-gray-300',
-  danger: 'bg-red-500 text-red-50 border-red-600 ' +
-    'dark:border-red-500 hover:bg-red-600 active:bg-red-700 ' +
+  danger: 'bg-red-500 text-red-50 ' +
+    'hover:bg-red-600 active:bg-red-700 ' +
     'focus:ring-red-300'
 }
 
