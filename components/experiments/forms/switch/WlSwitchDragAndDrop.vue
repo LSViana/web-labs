@@ -6,7 +6,7 @@
       class="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer border-2 transition-colors"
       :class="[
         backgroundColors[(i - 1) % backgroundColors.length],
-        props.value === i ? borderColors[(i - 1) % borderColors.length] : 'border-transparent hover:border-white'
+        props.value === i ? borderColors[(i - 1) % borderColors.length] : 'border-transparent hover:border-white/25'
       ]"
       :data-value="i"
       @dragover="listeners.dragover"
