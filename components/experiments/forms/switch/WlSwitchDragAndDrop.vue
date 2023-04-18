@@ -20,7 +20,7 @@
         draggable="true"
         @dragstart="listeners.dragstart"
       />
-      <span v-else class="pointer-events-none">
+      <span v-else class="pointer-events-none text-white">
         {{ i }}
       </span>
     </div>
