@@ -3,10 +3,10 @@
     <div
       v-for="i in props.options"
       :key="i"
-      class="w-9 h-9 flex items-center justify-center rounded-full border-2 transition-colors"
+      class="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer border-2 transition-colors"
       :class="[
         backgroundColors[(i - 1) % backgroundColors.length],
-        props.value === i ? borderColors[(i - 1) % borderColors.length] : 'border-transparent'
+        props.value === i ? borderColors[(i - 1) % borderColors.length] : 'border-transparent hover:border-white'
       ]"
       :data-value="i"
       @dragover="listeners.dragover"
