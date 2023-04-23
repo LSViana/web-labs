@@ -8,6 +8,13 @@
           Used to enable/disable something.
         </template>
       </ExperimentCanvas>
+      <p>The component used to confirm before performing operations:</p>
+      <ExperimentCanvas>
+        <WlSwitchDragToConfirmShutdown @confirm="methods.onConfirm" />
+        <template #caption>
+          Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
+        </template>
+      </ExperimentCanvas>
     </Container>
   </NuxtLayout>
 </template>
@@ -18,6 +25,15 @@ import { ref } from 'vue'
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
 import WlSwitchDragAndDrop from '~/components/experiments/forms/switch/WlSwitchDragAndDrop.vue'
+import WlSwitchDragToConfirmShutdown from '~/components/experiments/forms/switch/WlSwitchDragToConfirmShutdown.vue'
 
 const switchValue = ref(1)
+const confirmed = ref(false)
+
+const methods = {
+  onConfirm (): void {
+    console.log('confirm?')
+    confirmed.value = true
+  }
+}
 </script>
