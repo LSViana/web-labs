@@ -32,7 +32,6 @@ const confirmed = ref(false)
 
 const methods = {
   onConfirm (): void {
-    console.log('confirm?')
     confirmed.value = true
   }
 }
