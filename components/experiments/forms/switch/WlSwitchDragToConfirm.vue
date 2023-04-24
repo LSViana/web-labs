@@ -42,11 +42,9 @@ const maxOffset = 134 // 192-56-2 => [width of the track]-[padding of the track]
 const listeners = {
   pointerup (): void {
     dragging.value = false
-    document.body.style.cursor = ''
   },
   pointerdown (): void {
     dragging.value = true
-    document.body.style.cursor = 'move'
   },
   pointerenter (event: PointerEvent): void {
     if (event.buttons ^ 1) {
