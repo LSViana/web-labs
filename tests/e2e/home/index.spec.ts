@@ -1,4 +1,3 @@
-
 import { expect, Page, test } from '@playwright/test'
 
 test.describe('Home page', () => {
