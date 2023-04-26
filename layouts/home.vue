@@ -5,6 +5,9 @@
       <slot />
     </div>
     <Footer />
+    <ClientOnly>
+      <span data-test="hydrated" />
+    </ClientOnly>
   </div>
 </template>
 
