@@ -22,4 +22,12 @@ test.describe('Home page', () => {
   test('has main paragraph', async () => {
     await expect(page.locator('text=Experiments on the web platform.')).toBeVisible()
   })
+
+  test('has footer', async () => {
+    await expect(page.locator('text=Created by Lucas Viana.')).toBeVisible()
+  })
+
+  test('matches screenshot', async () => {
+    await expect(await page.screenshot()).toMatchSnapshot()
+  })
 })
