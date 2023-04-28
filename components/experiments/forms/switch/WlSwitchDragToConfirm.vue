@@ -6,8 +6,6 @@
       :style="handleStyles"
       @pointerup="listeners.pointerup"
       @pointerdown="listeners.pointerdown"
-      @pointermove="listeners.pointermove"
-      @pointerenter="listeners.pointerenter"
     >
       <span class="flex pointer-events-none">
         <slot />
@@ -42,14 +40,15 @@ const maxOffset = 134 // 192-56-2 => [width of the track]-[padding of the track]
 const listeners = {
   pointerup (): void {
     dragging.value = false
+
+    document.body.removeEventListener('pointermove', this.pointermove)
+    document.body.removeEventListener('pointerup', this.pointerup)
   },
   pointerdown (): void {
     dragging.value = true
-  },
-  pointerenter (event: PointerEvent): void {
-    if (event.buttons ^ 1) {
-      dragging.value = false
-    }
+
+    document.body.addEventListener('pointermove', this.pointermove)
+    document.body.addEventListener('pointerup', this.pointerup)
   },
   pointermove (event: PointerEvent): void {
     if (!dragging.value) {
