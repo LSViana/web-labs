@@ -8,7 +8,7 @@
     @drop="listeners.drop"
   >
     <span
-      class="p-3 mr-[1px] pointer-events-none"
+      class="p-3 mr-[1px] pointer-events-none transition-colors"
       :class="chooseFileClasses"
     >
       Choose File
