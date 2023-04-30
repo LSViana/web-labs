@@ -17,9 +17,9 @@
       </ExperimentCanvas>
       <p>The component used to receive file uploads:</p>
       <ExperimentCanvas>
-        <WlFileInput />
+        <WlFileInput v-model:value="files" accept="image/png" multiple />
         <template #caption>
-          Used to allow the user to upload files.
+          Used to allow the user to upload files. Accepts multiple PNG images.
         </template>
       </ExperimentCanvas>
     </Container>
@@ -37,6 +37,7 @@ import WlFileInput from '~/components/experiments/forms/file/WlFileInput.vue'
 
 const switchValue = ref(1)
 const confirmed = ref(false)
+const files = ref<FileList>()
 
 const methods = {
   onConfirm (): void {
