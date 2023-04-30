@@ -15,29 +15,40 @@
     </span>
     <span class="py-3 pl-3 pr-12 bg-slate-200 dark:bg-slate-800 pointer-events-none">
       <span class="opacity-70">
-        <template v-if="droppedFiles">
-          Dropped {{ droppedFiles.length }} {{ droppedFiles.length > 1 ? 'files' : 'file' }}
+        <template v-if="props.value">
+          Dropped {{ props.value.length }} {{ props.value.length > 1 ? 'files' : 'file' }}
         </template>
         <template v-else>
           {{ dragging ? 'Drop file here' : 'Select a file...' }}
         </template>
       </span>
     </span>
-    <input type="file" class="opacity-0 absolute pointer-events-none">
+    <input
+      type="file"
+      :multiple="props.multiple"
+      :accept="props.accept"
+      class="opacity-0 absolute pointer-events-none"
+      @input="methods.onInputFile"
+    >
   </label>
 </template>
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-type Props = {};
-type Events = {};
+type Props = {
+  accept?: string;
+  multiple?: boolean;
+  value?: FileList;
+};
+type Events = {
+  (e: 'update:value', value: FileList): void;
+};
 
 const props = defineProps<Props>()
 const emits = defineEmits<Events>()
 
 const dragging = ref(false)
-const droppedFiles = ref<FileList>()
 
 const labelClasses = computed(() => ([
   dragging.value
@@ -67,18 +78,26 @@ const listeners = {
     event.preventDefault()
     dragging.value = false
 
-    const label = event.target as HTMLLabelElement
-    const input = label.querySelector('input')!
     const files = event.dataTransfer?.files
 
     if (files) {
-      input.files = files
-      droppedFiles.value = files
+      methods.onInput(files)
     }
   }
 }
 
-const methods = {}
+const methods = {
+  onInputFile (event: Event): void {
+    const input = event.target as HTMLInputElement
+
+    if (input.files) {
+      methods.onInput(input.files)
+    }
+  },
+  onInput (value: FileList): void {
+    emits('update:value', value)
+  }
+}
 </script>
 
 <style lang="scss" scoped>
