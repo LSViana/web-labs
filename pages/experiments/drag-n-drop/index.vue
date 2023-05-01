@@ -5,7 +5,7 @@
       <ExperimentCanvas>
         <WlSwitchDragAndDrop v-model:value="switchValue" :options="5" />
         <template #caption>
-          Used to enable/disable something.
+          Used to enable/disable something. Drag the active item to another position to change the value.
         </template>
       </ExperimentCanvas>
       <p>The component used to confirm before performing operations:</p>
