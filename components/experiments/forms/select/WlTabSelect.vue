@@ -1,5 +1,5 @@
 <template>
-  <div class="border flex p-2 bg-slate-800 rounded relative">
+  <div class="border flex p-2 bg-slate-200 dark:bg-slate-800 rounded relative">
     <button
       v-for="(option, index) in props.options"
       :key="option"
@@ -8,7 +8,7 @@
     >
       {{ option }}
     </button>
-    <div ref="selectedOverlay" class="absolute rounded bg-slate-600 opacity-0 transition-[left,width,opacity]" />
+    <div ref="selectedOverlay" class="absolute rounded bg-slate-300 dark:bg-slate-600 opacity-0 transition-[left,width,opacity]" />
   </div>
 </template>
 
