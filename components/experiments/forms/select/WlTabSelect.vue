@@ -1,5 +1,5 @@
 <template>
-  <div class="border flex p-2 bg-slate-800 rounded">
+  <div class="border flex p-2 bg-slate-800 rounded relative">
     <button
       v-for="(option, index) in props.options"
       :key="option"
@@ -41,18 +41,16 @@ const methods = {
       return
     }
 
-    const selectedButton = overlayElement?.parentElement?.children[props.value]
+    const selectedButton = overlayElement?.parentElement?.children[props.value] as HTMLElement | undefined
 
     if (!selectedButton) {
       return
     }
 
-    const { left, top, width, height } = selectedButton.getBoundingClientRect()
-
-    overlayElement.style.left = `${left}px`
-    overlayElement.style.top = `${top}px`
-    overlayElement.style.width = `${width}px`
-    overlayElement.style.height = `${height}px`
+    overlayElement.style.left = `${selectedButton.offsetLeft}px`
+    overlayElement.style.top = `${selectedButton.offsetTop}px`
+    overlayElement.style.width = `${selectedButton.offsetWidth}px`
+    overlayElement.style.height = `${selectedButton.offsetHeight}px`
 
     overlayElement.classList.remove('opacity-0')
     overlayElement.classList.add('opacity-100')
