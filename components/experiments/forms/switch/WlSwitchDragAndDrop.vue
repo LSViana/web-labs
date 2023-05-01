@@ -15,11 +15,14 @@
     >
       <div
         v-if="props.value === i"
-        class="w-6 h-6 rounded-full"
+        class="w-9 h-9 rounded-full flex items-center justify-center"
         :class="[ foregroundColors[(i - 1) % foregroundColors.length] ]"
         draggable="true"
+        :data-value="i"
         @dragstart="listeners.dragstart"
-      />
+      >
+        {{ i }}
+      </div>
       <span v-else class="pointer-events-none text-white">
         {{ i }}
       </span>
@@ -40,8 +43,8 @@ const props = defineProps<Props>()
 const emits = defineEmits<Events>()
 
 const backgroundColors = ['bg-green-900', 'bg-blue-900', 'bg-yellow-900', 'bg-red-900', 'bg-purple-900']
-const borderColors = ['border-green-500', 'border-blue-500', 'border-yellow-500', 'border-red-500', 'border-purple-500']
-const foregroundColors = ['bg-green-500', 'bg-blue-500', 'bg-yellow-500', 'bg-red-500', 'bg-purple-500']
+const borderColors = ['border-green-400', 'border-blue-400', 'border-yellow-400', 'border-red-400', 'border-purple-400']
+const foregroundColors = ['bg-green-400 text-green-900', 'bg-blue-400 text-blue-900', 'bg-yellow-400 text-yellow-900', 'bg-red-400 text-red-900', 'bg-purple-400 text-purple-900']
 
 const listeners = {
   click (event: MouseEvent): void {
