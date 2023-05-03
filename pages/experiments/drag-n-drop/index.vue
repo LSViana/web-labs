@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="p-3 flex flex-col gap-3">
+    <Container class="flex flex-col gap-3 p-3">
       <p>The component used to toggle between mutually exclusive states:</p>
       <ExperimentCanvas>
         <WlSwitchDragAndDrop v-model:value="switchValue" :options="5" />

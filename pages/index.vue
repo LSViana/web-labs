@@ -3,7 +3,7 @@
     <Container>
       <div class="p-3">
         <p>Experiments on the <b>web platform</b>.</p>
-        <ul class="mt-3 grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <ul class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
           <li v-for="experiment in experiments" :key="experiment.route">
             <ExperimentCard :experiment="experiment" />
           </li>

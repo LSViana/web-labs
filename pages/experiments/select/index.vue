@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="p-3 flex flex-col gap-3">
+    <Container class="flex flex-col gap-3 p-3">
       <p>The tab select:</p>
       <ExperimentCanvas>
         <div class="flex">

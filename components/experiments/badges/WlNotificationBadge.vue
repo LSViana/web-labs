@@ -1,7 +1,7 @@
 <template>
   <div
-    class="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-red-600 text-white flex justify-center items-center
-    text-sm transition-transform transform ease-in-out duration-300"
+    class="absolute -right-3 -top-3 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-sm
+    text-white transition-transform duration-300 ease-in-out"
     :class="classes"
   >
     <slot />

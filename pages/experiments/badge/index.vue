@@ -1,9 +1,9 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="p-3 flex flex-col gap-3">
+    <Container class="flex flex-col gap-3 p-3">
       <p>The notification badge:</p>
       <ExperimentCanvas>
-        <div class="w-12 h-12 aspect-square rounded bg-pink-300 text-pink-800 flex justify-center items-center relative">
+        <div class="relative flex aspect-square h-12 w-12 items-center justify-center rounded bg-pink-300 text-pink-800">
           <WlNotificationBadge v-model:value="badge">1</WlNotificationBadge>
           <span>BR</span>
         </div>
