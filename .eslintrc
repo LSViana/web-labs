@@ -8,6 +8,17 @@
   "rules": {
     // Vue
     "vue/multi-word-component-names": "off",
+    "vue/singleline-html-element-content-newline": [
+      "warn",
+      {
+        "ignores": [
+          // Built-in
+          "a", "abbr", "audio", "b", "bdi", "bdo", "canvas", "cite", "code", "data", "del", "dfn", "em", "i", "iframe", "ins", "kbd", "label", "map", "mark", "noscript", "object", "output", "picture", "q", "ruby", "s", "samp", "small", "span", "strong", "sub", "sup", "svg", "time", "u", "var", "video",
+          // Custom
+          "WlNotificationBadge"
+        ]
+      }
+    ],
     // TypeScript
     "@typescript-eslint/explicit-function-return-type": "error",
     "@typescript-eslint/member-delimiter-style": [
