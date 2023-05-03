@@ -23,6 +23,7 @@ const experiments: Experiment[] = [
   { name: 'Button', route: '/experiments/button' },
   { name: 'Progress', route: '/experiments/progress' },
   { name: 'Select', route: '/experiments/select' },
+  { name: 'Badge', route: '/experiments/badge' },
   { name: 'Drag & Drop', route: '/experiments/drag-n-drop' },
   { name: 'SVG', route: '/experiments/svg' }
 ]
