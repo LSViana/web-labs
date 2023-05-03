@@ -25,6 +25,7 @@
     "dotenv": "^16.0.3",
     "eslint": "^8.39.0",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-tailwindcss": "^3.11.0",
     "happy-dom": "^9.10.6",
     "nuxt": "^3.4.3",
     "sass": "^1.62.1",

@@ -1,6 +1,7 @@
 {
   "extends": [
-    "@nuxtjs/eslint-config-typescript"
+    "@nuxtjs/eslint-config-typescript",
+    "plugin:tailwindcss/recommended"
   ],
   "plugins": [
     "import"
