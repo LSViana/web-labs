@@ -58,6 +58,7 @@ const listeners = {
 
     event.dataTransfer.effectAllowed = 'move'
     event.dataTransfer.setData('text/plain', props.value.toString())
+    event.dataTransfer.setDragImage(document.createElement('div'), 0, 0)
   },
   dragover (event: DragEvent): void {
     event.preventDefault()
