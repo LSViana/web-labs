@@ -17,7 +17,7 @@
         v-for="(label, key, index) in PasswordStrength"
         :key="key"
         class="mt-0.5 h-1 w-4 rounded transition-colors"
-        :class="[ strengthValue >= index ? passwordStrengthContainerClasses[label] : 'bg-slate-600' ]"
+        :class="[ strengthValue >= index ? passwordStrengthContainerClasses[strength] : 'bg-slate-600' ]"
       />
     </div>
   </div>
