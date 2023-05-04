@@ -22,6 +22,7 @@ import ExperimentCard from '~/components/shared/experiments/ExperimentCard.vue'
 const experiments: Experiment[] = [
   { name: 'Button', route: '/experiments/button' },
   { name: 'Progress', route: '/experiments/progress' },
+  { name: 'Input', route: '/experiments/input' },
   { name: 'Select', route: '/experiments/select' },
   { name: 'Badge', route: '/experiments/badge' },
   { name: 'Drag & Drop', route: '/experiments/drag-n-drop' },
