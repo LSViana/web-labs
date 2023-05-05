@@ -5,7 +5,7 @@
       <span
         v-for="(label, key, index) in PasswordStrength"
         :key="key"
-        class="absolute text-sm font-semibold shadow-white drop-shadow transition-[opacity,transform] duration-300"
+        class="absolute text-sm font-semibold transition-[opacity,transform] duration-300"
         :class="[ strengthValue === index ? 'delay-100' : '-translate-y-3 opacity-0', passwordStrengthTextClasses[label] ]"
       >
         {{ label }}
