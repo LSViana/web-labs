@@ -26,6 +26,7 @@ const experiments: Experiment[] = [
   { name: 'Select', route: '/experiments/select' },
   { name: 'Badge', route: '/experiments/badge' },
   { name: 'Drag & Drop', route: '/experiments/drag-n-drop' },
+  { name: 'Scroll', route: '/experiments/scroll' },
   { name: 'SVG', route: '/experiments/svg' }
 ]
 </script>
