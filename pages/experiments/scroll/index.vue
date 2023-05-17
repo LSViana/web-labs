@@ -5,10 +5,10 @@
       <ExperimentCanvas>
         <WlScrollStackAnimatedContainer>
           <div
-            v-for="i in 8"
+            v-for="i in 15"
             :key="i"
-            class="flex h-64 w-64 shrink-0 items-center justify-center rounded border"
-            :style="{ backgroundColor: `hsl(${i * 20 + 40}deg, 100%, 50%)`, borderColor: `hsl(${i * 20 + 40}deg, 100%, 40%)` }"
+            class="flex h-32 w-32 shrink-0 items-center justify-center rounded border"
+            :style="{ backgroundColor: `hsl(${i * 10 + 30}deg, 100%, 50%)`, borderColor: `hsl(${i * 10 + 30}deg, 100%, 40%)` }"
           >
             {{ i }}
           </div>
