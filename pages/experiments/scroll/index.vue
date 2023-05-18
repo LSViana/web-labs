@@ -7,7 +7,7 @@
           <div
             v-for="i in 15"
             :key="i"
-            class="flex h-32 w-32 shrink-0 items-center justify-center rounded border"
+            class="flex h-32 w-32 shrink-0 items-center justify-center rounded border text-slate-800"
             :style="{ backgroundColor: `hsl(${i * 10 + 30}deg, 100%, 50%)`, borderColor: `hsl(${i * 10 + 30}deg, 100%, 40%)` }"
           >
             {{ i }}
