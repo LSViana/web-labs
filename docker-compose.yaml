@@ -1,0 +1,20 @@
+services:
+  e2e-tests:
+    image: mcr.microsoft.com/playwright:v1.34.0-jammy
+    command: bash -c "cd work && npm run test:e2e"
+    environment:
+      - BASE_URL=http://host.docker.internal:3000
+    volumes:
+      - ./:/work/
+    ports:
+      - 3001:9323 # 3001 is the next port after the dev. server
+
+  e2e-tests-update-snapshots:
+    image: mcr.microsoft.com/playwright:v1.34.0-jammy
+    command: bash -c "cd work && npm run test:e2e -- --update-snapshots"
+    environment:
+      - BASE_URL=http://host.docker.internal:3000
+    volumes:
+      - ./:/work/
+    ports:
+      - 3001:9323 # 3001 is the next port after the dev. server
