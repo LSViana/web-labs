@@ -11,6 +11,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "test:e2e": "npx playwright test",
     "postinstall": "nuxt prepare",
     "typecheck": "vue-tsc --noEmit"
   },
