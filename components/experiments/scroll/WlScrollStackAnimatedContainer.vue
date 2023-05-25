@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 const scrolledClass = 'scrolled'
 const overScrolledClass = 'overscrolled'
-const childrenClasses = ['transition-transform', 'duration-500']
+const childrenClasses = ['transition-transform', 'origin-left', 'duration-500']
 
 const listeners = {
   scroll (event: Event): void {
@@ -54,10 +54,10 @@ const listeners = {
 
 <style lang="scss">
 .scrolled {
-  transform: translateX(-0.6rem) scale(0.95);
+  transform: translateX(-0.4rem) scale(0.95);
 }
 
 .overscrolled {
-  transform: translateX(-1.2rem) scale(0.9);
+  transform: translateX(-0.7rem) scale(0.9);
 }
 </style>
