@@ -1,10 +1,10 @@
 <template>
   <NuxtLayout name="home">
     <Container>
-      <div class="p-3">
-        <p>Experiments on the <b>web platform</b>.</p>
+      <div v-for="group in groups" :key="group.target" class="p-3">
+        <p>{{ group.target }}</p>
         <ul class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-          <li v-for="experiment in experiments" :key="experiment.route">
+          <li v-for="experiment in group.experiments" :key="experiment.route">
             <ExperimentCard :experiment="experiment" />
           </li>
         </ul>
@@ -19,14 +19,35 @@ import { Experiment } from '~/types/experiments'
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCard from '~/components/shared/experiments/ExperimentCard.vue'
 
-const experiments: Experiment[] = [
-  { name: 'Button', route: '/experiments/button' },
-  { name: 'Progress', route: '/experiments/progress' },
-  { name: 'Input', route: '/experiments/input' },
-  { name: 'Select', route: '/experiments/select' },
-  { name: 'Badge', route: '/experiments/badge' },
-  { name: 'Drag & Drop', route: '/experiments/drag-n-drop' },
-  { name: 'Scroll', route: '/experiments/scroll' },
-  { name: 'SVG', route: '/experiments/svg' }
+type ExperimentGroup = {
+  target: string;
+  experiments: Experiment[];
+}
+
+const groups: ExperimentGroup[] = [
+  {
+    target: 'Forms & Input',
+    experiments: [
+      { name: 'Button', route: '/experiments/button' },
+      { name: 'Progress', route: '/experiments/progress' },
+      { name: 'Input', route: '/experiments/input' },
+      { name: 'Select', route: '/experiments/select' },
+      { name: 'Badge', route: '/experiments/badge' }
+    ]
+  },
+  {
+    target: 'Micro-interactions',
+    experiments: [
+      { name: 'Scroll', route: '/experiments/scroll' },
+      { name: 'SVG', route: '/experiments/svg' },
+      { name: 'Drag & Drop', route: '/experiments/drag-n-drop' }
+    ]
+  },
+  {
+    target: 'Navigation',
+    experiments: [
+      { name: 'Transitions', route: '/experiments/transitions' }
+    ]
+  }
 ]
 </script>
