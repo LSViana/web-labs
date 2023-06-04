@@ -18,8 +18,11 @@ test.describe('Home page', () => {
     await expect(page).toHaveTitle('Web Labs')
   })
 
-  test('has main paragraph', async () => {
-    await expect(page.locator('text=Experiments on the web platform.')).toBeVisible()
+  test('has groups', async () => {
+    await expect(page.locator('text="Forms & Input"')).toBeVisible()
+    await expect(page.locator('text=Micro-interactions')).toBeVisible()
+
+    // This list is not exhaustive, the snapshot checks for all groups.
   })
 
   test('has footer', async () => {
