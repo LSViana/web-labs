@@ -1,8 +1,8 @@
 <template>
   <header class="border-b">
-    <Container class="flex justify-between items-center">
+    <Container class="flex items-center justify-between">
       <h2 class="text-2xl">
-        <NuxtLink to="/" class="p-3 inline-block">
+        <NuxtLink to="/" class="inline-block p-3">
           Web Labs
         </NuxtLink>
       </h2>
