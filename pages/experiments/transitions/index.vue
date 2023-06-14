@@ -34,7 +34,7 @@ const listeners = {
       return
     }
 
-    document.startViewTransition?.(() => {
+    document.startViewTransition(() => {
       methods.goToDetails()
     })
   }
