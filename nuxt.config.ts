@@ -11,5 +11,8 @@ export default defineNuxtConfig({
   },
   tailwindcss: {
     cssPath: '~/assets/styles/tailwind.scss'
+  },
+  experimental: {
+    viewTransition: true
   }
 })
