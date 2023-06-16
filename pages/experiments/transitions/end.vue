@@ -13,7 +13,11 @@ import { useRouter } from '#app'
 
 import WlButton from '~/components/experiments/buttons/WlButton.vue'
 
+import { useCustomViewTransitions } from '~/composables/view-transitions'
+
 const router = useRouter()
+
+useCustomViewTransitions()
 
 const methods = {
   goBack (): void {
@@ -48,16 +52,18 @@ const listeners = {
   }
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  mix-blend-mode: unset;
-}
+html.end {
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    mix-blend-mode: unset;
+  }
 
-::view-transition-old(root) {
-  animation: 500ms ease-out old;
-}
+  &::view-transition-old(root) {
+    animation: 500ms ease-out old;
+  }
 
-::view-transition-new(root) {
-  animation: 500ms ease-out new;
+  &::view-transition-new(root) {
+    animation: 500ms ease-out new;
+  }
 }
 </style>
