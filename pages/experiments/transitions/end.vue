@@ -1,41 +1,21 @@
 <template>
   <NuxtLayout name="home">
     <div class="flex justify-center p-3">
-      <WlButton variant="primary" @click="listeners.click">
-        View Details
-      </WlButton>
+      <NuxtLink to="/experiments/transitions" draggable="false">
+        <WlButton variant="primary" style="view-transition-name: view-details">
+          View Details
+        </WlButton>
+      </NuxtLink>
     </div>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from '#app'
-
 import WlButton from '~/components/experiments/buttons/WlButton.vue'
 
 import { useCustomViewTransitions } from '~/composables/view-transitions'
 
-const router = useRouter()
-
 useCustomViewTransitions()
-
-const methods = {
-  goBack (): void {
-    router.push('/experiments/transitions')
-  }
-}
-
-const listeners = {
-  click (): void {
-    if (!document.startViewTransition) {
-      methods.goBack()
-
-      return
-    }
-
-    document.startViewTransition?.(() => methods.goBack())
-  }
-}
 </script>
 
 <style lang="scss">
@@ -52,6 +32,25 @@ const listeners = {
   }
 }
 
+@keyframes view-details {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+::view-transition-old(view-details) {
+  display: none;
+}
+
+::view-transition-new(view-details) {
+  animation: view-details 300ms ease-in-out;
+  mix-blend-mode: normal;
+}
+
 html.end {
   &::view-transition-old(root),
   &::view-transition-new(root) {
@@ -59,11 +58,11 @@ html.end {
   }
 
   &::view-transition-old(root) {
-    animation: 500ms ease-out old;
+    animation: 300ms ease-in-out old;
   }
 
   &::view-transition-new(root) {
-    animation: 500ms ease-out new;
+    animation: 300ms ease-in-out new;
   }
 }
 </style>
