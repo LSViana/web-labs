@@ -1,12 +1,30 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 import { RealtimeChannel } from '@supabase/realtime-js'
 
-import { useAppConfig } from '#app'
+import { useAppConfig } from '#imports'
 
 type Supabase = {
   client: SupabaseClient;
   channel: RealtimeChannel;
   channelConnected: Promise<void>;
+}
+
+function buildSupabase (): Supabase {
+  const config = useAppConfig()
+
+  const client = createClient(config.supabase.url, config.supabase.key, {
+    auth: {
+      persistSession: false
+    }
+  })
+  const channel = client.channel('web-labs')
+  const channelConnected = getChannelConnectedPromise(channel)
+
+  return {
+    client,
+    channel,
+    channelConnected
+  }
 }
 
 function getChannelConnectedPromise (channel: RealtimeChannel): Promise<void> {
@@ -26,16 +44,7 @@ export function useSupabaseClient (): Supabase | undefined {
     return
   }
 
-  const config = useAppConfig()
-  const client = createClient(config.supabase.url, config.supabase.key)
-  const channel = client.channel('web-labs')
-  const channelConnected = getChannelConnectedPromise(channel)
-
-  return {
-    client,
-    channel,
-    channelConnected
-  }
+  return buildSupabase()
 }
 
 // Server-state
@@ -47,15 +56,7 @@ export function useSupabaseServer (): Supabase | undefined {
   }
 
   if (!supabaseServer) {
-    const client = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_KEY!)
-    const channel = client.channel('web-labs')
-    const channelConnected = getChannelConnectedPromise(channel)
-
-    supabaseServer = {
-      client,
-      channel,
-      channelConnected
-    }
+    supabaseServer = buildSupabase()
   }
 
   return supabaseServer
