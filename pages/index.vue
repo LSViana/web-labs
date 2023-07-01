@@ -14,10 +14,11 @@
 </template>
 
 <script lang="ts" setup>
-import { Experiment } from '~/types/experiments'
 
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCard from '~/components/shared/experiments/ExperimentCard.vue'
+
+import { Experiment } from '~/utils/types/experiments'
 
 type ExperimentGroup = {
   target: string;

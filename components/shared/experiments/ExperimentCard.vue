@@ -1,10 +1,10 @@
 <template>
   <NuxtLink
     class="
-      border rounded p-3 hover:border-slate-400
-      active:bg-slate-300
-      dark:active:text-slate-50 dark:active:bg-slate-700
-      transition-colors block text-center
+      block rounded border p-3
+      text-center
+      transition-colors hover:border-slate-400
+      active:bg-slate-300 dark:active:bg-slate-700 dark:active:text-slate-50
     "
     :to="props.experiment.route"
   >
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Experiment } from '~/types/experiments'
+import { Experiment } from '~/utils/types/experiments'
 
 const props = defineProps<{
   experiment: Experiment;

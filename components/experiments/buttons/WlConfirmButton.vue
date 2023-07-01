@@ -10,7 +10,7 @@
     @keydown="listeners.keydown"
     @keyup="listeners.keyup"
   >
-    <span class="progress-container absolute top-0 bottom-0 left-0 right-0 rounded-[inherit] overflow-hidden">
+    <span class="progress-container absolute inset-0 overflow-hidden rounded-[inherit]">
       <span
         class="progress block h-full bg-white opacity-20 mix-blend-plus-lighter transition-[width] duration-[1000ms]"
         :class="progressClasses"
@@ -24,9 +24,9 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import { KeyboardCode } from '~/types/ui/keyboardEvent'
-
 import WlButton, { WlButtonVariant } from '~/components/experiments/buttons/WlButton.vue'
+
+import { KeyboardCode } from '~/utils/types/ui/keyboardEvent'
 
 type Props = {
   variant: WlButtonVariant;
