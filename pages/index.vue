@@ -48,6 +48,12 @@ const groups: ExperimentGroup[] = [
     experiments: [
       { name: 'Transitions', route: '/experiments/transitions' }
     ]
+  },
+  {
+    target: 'Authentication',
+    experiments: [
+      { name: 'Third-party login', route: '/experiments/authentication/third-party-login' }
+    ]
   }
 ]
 </script>
