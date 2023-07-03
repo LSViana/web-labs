@@ -15,7 +15,7 @@
         <img
           class="my-3 rounded border"
           alt="Profile image of the user"
-          :src="userInfo.value.value.picture"
+          :src="userInfo.value.value?.picture"
           style="width: 72px; height: 72px;"
         >
         <NuxtLink external :href="routes.discardUserInfo">
@@ -39,7 +39,6 @@
 <script lang="ts" setup>
 import { isDevelopment } from 'std-env'
 import { ref } from 'vue'
-import { Record } from 'immutable'
 
 import WlButton from '~/components/experiments/buttons/WlButton.vue'
 
@@ -51,7 +50,7 @@ const authentication = useCookie('google_auth', {
 
 const userInfo = {
   loading: ref(false),
-  value: ref<Record<string, unknown>>()
+  value: ref<{ id: string; picture: string; }>()
 }
 
 const routes = {
