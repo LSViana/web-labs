@@ -54,6 +54,12 @@ const groups: ExperimentGroup[] = [
     experiments: [
       { name: 'Third-party login', route: '/experiments/authentication/third-party-login' }
     ]
+  },
+  {
+    target: 'Real-time Communication',
+    experiments: [
+      { name: 'Supabase', route: '/experiments/rtc/supabase' }
+    ]
   }
 ]
 </script>
