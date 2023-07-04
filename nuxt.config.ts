@@ -14,5 +14,11 @@ export default defineNuxtConfig({
   },
   experimental: {
     viewTransition: true
+  },
+  appConfig: {
+    supabase: {
+      url: process.env.SUPABASE_URL!,
+      key: process.env.SUPABASE_KEY!
+    }
   }
 })
