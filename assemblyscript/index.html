@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="module">
+    import { add, appendName } from './build/release.js'
+
+    document.body.innerText += add(1, 4)
+    document.body.innerHTML += '<br>'
+    document.body.innerText += appendName("Hello")
+  </script>
+</head>
+<body></body>
+</html>
