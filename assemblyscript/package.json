@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/release.js",
+      "types": "./build/release.d.ts"
+    }
+  },
+  "scripts": {
+    "asbuild:debug": "asc assembly/index.ts --target debug",
+    "asbuild:release": "asc assembly/index.ts --target release",
+    "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+    "test": "vitest --run",
+    "start": "npx serve ."
+  },
+  "devDependencies": {
+    "assemblyscript": "^0.27.6",
+    "vitest": "^0.33.0"
+  }
+}

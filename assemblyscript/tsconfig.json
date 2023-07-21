@@ -1,0 +1,11 @@
+{
+  "extends": "assemblyscript/std/assembly.json",
+  "compilerOptions": {
+    "paths": {
+      "assemblyscript": [ "." ]
+    }
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}
