@@ -61,6 +61,12 @@ const groups: ExperimentGroup[] = [
     experiments: [
       { name: 'Supabase', route: '/experiments/rtc/supabase' }
     ]
+  },
+  {
+    target: 'Threading',
+    experiments: [
+      { name: 'Web Workers', route: '/experiments/threading/web-workers' }
+    ]
   }
 ]
 </script>
