@@ -1,11 +1,13 @@
 <template>
-  <div class="flex h-2 w-32 bg-violet-900 rounded-full overflow-hidden">
+  <div class="flex h-2 w-32 overflow-hidden rounded-full bg-violet-900">
     <span class="inline-block h-full bg-violet-500 transition-[width]" :style="trackStyles" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, StyleValue } from 'vue'
+import { computed } from 'vue'
+
+import type { StyleValue } from 'vue'
 
 type Props = {
   value: number;

@@ -24,7 +24,8 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import WlButton, { WlButtonVariant } from '~/components/experiments/buttons/WlButton.vue'
+import type { WlButtonVariant } from '~/components/experiments/buttons/WlButton.vue'
+import WlButton from '~/components/experiments/buttons/WlButton.vue'
 
 import { KeyboardCode } from '~/utils/types/ui/keyboardEvent'
 

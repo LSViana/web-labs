@@ -1,9 +1,9 @@
 <template>
-  <div class="border rounded overflow-hidden">
+  <div class="overflow-hidden rounded border">
     <div class="canvas p-5">
       <slot />
     </div>
-    <div v-if="hasCaption" class="border-t p-3 text-sm bg-slate-50 text-muted dark:bg-slate-700 dark:text-muted-dark">
+    <div v-if="hasCaption" class="border-t bg-slate-50 p-3 text-sm text-muted dark:bg-slate-700 dark:text-muted-dark">
       <slot name="caption" />
     </div>
   </div>

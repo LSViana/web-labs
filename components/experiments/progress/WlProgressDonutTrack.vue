@@ -5,7 +5,7 @@
       cy="50%"
       r="50%"
       stroke-width="0.5rem"
-      class="stroke-red-900 fill-transparent"
+      class="fill-transparent stroke-red-900"
     />
     <circle
       r="50%"
@@ -14,7 +14,7 @@
       stroke-width="0.5rem"
       :stroke-dasharray="`calc(3.141592653589793 * ${percentageValue}%) calc(2 * 3.141592653589793 * 50%)`"
       stroke-linecap="round"
-      class="stroke-red-500 fill-transparent transition-[stroke-dasharray]"
+      class="fill-transparent stroke-red-500 transition-[stroke-dasharray]"
     />
   </svg>
 </template>

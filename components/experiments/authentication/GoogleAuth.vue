@@ -39,10 +39,9 @@
 <script lang="ts" setup>
 import { isDevelopment } from 'std-env'
 import { ref } from 'vue'
+import { useCookie } from '#app'
 
 import WlButton from '~/components/experiments/buttons/WlButton.vue'
-
-import { useCookie } from '#app'
 
 const authentication = useCookie('google_auth', {
   secure: !isDevelopment

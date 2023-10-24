@@ -1,14 +1,14 @@
 <template>
-  <div class="w-48 relative border rounded-full px-7 py-1 bg-slate-100 dark:bg-slate-800">
+  <div class="relative w-48 rounded-full border bg-slate-100 px-7 py-1 dark:bg-slate-800">
     <div
-      class="h-12 w-12 rounded-full bg-slate-300 dark:bg-slate-600 touch-none flex items-center justify-center
-      hover:border cursor-ew-resize -translate-x-1/2 transition-[border-color,background-color]"
+      class="flex h-12 w-12 -translate-x-1/2 cursor-ew-resize touch-none items-center justify-center rounded-full
+      bg-slate-300 transition-[border-color,background-color] hover:border dark:bg-slate-600"
       :class="handleClasses"
       :style="handleStyles"
       @pointerup="listeners.pointerup"
       @pointerdown="listeners.pointerdown"
     >
-      <span class="flex pointer-events-none">
+      <span class="pointer-events-none flex">
         <slot />
       </span>
     </div>

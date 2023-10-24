@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Experiment } from '~/utils/types/experiments'
+import type { Experiment } from '~/utils/types/experiments'
 
 const props = defineProps<{
   experiment: Experiment;

@@ -1,5 +1,5 @@
 <template>
-  <div class="2xl:max-w-screen-xl xl:max-w-screen-lg lg:max-w-screen-md md:max-w-screen-sm mx-auto">
+  <div class="mx-auto md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-lg 2xl:max-w-screen-xl">
     <slot />
   </div>
 </template>

@@ -7,7 +7,8 @@
 </template>
 
 <script lang="ts" setup>
-import WlIcon, { WlIconSize } from '~/components/experiments/icons/WlIcon.vue'
+import type { WlIconSize } from '~/components/experiments/icons/WlIcon.vue'
+import WlIcon from '~/components/experiments/icons/WlIcon.vue'
 
 type Props = {
   size?: WlIconSize;

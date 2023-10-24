@@ -1,6 +1,6 @@
 <template>
   <label
-    class="inline-flex cursor-pointer rounded overflow-hidden transition-colors border"
+    class="inline-flex cursor-pointer overflow-hidden rounded border transition-colors"
     :class="labelClasses"
     @dragenter="listeners.dragenter"
     @dragleave="listeners.dragleave"
@@ -8,12 +8,12 @@
     @drop="listeners.drop"
   >
     <span
-      class="p-3 mr-[1px] pointer-events-none transition-colors"
+      class="pointer-events-none mr-[1px] p-3 transition-colors"
       :class="chooseFileClasses"
     >
       Choose File
     </span>
-    <span class="py-3 pl-3 pr-12 bg-slate-200 dark:bg-slate-800 pointer-events-none">
+    <span class="pointer-events-none bg-slate-200 py-3 pl-3 pr-12 dark:bg-slate-800">
       <span class="opacity-70">
         <template v-if="props.value">
           Dropped {{ props.value.length }} {{ props.value.length > 1 ? 'files' : 'file' }}
@@ -27,7 +27,7 @@
       type="file"
       :multiple="props.multiple"
       :accept="props.accept"
-      class="opacity-0 absolute pointer-events-none"
+      class="pointer-events-none absolute opacity-0"
       @input="methods.onInputFile"
     >
   </label>

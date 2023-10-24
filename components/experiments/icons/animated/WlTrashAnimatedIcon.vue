@@ -10,7 +10,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-import WlIcon, { WlIconSize } from '~/components/experiments/icons/WlIcon.vue'
+import type { WlIconSize } from '~/components/experiments/icons/WlIcon.vue'
+import WlIcon from '~/components/experiments/icons/WlIcon.vue'
 
 type Props = {
   progress?: number;

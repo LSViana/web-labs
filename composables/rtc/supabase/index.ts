@@ -1,7 +1,9 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
-import { RealtimeChannel } from '@supabase/realtime-js'
+import { createClient } from '@supabase/supabase-js'
 
 import { useAppConfig } from '#imports'
+
+import type { SupabaseClient } from '@supabase/supabase-js'
+import type { RealtimeChannel } from '@supabase/realtime-js'
 
 type Supabase = {
   client: SupabaseClient;
