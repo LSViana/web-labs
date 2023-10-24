@@ -1,11 +1,7 @@
 <template>
   <NuxtLink
-    class="
-      block rounded border p-3
-      text-center
-      transition-colors hover:border-slate-400
-      active:bg-slate-300 dark:active:bg-slate-700 dark:active:text-slate-50
-    "
+    class="block rounded border p-3 text-center"
+    :class="classes"
     :to="to"
   >
     <slot />
@@ -13,18 +9,18 @@
 </template>
 
 <script lang="ts" setup>
+import { computed } from 'vue'
+
 type Props = {
-  to: string;
+  to?: string;
 };
-type Events = {};
 
 const props = defineProps<Props>()
-const emits = defineEmits<Events>()
 
-const listeners = {}
+const linkClasses = 'transition-colors hover:border-slate-400 ' +
+    'active:bg-slate-300 dark:active:bg-slate-700 dark:active:text-slate-50'
 
-const methods = {}
+const classes = computed(() => ({
+  [linkClasses]: Boolean(props.to)
+}))
 </script>
-
-<style lang="scss" scoped>
-</style>
