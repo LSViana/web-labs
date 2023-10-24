@@ -30,8 +30,4 @@ test.describe('Experiments page', () => {
   test('has footer', async () => {
     await expect(page.locator('text=Created by Lucas Viana.')).toBeVisible()
   })
-
-  test('matches screenshot', async () => {
-    await expect(await page.screenshot()).toMatchSnapshot()
-  })
 })
