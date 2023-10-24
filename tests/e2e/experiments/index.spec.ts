@@ -2,14 +2,14 @@ import { expect, test } from '@playwright/test'
 
 import type { Page } from '@playwright/test'
 
-test.describe('Home page', () => {
+test.describe('Experiments page', () => {
   let page: Page
 
   test.describe.configure({ mode: 'serial' })
 
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage()
-    await page.goto('/')
+    await page.goto('/experiments')
   })
 
   test.afterAll(async () => {
