@@ -28,7 +28,10 @@
           Used to show progress when the precision is lower and/or the number of steps is unknown.
         </template>
       </ExperimentCanvas>
-      <p>The battery progress:</p>
+      <p>
+        The battery progress
+        (<a class="underline" href="https://twitter.com/60fpsdesign/status/1718168346699723212" target="_blank">source</a>):
+      </p>
       <ExperimentCanvas>
         <div class="flex flex-col items-start gap-5">
           <WlProgressBatteryIndicator :value="charge" :charging="charging" />
