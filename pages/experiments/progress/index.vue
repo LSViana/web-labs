@@ -28,6 +28,26 @@
           Used to show progress when the precision is lower and/or the number of steps is unknown.
         </template>
       </ExperimentCanvas>
+      <p>The battery progress:</p>
+      <ExperimentCanvas>
+        <div class="flex flex-col items-start gap-5">
+          <WlProgressBatteryIndicator :value="charge" :charging="charging" />
+          <div class="flex items-center gap-3">
+            <input
+              v-model="charge"
+              type="number"
+              min="0"
+              max="100"
+              class="rounded border bg-slate-200 px-2 py-1 outline-0 dark:bg-slate-800"
+              @input="onChargeInput"
+            >
+            <a href="#" class="underline" @click="charging = !charging">Toggle charging</a>
+          </div>
+        </div>
+        <template #caption>
+          Used to show battery percentage with illustrations.
+        </template>
+      </ExperimentCanvas>
     </Container>
   </NuxtLayout>
 </template>
@@ -40,10 +60,17 @@ import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.v
 import WlProgressBarTile from '~/components/experiments/progress/WlProgressBarTile.vue'
 import WlProgressBarTrack from '~/components/experiments/progress/WlProgressBarTrack.vue'
 import WlProgressDonutTrack from '~/components/experiments/progress/WlProgressDonutTrack.vue'
+import WlProgressBatteryIndicator from '~/components/experiments/progress/WlProgressBatteryIndicator.vue'
 
 const progressTile = ref(5)
+const charge = ref(56)
+const charging = ref(false)
 
 setInterval(() => {
   progressTile.value = Math.min(Math.max(progressTile.value + (Math.random() > 0.5 ? -1 : 1), 0), 10)
 }, 500)
+
+function onChargeInput (event: Event) {
+  charge.value = Number((event.target as HTMLInputElement).value)
+}
 </script>
