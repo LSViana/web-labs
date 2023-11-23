@@ -17,6 +17,15 @@
           Used to show multiple cards in an animated stack list as the box scrolls.
         </template>
       </ExperimentCanvas>
+      <p>
+        The
+        <a href="https://developer.chrome.com/articles/scroll-driven-animations/" class="underline" target="_blank">
+          <span>scroll-driven animation</span>
+        </a>:
+      </p>
+      <ExperimentCanvas>
+        <WlScrollDrivenAnimation />
+      </ExperimentCanvas>
     </Container>
   </NuxtLayout>
 </template>
@@ -25,4 +34,5 @@
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
 import WlScrollStackAnimatedContainer from '~/components/experiments/scroll/WlScrollStackAnimatedContainer.vue'
+import WlScrollDrivenAnimation from '~/components/experiments/scroll/WlScrollDrivenAnimation.vue'
 </script>
