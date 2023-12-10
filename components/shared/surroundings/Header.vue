@@ -6,7 +6,7 @@
           Web Labs
         </NuxtLink>
       </h2>
-      <NuxtLink v-if="!isHome" to="/" class="inline-block p-3">
+      <NuxtLink v-if="!isHome" to="/" class="inline-block p-3 transition-opacity hover:opacity-70">
         Back to home
       </NuxtLink>
     </Container>
