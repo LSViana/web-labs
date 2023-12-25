@@ -1,6 +1,8 @@
 <template>
   <button
-    class="wl-button rounded px-4 py-2 outline-0 transition-[background-color,box-shadow] focus-visible:z-10 focus-visible:ring-4"
+    class="flex items-center justify-center rounded
+    px-4 py-2 outline-0 transition-[background-color,box-shadow] focus-visible:z-10
+    focus-visible:ring-4"
     :class="classes"
     v-on="listeners"
   >
