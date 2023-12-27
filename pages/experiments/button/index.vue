@@ -11,6 +11,14 @@
         </template>
       </ExperimentCanvas>
       <p>
+        The icon button allows you to show an action quicker:
+      </p>
+      <ExperimentCanvas>
+        <WlIconButton variant="danger">
+          <WlTrashAnimatedIcon />
+        </WlIconButton>
+      </ExperimentCanvas>
+      <p>
         The confirm button allows you to perform the main action with a confirmation step:
       </p>
       <ExperimentCanvas>
@@ -55,6 +63,9 @@ import WlButton from '~/components/experiments/buttons/WlButton.vue'
 import WlConfirmDeleteButton from '~/components/experiments/buttons/WlConfirmDeleteButton.vue'
 import WlButtonGroup from '~/components/experiments/buttons/WlButtonGroup.vue'
 import WlRatingButton from '~/components/experiments/buttons/WlRatingButton.vue'
+import WlStarIcon from '~/components/experiments/icons/static/WlStarIcon.vue'
+import WlIconButton from '~/components/experiments/buttons/WlIconButton.vue'
+import WlTrashAnimatedIcon from '~/components/experiments/icons/animated/WlTrashAnimatedIcon.vue'
 
 const counter = ref(0)
 const confirmed = ref(false)
