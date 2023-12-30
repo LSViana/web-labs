@@ -14,9 +14,14 @@
         The icon button allows you to show an action quicker:
       </p>
       <ExperimentCanvas>
-        <WlIconButton variant="danger">
-          <WlTrashAnimatedIcon />
-        </WlIconButton>
+        <div class="inline-flex gap-2 rounded-full border bg-slate-200 p-1 dark:bg-slate-800">
+          <WlIconButton variant="primary">
+            <WlStarIcon value />
+          </WlIconButton>
+          <WlIconButton variant="danger">
+            <WlTrashAnimatedIcon />
+          </WlIconButton>
+        </div>
       </ExperimentCanvas>
       <p>
         The confirm button allows you to perform the main action with a confirmation step:
@@ -66,6 +71,7 @@ import WlRatingButton from '~/components/experiments/buttons/WlRatingButton.vue'
 import WlStarIcon from '~/components/experiments/icons/static/WlStarIcon.vue'
 import WlIconButton from '~/components/experiments/buttons/WlIconButton.vue'
 import WlTrashAnimatedIcon from '~/components/experiments/icons/animated/WlTrashAnimatedIcon.vue'
+import WlCheckIcon from '~/components/experiments/icons/static/WlCheckIcon.vue'
 
 const counter = ref(0)
 const confirmed = ref(false)
