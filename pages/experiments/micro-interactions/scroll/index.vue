@@ -33,6 +33,6 @@
 <script lang="ts" setup>
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlScrollStackAnimatedContainer from '~/components/experiments/scroll/WlScrollStackAnimatedContainer.vue'
-import WlScrollDrivenAnimation from '~/components/experiments/scroll/WlScrollDrivenAnimation.vue'
+import WlScrollStackAnimatedContainer from '~/components/experiments/micro-interactions/scroll/WlScrollStackAnimatedContainer.vue'
+import WlScrollDrivenAnimation from '~/components/experiments/micro-interactions/scroll/WlScrollDrivenAnimation.vue'
 </script>

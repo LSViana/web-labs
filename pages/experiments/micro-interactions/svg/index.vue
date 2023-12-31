@@ -24,6 +24,6 @@
 <script lang="ts" setup>
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlAnimatedSvgGradientTracing from '~/components/experiments/svg/WlAnimatedSvgGradientTracing.vue'
-import WlSvgGrainyGradient from '~/components/experiments/svg/WlSvgGrainyGradient.vue'
+import WlAnimatedSvgGradientTracing from '~/components/experiments/micro-interactions/svg/WlAnimatedSvgGradientTracing.vue'
+import WlSvgGrainyGradient from '~/components/experiments/micro-interactions/svg/WlSvgGrainyGradient.vue'
 </script>
