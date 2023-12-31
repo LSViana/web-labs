@@ -40,7 +40,8 @@ const groups: ExperimentGroup[] = [
     experiments: [
       { name: 'Scroll', route: '/experiments/micro-interactions/scroll' },
       { name: 'SVG', route: '/experiments/micro-interactions/svg' },
-      { name: 'Drag & Drop', route: '/experiments/micro-interactions/drag-n-drop' }
+      { name: 'Drag & Drop', route: '/experiments/micro-interactions/drag-n-drop' },
+      { name: 'GSAP', route: '/experiments/micro-interactions/gsap' }
     ]
   },
   {
