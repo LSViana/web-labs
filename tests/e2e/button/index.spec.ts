@@ -9,7 +9,7 @@ test.describe('Button experiments page', () => {
 
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage()
-    await page.goto('/experiments/button')
+    await page.goto('/experiments/forms-input/button')
   })
 
   test.afterAll(async () => {
