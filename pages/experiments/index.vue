@@ -28,11 +28,11 @@ const groups: ExperimentGroup[] = [
   {
     target: 'Forms & Input',
     experiments: [
-      { name: 'Button', route: '/experiments/button' },
-      { name: 'Progress', route: '/experiments/progress' },
-      { name: 'Input', route: '/experiments/input' },
-      { name: 'Select', route: '/experiments/select' },
-      { name: 'Badge', route: '/experiments/badge' }
+      { name: 'Button', route: '/experiments/forms-input/button' },
+      { name: 'Progress', route: '/experiments/forms-input/progress' },
+      { name: 'Input', route: '/experiments/forms-input/input' },
+      { name: 'Select', route: '/experiments/forms-input/select' },
+      { name: 'Badge', route: '/experiments/forms-input/badge' }
     ]
   },
   {
