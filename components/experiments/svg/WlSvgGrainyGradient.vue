@@ -11,9 +11,10 @@ div {
       linear-gradient(to bottom right,
         rgba(blue, 70%),
         rgba(green, 70%),
-        rgba(yellow, 70%)
+        rgba(#dcdc00, 70%)
       ),
       url('/img/noise-filter.svg');
+  background-blend-mode: difference;
   background-size: cover;
   background-color: white;
 }
