@@ -30,7 +30,7 @@ import {
   PasswordStrength,
   passwordStrengthContainerClasses,
   passwordStrengthTextClasses
-} from '~/components/experiments/input/passwordStrength'
+} from '~/components/experiments/forms-input/input/passwordStrength'
 
 type Props = {
   value: string;

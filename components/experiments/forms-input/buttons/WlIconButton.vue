@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-import WlButton, { type WlButtonVariant } from '~/components/experiments/buttons/WlButton.vue'
+import WlButton from 'components/experiments/forms-input/buttons/WlButton.vue'
+
+import type { WlButtonVariant } from '~/components/experiments/forms-input/buttons/WlButton.vue'
 
 type Props = {
   variant: WlButtonVariant;
