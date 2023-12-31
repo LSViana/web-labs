@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import WlTrashAnimatedIcon from '~/components/experiments/icons/animated/WlTrashAnimatedIcon.vue'
+import WlTrashAnimatedIcon from '~/components/shared/icons/animated/WlTrashAnimatedIcon.vue'
 import WlConfirmButton from '~/components/experiments/buttons/WlConfirmButton.vue'
 
 type Events = {

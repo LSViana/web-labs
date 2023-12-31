@@ -9,8 +9,8 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-import type { WlIconSize } from '~/components/experiments/icons/WlIcon.vue'
-import WlIcon from '~/components/experiments/icons/WlIcon.vue'
+import type { WlIconSize } from '~/components/shared/icons/WlIcon.vue'
+import WlIcon from '~/components/shared/icons/WlIcon.vue'
 
 type Props = {
   size?: WlIconSize;

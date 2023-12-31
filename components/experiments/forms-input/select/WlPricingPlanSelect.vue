@@ -25,7 +25,7 @@
 <script lang="ts" setup>
 import { readonly } from 'vue'
 
-import WlCheckIcon from '~/components/experiments/icons/static/WlCheckIcon.vue'
+import WlCheckIcon from '~/components/shared/icons/static/WlCheckIcon.vue'
 
 type Props = {
   value: number;
