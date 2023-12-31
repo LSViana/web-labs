@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import WlCard from '~/components/experiments/card/WlCard.vue'
+import WlCard from '~/components/shared/card/WlCard.vue'
 
 import type { Experiment } from '~/utils/types/experiments'
 

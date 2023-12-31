@@ -71,6 +71,6 @@
 
 <script setup lang="ts">
 import Container from '~/components/shared/layout/Container.vue'
-import WlCard from '~/components/experiments/card/WlCard.vue'
+import WlCard from '~/components/shared/card/WlCard.vue'
 import WlTodoBadge from '~/components/shared/badge/WlTodoBadge.vue'
 </script>
