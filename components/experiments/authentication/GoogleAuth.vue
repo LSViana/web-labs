@@ -41,7 +41,7 @@ import { isDevelopment } from 'std-env'
 import { ref } from 'vue'
 import { useCookie } from '#app'
 
-import WlButton from '~/components/experiments/buttons/WlButton.vue'
+import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 
 const authentication = useCookie('google_auth', {
   secure: !isDevelopment

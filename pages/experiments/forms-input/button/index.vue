@@ -64,12 +64,12 @@ import { ref } from 'vue'
 
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlButton from '~/components/experiments/buttons/WlButton.vue'
-import WlConfirmDeleteButton from '~/components/experiments/buttons/WlConfirmDeleteButton.vue'
-import WlButtonGroup from '~/components/experiments/buttons/WlButtonGroup.vue'
-import WlRatingButton from '~/components/experiments/buttons/WlRatingButton.vue'
+import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
+import WlConfirmDeleteButton from '~/components/experiments/forms-input/buttons/WlConfirmDeleteButton.vue'
+import WlButtonGroup from '~/components/experiments/forms-input/buttons/WlButtonGroup.vue'
+import WlRatingButton from '~/components/experiments/forms-input/buttons/WlRatingButton.vue'
 import WlStarIcon from '~/components/shared/icons/static/WlStarIcon.vue'
-import WlIconButton from '~/components/experiments/buttons/WlIconButton.vue'
+import WlIconButton from '~/components/experiments/forms-input/buttons/WlIconButton.vue'
 import WlTrashAnimatedIcon from '~/components/shared/icons/animated/WlTrashAnimatedIcon.vue'
 
 const counter = ref(0)

@@ -31,9 +31,9 @@ import { ref } from 'vue'
 
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlSwitchDragAndDrop from '~/components/experiments/forms/switch/WlSwitchDragAndDrop.vue'
-import WlSwitchDragToConfirmShutdown from '~/components/experiments/forms/switch/WlSwitchDragToConfirmShutdown.vue'
-import WlFileInput from '~/components/experiments/forms/file/WlFileInput.vue'
+import WlSwitchDragAndDrop from '~/components/experiments/forms-input/switch/WlSwitchDragAndDrop.vue'
+import WlSwitchDragToConfirmShutdown from '~/components/experiments/forms-input/switch/WlSwitchDragToConfirmShutdown.vue'
+import WlFileInput from '~/components/experiments/forms-input/file/WlFileInput.vue'
 
 const switchValue = ref(1)
 const confirmed = ref(false)

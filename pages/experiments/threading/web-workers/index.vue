@@ -24,7 +24,7 @@ import { reactive } from 'vue'
 
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlButton from '~/components/experiments/buttons/WlButton.vue'
+import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 
 import useFibonacci from '~/composables/threading/fibonacci'
 

@@ -38,8 +38,8 @@ import { ref } from 'vue'
 
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlPasswordStrength from '~/components/experiments/input/WlPasswordStrength.vue'
-import WlNumberDisplay from '~/components/experiments/input/WlNumberDisplay.vue'
+import WlPasswordStrength from '~/components/experiments/forms-input/input/WlPasswordStrength.vue'
+import WlNumberDisplay from '~/components/experiments/forms-input/input/WlNumberDisplay.vue'
 
 const password = ref('')
 const amount = ref(0)

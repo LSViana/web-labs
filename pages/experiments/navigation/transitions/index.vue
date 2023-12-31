@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlButton from '~/components/experiments/buttons/WlButton.vue'
+import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlMovableElementWebAnimationsApi from '~/components/experiments/transitions/WlMovableElementWebAnimationsApi.vue'
 
 import { useCustomViewTransitions } from '~/composables/view-transitions'

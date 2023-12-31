@@ -28,8 +28,8 @@ import { computed, ref } from 'vue'
 
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlTabSelect from '~/components/experiments/forms/select/WlTabSelect.vue'
-import WlPricingPlanSelect from '~/components/experiments/forms/select/WlPricingPlanSelect.vue'
+import WlTabSelect from '~/components/experiments/forms-input/select/WlTabSelect.vue'
+import WlPricingPlanSelect from '~/components/experiments/forms-input/select/WlPricingPlanSelect.vue'
 
 const tab = ref(0)
 const options = computed(() => ['Home', 'Features', 'Engineering', 'Pricing'])

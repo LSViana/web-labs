@@ -17,7 +17,7 @@
 import { ref } from 'vue'
 
 import WlTrashAnimatedIcon from '~/components/shared/icons/animated/WlTrashAnimatedIcon.vue'
-import WlConfirmButton from '~/components/experiments/buttons/WlConfirmButton.vue'
+import WlConfirmButton from '~/components/experiments/forms-input/buttons/WlConfirmButton.vue'
 
 type Events = {
     (e: 'confirm'): void;

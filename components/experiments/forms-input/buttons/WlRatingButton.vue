@@ -7,11 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import WlStarIcon from 'components/experiments/icons/static/WlStarIcon.vue'
-import WlButton from 'components/experiments/forms-input/buttons/WlButton.vue'
-import WlButtonGroup from 'components/experiments/forms-input/buttons/WlButtonGroup.vue'
-
-import type { WlButtonVariant } from '~/components/experiments/forms-input/buttons/WlButton.vue'
+import WlButton, { type WlButtonVariant } from '~/components/experiments/forms-input/buttons/WlButton.vue'
+import WlStarIcon from '~/components/shared/icons/static/WlStarIcon.vue'
+import WlButtonGroup from '~/components/experiments/forms-input/buttons/WlButtonGroup.vue'
 
 type Props = {
   value: number;

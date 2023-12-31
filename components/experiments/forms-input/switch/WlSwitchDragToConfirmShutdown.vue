@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import WlSwitchDragToConfirm from '~/components/experiments/forms/switch/WlSwitchDragToConfirm.vue'
+import WlSwitchDragToConfirm from '~/components/experiments/forms-input/switch/WlSwitchDragToConfirm.vue'
 import WlPowerOffIcon from '~/components/shared/icons/static/WlPowerOffIcon.vue'
 
 type Events = {

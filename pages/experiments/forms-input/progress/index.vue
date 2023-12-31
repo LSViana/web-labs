@@ -60,10 +60,10 @@ import { ref } from 'vue'
 
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
-import WlProgressBarTile from '~/components/experiments/progress/WlProgressBarTile.vue'
-import WlProgressBarTrack from '~/components/experiments/progress/WlProgressBarTrack.vue'
-import WlProgressDonutTrack from '~/components/experiments/progress/WlProgressDonutTrack.vue'
-import WlProgressBatteryIndicator from '~/components/experiments/progress/WlProgressBatteryIndicator.vue'
+import WlProgressBarTile from '~/components/experiments/forms-input/progress/WlProgressBarTile.vue'
+import WlProgressBarTrack from '~/components/experiments/forms-input/progress/WlProgressBarTrack.vue'
+import WlProgressDonutTrack from '~/components/experiments/forms-input/progress/WlProgressDonutTrack.vue'
+import WlProgressBatteryIndicator from '~/components/experiments/forms-input/progress/WlProgressBatteryIndicator.vue'
 
 const progressTile = ref(5)
 const charge = ref(56)

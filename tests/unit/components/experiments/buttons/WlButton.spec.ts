@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
 
-import WlButton from '~/components/experiments/buttons/WlButton.vue'
+import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 
 describe('WlButton', () => {
   test('should render a <button>', () => {
