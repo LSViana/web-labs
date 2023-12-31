@@ -46,7 +46,7 @@ const groups: ExperimentGroup[] = [
   {
     target: 'Navigation',
     experiments: [
-      { name: 'Transitions', route: '/experiments/transitions' }
+      { name: 'Transitions', route: '/experiments/navigation/transitions' }
     ]
   },
   {
