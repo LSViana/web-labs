@@ -9,6 +9,14 @@
           <a href="https://rauno.me/craft/nextjs" class="underline" target="_blank">Vercel designers</a>.
         </template>
       </ExperimentCanvas>
+      <p>The grainy SVG gradient:</p>
+      <ExperimentCanvas>
+        <WlSvgGrainyGradient />
+        <template #caption>
+          Demonstration based on the SVG grainy gradient effect created by
+          <a href="https://css-tricks.com/grainy-gradients/" class="underline" target="_blank">Jimmy Chion</a>.
+        </template>
+      </ExperimentCanvas>
     </Container>
   </NuxtLayout>
 </template>
@@ -17,4 +25,5 @@
 import Container from '~/components/shared/layout/Container.vue'
 import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
 import WlAnimatedSvgGradientTracing from '~/components/experiments/svg/WlAnimatedSvgGradientTracing.vue'
+import WlSvgGrainyGradient from '~/components/experiments/svg/WlSvgGrainyGradient.vue'
 </script>
