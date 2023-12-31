@@ -19,14 +19,16 @@ onMounted(async () => {
   const boxes = root.value?.querySelectorAll('div')
 
   await gsap.to(boxes!, {
-    duration: 2,
+    duration: 1,
     repeatRefresh: true,
     x: () => root.value!.clientWidth,
     xPercent: -100,
     ease: 'sine.inOut',
-    stagger: 0.2,
-    repeat: -1,
-    yoyo: true
+    stagger: {
+      each: 1,
+      repeat: -1,
+      yoyo: true
+    }
   })
 })
 </script>
