@@ -2,8 +2,8 @@ import { createClient } from '@supabase/supabase-js'
 
 import { useAppConfig } from '#imports'
 
-import type { SupabaseClient } from '@supabase/supabase-js'
 import type { RealtimeChannel } from '@supabase/realtime-js'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 type Supabase = {
   client: SupabaseClient;
@@ -11,7 +11,7 @@ type Supabase = {
   channelConnected: Promise<void>;
 }
 
-function buildSupabase (): Supabase {
+function buildSupabase(): Supabase {
   const config = useAppConfig()
 
   const client = createClient(config.supabase.url, config.supabase.key, {
@@ -29,7 +29,7 @@ function buildSupabase (): Supabase {
   }
 }
 
-function getChannelConnectedPromise (channel: RealtimeChannel): Promise<void> {
+function getChannelConnectedPromise(channel: RealtimeChannel): Promise<void> {
   return new Promise((resolve, reject) => {
     channel.subscribe((status, error) => {
       if (status === 'SUBSCRIBED') {
@@ -41,7 +41,7 @@ function getChannelConnectedPromise (channel: RealtimeChannel): Promise<void> {
   })
 }
 
-export function useSupabaseClient (): Supabase | undefined {
+export function useSupabaseClient(): Supabase | undefined {
   if (!process.client) {
     return
   }
@@ -52,7 +52,7 @@ export function useSupabaseClient (): Supabase | undefined {
 // Server-state
 let supabaseServer: Supabase | undefined
 
-export function useSupabaseServer (): Supabase | undefined {
+export function useSupabaseServer(): Supabase | undefined {
   if (!process.server) {
     return
   }
