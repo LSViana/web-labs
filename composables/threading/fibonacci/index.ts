@@ -5,12 +5,12 @@ type FibonacciResult = {
   calculateAsync(iterations: number): Promise<number>;
 };
 
-function useFibonacci (): FibonacciResult {
+function useFibonacci(): FibonacciResult {
   return {
-    calculate (iterations: number): number {
+    calculate(iterations: number): number {
       return fibonacci(iterations)
     },
-    calculateAsync (iterations: number): Promise<number> {
+    calculateAsync(iterations: number): Promise<number> {
       return new Promise((resolve, reject) => {
         const worker = new Worker(new URL('./worker.ts', import.meta.url), {
           type: 'module'

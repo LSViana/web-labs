@@ -2,14 +2,14 @@ import { useRouter } from '#app'
 
 import type { RouteLocationNormalized } from 'vue-router'
 
-export function useCustomViewTransitions (): void {
+export function useCustomViewTransitions(): void {
   if (!process.client) {
     return
   }
 
   const router = useRouter()
 
-  function useCustomTransitions (route: RouteLocationNormalized): boolean {
+  function useCustomTransitions(route: RouteLocationNormalized): boolean {
     return route.fullPath.startsWith('/experiments/transitions')
   }
 

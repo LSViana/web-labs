@@ -77,10 +77,10 @@ const confirmed = ref(false)
 const rating = ref(3)
 
 const methods = {
-  onClick (): void {
+  onClick(): void {
     counter.value++
   },
-  onConfirm (): void {
+  onConfirm(): void {
     confirmed.value = true
   }
 }

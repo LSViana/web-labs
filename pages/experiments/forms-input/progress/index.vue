@@ -30,7 +30,11 @@
       </ExperimentCanvas>
       <p>
         The battery progress
-        (<a class="underline" href="https://twitter.com/60fpsdesign/status/1718168346699723212" target="_blank">source</a>):
+        (<a
+          class="underline"
+          href="https://twitter.com/60fpsdesign/status/1718168346699723212"
+          target="_blank"
+        >source</a>):
       </p>
       <ExperimentCanvas>
         <div class="flex flex-col items-start gap-5">
@@ -73,7 +77,7 @@ setInterval(() => {
   progressTile.value = Math.min(Math.max(progressTile.value + (Math.random() > 0.5 ? -1 : 1), 0), 10)
 }, 500)
 
-function onChargeInput (event: Event) {
+function onChargeInput(event: Event): void {
   charge.value = Number((event.target as HTMLInputElement).value)
 }
 </script>

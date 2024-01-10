@@ -41,7 +41,7 @@ const multiThread = reactive({
 })
 
 const listeners = {
-  singleThreadClick (): void {
+  singleThreadClick(): void {
     // Reset the state
     singleThread.result = 0
     singleThread.duration = 0
@@ -51,7 +51,7 @@ const listeners = {
     singleThread.result = fibonacci.calculate(iterations)
     singleThread.duration = Math.round(performance.now() - now)
   },
-  async multiThreadClick (): Promise<void> {
+  async multiThreadClick(): Promise<void> {
     // Reset the state
     multiThread.result = 0
     multiThread.duration = 0

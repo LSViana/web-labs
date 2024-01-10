@@ -1,4 +1,4 @@
-function fibonacci (value: number): number {
+function fibonacci(value: number): number {
   if (value <= 1) {
     return value
   } else {

@@ -40,7 +40,7 @@ const confirmed = ref(false)
 const files = ref<FileList>()
 
 const methods = {
-  onConfirm (): void {
+  onConfirm(): void {
     confirmed.value = true
   }
 }

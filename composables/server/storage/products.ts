@@ -7,7 +7,7 @@ type ProductsStorage = {
   loadProducts: () => Promise<void>;
 }
 
-export function useProductsStorage (): ProductsStorage {
+export function useProductsStorage(): ProductsStorage {
   const products = reactive<Product[]>([])
 
   const loadProducts = async (): Promise<void> => {

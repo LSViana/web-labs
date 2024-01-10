@@ -35,7 +35,7 @@ if (supabase?.client) {
 }
 
 const listeners = {
-  input (event: InputEvent): void {
+  input(event: InputEvent): void {
     const value = (event.target as HTMLInputElement).value
 
     if (supabase?.channel) {
@@ -46,7 +46,7 @@ const listeners = {
       })
     }
   },
-  async clickUpdateServer (): Promise<void> {
+  async clickUpdateServer(): Promise<void> {
     await fetch('/api/rtc/supabase/update')
   }
 }
