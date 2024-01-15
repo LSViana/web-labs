@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout name="home">
     <div class="flex justify-center p-3">
-      <NuxtLink to="/experiments/transitions" draggable="false">
+      <NuxtLink to="/experiments/navigation/transitions" draggable="false">
         <WlButton variant="primary" style="view-transition-name: view-details">
           View Details
         </WlButton>

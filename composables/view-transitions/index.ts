@@ -10,7 +10,7 @@ export function useCustomViewTransitions(): void {
   const router = useRouter()
 
   function useCustomTransitions(route: RouteLocationNormalized): boolean {
-    return route.fullPath.startsWith('/experiments/transitions')
+    return route.fullPath.startsWith('/experiments/navigation/transitions')
   }
 
   router.afterEach((to, from) => {

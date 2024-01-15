@@ -3,7 +3,7 @@
     <Container class="flex flex-col gap-3 p-3">
       <p>The View Transitions API example:</p>
       <ExperimentCanvas>
-        <NuxtLink to="/experiments/transitions/end" draggable="false">
+        <NuxtLink to="/experiments/navigation/transitions/end" draggable="false">
           <WlButton variant="primary" style="view-transition-name: view-details">
             View Details
           </WlButton>
