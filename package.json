@@ -17,6 +17,8 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "devDependencies": {
+    "@grpc/grpc-js": "^1.10.6",
+    "@grpc/proto-loader": "^0.7.12",
     "@nuxtjs/eslint-config-typescript": "^12.1.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@playwright/test": "^1.42.1",
