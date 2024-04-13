@@ -1,7 +1,11 @@
 syntax='proto3';
 
+import 'google/protobuf/empty.proto';
+
 service MessageService {
   rpc SendMessage (Message) returns (MessageReceipt) {}
+  rpc SendMessageStream (stream Message) returns (google.protobuf.Empty) {}
+  rpc ReadMessageStream (google.protobuf.Empty) returns (stream MessageReceipt) {}
 }
 
 message Message {
@@ -16,4 +20,9 @@ message MessageReceipt {
    * The ID of the message.
    */
   int32 id = 1;
+
+  /**
+   * The length of the message received.
+   */
+  int32 length = 2;
 }
