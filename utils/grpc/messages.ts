@@ -5,14 +5,14 @@ import type { MessageService } from '~/utils/grpc/messages-types'
 
 const packageDefinition = protoLoader.loadSync(process.cwd() + '/utils/grpc/messages.proto')
 const protoDescriptor = grpc.loadPackageDefinition(packageDefinition)
-const messageService = protoDescriptor.MessageService as ServiceClientConstructor
 
 let messageReceiptId = 1
 
+export const Service = protoDescriptor.MessageService as ServiceClientConstructor
 export function getMessagesServer(): grpc.Server {
   const server = new grpc.Server()
 
-  server.addService(messageService.service, {
+  const handlers: MessageService = {
     sendMessage: (call, callback) => {
       callback(
         null,
@@ -20,8 +20,16 @@ export function getMessagesServer(): grpc.Server {
           id: messageReceiptId++,
           length: call.request.content.length
         })
+    },
+    sendMessageStream: (call, callback) => {
+      // TODO: Implement the handler.
+    },
+    readMessageStream: (call) => {
+      // TODO: Implement the handler.
     }
-  } as MessageService)
+  }
+
+  server.addService(Service.service, handlers)
 
   return server
 }
