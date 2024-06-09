@@ -1,0 +1,28 @@
+{
+  "extends": [
+    // More information: https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb.
+    "airbnb",
+
+    // More information: https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb#eslint-config-airbnbhooks.
+    "airbnb/hooks",
+
+    // More information: https://github.com/iamturns/eslint-config-airbnb-typescript/tree/master.
+    "airbnb-typescript",
+
+    // More information: https://nextjs.org/docs/app/building-your-application/configuring/eslint#recommended-plugin-ruleset.
+    "plugin:@next/next/recommended",
+
+    // More information: https://github.com/jsx-eslint/eslint-plugin-react#configuration-legacy-eslintrc-.
+    "plugin:react/jsx-runtime"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    // Disabled because it was causing problems when importing React components (`*.tsx` files).
+    "import/extensions": "off",
+
+    // Disabled because it was preventing binding function to component props to handle events.
+    "react/jsx-no-bind": "off"
+  }
+}
