@@ -1,6 +1,6 @@
 import { defineEventHandler, getRequestURL, sendRedirect } from 'h3'
 
-import googleAuthConfiguration from '~/components/experiments/authentication/googleAuthConfiguration'
+import { googleAuthConfiguration } from '~/components/experiments/authentication/google-auth-configuration'
 
 export default defineEventHandler(async (event) => {
   const requestURL = getRequestURL(event)
