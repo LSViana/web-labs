@@ -3,9 +3,14 @@ import { defineNitroPlugin } from 'nitropack/runtime'
 
 import { getMessagesServer } from '~/utils/grpc/messages'
 import { host } from '~/utils/grpc/messages-config'
+import { grpcConfiguration } from '~/utils/grpc/grpc-configuration'
 
-const server = getMessagesServer()
+export default defineNitroPlugin(async () => {
+  if (!grpcConfiguration.enablePlugin) {
+    return
+  }
 
-export default defineNitroPlugin(() => {
+  const server = await getMessagesServer()
+
   server.bindAsync(host, ServerCredentials.createInsecure(), () => console.log(`gRPC listening at ${host}`))
 })
