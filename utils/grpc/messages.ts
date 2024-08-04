@@ -2,8 +2,8 @@ import type { Server, ServiceClientConstructor } from '@grpc/grpc-js'
 import type { MessageService } from '~/utils/grpc/messages-types'
 
 export async function getMessagesServer(): Promise<Server> {
-  const grpc = await import('@grpc/grpc-js')
-  const protoLoader = await import('@grpc/proto-loader')
+  const { default: grpc } = await import('@grpc/grpc-js')
+  const { default: protoLoader } = await import('@grpc/proto-loader')
 
   const server = new grpc.Server()
 

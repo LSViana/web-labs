@@ -1,14 +1,15 @@
-import protobuf from 'protobufjs'
 import { defineEventHandler } from 'h3'
-
-const root = protobuf.loadSync(process.cwd() + '/utils/grpc/messages.proto')
-const MessageType = root.lookupType('Message')
 
 interface Message {
   content: string;
 }
 
-export default defineEventHandler(() => {
+export default defineEventHandler(async () => {
+  const { default: protobuf } = await import('protobufjs')
+
+  const root = protobuf.loadSync(process.cwd() + '/utils/grpc/messages.proto')
+  const MessageType = root.lookupType('Message')
+
   const messageInstance: Message = {
     content: 'This is a ProtoBuf message.'
   }
