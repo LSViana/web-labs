@@ -35,7 +35,7 @@ if (supabase?.client) {
 }
 
 const listeners = {
-  input(event: InputEvent): void {
+  input(event: Event): void {
     const value = (event.target as HTMLInputElement).value
 
     if (supabase?.channel) {
