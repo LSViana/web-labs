@@ -42,6 +42,7 @@
     "vue-tsc": "^2.0.29"
   },
   "overrides": {
-    "uri-js": "npm:uri-js-replace"
+    "uri-js": "npm:uri-js-replace",
+    "whatwg-url": "^14.0.0"
   }
 }
