@@ -1,31 +1,37 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxt/eslint',
   ],
   typescript: {
-    typeCheck: true
+    typeCheck: true,
   },
   imports: {
-    autoImport: false
+    autoImport: false,
   },
   components: {
-    dirs: []
+    dirs: [],
   },
   tailwindcss: {
-    cssPath: '~/assets/styles/tailwind.scss'
+    cssPath: '~/assets/styles/tailwind.scss',
   },
   experimental: {
-    viewTransition: true
+    viewTransition: true,
+  },
+  eslint: {
+    config: {
+      stylistic: false,
+    },
   },
   appConfig: {
     supabase: {
       url: process.env.SUPABASE_URL!,
-      key: process.env.SUPABASE_KEY!
-    }
+      key: process.env.SUPABASE_KEY!,
+    },
   },
   devServer: {
-    host: '0.0.0.0'
+    host: '0.0.0.0',
   },
-  compatibilityDate: '2024-08-04'
+  compatibilityDate: '2024-08-04',
 })
