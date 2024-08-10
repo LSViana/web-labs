@@ -12,3 +12,7 @@ export default withNuxt([
     }
   }
 ])
+  .override('nuxt/typescript/rules', {
+    // Ignores the submodules (like the React project).
+    ignores: [ 'submodules/**' ]
+  })
