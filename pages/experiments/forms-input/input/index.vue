@@ -1,8 +1,8 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="flex flex-col gap-3 p-3">
+    <WlContainer class="flex flex-col gap-3 p-3">
       <p>The password strength meter (input is just for decoration):</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <div class="flex w-56 flex-col">
           <input
             v-model="password"
@@ -14,9 +14,9 @@
         <template #caption>
           Used to demonstrate to the user the strength of their password. For this example, length is strength.
         </template>
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>The number input with an animated display:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <div class="flex w-56 flex-col">
           <input
             v-model="amount"
@@ -28,16 +28,16 @@
             <WlNumberDisplay :value="amount" />
           </div>
         </div>
-      </ExperimentCanvas>
-    </Container>
+      </WlExperimentCanvas>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import Container from '~/components/shared/layout/Container.vue'
-import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlPasswordStrength from '~/components/experiments/forms-input/input/WlPasswordStrength.vue'
 import WlNumberDisplay from '~/components/experiments/forms-input/input/WlNumberDisplay.vue'
 

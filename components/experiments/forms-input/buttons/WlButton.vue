@@ -19,15 +19,9 @@ type Props = {
   variant: WlButtonVariant;
 }
 type Events = {
-  (e: 'click', event: MouseEvent): void;
-  (e: 'mousedown', event: MouseEvent): void;
-  (e: 'mouseup', event: MouseEvent): void;
-  (e: 'mouseenter', event: MouseEvent): void;
-  (e: 'mouseleave', event: MouseEvent): void;
-  (e: 'touchstart', event: TouchEvent): void;
-  (e: 'touchend', event: TouchEvent): void;
-  (e: 'keydown', event: KeyboardEvent): void;
-  (e: 'keyup', event: KeyboardEvent): void;
+  (e: 'click' | 'mousedown' | 'mouseup' | 'mouseenter' | 'mouseleave', event: MouseEvent): void;
+  (e: 'touchstart' | 'touchend', event: TouchEvent): void;
+  (e: 'keydown' | 'keyup', event: KeyboardEvent): void;
 }
 
 const variantClasses: Record<WlButtonVariant, string> = {

@@ -1,19 +1,19 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="flex flex-col gap-3 p-3">
+    <WlContainer class="flex flex-col gap-3 p-3">
       <p>The <code>primary</code> button:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlButton variant="primary" @click="methods.onClick">
           Get Started
         </WlButton>
         <template #caption>
           Used to perform the main actions. Clicked <code>{{ counter }}</code> times.
         </template>
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>
         The icon button allows you to show an action quicker:
       </p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <div class="inline-flex gap-2 rounded-full border bg-slate-200 p-1 dark:bg-slate-800">
           <WlIconButton variant="primary">
             <WlStarIcon value />
@@ -22,20 +22,20 @@
             <WlTrashAnimatedIcon />
           </WlIconButton>
         </div>
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>
         The confirm button allows you to perform the main action with a confirmation step:
       </p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlConfirmDeleteButton @confirm="methods.onConfirm" />
         <template #caption>
           Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
         </template>
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>
         The button group allows putting multiple actions together.
       </p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlButtonGroup>
           <WlButton variant="secondary">
             Cancel
@@ -45,25 +45,25 @@
         <template #caption>
           Used to group actions.
         </template>
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>
         The rating button allows the user to rate something.
       </p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlRatingButton v-model:value="rating" />
         <template #caption>
           Used to evaluate aspects of something. Rating: <code>{{ rating }}</code>.
         </template>
-      </ExperimentCanvas>
-    </Container>
+      </WlExperimentCanvas>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import Container from '~/components/shared/layout/Container.vue'
-import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlConfirmDeleteButton from '~/components/experiments/forms-input/buttons/WlConfirmDeleteButton.vue'
 import WlButtonGroup from '~/components/experiments/forms-input/buttons/WlButtonGroup.vue'

@@ -3,7 +3,7 @@ import { useRouter } from '#app'
 import type { RouteLocationNormalized } from 'vue-router'
 
 export function useCustomViewTransitions(): void {
-  if (!process.client) {
+  if (!import.meta.client) {
     return
   }
 

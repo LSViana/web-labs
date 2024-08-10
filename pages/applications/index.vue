@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="home">
-    <Container>
+    <WlContainer>
       <div class="p-3">
         <ul class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
           <li>
@@ -65,12 +65,12 @@
           </li>
         </ul>
       </div>
-    </Container>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import Container from '~/components/shared/layout/Container.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 import WlCard from '~/components/shared/card/WlCard.vue'
 import WlTodoBadge from '~/components/shared/badge/WlTodoBadge.vue'
 </script>

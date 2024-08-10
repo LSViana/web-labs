@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="home">
-    <Container>
+    <WlContainer>
       <div class="p-3">
         <p>Get started by choosing a path:</p>
         <ul class="mt-3 grid grid-cols-2 gap-3">
@@ -16,11 +16,11 @@
           </li>
         </ul>
       </div>
-    </Container>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import Container from '~/components/shared/layout/Container.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 import WlCard from '~/components/shared/card/WlCard.vue'
 </script>

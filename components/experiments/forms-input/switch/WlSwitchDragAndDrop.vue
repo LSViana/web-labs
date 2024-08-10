@@ -3,7 +3,7 @@
     <div
       v-for="i in props.options"
       :key="i"
-      class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-2 transition-colors"
+      class="flex size-9 cursor-pointer items-center justify-center rounded-full border-2 transition-colors"
       :class="[
         backgroundColors[(i - 1) % backgroundColors.length],
         props.value === i ? borderColors[(i - 1) % borderColors.length] : 'border-transparent hover:border-white/25'
@@ -15,7 +15,7 @@
     >
       <div
         v-if="props.value === i"
-        class="flex h-9 w-9 items-center justify-center rounded-full"
+        class="flex size-9 items-center justify-center rounded-full"
         :class="[ foregroundColors[(i - 1) % foregroundColors.length] ]"
         draggable="true"
         :data-value="i"

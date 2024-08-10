@@ -1,21 +1,21 @@
 <template>
   <NuxtLayout name="home">
-    <Container>
+    <WlContainer>
       <div v-for="group in groups" :key="group.target" class="p-3">
         <p>{{ group.target }}</p>
         <ul class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
           <li v-for="experiment in group.experiments" :key="experiment.route">
-            <ExperimentCard :experiment="experiment" />
+            <WlExperimentCard :experiment="experiment" />
           </li>
         </ul>
       </div>
-    </Container>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import Container from '~/components/shared/layout/Container.vue'
-import ExperimentCard from '~/components/shared/experiments/ExperimentCard.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
+import WlExperimentCard from '~/components/shared/experiments/WlExperimentCard.vue'
 
 import type { Experiment } from '~/utils/types/experiments'
 

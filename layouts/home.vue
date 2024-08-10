@@ -1,10 +1,10 @@
 <template>
   <div class="flex min-h-screen flex-col bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-100">
-    <Header />
+    <WlHeader />
     <div class="flex-1">
       <slot />
     </div>
-    <Footer />
+    <WlFooter />
     <ClientOnly>
       <span data-test="hydrated" />
     </ClientOnly>
@@ -14,8 +14,8 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 
-import Header from '~/components/shared/surroundings/Header.vue'
-import Footer from '~/components/shared/surroundings/Footer.vue'
+import WlHeader from '~/components/shared/surroundings/WlHeader.vue'
+import WlFooter from '~/components/shared/surroundings/WlFooter.vue'
 
 useHead({
   title: 'Web Labs',

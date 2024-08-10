@@ -1,8 +1,8 @@
 <template>
   <div class="relative w-48 rounded-full border bg-slate-100 px-7 py-1 dark:bg-slate-800">
     <div
-      class="flex h-12 w-12 -translate-x-1/2 cursor-ew-resize touch-none items-center justify-center rounded-full
-      bg-slate-300 transition-[border-color,background-color] hover:border dark:bg-slate-600"
+      class="flex size-12 -translate-x-1/2 cursor-ew-resize touch-none items-center justify-center rounded-full bg-slate-300
+      transition-[border-color,background-color] hover:border dark:bg-slate-600"
       :class="handleClasses"
       :style="handleStyles"
       @pointerup="listeners.pointerup"

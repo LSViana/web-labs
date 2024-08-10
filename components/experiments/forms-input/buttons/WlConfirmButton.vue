@@ -10,9 +10,9 @@
     @keydown="listeners.keydown"
     @keyup="listeners.keyup"
   >
-    <span class="progress-container absolute inset-0 overflow-hidden rounded-[inherit]">
+    <span class="wl-progress-container absolute inset-0 overflow-hidden rounded-[inherit]">
       <span
-        class="progress block h-full bg-white opacity-20 mix-blend-plus-lighter transition-[width] duration-[1000ms]"
+        class="wl-progress block h-full bg-white opacity-20 mix-blend-plus-lighter transition-[width] duration-1000"
         :class="progressClasses"
         @transitionend="listeners.transitionend"
       />
@@ -33,9 +33,7 @@ type Props = {
   variant: WlButtonVariant;
 };
 type Events = {
-  (e: 'confirm'): void;
-  (e: 'start-confirm'): void;
-  (e: 'stop-confirm'): void;
+  (e: 'confirm' | 'start-confirm' |  'stop-confirm'): void;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -45,7 +43,7 @@ const emits = defineEmits<Events>()
 
 const loading = ref(false)
 const progressClasses = computed(() => ([
-  loading.value ? 'loading' : ''
+  loading.value ? 'wl-loading' : ''
 ]))
 
 const listeners = {
@@ -97,10 +95,10 @@ const methods = {
 </script>
 
 <style lang="scss" scoped>
-.progress {
+.wl-progress {
   width: 0;
 
-  &.loading {
+  &.wl-loading {
     width: 100%;
   }
 }

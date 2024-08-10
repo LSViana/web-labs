@@ -1,6 +1,6 @@
 <template>
   <header class="border-b">
-    <Container class="flex items-center justify-between">
+    <WlContainer class="flex items-center justify-between">
       <h2 class="text-2xl">
         <NuxtLink to="/" class="inline-block p-3">
           Web Labs
@@ -9,7 +9,7 @@
       <NuxtLink v-if="!isHome" to="/" class="inline-block p-3 transition-opacity hover:opacity-70">
         Back to home
       </NuxtLink>
-    </Container>
+    </WlContainer>
   </header>
 </template>
 
@@ -17,7 +17,7 @@
 import { useRoute } from '#app'
 import { computed } from 'vue'
 
-import Container from '~/components/shared/layout/Container.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 const route = useRoute()
 const isHome = computed(() => route.path === '/')

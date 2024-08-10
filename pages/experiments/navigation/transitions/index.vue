@@ -1,25 +1,25 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="flex flex-col gap-3 p-3">
+    <WlContainer class="flex flex-col gap-3 p-3">
       <p>The View Transitions API example:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <NuxtLink to="/experiments/navigation/transitions/end" draggable="false">
           <WlButton variant="primary" style="view-transition-name: view-details">
             View Details
           </WlButton>
         </NuxtLink>
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>Animating an element to wherever the user clicks using Web Animations API:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlMovableElementWebAnimationsApi />
-      </ExperimentCanvas>
-    </Container>
+      </WlExperimentCanvas>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import Container from '~/components/shared/layout/Container.vue'
-import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlMovableElementWebAnimationsApi from '~/components/experiments/transitions/WlMovableElementWebAnimationsApi.vue'
 

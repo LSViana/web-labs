@@ -1,25 +1,25 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="flex flex-col gap-3 p-3">
+    <WlContainer class="flex flex-col gap-3 p-3">
       <p>A simple animation example:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlGsapSimpleAnimation />
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>A staggered animation example:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlGsapStaggeredAnimation />
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>A raw object animation example:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlGsapRawObjectAnimationVue />
-      </ExperimentCanvas>
-    </Container>
+      </WlExperimentCanvas>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script setup lang="ts">
-import Container from '~/components/shared/layout/Container.vue'
-import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlGsapSimpleAnimation from '~/components/experiments/micro-interactions/gsap/WlGsapSimpleAnimation.vue'
 import WlGsapStaggeredAnimation from '~/components/experiments/micro-interactions/gsap/WlGsapStaggeredAnimation.vue'
 import WlGsapRawObjectAnimationVue from '~/components/experiments/micro-interactions/gsap/WlGsapRawObjectAnimation.vue'

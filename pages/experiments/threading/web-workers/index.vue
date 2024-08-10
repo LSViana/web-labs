@@ -1,29 +1,29 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="flex flex-col gap-3 p-3">
+    <WlContainer class="flex flex-col gap-3 p-3">
       <p>The single-threaded computation:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <p>Result: <code class="inline-block w-[96px]">{{ singleThread.result }}</code> | Duration: <code>{{ singleThread.duration }}ms</code></p>
         <WlButton variant="secondary" class="mt-2 flex items-center gap-2" @click="listeners.singleThreadClick">
           Calculate
         </WlButton>
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>The multi-threaded computation:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <p>Result: <code class="inline-block w-[96px]">{{ multiThread.result }}</code> | Duration: <code>{{ multiThread.duration }}ms</code></p>
         <WlButton variant="secondary" class="mt-2 flex items-center gap-2" @click="listeners.multiThreadClick">
           Calculate
         </WlButton>
-      </ExperimentCanvas>
-    </Container>
+      </WlExperimentCanvas>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-import Container from '~/components/shared/layout/Container.vue'
-import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 
 import useFibonacci from '~/composables/threading/fibonacci'

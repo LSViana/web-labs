@@ -1,6 +1,6 @@
 <template>
   <div class="relative m-3 h-[150px] bg-gray-500/10" @click="listeners.click">
-    <div ref="target" class="inline-block h-8 w-8 rounded-full bg-red-500" />
+    <div ref="target" class="inline-block size-8 rounded-full bg-red-500" />
   </div>
 </template>
 

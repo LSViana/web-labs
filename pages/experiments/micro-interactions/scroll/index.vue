@@ -1,13 +1,13 @@
 <template>
   <NuxtLayout name="home">
-    <Container class="flex flex-col gap-3 p-3">
+    <WlContainer class="flex flex-col gap-3 p-3">
       <p>The scrollable stack:</p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlScrollStackAnimatedContainer>
           <div
             v-for="i in 15"
             :key="i"
-            class="flex h-32 w-32 shrink-0 items-center justify-center rounded border text-slate-800"
+            class="flex size-32 shrink-0 items-center justify-center rounded border text-slate-800"
             :style="{ backgroundColor: `hsl(${i * 10 + 30}deg, 100%, 50%)`, borderColor: `hsl(${i * 10 + 30}deg, 100%, 40%)` }"
           >
             {{ i }}
@@ -16,23 +16,23 @@
         <template #caption>
           Used to show multiple cards in an animated stack list as the box scrolls.
         </template>
-      </ExperimentCanvas>
+      </WlExperimentCanvas>
       <p>
         The
         <a href="https://developer.chrome.com/articles/scroll-driven-animations/" class="underline" target="_blank">
           <span>scroll-driven animation</span>
         </a>:
       </p>
-      <ExperimentCanvas>
+      <WlExperimentCanvas>
         <WlScrollDrivenAnimation />
-      </ExperimentCanvas>
-    </Container>
+      </WlExperimentCanvas>
+    </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
-import Container from '~/components/shared/layout/Container.vue'
-import ExperimentCanvas from '~/components/shared/experiments/ExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlScrollStackAnimatedContainer from '~/components/experiments/micro-interactions/scroll/WlScrollStackAnimatedContainer.vue'
 import WlScrollDrivenAnimation from '~/components/experiments/micro-interactions/scroll/WlScrollDrivenAnimation.vue'
 </script>

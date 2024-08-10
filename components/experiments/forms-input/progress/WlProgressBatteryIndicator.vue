@@ -1,6 +1,6 @@
 <template>
-  <div class="relative flex h-64 w-64 flex-col overflow-hidden rounded-3xl bg-gray-800 p-6">
-    <h2 class="font text-5xl font-bold" :class="classes.text">
+  <div class="relative flex size-64 flex-col overflow-hidden rounded-3xl bg-gray-800 p-6">
+    <h2 class="text-5xl font-bold" :class="classes.text">
       {{ value }}%
     </h2>
     <p class="text-gray-400">
@@ -14,7 +14,7 @@
     </p>
     <div class="absolute -bottom-16 -right-36">
       <svg
-        class="h-96 w-96 fill-gray-700"
+        class="size-96 fill-gray-700"
         width="661"
         height="1230"
         viewBox="0 0 661 1230"

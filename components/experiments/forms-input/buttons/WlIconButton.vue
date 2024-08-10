@@ -1,5 +1,5 @@
 <template>
-  <WlButton :variant="variant" class="h-10 w-10 rounded-full">
+  <WlButton :variant="variant" class="size-10 rounded-full">
     <slot />
   </WlButton>
 </template>

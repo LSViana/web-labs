@@ -42,7 +42,7 @@ function getChannelConnectedPromise(channel: RealtimeChannel): Promise<void> {
 }
 
 export function useSupabaseClient(): Supabase | undefined {
-  if (!process.client) {
+  if (!import.meta.client) {
     return
   }
 
@@ -53,7 +53,7 @@ export function useSupabaseClient(): Supabase | undefined {
 let supabaseServer: Supabase | undefined
 
 export function useSupabaseServer(): Supabase | undefined {
-  if (!process.server) {
+  if (!import.meta.server) {
     return
   }
 

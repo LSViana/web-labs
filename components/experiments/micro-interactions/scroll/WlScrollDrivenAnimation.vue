@@ -5,7 +5,7 @@
       <div
         v-for="i in 10"
         :key="i"
-        class="h-32 w-32 shrink-0 rounded border bg-slate-200 dark:bg-slate-800"
+        class="size-32 shrink-0 rounded border bg-slate-200 dark:bg-slate-800"
       />
     </div>
   </div>

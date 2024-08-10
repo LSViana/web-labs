@@ -23,10 +23,10 @@ export async function getMessagesServer(): Promise<Server> {
           length: call.request.content.length
         })
     },
-    sendMessageStream: (call, callback) => {
+    sendMessageStream: () => {
       // TODO: Implement the handler.
     },
-    readMessageStream: (call) => {
+    readMessageStream: () => {
       // TODO: Implement the handler.
     }
   }

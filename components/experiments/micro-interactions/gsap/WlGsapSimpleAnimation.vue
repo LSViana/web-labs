@@ -1,8 +1,8 @@
 <template>
   <div class="h-32">
-    <div ref="box1" class="h-6 w-6 rounded border border-amber-400 bg-amber-500" />
-    <div ref="box2" class="h-6 w-6 rounded border border-purple-400 bg-purple-500" />
-    <div ref="box3" class="h-6 w-6 rounded border border-green-400 bg-green-500" />
+    <div ref="box1" class="size-6 rounded border border-amber-400 bg-amber-500" />
+    <div ref="box2" class="size-6 rounded border border-purple-400 bg-purple-500" />
+    <div ref="box3" class="size-6 rounded border border-green-400 bg-green-500" />
   </div>
 </template>
 
