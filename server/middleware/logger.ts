@@ -1,8 +1,7 @@
-import { defineEventHandler, getRequestPath } from 'h3'
+import { defineEventHandler } from 'h3'
 
 export default defineEventHandler((event) => {
-  if (getRequestPath(event).startsWith('/api/now')) {
-    // eslint-disable-next-line no-console
-    console.log('Requested now')
+  if (event.path.startsWith('/api/now')) {
+    console.log('Requested /api/now')
   }
 })
