@@ -2,26 +2,36 @@ import { computed, ref } from 'vue'
 import { Interval } from '~/components/applications/pomodoro/types/interval'
 import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
+import { type PomodoroEventMap, PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
+import { TypedEventBus } from '~/components/applications/pomodoro/types/typedEventBus'
+import type { TypedEventHandler } from '~/components/applications/pomodoro/types/typedEvent'
 
 export function usePomodoro() {
   // Private
-  const workDurationMs = 25 * 60 * 1_000 // minutes
   let intervalId = -1
+  const eventBus = new TypedEventBus()
 
   const startDate = ref(new Date())
+  const endDate = ref(new Date())
   const currentDate = ref(new Date())
   const type = ref(PomodoroIntervalType.work)
-  const remaining = computed(() => new PomodoroInterval(
-    calculateInterval(startDate.value, currentDate.value),
+
+  const interval = computed(() => new PomodoroInterval(
+    currentDate.value,
     startDate.value,
+    endDate.value,
     type.value
   ))
 
-  function calculateInterval(startDate: Date, endDate: Date) {
-    const diffMs = endDate.getTime() - startDate.getTime()
-    const diffSeconds = (workDurationMs - diffMs) / 1_000
-
-    return new Interval(Math.floor(diffSeconds / 60), Math.floor(diffSeconds % 60))
+  function getPeriodInterval(type: PomodoroIntervalType): Interval {
+    switch (type) {
+      case PomodoroIntervalType.work:
+        return new Interval(25, 0)
+      case PomodoroIntervalType.break:
+        return new Interval(5, 0)
+      default:
+        throw Error(`Unable to calculate duration for ${type}.`)
+    }
   }
 
   // Public
@@ -31,7 +41,16 @@ export function usePomodoro() {
     pause()
 
     startDate.value = new Date()
-    intervalId = window.setInterval(() => currentDate.value = new Date(), 1000)
+    endDate.value = getPeriodInterval(type.value).addToDate(startDate.value)
+
+    currentDate.value = startDate.value
+    intervalId = window.setInterval(() => {
+      currentDate.value = new Date()
+
+      if (currentDate.value >= endDate.value) {
+        skip()
+      }
+    }, 1000)
     isRunning.value = true
   }
 
@@ -41,19 +60,12 @@ export function usePomodoro() {
   }
 
   function skip(): PomodoroInterval {
-    let interval: Interval
-
-    if (isRunning.value) {
-      pause()
-
-      interval = calculateInterval(startDate.value, new Date())
-    } else {
-      interval = new Interval(0, 0)
-    }
+    pause()
 
     const pomodoroInterval = new PomodoroInterval(
-      interval,
+      currentDate.value,
       startDate.value,
+      endDate.value,
       type.value
     )
 
@@ -63,14 +75,29 @@ export function usePomodoro() {
       type.value = PomodoroIntervalType.work
     }
 
+    currentDate.value = startDate.value
+    endDate.value = getPeriodInterval(type.value).addToDate(startDate.value)
+
+    eventBus.trigger(new PomodoroIntervalEvent(pomodoroInterval))
+
     return pomodoroInterval
+  }
+
+  function on<K extends keyof PomodoroEventMap>(type: K, eventHandler: (event: PomodoroEventMap[K]) => void): void {
+    eventBus.on(type, eventHandler as TypedEventHandler)
+  }
+
+  function off<K extends keyof PomodoroEventMap>(type: K, eventHandler: (event: PomodoroEventMap[K]) => void): void {
+    eventBus.off(type, eventHandler as TypedEventHandler)
   }
 
   return {
     isRunning,
-    remaining,
+    interval,
     start,
     pause,
-    skip
+    skip,
+    on,
+    off
   }
 }
