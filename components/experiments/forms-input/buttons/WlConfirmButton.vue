@@ -1,23 +1,23 @@
 <template>
   <WlButton
-    :variant="props.variant"
-    class="wl-confirm-button relative"
-    @mousedown="listeners.mousedown"
-    @mouseup="listeners.mouseup"
-    @mouseleave="listeners.mouseleave"
-    @touchstart="listeners.touchstart"
-    @touchend="listeners.touchend"
-    @keydown="listeners.keydown"
-    @keyup="listeners.keyup"
+      :variant="props.variant"
+      class="wl-confirm-button relative"
+      @mousedown="listeners.mousedown"
+      @mouseup="listeners.mouseup"
+      @mouseleave="listeners.mouseleave"
+      @touchstart="listeners.touchstart"
+      @touchend="listeners.touchend"
+      @keydown="listeners.keydown"
+      @keyup="listeners.keyup"
   >
     <span class="wl-progress-container absolute inset-0 overflow-hidden rounded-[inherit]">
       <span
-        class="wl-progress block h-full bg-white opacity-20 mix-blend-plus-lighter transition-[width] duration-1000"
-        :class="progressClasses"
-        @transitionend="listeners.transitionend"
+          class="wl-progress block h-full bg-white opacity-20 mix-blend-plus-lighter transition-[width] duration-1000"
+          :class="progressClasses"
+          @transitionend="listeners.transitionend"
       />
     </span>
-    <slot />
+    <slot/>
   </WlButton>
 </template>
 
@@ -33,7 +33,9 @@ type Props = {
   variant: WlButtonVariant;
 };
 type Events = {
-  (e: 'confirm' | 'start-confirm' |  'stop-confirm'): void;
+  (e: 'confirm'): void;
+  (e: 'start-confirm'): void;
+  (e: 'stop-confirm'): void;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -47,32 +49,32 @@ const progressClasses = computed(() => ([
 ]))
 
 const listeners = {
-  mousedown (): void {
+  mousedown(): void {
     methods.onStartConfirm()
   },
-  mouseup (): void {
+  mouseup(): void {
     methods.onStopConfirm()
   },
-  mouseleave (): void {
+  mouseleave(): void {
     methods.onStopConfirm()
   },
-  touchstart (): void {
+  touchstart(): void {
     methods.onStartConfirm()
   },
-  touchend (): void {
+  touchend(): void {
     methods.onStopConfirm()
   },
-  keydown (event: KeyboardEvent): void {
+  keydown(event: KeyboardEvent): void {
     if (event.code === KeyboardCode.space) {
       methods.onStartConfirm()
     }
   },
-  keyup (event: KeyboardEvent): void {
+  keyup(event: KeyboardEvent): void {
     if (event.code === KeyboardCode.space) {
       methods.onStopConfirm()
     }
   },
-  transitionend (): void {
+  transitionend(): void {
     if (loading.value) {
       methods.onConfirm()
     }
@@ -80,15 +82,15 @@ const listeners = {
 }
 
 const methods = {
-  onStartConfirm (): void {
+  onStartConfirm(): void {
     loading.value = true
     emits('start-confirm')
   },
-  onStopConfirm (): void {
+  onStopConfirm(): void {
     loading.value = false
     emits('stop-confirm')
   },
-  onConfirm (): void {
+  onConfirm(): void {
     emits('confirm')
   }
 }
