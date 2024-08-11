@@ -14,13 +14,22 @@ export default withNuxt([
     }
   },
 
+  // TypeScript,
+  {
+    rules: {
+      // Disabled to allow defining one event per line with repeated types on components
+      // like `WlButton`, which then allows for proper code completion in the IDE.
+      '@typescript-eslint/unified-signatures': 'off'
+    }
+  },
+
   // TailwindCSS
   {
     rules: {
       'tailwindcss/no-custom-classname': [
         'error',
         {
-          whitelist: [ 'wl\\-[-\\w]+' ]
+          whitelist: ['wl\\-[-\\w]+']
         }
       ]
     }
@@ -28,5 +37,5 @@ export default withNuxt([
 ])
   .override('nuxt/typescript/rules', {
     // Ignores the submodules (like the React project).
-    ignores: [ 'submodules/**' ]
+    ignores: ['submodules/**']
   })
