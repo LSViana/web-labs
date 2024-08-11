@@ -3,22 +3,25 @@ import { usePomodoro } from '~/components/applications/pomodoro/usePomodoro'
 import { Interval } from '~/components/applications/pomodoro/types/interval'
 import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
+import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
 
 describe('usePomodoro', () => {
-  test('starts with timer paused, set to 25 min, and in work type', () => {
+  test('starts with timer paused, set to 0 min, 25 min duration, and in work type', () => {
     // Arrange
-    const now = new Date()
     const pomodoro = usePomodoro()
 
     // Act
     const isRunning = pomodoro.isRunning.value
-    const pomodoroInterval = pomodoro.remaining.value
+    const pomodoroInterval = pomodoro.interval.value
 
     // Assert
     expect(isRunning).toBe(false)
-    expect(pomodoroInterval.interval).toStrictEqual(new Interval(25, 0))
-    expect(pomodoroInterval.startDate).toStrictEqual(now)
-    expect(pomodoroInterval.type).toStrictEqual(PomodoroIntervalType.work)
+    expect(pomodoroInterval).toStrictEqual(new PomodoroInterval(
+      new Interval(0, 0),
+      new Interval(25, 0),
+      PomodoroIntervalType.work,
+    ))
+    expect(pomodoroInterval.remainingInterval).toStrictEqual(new Interval(25, 0))
   })
 
   test('timer only starts counting after started', () => {
@@ -32,7 +35,7 @@ describe('usePomodoro', () => {
     vi.advanceTimersByTime(1_000)
     pomodoro.start()
     vi.advanceTimersByTime(1_000)
-    const value = pomodoro.remaining.value.interval
+    const value = pomodoro.interval.value.remainingInterval
 
     // Assert
     expect(value).toStrictEqual(new Interval(24, 59))
@@ -41,7 +44,7 @@ describe('usePomodoro', () => {
     vi.useRealTimers()
   })
 
-  test('changes the remaining time every 1000 ms', () => {
+  test('changes the interval time every 1000 ms', () => {
     // Set-up
     vi.useFakeTimers()
 
@@ -51,30 +54,33 @@ describe('usePomodoro', () => {
     // Act
     pomodoro.start()
     vi.advanceTimersByTime(1_000)
-    let value = pomodoro.remaining.value.interval
+    let value = pomodoro.interval.value
 
     // Assert
-    expect(value).toStrictEqual(new Interval(24, 59))
+    expect(value.remainingInterval).toStrictEqual(new Interval(24, 59))
+    expect(value.remainingProgress).toBe(0.999)
 
     // Act
     vi.advanceTimersByTime(2_999)
-    value = pomodoro.remaining.value.interval
+    value = pomodoro.interval.value
 
     // Assert
-    expect(value).toStrictEqual(new Interval(24, 57))
+    expect(value.remainingInterval).toStrictEqual(new Interval(24, 57))
+    expect(value.remainingProgress).toBe(0.998)
 
     // Act
     vi.advanceTimersByTime(1)
-    value = pomodoro.remaining.value.interval
+    value = pomodoro.interval.value
 
     // Assert
-    expect(value).toStrictEqual(new Interval(24, 56))
+    expect(value.remainingInterval).toStrictEqual(new Interval(24, 56))
+    expect(value.remainingProgress).toBe(0.997)
 
     // Clean-up
     vi.useRealTimers()
   })
 
-  test('pausing the timer holds the same time', () => {
+  test('pausing and resuming the timer works correctly', () => {
     // Set-up
     vi.useFakeTimers()
 
@@ -86,16 +92,18 @@ describe('usePomodoro', () => {
     vi.advanceTimersByTime(37 * 1_000)
     pomodoro.pause()
     vi.advanceTimersByTime(10 * 1_000)
-    const value = pomodoro.remaining.value.interval
+    pomodoro.resume()
+    const value = pomodoro.interval.value
 
     // Assert
-    expect(value).toStrictEqual(new Interval(24, 23))
+    expect(value.remainingInterval).toStrictEqual(new Interval(24, 23))
+    expect(value.remainingProgress).toBe(0.975)
 
     // Clean-up
     vi.useRealTimers()
   })
 
-  test('skipping the timer pauses and sets it to 25 min', () => {
+  test('skipping the timer pauses and resets the remaining time', () => {
     // Set-up
     vi.useFakeTimers()
 
@@ -107,10 +115,10 @@ describe('usePomodoro', () => {
     vi.advanceTimersByTime(37 * 1_000)
     pomodoro.skip()
     vi.advanceTimersByTime(10 * 1_000)
-    const value = pomodoro.remaining.value.interval
+    const value = pomodoro.interval.value.remainingInterval
 
     // Assert
-    expect(value).toStrictEqual(new Interval(25, 0))
+    expect(value).toStrictEqual(new Interval(5, 0))
 
     // Clean-up
     vi.useRealTimers()
@@ -124,15 +132,15 @@ describe('usePomodoro', () => {
     const pomodoro = usePomodoro()
 
     // Act
-    const startDate = new Date()
     pomodoro.start()
     vi.advanceTimersByTime(25 * 1_000)
+
     const pomodoroInterval = pomodoro.skip()
 
     // Assert
     expect(pomodoroInterval).toStrictEqual(new PomodoroInterval(
-      new Interval(24, 35),
-      startDate,
+      new Interval(0, 25),
+      new Interval(25, 0),
       PomodoroIntervalType.work
     ))
 
@@ -140,57 +148,89 @@ describe('usePomodoro', () => {
     vi.useRealTimers()
   })
 
-  test('skipping the timer after a period paused returns interval zero', () => {
+  test('skipping the timer after a period paused resets timer to 5 min', () => {
     // Set-up
     vi.useFakeTimers()
 
     // Arrange
-    const now = new Date()
     const pomodoro = usePomodoro()
 
     // Act
     vi.advanceTimersByTime(25 * 1_000)
-    const pomodoroInterval = pomodoro.skip()
+    pomodoro.skip()
 
     // Assert
-    expect(pomodoroInterval).toStrictEqual(new PomodoroInterval(
-      new Interval(0, 0),
-      now,
-      PomodoroIntervalType.work
-    ))
+    expect(pomodoro.interval.value.remainingInterval).toStrictEqual(new Interval(5, 0))
 
     // Clean-up
     vi.useRealTimers()
   })
 
-  test('skipping the timer resets to 25 min and changes type', () => {
+  test('skipping the timer resets it and changes type', () => {
     // Set-up
     vi.useFakeTimers()
 
     // Arrange
-    const now = new Date()
     const pomodoro = usePomodoro()
 
     // Act
     pomodoro.start()
     vi.advanceTimersByTime(25 * 1_000)
     pomodoro.skip()
-    const remainingInterval = pomodoro.remaining.value
+
+    const interval = pomodoro.interval.value
+    const remainingTime = interval.remainingInterval
 
     // Assert
-    expect(remainingInterval).toStrictEqual(new PomodoroInterval(
-      new Interval(24, 35),
-      now,
+    expect(interval).toStrictEqual(new PomodoroInterval(
+      new Interval(0, 0),
+      new Interval(5, 0),
       PomodoroIntervalType.break
     ))
+    expect(remainingTime).toStrictEqual(new Interval(5, 0))
 
     // Clean-up
     vi.useRealTimers()
   })
 
-  test('when the timer ends, the finished event handlers are invoked', () => {
+  test('when the timer pauses or ends, the `interval` event is triggered', () => {
+    // Set-up
+    vi.useFakeTimers()
 
+    // Arrange
+    const pomodoro = usePomodoro()
+    const eventHandler = vi.fn()
+    pomodoro.on('interval', eventHandler)
+
+    // Act
+    pomodoro.start()
+    vi.advanceTimersByTime(25 * 60 * 1_000 - 1_000)
+
+    // Assert
+    expect(eventHandler).not.toHaveBeenCalled()
+
+    // Act
+    pomodoro.pause()
+    const parameters = eventHandler.mock.lastCall as [PomodoroIntervalEvent]
+    const interval = parameters[0].interval
+
+    // Assert
+    expect(eventHandler).toHaveBeenCalledTimes(1)
+    expect(parameters).toHaveLength(1)
+    expect(interval).toStrictEqual(new PomodoroInterval(
+      new Interval(24, 59),
+      new Interval(25, 0),
+      PomodoroIntervalType.work
+    ))
+
+    // Act
+    pomodoro.resume()
+    vi.advanceTimersByTime(25 * 60 * 1_000 * 2)
+
+    // Assert
+    expect(eventHandler).toHaveBeenCalledTimes(1)
+
+    // Clean-up
+    vi.useRealTimers()
   })
-
-  // TODO: Record the times. Return the details when finishing.
 })
