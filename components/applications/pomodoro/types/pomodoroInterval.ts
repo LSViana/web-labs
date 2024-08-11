@@ -1,20 +1,25 @@
-import { Interval } from '~/components/applications/pomodoro/types/interval'
+import type { Interval } from '~/components/applications/pomodoro/types/interval'
 import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 
 export class PomodoroInterval {
-  public readonly currentDate: Date
-  public readonly startDate: Date
-  public readonly endDate: Date
+  public readonly elapsedInterval: Interval
+  public readonly totalInterval: Interval
   public readonly type: PomodoroIntervalType
 
-  constructor(currentDate: Date, startDate: Date, endDate: Date, type: PomodoroIntervalType) {
-    this.currentDate = currentDate
-    this.startDate = startDate
-    this.endDate = endDate
+  constructor(elapsedInterval: Interval, totalInterval: Interval, type: PomodoroIntervalType) {
+    this.elapsedInterval = elapsedInterval
+    this.totalInterval = totalInterval
     this.type = type
   }
 
   get remainingInterval(): Interval {
-    return Interval.fromDates(this.currentDate, this.endDate)
+    return this.totalInterval.subtractInterval(this.elapsedInterval)
+  }
+
+  get remainingProgress(): number {
+    const totalSeconds = this.totalInterval.totalSeconds
+    const remainingSeconds = this.remainingInterval.totalSeconds
+
+    return Math.floor(remainingSeconds / totalSeconds * 1000) / 1000
   }
 }
