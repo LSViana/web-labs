@@ -1,3 +1,5 @@
+import checker from 'vite-plugin-checker'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -23,6 +25,15 @@ export default defineNuxtConfig({
     config: {
       stylistic: false,
     },
+  },
+  vite: {
+    plugins: [
+      checker({
+        overlay: {
+          initialIsOpen: false
+        }
+      })
+    ]
   },
   appConfig: {
     supabase: {
