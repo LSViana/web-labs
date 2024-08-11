@@ -51,7 +51,7 @@ export function usePomodoro() {
       elapsedSeconds.value++
 
       if (elapsedSeconds.value >= periodInterval.value.totalSeconds) {
-        skip()
+        // TODO: Notify.
       }
     }, 1_000)
 
