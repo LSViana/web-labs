@@ -1,21 +1,20 @@
-import type { Interval } from '~/components/applications/pomodoro/types/interval'
+import { Interval } from '~/components/applications/pomodoro/types/interval'
 import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 
 export class PomodoroInterval {
-  public readonly interval: Interval
+  public readonly currentDate: Date
   public readonly startDate: Date
+  public readonly endDate: Date
   public readonly type: PomodoroIntervalType
 
-  constructor(interval: Interval, startDate: Date, type: PomodoroIntervalType) {
-    this.interval = interval
+  constructor(currentDate: Date, startDate: Date, endDate: Date, type: PomodoroIntervalType) {
+    this.currentDate = currentDate
     this.startDate = startDate
+    this.endDate = endDate
     this.type = type
   }
 
-  public get endDate(): Date {
-    const totalSeconds = this.interval.minutes * 60 + this.interval.seconds
-    const totalMs = totalSeconds * 1_000
-
-    return new Date(this.startDate.getTime() + totalMs)
+  get remainingInterval(): Interval {
+    return Interval.fromDates(this.currentDate, this.endDate)
   }
 }
