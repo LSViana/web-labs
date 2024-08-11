@@ -43,6 +43,43 @@ describe('Interval', () => {
     const value = interval.toString()
 
     // Assert
-    expect(value).toBe('289:123')
+    expect(value).toBe('291:03')
+  })
+
+  test('formats mixed negative values correctly', () => {
+    // Arrange
+    const interval = new Interval(10, -60)
+
+    // Act
+    const value = interval.toString()
+
+    // Assert
+    expect(value).toBe('09:00')
+  })
+
+  test('formats all negative values correctly', () => {
+    // Arrange
+    const interval = new Interval(-10, -65)
+
+    // Act
+    const value = interval.toString()
+
+    // Assert
+    expect(value).toBe('11:05')
+  })
+
+  test('initializes correctly with negative values', () => {
+    // Arrange
+    const interval = new Interval(-10, -65)
+
+    // Act
+    const {
+      minutes,
+      seconds
+    } = interval
+
+    // Assert
+    expect(minutes).toBe(-11)
+    expect(seconds).toBe(-5)
   })
 })
