@@ -6,6 +6,7 @@
     "url": "https://lsviana.github.io"
   },
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
