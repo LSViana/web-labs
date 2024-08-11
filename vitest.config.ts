@@ -6,12 +6,11 @@ export default defineConfig({
     vuePlugin()
   ],
   test: {
-    globals: true,
     environment: 'happy-dom'
   },
   resolve: {
     alias: {
-      '~': '.'
+      '~/': new URL('./', import.meta.url).pathname
     }
   }
 })
