@@ -11,17 +11,10 @@ export function usePomodoro() {
   let intervalId = -1
   const eventBus = new TypedEventBus()
 
-  const startDate = ref(new Date())
-  const endDate = ref(new Date())
-  const currentDate = ref(new Date())
   const type = ref(PomodoroIntervalType.work)
-
-  const interval = computed(() => new PomodoroInterval(
-    currentDate.value,
-    startDate.value,
-    endDate.value,
-    type.value
-  ))
+  const periodInterval = computed(() => getPeriodInterval(type.value))
+  const startDate = ref(new Date())
+  const elapsedSeconds = ref(0)
 
   function getPeriodInterval(type: PomodoroIntervalType): Interval {
     switch (type) {
@@ -36,38 +29,51 @@ export function usePomodoro() {
 
   // Public
   const isRunning = ref(false)
+  const isInProgress = computed(() => elapsedSeconds.value > 0)
+
+  const interval = computed(() => new PomodoroInterval(
+    new Interval(0, elapsedSeconds.value),
+    periodInterval.value,
+    type.value
+  ))
 
   function start() {
     pause()
 
     startDate.value = new Date()
-    endDate.value = getPeriodInterval(type.value).addToDate(startDate.value)
+    elapsedSeconds.value = 0
 
-    currentDate.value = startDate.value
+    resume()
+  }
+
+  function resume(): void {
     intervalId = window.setInterval(() => {
-      currentDate.value = new Date()
+      elapsedSeconds.value++
 
-      if (currentDate.value >= endDate.value) {
+      if (elapsedSeconds.value >= periodInterval.value.totalSeconds) {
         skip()
       }
-    }, 1000)
+    }, 1_000)
+
     isRunning.value = true
   }
 
   function pause() {
+    const pomodoroInterval = interval.value
+
     isRunning.value = false
     clearInterval(intervalId)
+
+    if (elapsedSeconds.value > 0) {
+      eventBus.trigger(new PomodoroIntervalEvent(pomodoroInterval))
+    }
   }
 
   function skip(): PomodoroInterval {
-    pause()
+    const pomodoroInterval = interval.value
 
-    const pomodoroInterval = new PomodoroInterval(
-      currentDate.value,
-      startDate.value,
-      endDate.value,
-      type.value
-    )
+    isRunning.value = false
+    clearInterval(intervalId)
 
     if (type.value === PomodoroIntervalType.work) {
       type.value = PomodoroIntervalType.break
@@ -75,8 +81,7 @@ export function usePomodoro() {
       type.value = PomodoroIntervalType.work
     }
 
-    currentDate.value = startDate.value
-    endDate.value = getPeriodInterval(type.value).addToDate(startDate.value)
+    elapsedSeconds.value = 0
 
     eventBus.trigger(new PomodoroIntervalEvent(pomodoroInterval))
 
@@ -93,9 +98,11 @@ export function usePomodoro() {
 
   return {
     isRunning,
+    isInProgress,
     interval,
     start,
     pause,
+    resume,
     skip,
     on,
     off
