@@ -3,12 +3,12 @@ export class Interval {
   public readonly seconds: number
 
   constructor(minutes: number, seconds: number) {
-    const totalSeconds = Math.abs(minutes) * 60 + Math.abs(seconds)
-    const finalMinutes = minutes < 0 ? Math.ceil(totalSeconds / 60) : Math.floor(totalSeconds / 60)
-    const finalSeconds = seconds < 0 ? Math.ceil(totalSeconds % 60) : Math.floor(totalSeconds % 60)
+    const totalSeconds = minutes * 60 + seconds
+    const finalMinutes = totalSeconds > 0 ? Math.floor(totalSeconds / 60) : Math.ceil(totalSeconds / 60)
+    const finalSeconds = totalSeconds > 0 ? Math.floor(totalSeconds % 60) : Math.ceil(totalSeconds % 60)
 
-    this.minutes = minutes < 0 ? -finalMinutes : finalMinutes
-    this.seconds = seconds < 0 ? -finalSeconds : finalSeconds
+    this.minutes = finalMinutes
+    this.seconds = finalSeconds
   }
 
   get totalSeconds(): number {
@@ -27,6 +27,9 @@ export class Interval {
   }
 
   public toString(): string {
-    return `${this.minutes.toString().padStart(2, '0')}:${this.seconds.toString().padStart(2, '0')}`
+    const minutes = Math.abs(this.minutes)
+    const seconds = Math.abs(this.seconds)
+
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
   }
 }
