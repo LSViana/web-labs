@@ -1,14 +1,31 @@
 <template>
   <div class="flex flex-col items-center gap-3 border p-5">
-    <WlPomodoroProgressCircle
-        :progress="pomodoro.interval.value.remainingProgress"
-        :text="pomodoro.interval.value.remainingInterval.toString()"
-    />
+    <WlPomodoroProgressCircle :interval="pomodoro.interval.value"/>
     <div class="flex gap-3">
-      <WlIconButton v-if="pomodoro.isRunning.value" variant="primary" title="Pause timer" @click="listeners.pauseClick">
+      <WlIconButton
+          v-if="pomodoro.isOvertime.value"
+          variant="danger"
+          title="Finish interval"
+          @click="listeners.finishClick"
+      >
+        <WlStopIcon/>
+      </WlIconButton>
+      <WlIconButton
+          v-else-if="pomodoro.isRunning.value"
+          variant="transparent"
+          :class="pomodoroColor.backgroundInteractive"
+          title="Pause timer"
+          @click="listeners.pauseClick"
+      >
         <WlPauseIcon/>
       </WlIconButton>
-      <WlIconButton v-else variant="primary" title="Start timer" @click="listeners.playClick">
+      <WlIconButton
+          v-else
+          variant="transparent"
+          :class="pomodoroColor.backgroundInteractive"
+          title="Start timer"
+          @click="listeners.playClick"
+      >
         <WlPlayIcon class="ps-1"/>
       </WlIconButton>
       <WlIconButton variant="secondary" title="Skip interval" @click="listeners.skipClick()">
@@ -25,8 +42,23 @@ import WlPlayIcon from '~/components/shared/icons/static/WlPlayIcon.vue'
 import WlPauseIcon from '~/components/shared/icons/static/WlPauseIcon.vue'
 import WlForwardIcon from '~/components/shared/icons/static/WlForwardIcon.vue'
 import WlPomodoroProgressCircle from '~/components/applications/pomodoro/WlPomodoroProgressCircle.vue'
+import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
+import { computed, onMounted, onUnmounted } from 'vue'
+import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
+import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
+import WlStopIcon from '~/components/shared/icons/static/WlStopIcon.vue'
 
+type Events = {
+  (e: 'interval', value: PomodoroInterval): void;
+  (e: 'play'): void;
+}
+
+const emits = defineEmits<Events>()
 const pomodoro = usePomodoro()
+const pomodoroColor = computed(() => getPomodoroTypeColor(pomodoro.interval.value.type))
+
+onMounted(() => pomodoro.on('interval', listeners.interval))
+onUnmounted(() => pomodoro.off('interval', listeners.interval))
 
 const listeners = {
   playClick() {
@@ -35,12 +67,20 @@ const listeners = {
     } else {
       pomodoro.start()
     }
+
+    emits('play')
   },
   pauseClick() {
     pomodoro.pause()
   },
+  finishClick() {
+    pomodoro.skip()
+  },
   skipClick() {
     pomodoro.skip()
+  },
+  interval(event: PomodoroIntervalEvent): void {
+    emits('interval', event.interval)
   }
 }
 </script>

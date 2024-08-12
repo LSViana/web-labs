@@ -6,24 +6,26 @@
           cx="50%" cy="50%" r="50%" stroke-width="1rem"
       />
       <circle
-          class="wl-circle fill-none stroke-primary-100"
+          class="wl-circle fill-none"
+          :class="pomodoroColor.stroke"
           cx="50%" cy="50%" r="50%" stroke-width="1rem"
           :stroke-dasharray="dashArray"
           :stroke-dashoffset="dashOffset"
       />
     </svg>
     <p class="relative text-5xl font-bold">
-      {{ text }}
+      {{ props.interval.remainingInterval }}
     </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue'
+import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
+import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
 
 type Props = {
-  text: string;
-  progress: number;
+  interval: PomodoroInterval;
 }
 
 const size = 180
@@ -31,12 +33,13 @@ const radius = size / 2
 const circumference = 2 * Math.PI * radius
 
 const props = defineProps<Props>()
+const pomodoroColor = computed(() => getPomodoroTypeColor(props.interval.type))
 
 const progressStyles = computed<Partial<StyleValue>>(() => ({
   width: `${size}px`
 }))
 const dashArray = computed(() => {
-  const dash = Math.max(0, props.progress) * circumference
+  const dash = Math.max(0, props.interval.remainingProgress) * circumference
 
   return `${dash} ${circumference - dash}`
 })
