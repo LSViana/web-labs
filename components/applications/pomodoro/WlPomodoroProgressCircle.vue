@@ -6,7 +6,7 @@
           cx="50%" cy="50%" r="50%" stroke-width="1rem"
       />
       <circle
-          class="wl-circle fill-none"
+          class="fill-none"
           :class="pomodoroColor.stroke"
           cx="50%" cy="50%" r="50%" stroke-width="1rem"
           :stroke-dasharray="dashArray"
@@ -48,15 +48,3 @@ const dashArray = computed(() => {
 })
 const dashOffset = computed(() => circumference / 4)
 </script>
-
-<style lang="scss" scoped>
-.wl-circle {
-  --size: 200px;
-  --half-size: calc(var(--size) / 2);
-  --stroke-width: 20px;
-  --radius: calc((var(--size) - var(--stroke-width)) / 2);
-  --circumference: calc(var(--radius) * pi * 2);
-  --dash: calc((attr(data-progress, number) * var(--circumference)) / 100);
-  animation: progress-animation 5s linear 0s 1 forwards;
-}
-</style>
