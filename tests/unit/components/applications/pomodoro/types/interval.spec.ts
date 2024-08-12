@@ -96,6 +96,32 @@ describe('Interval', () => {
     expect(interval.seconds).toBe(14)
   })
 
+  test('calculates interval from dates with 500+ milliseconds correctly', () => {
+    // Arrange
+    const startDate = new Date('2000-01-01 10:00:00.700')
+    const endDate = new Date('2000-01-01 10:05:00')
+
+    // Act
+    const interval = Interval.fromDates(startDate, endDate)
+
+    // Assert
+    expect(interval.minutes).toBe(5)
+    expect(interval.seconds).toBe(0)
+  })
+
+  test('calculates interval from dates with 500- milliseconds correctly', () => {
+    // Arrange
+    const startDate = new Date('2000-01-01 10:00:00.499')
+    const endDate = new Date('2000-01-01 10:05:00')
+
+    // Act
+    const interval = Interval.fromDates(startDate, endDate)
+
+    // Assert
+    expect(interval.minutes).toBe(5)
+    expect(interval.seconds).toBe(0)
+  })
+
   test('calculates interval from inverted dates correctly', () => {
     // Arrange
     const startDate = new Date('2000-01-01 10:05:05')
