@@ -54,7 +54,7 @@ export function usePomodoro() {
       if (interval.value.elapsedInterval.totalSeconds >= periodInterval.value.totalSeconds) {
         // TODO: Notify.
       }
-    }, 500)
+    }, 1_000)
 
     isRunning.value = true
   }
