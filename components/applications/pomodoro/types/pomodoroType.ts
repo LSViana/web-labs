@@ -1,4 +1,4 @@
 export enum PomodoroIntervalType {
-  work,
-  break
+  work = 'work',
+  break = 'break'
 }
