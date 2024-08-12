@@ -82,4 +82,30 @@ describe('Interval', () => {
     expect(minutes).toBe(-11)
     expect(seconds).toBe(-5)
   })
+
+  test('calculates interval from dates correctly', () => {
+    // Arrange
+    const startDate = new Date('2000-01-01 10:03:05')
+    const endDate = new Date('2000-01-01 11:18:19')
+
+    // Act
+    const interval = Interval.fromDates(startDate, endDate)
+
+    // Assert
+    expect(interval.minutes).toBe(75)
+    expect(interval.seconds).toBe(14)
+  })
+
+  test('calculates interval from inverted dates correctly', () => {
+    // Arrange
+    const startDate = new Date('2000-01-01 10:05:05')
+    const endDate = new Date('2000-01-01 10:03:50')
+
+    // Act
+    const interval = Interval.fromDates(startDate, endDate)
+
+    // Assert
+    expect(interval.minutes).toBe(-1)
+    expect(interval.seconds).toBe(-15)
+  })
 })
