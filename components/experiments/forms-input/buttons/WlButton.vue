@@ -13,7 +13,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 
-export type WlButtonVariant = 'primary' | 'secondary' | 'danger'
+export type WlButtonVariant = 'primary' | 'secondary' | 'danger' | 'transparent'
 
 type Props = {
   variant: WlButtonVariant;
@@ -39,7 +39,8 @@ const variantClasses: Record<WlButtonVariant, string> = {
       'focus:ring-gray-300',
   danger: 'bg-red-500 text-red-50 ' +
       'hover:bg-red-600 active:bg-red-700 ' +
-      'focus:ring-red-300'
+      'focus:ring-red-300',
+  transparent: '' // Used when it's necessary to manually set the colors.
 }
 
 const props = defineProps<Props>()
