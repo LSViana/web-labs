@@ -1,12 +1,12 @@
 <template>
   <div class="flex min-h-screen flex-col bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-100">
-    <WlHeader />
+    <WlHeader/>
     <div class="flex-1">
-      <slot />
+      <slot/>
     </div>
-    <WlFooter />
+    <WlFooter/>
     <ClientOnly>
-      <span data-test="hydrated" />
+      <span data-test="hydrated"/>
     </ClientOnly>
   </div>
 </template>
@@ -18,7 +18,11 @@ import WlHeader from '~/components/shared/surroundings/WlHeader.vue'
 import WlFooter from '~/components/shared/surroundings/WlFooter.vue'
 
 useHead({
-  title: 'Web Labs',
+  titleTemplate: (pageTitle) => {
+    return pageTitle
+        ? `${pageTitle} - Web Labs`
+        : 'Web Labs'
+  },
   meta: [
     {
       name: 'viewport',

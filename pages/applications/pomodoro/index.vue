@@ -18,6 +18,11 @@ import { usePomodoroRecorder } from '~/components/applications/pomodoro/usePomod
 import { usePomodoroStorage } from '~/components/applications/pomodoro/usePomodoroStorage'
 import { onMounted } from 'vue'
 import { useLeaveConfirmation } from '~/components/applications/pomodoro/useLeaveConfirmation'
+import { useHead } from '@vueuse/head'
+
+useHead({
+  title: 'Pomodoro'
+})
 
 const pomodoroRecorder = usePomodoroRecorder()
 const pomodoroStorage = usePomodoroStorage()
