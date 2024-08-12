@@ -1,5 +1,5 @@
 <template>
-  <div class="wl-progress relative flex aspect-square items-center justify-center" :style="progressStyles">
+  <div class="wl-progress relative flex aspect-square flex-col items-center justify-center" :style="progressStyles">
     <svg class="absolute inset-0 overflow-hidden rounded-full" width="100%" height="100%">
       <circle
           class="wl-circle relative fill-none stroke-slate-900"
@@ -13,6 +13,9 @@
           :stroke-dashoffset="dashOffset"
       />
     </svg>
+    <p class="absolute -translate-y-10 capitalize text-muted dark:text-muted-dark">
+      {{ props.interval.type }}
+    </p>
     <p class="relative text-5xl font-bold">
       {{ props.interval.remainingInterval }}
     </p>
