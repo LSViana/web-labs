@@ -1,3 +1,6 @@
+- 2024-08-11: The `usePomodoro()` composable must depend on dates because the browser may stop the tab process
+  (including intervals), and counting the amount of elapsed seconds fails in that scenario.
+
 - 2024-08-11: Use `"type": "module"` in `package.json` to
   fix [Vite's warning](https://vitejs.dev/guide/troubleshooting.html#vite-cjs-node-api-deprecated).
 

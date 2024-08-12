@@ -12,9 +12,9 @@ export function usePomodoro() {
   const eventBus = new TypedEventBus()
 
   const type = ref(PomodoroIntervalType.work)
-  const periodInterval = computed(() => getPeriodInterval(type.value))
   const startDate = ref(new Date())
-  const elapsedSeconds = ref(0)
+  const endDate = ref(new Date())
+  const periodInterval = computed(() => getPeriodInterval(type.value))
 
   function getPeriodInterval(type: PomodoroIntervalType): Interval {
     switch (type) {
@@ -29,10 +29,11 @@ export function usePomodoro() {
 
   // Public
   const isRunning = ref(false)
-  const isInProgress = computed(() => elapsedSeconds.value > 0)
+  const isInProgress = computed(() => interval.value.elapsedInterval.totalSeconds > 0)
+  const isOvertime = computed(() => interval.value.elapsedInterval.totalSeconds > periodInterval.value.totalSeconds)
 
   const interval = computed(() => new PomodoroInterval(
-    new Interval(0, elapsedSeconds.value),
+    Interval.fromDates(startDate.value, endDate.value),
     periodInterval.value,
     type.value
   ))
@@ -41,19 +42,19 @@ export function usePomodoro() {
     pause()
 
     startDate.value = new Date()
-    elapsedSeconds.value = 0
+    endDate.value = new Date()
 
     resume()
   }
 
   function resume(): void {
     intervalId = window.setInterval(() => {
-      elapsedSeconds.value++
+      endDate.value = new Date()
 
-      if (elapsedSeconds.value >= periodInterval.value.totalSeconds) {
+      if (interval.value.elapsedInterval.totalSeconds >= periodInterval.value.totalSeconds) {
         // TODO: Notify.
       }
-    }, 1_000)
+    }, 500)
 
     isRunning.value = true
   }
@@ -64,7 +65,7 @@ export function usePomodoro() {
     isRunning.value = false
     clearInterval(intervalId)
 
-    if (elapsedSeconds.value > 0) {
+    if (interval.value.elapsedInterval.totalSeconds > 0) {
       eventBus.trigger(new PomodoroIntervalEvent(pomodoroInterval))
     }
   }
@@ -81,7 +82,8 @@ export function usePomodoro() {
       type.value = PomodoroIntervalType.work
     }
 
-    elapsedSeconds.value = 0
+    startDate.value = new Date()
+    endDate.value = new Date()
 
     eventBus.trigger(new PomodoroIntervalEvent(pomodoroInterval))
 
@@ -99,6 +101,7 @@ export function usePomodoro() {
   return {
     isRunning,
     isInProgress,
+    isOvertime,
     interval,
     start,
     pause,
