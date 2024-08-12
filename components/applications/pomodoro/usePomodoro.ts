@@ -56,6 +56,11 @@ export function usePomodoro() {
       }
     }, 1_000)
 
+    const totalMs = interval.value.elapsedInterval.totalSeconds * 1_000
+
+    endDate.value = new Date()
+    startDate.value = new Date(new Date().getTime() - totalMs)
+
     isRunning.value = true
   }
 
