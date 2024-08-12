@@ -93,11 +93,12 @@ describe('usePomodoro', () => {
     pomodoro.pause()
     vi.advanceTimersByTime(10 * 1_000)
     pomodoro.resume()
+    vi.advanceTimersByTime(1_000)
     const value = pomodoro.interval.value
 
     // Assert
-    expect(value.remainingInterval).toStrictEqual(new Interval(24, 23))
-    expect(value.remainingProgress).toBe(0.975)
+    expect(value.remainingInterval).toStrictEqual(new Interval(24, 22))
+    expect(value.remainingProgress).toBe(0.974)
 
     // Clean-up
     vi.useRealTimers()
