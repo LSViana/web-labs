@@ -29,9 +29,14 @@ export function usePomodoroRecorder() {
     ))
   }
 
+  function load(newRecords: PomodoroRecord[]) {
+    records.value.splice(0, records.value.length, ...newRecords)
+  }
+
   return {
     record,
     save,
+    load,
     records
   }
 }
