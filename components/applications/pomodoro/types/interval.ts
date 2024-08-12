@@ -32,4 +32,11 @@ export class Interval {
 
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
   }
+
+  public static fromDates(startDate: Date, endDate: Date): Interval {
+    const diffMs = endDate.getTime() - startDate.getTime()
+    const diffSeconds = diffMs / 1_000
+
+    return new Interval(Math.floor(diffSeconds / 60), Math.floor(diffSeconds % 60))
+  }
 }
