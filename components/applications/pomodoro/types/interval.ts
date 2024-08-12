@@ -37,6 +37,6 @@ export class Interval {
     const diffMs = endDate.getTime() - startDate.getTime()
     const diffSeconds = diffMs / 1_000
 
-    return new Interval(Math.floor(diffSeconds / 60), Math.floor(diffSeconds % 60))
+    return new Interval(0, diffSeconds)
   }
 }
