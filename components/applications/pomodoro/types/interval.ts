@@ -35,7 +35,7 @@ export class Interval {
 
   public static fromDates(startDate: Date, endDate: Date): Interval {
     const diffMs = endDate.getTime() - startDate.getTime()
-    const diffSeconds = diffMs / 1_000
+    const diffSeconds = Math.ceil(diffMs / 1_000)
 
     return new Interval(0, diffSeconds)
   }
