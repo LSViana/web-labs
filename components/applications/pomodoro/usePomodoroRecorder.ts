@@ -1,16 +1,18 @@
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { ref } from 'vue'
 import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
+import { useNow } from '~/components/applications/pomodoro/useNow'
 
 export function usePomodoroRecorder() {
-  let isRecording = false
-  let startDate = new Date()
-
+  const now = useNow()
   const records = ref<PomodoroRecord[]>([])
+
+  let isRecording = false
+  let startDate = now.get()
 
   function record() {
     isRecording = true
-    startDate = new Date()
+    startDate = now.get()
   }
 
   function save(pomodoroInterval: PomodoroInterval) {
@@ -20,7 +22,7 @@ export function usePomodoroRecorder() {
 
     isRecording = false
 
-    const endDate = new Date()
+    const endDate = now.get()
 
     records.value.push(new PomodoroRecord(
       startDate,

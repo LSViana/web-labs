@@ -1,7 +1,10 @@
 import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
+import { useNow } from '~/components/applications/pomodoro/useNow'
 
 export function usePomodoroStorage() {
+  const now = useNow()
+
   function getKey(date: Date) {
     return `pomodoro-records-${date.toLocaleDateString(['en-US'])}`
   }
@@ -23,11 +26,11 @@ export function usePomodoroStorage() {
   }
 
   function saveToday(records: PomodoroRecord[]) {
-    save(new Date(), records)
+    save(now.get(), records)
   }
 
   function loadToday(): PomodoroRecord[] {
-    return load(new Date())
+    return load(now.get())
   }
 
   return {
