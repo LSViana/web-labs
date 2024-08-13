@@ -107,13 +107,28 @@ describe('Interval', () => {
 
   test('calculates interval from dates with 500+ milliseconds correctly', () => {
     // Arrange
-    const startDate = new Date('2000-01-01 10:00:00.700')
-    const endDate = new Date('2000-01-01 10:05:00')
+    const startDate = new Date('2000-01-01 10:00:00.501')
+    const endDate = new Date('2000-01-01 11:05:00')
 
     // Act
     const interval = Interval.fromDates(startDate, endDate)
 
     // Assert
+    expect(interval.hours).toBe(1)
+    expect(interval.minutes).toBe(4)
+    expect(interval.seconds).toBe(59)
+  })
+
+  test('calculates interval from dates with 500 milliseconds correctly', () => {
+    // Arrange
+    const startDate = new Date('2000-01-01 10:00:00.500')
+    const endDate = new Date('2000-01-01 12:05:00')
+
+    // Act
+    const interval = Interval.fromDates(startDate, endDate)
+
+    // Assert
+    expect(interval.hours).toBe(2)
     expect(interval.minutes).toBe(5)
     expect(interval.seconds).toBe(0)
   })
@@ -121,26 +136,42 @@ describe('Interval', () => {
   test('calculates interval from dates with 500- milliseconds correctly', () => {
     // Arrange
     const startDate = new Date('2000-01-01 10:00:00.499')
-    const endDate = new Date('2000-01-01 10:05:00')
+    const endDate = new Date('2000-01-01 13:05:00')
 
     // Act
     const interval = Interval.fromDates(startDate, endDate)
 
     // Assert
+    expect(interval.hours).toBe(3)
     expect(interval.minutes).toBe(5)
     expect(interval.seconds).toBe(0)
   })
 
   test('calculates interval from inverted dates correctly', () => {
     // Arrange
-    const startDate = new Date('2000-01-01 10:05:05')
+    const startDate = new Date('2000-01-02 10:05:05')
     const endDate = new Date('2000-01-01 10:03:50')
 
     // Act
     const interval = Interval.fromDates(startDate, endDate)
 
     // Assert
+    expect(interval.hours).toBe(-24)
     expect(interval.minutes).toBe(-1)
     expect(interval.seconds).toBe(-15)
+  })
+
+  test('calculates interval from arbitrary dates correctly', () => {
+    // Arrange
+    const startDate = new Date('2024-08-13T01:00:11.317Z')
+    const endDate = new Date('2024-08-13T02:02:16.973Z')
+
+    // Act
+    const interval = Interval.fromDates(startDate, endDate)
+
+    // Assert
+    expect(interval.hours).toBe(1)
+    expect(interval.minutes).toBe(2)
+    expect(interval.seconds).toBe(6)
   })
 })
