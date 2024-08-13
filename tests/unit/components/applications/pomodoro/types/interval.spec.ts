@@ -4,7 +4,7 @@ import { Interval } from '~/components/applications/pomodoro/types/interval'
 describe('Interval', () => {
   test('formats zero interval correctly', () => {
     // Arrange
-    const interval = new Interval(0, 0)
+    const interval = new Interval(0, 0, 0)
 
     // Act
     const value = interval.toString()
@@ -15,7 +15,7 @@ describe('Interval', () => {
 
   test('formats one-digit interval correctly', () => {
     // Arrange
-    const interval = new Interval(4, 7)
+    const interval = new Interval(0, 4, 7)
 
     // Act
     const value = interval.toString()
@@ -26,7 +26,7 @@ describe('Interval', () => {
 
   test('formats two-digit interval correctly', () => {
     // Arrange
-    const interval = new Interval(24, 37)
+    const interval = new Interval(0, 24, 37)
 
     // Act
     const value = interval.toString()
@@ -37,29 +37,35 @@ describe('Interval', () => {
 
   test('formats three-digit interval correctly', () => {
     // Arrange
-    const interval = new Interval(289, 123)
+    const interval1 = new Interval(0, 289, 123)
+    const interval2 = new Interval(121, 12, 61)
 
     // Act
-    const value = interval.toString()
+    const value1 = interval1.toString()
+    const value2 = interval2.toString()
 
     // Assert
-    expect(value).toBe('291:03')
+    expect(value1).toBe('04:51:03')
+    expect(value2).toBe('121:13:01')
   })
 
   test('formats mixed negative values correctly', () => {
     // Arrange
-    const interval = new Interval(10, -60)
+    const interval1 = new Interval(0, 10, -60)
+    const interval2 = new Interval(1, 75, -65)
 
     // Act
-    const value = interval.toString()
+    const value1 = interval1.toString()
+    const value2 = interval2.toString()
 
     // Assert
-    expect(value).toBe('09:00')
+    expect(value1).toBe('09:00')
+    expect(value2).toBe('02:13:55')
   })
 
   test('formats all negative values correctly', () => {
     // Arrange
-    const interval = new Interval(-10, -65)
+    const interval = new Interval(0, -10, -65)
 
     // Act
     const value = interval.toString()
@@ -70,16 +76,18 @@ describe('Interval', () => {
 
   test('initializes correctly with negative values', () => {
     // Arrange
-    const interval = new Interval(-10, -65)
+    const interval = new Interval(-2, -82, -65)
 
     // Act
     const {
+      hours,
       minutes,
       seconds
     } = interval
 
     // Assert
-    expect(minutes).toBe(-11)
+    expect(hours).toBe(-3)
+    expect(minutes).toBe(-23)
     expect(seconds).toBe(-5)
   })
 
@@ -92,7 +100,8 @@ describe('Interval', () => {
     const interval = Interval.fromDates(startDate, endDate)
 
     // Assert
-    expect(interval.minutes).toBe(75)
+    expect(interval.hours).toBe(1)
+    expect(interval.minutes).toBe(15)
     expect(interval.seconds).toBe(14)
   })
 
