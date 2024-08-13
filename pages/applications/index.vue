@@ -4,6 +4,11 @@
       <div class="p-3">
         <ul class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
           <li>
+            <WlCard to="/applications/pomodoro">
+              <span>Pomodoro</span>
+            </WlCard>
+          </li>
+          <li>
             <WlCard>
               <span>Chat</span>
               <WlTodoBadge class="ml-2"/>
@@ -61,11 +66,6 @@
             <WlCard>
               <span>Budget</span>
               <WlTodoBadge class="ml-2"/>
-            </WlCard>
-          </li>
-          <li>
-            <WlCard to="/applications/pomodoro">
-              <span>Pomodoro</span>
             </WlCard>
           </li>
         </ul>
