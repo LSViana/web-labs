@@ -1,4 +1,5 @@
 export class Interval {
+  private static readonly minutesPerHour = 60
   private static readonly secondsPerHour = 3_600
   private static readonly secondsPerMinutes = 60
 
@@ -14,7 +15,7 @@ export class Interval {
       Math.ceil(totalSeconds / Interval.secondsPerHour)
     const finalMinutes = (totalSeconds > 0 ?
       Math.floor(totalSeconds / Interval.secondsPerMinutes) :
-      Math.ceil(totalSeconds / Interval.secondsPerMinutes)) % Interval.secondsPerMinutes
+      Math.ceil(totalSeconds / Interval.secondsPerMinutes)) % Interval.minutesPerHour
     const finalSeconds = totalSeconds > 0 ?
       Math.floor(totalSeconds % Interval.secondsPerMinutes) :
       Math.ceil(totalSeconds % Interval.secondsPerMinutes)
