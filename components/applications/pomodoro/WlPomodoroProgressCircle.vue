@@ -16,7 +16,7 @@
     <p class="absolute -translate-y-10 capitalize text-muted dark:text-muted-dark">
       {{ props.interval.type }}
     </p>
-    <p class="relative text-5xl font-bold">
+    <p class="relative font-bold" :class="intervalClasses">
       {{ props.interval.remainingInterval }}
     </p>
   </div>
@@ -37,10 +37,12 @@ const circumference = 2 * Math.PI * radius
 
 const props = defineProps<Props>()
 const pomodoroColor = computed(() => getPomodoroTypeColor(props.interval.type))
+const hasHours = computed(() => props.interval.remainingInterval.hours > 0)
 
 const progressStyles = computed<Partial<StyleValue>>(() => ({
   width: `${size}px`
 }))
+const intervalClasses = computed(() => [hasHours.value ? 'text-4xl' : 'text-5xl'])
 const dashArray = computed(() => {
   const dash = Math.max(0, props.interval.remainingProgress) * circumference
 
