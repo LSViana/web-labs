@@ -17,11 +17,11 @@ describe('usePomodoro', () => {
     // Assert
     expect(isRunning).toBe(false)
     expect(pomodoroInterval).toStrictEqual(new PomodoroInterval(
-      new Interval(0, 0),
-      new Interval(25, 0),
+      new Interval(0, 0, 0),
+      new Interval(0, 25, 0),
       PomodoroIntervalType.work,
     ))
-    expect(pomodoroInterval.remainingInterval).toStrictEqual(new Interval(25, 0))
+    expect(pomodoroInterval.remainingInterval).toStrictEqual(new Interval(0, 25, 0))
   })
 
   test('timer only starts counting after started', () => {
@@ -38,7 +38,7 @@ describe('usePomodoro', () => {
     const value = pomodoro.interval.value.remainingInterval
 
     // Assert
-    expect(value).toStrictEqual(new Interval(24, 59))
+    expect(value).toStrictEqual(new Interval(0, 24, 59))
 
     // Clean-up
     vi.useRealTimers()
@@ -57,7 +57,7 @@ describe('usePomodoro', () => {
     let value = pomodoro.interval.value
 
     // Assert
-    expect(value.remainingInterval).toStrictEqual(new Interval(24, 59))
+    expect(value.remainingInterval).toStrictEqual(new Interval(0, 24, 59))
     expect(value.remainingProgress).toBe(0.999)
 
     // Act
@@ -65,7 +65,7 @@ describe('usePomodoro', () => {
     value = pomodoro.interval.value
 
     // Assert
-    expect(value.remainingInterval).toStrictEqual(new Interval(24, 57))
+    expect(value.remainingInterval).toStrictEqual(new Interval(0, 24, 57))
     expect(value.remainingProgress).toBe(0.998)
 
     // Act
@@ -73,7 +73,7 @@ describe('usePomodoro', () => {
     value = pomodoro.interval.value
 
     // Assert
-    expect(value.remainingInterval).toStrictEqual(new Interval(24, 56))
+    expect(value.remainingInterval).toStrictEqual(new Interval(0, 24, 56))
     expect(value.remainingProgress).toBe(0.997)
 
     // Clean-up
@@ -97,7 +97,7 @@ describe('usePomodoro', () => {
     const value = pomodoro.interval.value
 
     // Assert
-    expect(value.remainingInterval).toStrictEqual(new Interval(24, 22))
+    expect(value.remainingInterval).toStrictEqual(new Interval(0, 24, 22))
     expect(value.remainingProgress).toBe(0.974)
 
     // Clean-up
@@ -119,7 +119,7 @@ describe('usePomodoro', () => {
     const value = pomodoro.interval.value.remainingInterval
 
     // Assert
-    expect(value).toStrictEqual(new Interval(5, 0))
+    expect(value).toStrictEqual(new Interval(0, 5, 0))
 
     // Clean-up
     vi.useRealTimers()
@@ -140,8 +140,8 @@ describe('usePomodoro', () => {
 
     // Assert
     expect(pomodoroInterval).toStrictEqual(new PomodoroInterval(
-      new Interval(0, 25),
-      new Interval(25, 0),
+      new Interval(0, 0, 25),
+      new Interval(0, 25, 0),
       PomodoroIntervalType.work
     ))
 
@@ -161,7 +161,7 @@ describe('usePomodoro', () => {
     pomodoro.skip()
 
     // Assert
-    expect(pomodoro.interval.value.remainingInterval).toStrictEqual(new Interval(5, 0))
+    expect(pomodoro.interval.value.remainingInterval).toStrictEqual(new Interval(0, 5, 0))
 
     // Clean-up
     vi.useRealTimers()
@@ -184,11 +184,11 @@ describe('usePomodoro', () => {
 
     // Assert
     expect(interval).toStrictEqual(new PomodoroInterval(
-      new Interval(0, 0),
-      new Interval(5, 0),
+      new Interval(0, 0, 0),
+      new Interval(0, 5, 0),
       PomodoroIntervalType.break
     ))
-    expect(remainingTime).toStrictEqual(new Interval(5, 0))
+    expect(remainingTime).toStrictEqual(new Interval(0, 5, 0))
 
     // Clean-up
     vi.useRealTimers()
@@ -219,8 +219,8 @@ describe('usePomodoro', () => {
     expect(eventHandler).toHaveBeenCalledTimes(1)
     expect(parameters).toHaveLength(1)
     expect(interval).toStrictEqual(new PomodoroInterval(
-      new Interval(24, 59),
-      new Interval(25, 0),
+      new Interval(0, 24, 59),
+      new Interval(0, 25, 0),
       PomodoroIntervalType.work
     ))
 
