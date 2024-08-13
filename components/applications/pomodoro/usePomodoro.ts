@@ -19,9 +19,9 @@ export function usePomodoro() {
   function getPeriodInterval(type: PomodoroIntervalType): Interval {
     switch (type) {
       case PomodoroIntervalType.work:
-        return new Interval(25, 0)
+        return new Interval(0, 25, 0)
       case PomodoroIntervalType.break:
-        return new Interval(5, 0)
+        return new Interval(0, 5, 0)
       default:
         throw Error(`Unable to calculate duration for ${type}.`)
     }

@@ -36,8 +36,8 @@ const records = computed(() => {
       .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0)
 
   const result: Record<PomodoroIntervalType, Interval> = {
-    work: new Interval(0, workSeconds),
-    break: new Interval(0, breakSeconds),
+    work: new Interval(0, 0, workSeconds),
+    break: new Interval(0, 0, breakSeconds),
   }
 
   return result
