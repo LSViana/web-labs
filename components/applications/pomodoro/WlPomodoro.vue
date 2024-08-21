@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center gap-3 border p-5">
+  <div class="flex flex-col items-center gap-3 rounded border p-5">
     <WlPomodoroProgressCircle :interval="pomodoro.interval.value"/>
     <div class="flex gap-3">
       <WlIconButton

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex grow flex-col gap-5 border p-5">
+  <div class="flex grow flex-col gap-5 rounded border p-5">
     <div class="flex justify-between md:justify-start md:gap-12">
       <div class="flex flex-col">
         <span class="text-muted dark:text-muted-dark">Work</span>
