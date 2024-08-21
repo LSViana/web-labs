@@ -1,6 +1,6 @@
 <template>
   <div class="flex grow flex-col gap-5 rounded border p-5">
-    <div class="flex justify-between md:justify-start md:gap-12">
+    <div class="flex flex-wrap justify-between gap-4 md:justify-start">
       <div class="flex flex-col">
         <span class="text-muted dark:text-muted-dark">Work</span>
         <p class="text-4xl font-bold">{{ computedRecords.work }}</p>
@@ -9,8 +9,8 @@
         <span class="text-muted dark:text-muted-dark">Break</span>
         <p class="text-4xl font-bold">{{ computedRecords.break }}</p>
       </div>
-      <div class="flex items-end gap-3">
-        <div class="flex flex-col">
+      <div class="flex grow items-end gap-3 sm:grow-0">
+        <div class="flex grow flex-col">
           <span class="text-muted dark:text-muted-dark">Date</span>
           <WlDateInput v-model="date" @update:model-value="listeners.date"/>
         </div>
@@ -24,7 +24,7 @@
         @update:record="listeners.record"
         @close="listeners.close"
     />
-    <div v-else class="flex gap-3">
+    <div v-else class="flex flex-col gap-3 sm:flex-row">
       <WlButton variant="secondary" @click="listeners.addWork">Add Work</WlButton>
       <WlButton variant="secondary" @click="listeners.addBreak">Add Break</WlButton>
     </div>
