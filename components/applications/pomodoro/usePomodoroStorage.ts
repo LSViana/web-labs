@@ -34,6 +34,7 @@ export function usePomodoroStorage() {
   }
 
   return {
+    load,
     saveToday,
     loadToday
   }
