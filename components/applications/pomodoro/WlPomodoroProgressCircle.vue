@@ -37,7 +37,7 @@ const circumference = 2 * Math.PI * radius
 
 const props = defineProps<Props>()
 const pomodoroColor = computed(() => getPomodoroTypeColor(props.interval.type))
-const hasHours = computed(() => props.interval.remainingInterval.hours > 0)
+const hasHours = computed(() => Math.abs(props.interval.remainingInterval.hours) > 0)
 
 const progressStyles = computed<Partial<StyleValue>>(() => ({
   width: `${size}px`
