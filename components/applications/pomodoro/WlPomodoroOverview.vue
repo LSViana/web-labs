@@ -3,63 +3,59 @@
     <div class="flex justify-between md:justify-start md:gap-12">
       <div class="flex flex-col">
         <span class="text-muted dark:text-muted-dark">Work</span>
-        <p class="text-4xl font-bold">{{ records.work }}</p>
+        <p class="text-4xl font-bold">{{ computedRecords.work }}</p>
       </div>
       <div class="flex flex-col">
         <span class="text-muted dark:text-muted-dark">Break</span>
-        <p class="text-4xl font-bold">{{ records.break }}</p>
+        <p class="text-4xl font-bold">{{ computedRecords.break }}</p>
       </div>
       <div class="flex items-end gap-3">
         <div class="flex flex-col">
           <span class="text-muted dark:text-muted-dark">Date</span>
-          <input
-              v-model="date"
-              type="date"
-              class="rounded border bg-slate-200 px-3 py-2 outline-0 focus:border-slate-400 dark:bg-slate-700"
-          >
+          <WlDateInput v-model="date" @update:model-value="listeners.date"/>
         </div>
         <WlButton variant="secondary" @click="listeners.today">Today</WlButton>
       </div>
     </div>
-    <WlPomodoroOverviewTimeline v-if="props.records.length > 0" :records="props.records"/>
+    <WlPomodoroOverviewTimeline v-if="records.length > 0" :records="records" @select="listeners.select"/>
+    <WlPomodoroRecordDetails
+        v-if="record"
+        v-model:record="record"
+        @update:record="listeners.record"
+        @close="listeners.close"
+    />
+    <div v-else class="flex gap-3">
+      <WlButton variant="secondary" @click="listeners.addWork">Add Work</WlButton>
+      <WlButton variant="secondary" @click="listeners.addBreak">Add Break</WlButton>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { Interval } from '~/components/applications/pomodoro/types/interval'
-import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
+import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import WlPomodoroOverviewTimeline from '~/components/applications/pomodoro/WlPomodoroOverviewTimeline.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import { useToday } from '~/components/applications/pomodoro/useToday'
+import WlPomodoroRecordDetails from '~/components/applications/pomodoro/WlPomodoroRecordDetails.vue'
+import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
+import { useNow } from '~/components/applications/pomodoro/useNow'
 
-type Props = {
-  records: PomodoroRecord[];
-};
-
-const props = defineProps<Props>()
-const date = defineModel<Date>('date', {
-  required: true,
-  set: (value: Date | string) => {
-    if (value instanceof Date) {
-      // When it's set to today via the event handler.
-      return value
-    } else {
-      // When it's set to a date via the `<input>` element.
-      return new Date(value + 'T00:00:00')
-    }
-  },
-  get: (value) => value.toISOString().split('T')[0]
-})
+const records = defineModel<PomodoroRecord[]>('records', { required: true })
+const date = defineModel<Date>('date', { required: true })
+const record = ref<PomodoroRecord>()
+const recordIndex = ref<number>(-1)
 
 const today = useToday()
+const now = useNow()
 
-const records = computed(() => {
-  const workSeconds = props.records
+const computedRecords = computed(() => {
+  const workSeconds = records.value
       .filter(x => x.type === PomodoroIntervalType.work)
       .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0)
-  const breakSeconds = props.records
+  const breakSeconds = records.value
       .filter(x => x.type === PomodoroIntervalType.break)
       .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0)
 
@@ -70,10 +66,75 @@ const records = computed(() => {
 
   return result
 })
+const isCreating = computed(() => record.value && recordIndex.value === -1)
+
+function getEndDateOfPrevious(): Date {
+  if (records.value.length === 0) {
+    // If there are no records, the end date of the previous interval is the current date.
+    return now.get()
+  }
+
+  const previousRecord = records.value[records.value.length - 1]
+
+  return previousRecord.endDate
+}
 
 const listeners = {
+  date(): void {
+    console.log('new date')
+    record.value = undefined
+    recordIndex.value = -1
+  },
   today(): void {
     date.value = today.get()
+    record.value = undefined
+  },
+  select(index: number): void {
+    recordIndex.value = index
+    record.value = records.value[index]
+  },
+  record(newRecord: PomodoroRecord): void {
+    if (isCreating.value) {
+      let index = -1
+
+      if (records.value.length === 0) {
+        // If there are no records, add it to the end.
+        index = records.value.length - 1
+      } else {
+        // Otherwise, add it before the next record.
+        const nextRecordIndex = records.value.findIndex(x => x.startDate > newRecord.endDate)
+
+        if (nextRecordIndex !== -1) {
+          // If there is a next record, add the new record before it.
+          index = nextRecordIndex
+        } else {
+          // If there is no next record, add it to the end.
+          index = records.value.length - 1
+        }
+      }
+
+      console.log('INDEX', index)
+
+      records.value.splice(index, 0, newRecord)
+      recordIndex.value = index
+    }
+
+    const newRecords: PomodoroRecord[] = []
+
+    newRecords.push(...records.value.slice(0, recordIndex.value))
+    newRecords.push(newRecord)
+    newRecords.push(...records.value.slice(recordIndex.value + 1))
+    records.value = newRecords
+  },
+  close(): void {
+    record.value = undefined
+    recordIndex.value = -1
+  },
+  addWork(): void {
+    record.value = new PomodoroRecord(getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work)
+  },
+  addBreak(): void {
+    record.value = new PomodoroRecord(getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break)
   }
 }
 </script>
