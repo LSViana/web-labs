@@ -1,7 +1,8 @@
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 import tailwindCssPlugin from 'eslint-plugin-tailwindcss'
-import stylistic from '@stylistic/eslint-plugin'
+import stylisticPlugin from '@stylistic/eslint-plugin'
+import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort'
 
 // To debug this configuration file, run: `npx @eslint/config-inspector`.
 export default withNuxt([
@@ -10,7 +11,18 @@ export default withNuxt([
   // Adds a set of default rules to format the code.
   {
     plugins: {
-      '@stylistic': stylistic,
+      '@stylistic': stylisticPlugin
+    }
+  },
+
+  // Configures the sort order of imports.
+  {
+    plugins: {
+      'simple-import-sort': eslintPluginSimpleImportSort
+    },
+    rules: {
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error'
     }
   },
 
