@@ -15,17 +15,18 @@
 </template>
 
 <script lang="ts" setup>
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlPomodoro from '~/components/applications/pomodoro/WlPomodoro.vue'
+import { useHead } from '@vueuse/head'
+import { onMounted, ref } from 'vue'
+
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
-import WlPomodoroOverview from '~/components/applications/pomodoro/WlPomodoroOverview.vue'
+import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
+import { useLeaveConfirmation } from '~/components/applications/pomodoro/useLeaveConfirmation'
 import { usePomodoroRecorder } from '~/components/applications/pomodoro/usePomodoroRecorder'
 import { usePomodoroStorage } from '~/components/applications/pomodoro/usePomodoroStorage'
-import { onMounted, ref } from 'vue'
-import { useLeaveConfirmation } from '~/components/applications/pomodoro/useLeaveConfirmation'
-import { useHead } from '@vueuse/head'
 import { useToday } from '~/components/applications/pomodoro/useToday'
-import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
+import WlPomodoro from '~/components/applications/pomodoro/WlPomodoro.vue'
+import WlPomodoroOverview from '~/components/applications/pomodoro/WlPomodoroOverview.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 useHead({
   title: 'Pomodoro'

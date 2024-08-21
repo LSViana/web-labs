@@ -1,10 +1,11 @@
 import { computed, ref } from 'vue'
+
 import { Interval } from '~/components/applications/pomodoro/types/interval'
+import { type PomodoroEventMap, PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
 import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
-import { type PomodoroEventMap, PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
-import { TypedEventBus } from '~/components/applications/pomodoro/types/typedEventBus'
 import type { TypedEventHandler } from '~/components/applications/pomodoro/types/typedEvent'
+import { TypedEventBus } from '~/components/applications/pomodoro/types/typedEventBus'
 import { useNow } from '~/components/applications/pomodoro/useNow'
 
 export function usePomodoro() {

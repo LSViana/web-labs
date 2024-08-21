@@ -16,8 +16,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import WlTrashAnimatedIcon from '~/components/shared/icons/animated/WlTrashAnimatedIcon.vue'
 import WlConfirmButton from '~/components/experiments/forms-input/buttons/WlConfirmButton.vue'
+import WlTrashAnimatedIcon from '~/components/shared/icons/animated/WlTrashAnimatedIcon.vue'
 
 type Events = {
   (e: 'confirm'): void;

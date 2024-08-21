@@ -36,16 +36,17 @@
 </template>
 
 <script setup lang="ts">
-import { usePomodoro } from '~/components/applications/pomodoro/usePomodoro'
-import WlIconButton from '~/components/experiments/forms-input/buttons/WlIconButton.vue'
-import WlPlayIcon from '~/components/shared/icons/static/WlPlayIcon.vue'
-import WlPauseIcon from '~/components/shared/icons/static/WlPauseIcon.vue'
-import WlForwardIcon from '~/components/shared/icons/static/WlForwardIcon.vue'
-import WlPomodoroProgressCircle from '~/components/applications/pomodoro/WlPomodoroProgressCircle.vue'
-import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { computed, onMounted, onUnmounted } from 'vue'
+
 import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
+import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
+import { usePomodoro } from '~/components/applications/pomodoro/usePomodoro'
+import WlPomodoroProgressCircle from '~/components/applications/pomodoro/WlPomodoroProgressCircle.vue'
+import WlIconButton from '~/components/experiments/forms-input/buttons/WlIconButton.vue'
+import WlForwardIcon from '~/components/shared/icons/static/WlForwardIcon.vue'
+import WlPauseIcon from '~/components/shared/icons/static/WlPauseIcon.vue'
+import WlPlayIcon from '~/components/shared/icons/static/WlPlayIcon.vue'
 import WlStopIcon from '~/components/shared/icons/static/WlStopIcon.vue'
 
 type Events = {

@@ -8,8 +8,8 @@
 
 <script lang="ts" setup>
 import WlButton, { type WlButtonVariant } from '~/components/experiments/forms-input/buttons/WlButton.vue'
-import WlStarIcon from '~/components/shared/icons/static/WlStarIcon.vue'
 import WlButtonGroup from '~/components/experiments/forms-input/buttons/WlButtonGroup.vue'
+import WlStarIcon from '~/components/shared/icons/static/WlStarIcon.vue'
 
 type Props = {
   value: number;

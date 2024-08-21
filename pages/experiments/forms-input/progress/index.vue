@@ -62,12 +62,12 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlProgressBarTile from '~/components/experiments/forms-input/progress/WlProgressBarTile.vue'
 import WlProgressBarTrack from '~/components/experiments/forms-input/progress/WlProgressBarTrack.vue'
-import WlProgressDonutTrack from '~/components/experiments/forms-input/progress/WlProgressDonutTrack.vue'
 import WlProgressBatteryIndicator from '~/components/experiments/forms-input/progress/WlProgressBatteryIndicator.vue'
+import WlProgressDonutTrack from '~/components/experiments/forms-input/progress/WlProgressDonutTrack.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 const progressTile = ref(5)
 const charge = ref(56)

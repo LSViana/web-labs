@@ -18,11 +18,10 @@
 </template>
 
 <script lang="ts" setup>
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlMovableElementWebAnimationsApi from '~/components/experiments/transitions/WlMovableElementWebAnimationsApi.vue'
-
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 import { useCustomViewTransitions } from '~/composables/view-transitions'
 
 useCustomViewTransitions()

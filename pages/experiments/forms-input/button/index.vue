@@ -62,15 +62,15 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
-import WlConfirmDeleteButton from '~/components/experiments/forms-input/buttons/WlConfirmDeleteButton.vue'
 import WlButtonGroup from '~/components/experiments/forms-input/buttons/WlButtonGroup.vue'
-import WlRatingButton from '~/components/experiments/forms-input/buttons/WlRatingButton.vue'
-import WlStarIcon from '~/components/shared/icons/static/WlStarIcon.vue'
+import WlConfirmDeleteButton from '~/components/experiments/forms-input/buttons/WlConfirmDeleteButton.vue'
 import WlIconButton from '~/components/experiments/forms-input/buttons/WlIconButton.vue'
+import WlRatingButton from '~/components/experiments/forms-input/buttons/WlRatingButton.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlTrashAnimatedIcon from '~/components/shared/icons/animated/WlTrashAnimatedIcon.vue'
+import WlStarIcon from '~/components/shared/icons/static/WlStarIcon.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 const counter = ref(0)
 const confirmed = ref(false)

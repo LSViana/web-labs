@@ -7,8 +7,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
 import gsap from 'gsap'
+import { onMounted, ref } from 'vue'
 
 const box1 = ref<HTMLElement>()
 const box2 = ref<HTMLElement>()

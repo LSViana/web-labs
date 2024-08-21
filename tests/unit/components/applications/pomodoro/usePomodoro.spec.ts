@@ -1,9 +1,10 @@
 import { describe, expect, test, vi } from 'vitest'
-import { usePomodoro } from '~/components/applications/pomodoro/usePomodoro'
+
 import { Interval } from '~/components/applications/pomodoro/types/interval'
+import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
 import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
-import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
+import { usePomodoro } from '~/components/applications/pomodoro/usePomodoro'
 
 describe('usePomodoro', () => {
   test('starts with timer paused, set to 0 min, 25 min duration, and in work type', () => {

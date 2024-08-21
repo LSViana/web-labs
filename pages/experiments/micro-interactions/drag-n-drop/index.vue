@@ -29,11 +29,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlFileInput from '~/components/experiments/forms-input/file/WlFileInput.vue'
 import WlSwitchDragAndDrop from '~/components/experiments/forms-input/switch/WlSwitchDragAndDrop.vue'
 import WlSwitchDragToConfirmShutdown from '~/components/experiments/forms-input/switch/WlSwitchDragToConfirmShutdown.vue'
-import WlFileInput from '~/components/experiments/forms-input/file/WlFileInput.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 const switchValue = ref(1)
 const confirmed = ref(false)

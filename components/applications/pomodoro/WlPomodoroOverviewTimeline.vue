@@ -21,9 +21,10 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+
 import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
-import { computed } from 'vue'
 
 type Props = {
   records: PomodoroRecord[];

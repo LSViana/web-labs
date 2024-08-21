@@ -26,10 +26,10 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
 
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
-import WlTabSelect from '~/components/experiments/forms-input/select/WlTabSelect.vue'
 import WlPricingPlanSelect from '~/components/experiments/forms-input/select/WlPricingPlanSelect.vue'
+import WlTabSelect from '~/components/experiments/forms-input/select/WlTabSelect.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 const tab = ref(0)
 const options = computed(() => ['Home', 'Features', 'Engineering', 'Pricing'])

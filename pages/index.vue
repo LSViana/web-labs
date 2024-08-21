@@ -21,6 +21,6 @@
 </template>
 
 <script setup lang="ts">
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
 import WlCard from '~/components/shared/card/WlCard.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 </script>

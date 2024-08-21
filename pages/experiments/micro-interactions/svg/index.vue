@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts" setup>
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlAnimatedSvgGradientTracing from '~/components/experiments/micro-interactions/svg/WlAnimatedSvgGradientTracing.vue'
 import WlSvgGrainyGradient from '~/components/experiments/micro-interactions/svg/WlSvgGrainyGradient.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 </script>

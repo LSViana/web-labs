@@ -14,9 +14,9 @@
 </template>
 
 <script setup>
-import { useRoute } from '#app'
 import { computed } from 'vue'
 
+import { useRoute } from '#app'
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 const route = useRoute()

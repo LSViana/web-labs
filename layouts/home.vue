@@ -14,8 +14,8 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 
-import WlHeader from '~/components/shared/surroundings/WlHeader.vue'
 import WlFooter from '~/components/shared/surroundings/WlFooter.vue'
+import WlHeader from '~/components/shared/surroundings/WlHeader.vue'
 
 useHead({
   titleTemplate: (pageTitle) => {

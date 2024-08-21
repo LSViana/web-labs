@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
 import { add } from 'assemblyscript/build/debug'
+import { describe, expect,it } from 'vitest'
 
 describe('add', () => {
   it('should work with positive numbers', () => {

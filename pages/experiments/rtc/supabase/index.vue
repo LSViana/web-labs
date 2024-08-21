@@ -15,9 +15,8 @@
 <script lang="ts" setup>
 import { onUnmounted, ref } from 'vue'
 
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
 import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
-
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 import { useSupabaseClient } from '~/composables/rtc/supabase'
 
 const supabase = useSupabaseClient()

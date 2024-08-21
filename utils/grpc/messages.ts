@@ -1,4 +1,5 @@
 import type { Server, ServiceClientConstructor } from '@grpc/grpc-js'
+
 import type { MessageService } from '~/utils/grpc/messages-types'
 
 export async function getMessagesServer(): Promise<Server> {

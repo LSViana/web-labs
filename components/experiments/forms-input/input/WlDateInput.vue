@@ -8,8 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 import { computed } from 'vue'
+
+import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 
 type Props = {
   step?: number;

@@ -1,5 +1,4 @@
 import * as fs from 'fs'
-
 import { defineEventHandler, send, setResponseStatus } from 'h3'
 
 export default defineEventHandler(async (event) => {

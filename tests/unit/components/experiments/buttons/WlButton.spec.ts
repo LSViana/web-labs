@@ -1,5 +1,5 @@
-import { describe, expect, test } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { describe, expect, test } from 'vitest'
 
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 

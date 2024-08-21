@@ -33,15 +33,16 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
+
 import { Interval } from '~/components/applications/pomodoro/types/interval'
 import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
-import WlPomodoroOverviewTimeline from '~/components/applications/pomodoro/WlPomodoroOverviewTimeline.vue'
-import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
-import { useToday } from '~/components/applications/pomodoro/useToday'
-import WlPomodoroRecordDetails from '~/components/applications/pomodoro/WlPomodoroRecordDetails.vue'
-import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
+import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { useNow } from '~/components/applications/pomodoro/useNow'
+import { useToday } from '~/components/applications/pomodoro/useToday'
+import WlPomodoroOverviewTimeline from '~/components/applications/pomodoro/WlPomodoroOverviewTimeline.vue'
+import WlPomodoroRecordDetails from '~/components/applications/pomodoro/WlPomodoroRecordDetails.vue'
+import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
+import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
 
 const records = defineModel<PomodoroRecord[]>('records', { required: true })
 const date = defineModel<Date>('date', { required: true })

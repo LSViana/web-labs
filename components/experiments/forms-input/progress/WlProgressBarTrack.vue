@@ -5,9 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
-
 import type { StyleValue } from 'vue'
+import { computed } from 'vue'
 
 type Props = {
   value: number;

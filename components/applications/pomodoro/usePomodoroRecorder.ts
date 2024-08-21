@@ -1,5 +1,6 @@
-import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { ref } from 'vue'
+
+import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { useNow } from '~/components/applications/pomodoro/useNow'
 

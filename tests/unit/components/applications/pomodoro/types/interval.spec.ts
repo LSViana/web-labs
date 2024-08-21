@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest'
+
 import { Interval } from '~/components/applications/pomodoro/types/interval'
 
 describe('Interval', () => {

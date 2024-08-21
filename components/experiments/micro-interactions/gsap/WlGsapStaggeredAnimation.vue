@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
 import gsap from 'gsap'
+import { onMounted, ref } from 'vue'
 
 const root = ref<HTMLElement>()
 

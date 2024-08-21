@@ -1,5 +1,5 @@
-import { defineConfig } from 'vitest/config'
 import vuePlugin from '@vitejs/plugin-vue'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [

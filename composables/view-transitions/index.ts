@@ -1,6 +1,6 @@
-import { useRouter } from '#app'
-
 import type { RouteLocationNormalized } from 'vue-router'
+
+import { useRouter } from '#app'
 
 export function useCustomViewTransitions(): void {
   if (!import.meta.client) {

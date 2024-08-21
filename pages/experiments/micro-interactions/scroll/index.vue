@@ -31,8 +31,8 @@
 </template>
 
 <script lang="ts" setup>
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
-import WlScrollStackAnimatedContainer from '~/components/experiments/micro-interactions/scroll/WlScrollStackAnimatedContainer.vue'
 import WlScrollDrivenAnimation from '~/components/experiments/micro-interactions/scroll/WlScrollDrivenAnimation.vue'
+import WlScrollStackAnimatedContainer from '~/components/experiments/micro-interactions/scroll/WlScrollStackAnimatedContainer.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 </script>

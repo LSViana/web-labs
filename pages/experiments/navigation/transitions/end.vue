@@ -12,7 +12,6 @@
 
 <script lang="ts" setup>
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
-
 import { useCustomViewTransitions } from '~/composables/view-transitions'
 
 useCustomViewTransitions()

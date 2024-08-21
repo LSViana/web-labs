@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue'
+
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
 

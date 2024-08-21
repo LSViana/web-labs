@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlGsapRawObjectAnimationVue from '~/components/experiments/micro-interactions/gsap/WlGsapRawObjectAnimation.vue'
 import WlGsapSimpleAnimation from '~/components/experiments/micro-interactions/gsap/WlGsapSimpleAnimation.vue'
 import WlGsapStaggeredAnimation from '~/components/experiments/micro-interactions/gsap/WlGsapStaggeredAnimation.vue'
-import WlGsapRawObjectAnimationVue from '~/components/experiments/micro-interactions/gsap/WlGsapRawObjectAnimation.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 </script>

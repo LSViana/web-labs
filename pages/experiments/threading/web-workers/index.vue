@@ -22,10 +22,9 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
-
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 import useFibonacci from '~/composables/threading/fibonacci'
 
 const iterations = 40

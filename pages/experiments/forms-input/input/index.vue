@@ -39,13 +39,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
-import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
-import WlPasswordStrength from '~/components/experiments/forms-input/input/WlPasswordStrength.vue'
-import WlNumberDisplay from '~/components/experiments/forms-input/input/WlNumberDisplay.vue'
-import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
-import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
 import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
+import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
+import WlNumberDisplay from '~/components/experiments/forms-input/input/WlNumberDisplay.vue'
+import WlPasswordStrength from '~/components/experiments/forms-input/input/WlPasswordStrength.vue'
+import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
+import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
+import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 const password = ref('')
 const amount = ref(0)

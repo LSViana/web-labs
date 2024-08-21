@@ -20,12 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { ref, watch } from 'vue'
-import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
-import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
+
+import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { PomodoroIntervalType, PomodoroIntervalTypeLabels } from '~/components/applications/pomodoro/types/pomodoroType'
+import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlSelect from '~/components/experiments/forms-input/input/WlSelect.vue'
+import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
 
 type Emits = {
   (e: 'update:record', value: PomodoroRecord): void;

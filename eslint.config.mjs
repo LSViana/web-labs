@@ -1,8 +1,8 @@
-import withNuxt from './.nuxt/eslint.config.mjs'
-
-import tailwindCssPlugin from 'eslint-plugin-tailwindcss'
 import stylisticPlugin from '@stylistic/eslint-plugin'
 import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort'
+import tailwindCssPlugin from 'eslint-plugin-tailwindcss'
+
+import withNuxt from './.nuxt/eslint.config.mjs'
 
 // To debug this configuration file, run: `npx @eslint/config-inspector`.
 export default withNuxt([
