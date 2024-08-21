@@ -6,7 +6,7 @@
   >
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup generic="T">
 type Props = {
   type?: 'text' | 'password' | 'number' | 'date' | 'time' | 'email';
 }
@@ -15,5 +15,5 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'text'
 })
 
-const model = defineModel<string | number | Date>()
+const model = defineModel<T>()
 </script>
