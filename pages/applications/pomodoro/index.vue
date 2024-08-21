@@ -3,7 +3,12 @@
     <WlContainer>
       <div class="flex flex-col gap-3 p-3 md:flex-row">
         <WlPomodoro @interval="listeners.interval" @play="listeners.play"/>
-        <WlPomodoroOverview v-model:date="date" :records="records" @update:date="listeners.date"/>
+        <WlPomodoroOverview
+            v-model:date="date"
+            :records="records"
+            @update:date="listeners.date"
+            @update:records="listeners.records"
+        />
       </div>
     </WlContainer>
   </NuxtLayout>
@@ -54,6 +59,10 @@ const listeners = {
   },
   date(date: Date): void {
     records.value = pomodoroStorage.load(date)
+  },
+  records(newRecords: PomodoroRecord[]): void {
+    pomodoroStorage.save(date.value, newRecords)
+    records.value = newRecords
   }
 }
 </script>
