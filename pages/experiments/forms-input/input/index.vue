@@ -24,8 +24,13 @@
       </WlExperimentCanvas>
       <p>The time input:</p>
       <WlExperimentCanvas>
-        <WlTimeInput v-model="time"/>
-        <p class="mt-3">Time: <code>{{ time.toLocaleString() }}</code></p>
+        <WlTimeInput v-model="datetime"/>
+        <p class="mt-3">Time: <code>{{ datetime.toLocaleString() }}</code></p>
+      </WlExperimentCanvas>
+      <p>The date input:</p>
+      <WlExperimentCanvas>
+        <WlDateInput v-model="datetime"/>
+        <p class="mt-3">Date: <code>{{ datetime.toLocaleString() }}</code></p>
       </WlExperimentCanvas>
     </WlContainer>
   </NuxtLayout>
@@ -40,8 +45,9 @@ import WlPasswordStrength from '~/components/experiments/forms-input/input/WlPas
 import WlNumberDisplay from '~/components/experiments/forms-input/input/WlNumberDisplay.vue'
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
+import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
 
 const password = ref('')
 const amount = ref(0)
-const time = ref(new Date())
+const datetime = ref(new Date())
 </script>
