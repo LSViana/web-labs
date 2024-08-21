@@ -7,7 +7,16 @@ export function useToday() {
     return today
   }
 
+  function isToday(date: Date) {
+    const today = get()
+
+    return date.getFullYear() === today.getFullYear()
+      && date.getMonth() === today.getMonth()
+      && date.getDate() === today.getDate()
+  }
+
   return {
-    get
+    get,
+    isToday
   }
 }
