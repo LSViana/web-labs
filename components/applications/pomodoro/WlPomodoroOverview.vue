@@ -43,8 +43,10 @@ const date = defineModel<Date>('date', {
   required: true,
   set: (value: Date | string) => {
     if (value instanceof Date) {
+      // When it's set to today via the event handler.
       return value
     } else {
+      // When it's set to a date via the `<input>` element.
       return new Date(value + 'T00:00:00')
     }
   },
