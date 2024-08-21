@@ -51,6 +51,7 @@ const listeners = {
   interval(interval: PomodoroInterval): void {
     pomodoroRecorder.save(interval)
     pomodoroStorage.saveToday(pomodoroRecorder.records.value)
+    records.value = pomodoroRecorder.records.value
     leaveConfirmation.release()
   },
   play(): void {
