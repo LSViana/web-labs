@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-end gap-3">
+  <div class="flex flex-wrap items-end gap-3">
     <div class="inline-flex flex-col">
       <span class="text-muted dark:text-muted-dark">Start</span>
       <WlTimeInput v-model="startDate"/>
@@ -14,8 +14,10 @@
         <option v-for="item in types" :key="item" :value="item">{{ PomodoroIntervalTypeLabels[item] }}</option>
       </WlSelect>
     </div>
-    <WlButton variant="primary" @click="listeners.save">Save</WlButton>
-    <WlButton variant="secondary" @click="listeners.close">Close</WlButton>
+    <div class="flex gap-3">
+      <WlButton variant="primary" @click="listeners.save">Save</WlButton>
+      <WlButton variant="secondary" @click="listeners.close">Close</WlButton>
+    </div>
   </div>
 </template>
 
