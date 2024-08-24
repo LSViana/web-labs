@@ -20,14 +20,20 @@
       </div>
     </div>
     <WlPomodoroOverviewTimeline :records="records" @select="listeners.select"/>
-    <WlPomodoroRecordDetails
-        v-if="record"
-        v-model:record="record"
-        :new="isCreating"
-        @update:record="listeners.record"
-        @close="listeners.close"
-        @delete="listeners.delete"
-    />
+    <template v-if="record">
+      <WlPomodoroRecordDetails
+          v-model:record="record"
+          :new="isCreating"
+          @update:record="listeners.record"
+          @close="listeners.close"
+          @delete="listeners.delete"
+      />
+      <div v-if="!isCreating" class="flex items-center gap-3">
+        <a href="#" class="underline" @click="listeners.previous">Previous</a>
+        <span class="w-16 text-center">{{ recordIndex + 1 }} of {{ records.length }}</span>
+        <a href="#" class="underline" @click="listeners.next">Next</a>
+      </div>
+    </template>
     <div v-else class="flex flex-col gap-3 sm:flex-row">
       <WlButton variant="secondary" title="Add work record (W)" @click="listeners.addWork">
         <span>Add <span class="underline">W</span>ork</span>
@@ -159,6 +165,16 @@ const listeners = {
   },
   addBreak(): void {
     record.value = new PomodoroRecord(methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break)
+  },
+  previous(): void {
+    if (recordIndex.value > 0) {
+      listeners.select(recordIndex.value - 1)
+    }
+  },
+  next(): void {
+    if (recordIndex.value < records.value.length - 1) {
+      listeners.select(recordIndex.value + 1)
+    }
   }
 }
 </script>
