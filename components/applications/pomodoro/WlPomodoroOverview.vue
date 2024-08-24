@@ -85,8 +85,8 @@ const computedRecords = computed(() => {
 })
 const isCreating = computed(() => Boolean(record.value && recordIndex.value === -1))
 
-onKeyDown('w', () => listeners.addWork())
-onKeyDown('b', () => listeners.addBreak())
+onKeyDown('w', () => recordIndex.value === -1 ? listeners.addWork() : undefined)
+onKeyDown('b', () => recordIndex.value === -1 ? listeners.addBreak() : undefined)
 onKeyDown('t', () => listeners.today())
 
 const methods = {
