@@ -4,11 +4,13 @@
       <div
           v-for="(item, index) in items"
           :key="item.start"
-          class="absolute inset-0 cursor-pointer"
+          class="absolute inset-0 cursor-pointer outline-none focus-visible:ring-4"
+          tabindex="0"
           :class="item.classes"
           :style="{ left: `${item.start}%`, width: `${item.length}%` }"
           :title="item.title"
           @click="listeners.select(index)"
+          @keyup.enter="listeners.select(index)"
       />
       <div class="absolute left-0 top-full" title="Start time of first interval">
         {{ formattedDates.start }}
@@ -72,7 +74,7 @@ const items = computed(() => {
       title: `Start: ${x.startDate.toLocaleTimeString()}, End: ${x.endDate.toLocaleTimeString()}, Duration: ${x.elapsedInterval}`,
       start: (x.startDate.getTime() - dates.value.start.getTime()) / diffMs.value * 100,
       length: (x.endDate.getTime() - x.startDate.getTime()) / diffMs.value * 100,
-      classes: `${type.background} ${type.border}`
+      classes: `${type.backgroundInteractive} ${type.border}`
     }
   })
 })
