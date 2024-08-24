@@ -14,7 +14,7 @@
           <WlLabel for="pomodoro-overview-date">Date</WlLabel>
           <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date"/>
         </div>
-        <WlButton variant="secondary" @click="listeners.today">
+        <WlButton variant="secondary" title="Select today (T)" @click="listeners.today">
           <span class="underline">T</span>oday
         </WlButton>
       </div>
@@ -29,10 +29,10 @@
         @delete="listeners.delete"
     />
     <div v-else class="flex flex-col gap-3 sm:flex-row">
-      <WlButton variant="secondary" @click="listeners.addWork">
+      <WlButton variant="secondary" title="Add work record (W)" @click="listeners.addWork">
         <span>Add <span class="underline">W</span>ork</span>
       </WlButton>
-      <WlButton variant="secondary" @click="listeners.addBreak">
+      <WlButton variant="secondary" title="Add break record (W)" @click="listeners.addBreak">
         <span>Add <span class="underline">B</span>reak</span>
       </WlButton>
     </div>

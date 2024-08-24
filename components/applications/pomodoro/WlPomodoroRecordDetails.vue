@@ -16,13 +16,13 @@
     </div>
   </div>
   <div class="flex gap-3">
-    <WlButton ref="saveRef" variant="primary" @click="listeners.save">
+    <WlButton ref="saveRef" variant="primary" title="Save record (S)" @click="listeners.save">
       <span class="underline">S</span>ave
     </WlButton>
-    <WlButton v-if="!props.new" variant="danger" @click="listeners.delete">
+    <WlButton v-if="!props.new" variant="danger" title="Delete record (D)" @click="listeners.delete">
       <span class="underline">D</span>elete
     </WlButton>
-    <WlButton variant="secondary" @click="listeners.close">
+    <WlButton variant="secondary" title="Close record (C)" @click="listeners.close">
       <span class="underline">C</span>lose
     </WlButton>
   </div>

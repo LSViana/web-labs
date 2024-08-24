@@ -5,7 +5,7 @@
       <WlIconButton
           v-if="pomodoro.isOvertime.value"
           variant="danger"
-          title="Finish interval"
+          title="Finish interval (P)"
           @click="listeners.finishClick"
       >
         <WlStopIcon/>
@@ -14,7 +14,7 @@
           v-else-if="pomodoro.isRunning.value"
           variant="transparent"
           :class="pomodoroColor.backgroundInteractive"
-          title="Pause timer"
+          title="Pause timer (P)"
           @click="listeners.pauseClick"
       >
         <WlPauseIcon/>
@@ -23,12 +23,12 @@
           v-else
           variant="transparent"
           :class="pomodoroColor.backgroundInteractive"
-          title="Start timer"
+          title="Start timer (P)"
           @click="listeners.playClick"
       >
         <WlPlayIcon class="ps-1"/>
       </WlIconButton>
-      <WlIconButton variant="secondary" title="Skip interval" @click="listeners.skipClick()">
+      <WlIconButton variant="secondary" title="Skip interval (S)" @click="listeners.skipClick()">
         <WlForwardIcon/>
       </WlIconButton>
     </div>
