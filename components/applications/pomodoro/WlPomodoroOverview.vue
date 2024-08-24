@@ -17,7 +17,7 @@
         <WlButton variant="secondary" @click="listeners.today">Today</WlButton>
       </div>
     </div>
-    <WlPomodoroOverviewTimeline v-if="records.length > 0" :records="records" @select="listeners.select"/>
+    <WlPomodoroOverviewTimeline :records="records" @select="listeners.select"/>
     <WlPomodoroRecordDetails
         v-if="record"
         v-model:record="record"

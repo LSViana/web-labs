@@ -25,6 +25,7 @@ import { computed } from 'vue'
 
 import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
+import { useToday } from '~/components/applications/pomodoro/useToday'
 
 type Props = {
   records: PomodoroRecord[];
@@ -41,12 +42,14 @@ type TimelineItem = {
   classes: string;
 }
 
+const today = useToday()
+
 const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
 
 const dates = computed(() => ({
-  start: props.records[0].startDate,
-  end: props.records[props.records.length - 1].endDate
+  start: props.records[0]?.startDate ?? today.get(),
+  end: props.records[props.records.length - 1]?.endDate ?? today.get(),
 }))
 const diffMs = computed(() => dates.value.end.getTime() - dates.value.start.getTime())
 
