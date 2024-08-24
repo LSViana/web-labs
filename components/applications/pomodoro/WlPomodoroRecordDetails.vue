@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { type ComponentPublicInstance, onMounted, ref, watch } from 'vue'
 
 import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { PomodoroIntervalType, PomodoroIntervalTypeLabels } from '~/components/applications/pomodoro/types/pomodoroType'
@@ -50,8 +50,15 @@ const record = defineModel<PomodoroRecord>('record', { required: true })
 const startDate = ref<Date>(record.value.startDate)
 const endDate = ref<Date>(record.value.endDate)
 const type = ref<PomodoroIntervalType>(record.value.type)
+const startDateRef = ref<ComponentPublicInstance>()
 
 const types = Object.values(PomodoroIntervalType)
+
+onMounted(() => {
+  const element = startDateRef.value!.$el as HTMLElement
+
+  element.focus()
+})
 
 watch(
     record,
