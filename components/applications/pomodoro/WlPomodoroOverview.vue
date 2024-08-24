@@ -11,8 +11,8 @@
       </div>
       <div class="flex grow items-end gap-3 sm:grow-0">
         <div class="flex grow flex-col">
-          <span class="text-muted dark:text-muted-dark">Date</span>
-          <WlDateInput v-model="date" @update:model-value="listeners.date"/>
+          <label class="text-muted dark:text-muted-dark" for="pomodoro-overview-date">Date</label>
+          <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date"/>
         </div>
         <WlButton variant="secondary" @click="listeners.today">Today</WlButton>
       </div>

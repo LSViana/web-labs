@@ -1,16 +1,16 @@
 <template>
   <div class="flex flex-wrap items-end gap-3">
     <div class="inline-flex flex-col">
-      <span class="text-muted dark:text-muted-dark">Start</span>
-      <WlTimeInput v-model="startDate"/>
+      <label class="text-muted dark:text-muted-dark" for="pomodoro-record-details-start">Start</label>
+      <WlTimeInput id="pomodoro-record-details-start" v-model="startDate"/>
     </div>
     <div class="inline-flex flex-col">
-      <span class="text-muted dark:text-muted-dark">End</span>
-      <WlTimeInput v-model="endDate"/>
+      <label class="text-muted dark:text-muted-dark" for="pomodoro-record-details-end">End</label>
+      <WlTimeInput id="pomodoro-record-details-end" v-model="endDate"/>
     </div>
     <div class="inline-flex flex-col">
-      <span class="text-muted dark:text-muted-dark">Type</span>
-      <WlSelect v-model="type">
+      <label class="text-muted dark:text-muted-dark" for="pomodoro-record-details-type">Type</label>
+      <WlSelect id="pomodoro-record-details-type" v-model="type">
         <option v-for="item in types" :key="item" :value="item">{{ PomodoroIntervalTypeLabels[item] }}</option>
       </WlSelect>
     </div>
