@@ -14,15 +14,22 @@
         <option v-for="item in types" :key="item" :value="item">{{ PomodoroIntervalTypeLabels[item] }}</option>
       </WlSelect>
     </div>
-    <div class="flex gap-3">
-      <WlButton variant="primary" @click="listeners.save">Save</WlButton>
-      <WlButton v-if="!props.new" variant="danger" @click="listeners.delete">Delete</WlButton>
-      <WlButton variant="secondary" @click="listeners.close">Close</WlButton>
-    </div>
+  </div>
+  <div class="flex gap-3">
+    <WlButton variant="primary" @click="listeners.save">
+      <span class="underline">S</span>ave
+    </WlButton>
+    <WlButton v-if="!props.new" variant="danger" @click="listeners.delete">
+      <span class="underline">D</span>elete
+    </WlButton>
+    <WlButton variant="secondary" @click="listeners.close">
+      <span class="underline">C</span>lose
+    </WlButton>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onKeyDown } from '@vueuse/core'
 import { type ComponentPublicInstance, onMounted, ref, watch } from 'vue'
 
 import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
@@ -53,6 +60,10 @@ const type = ref<PomodoroIntervalType>(record.value.type)
 const startDateRef = ref<ComponentPublicInstance>()
 
 const types = Object.values(PomodoroIntervalType)
+
+onKeyDown('s', () => listeners.save())
+onKeyDown('d', () => listeners.delete())
+onKeyDown('c', () => listeners.close())
 
 onMounted(() => {
   const element = startDateRef.value!.$el as HTMLElement

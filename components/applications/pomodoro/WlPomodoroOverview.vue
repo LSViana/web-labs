@@ -27,13 +27,18 @@
         @delete="listeners.delete"
     />
     <div v-else class="flex flex-col gap-3 sm:flex-row">
-      <WlButton variant="secondary" @click="listeners.addWork">Add Work</WlButton>
-      <WlButton variant="secondary" @click="listeners.addBreak">Add Break</WlButton>
+      <WlButton variant="secondary" @click="listeners.addWork">
+        <span>Add <span class="underline">W</span>ork</span>
+      </WlButton>
+      <WlButton variant="secondary" @click="listeners.addBreak">
+        <span>Add <span class="underline">B</span>reak</span>
+      </WlButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onKeyDown } from '@vueuse/core'
 import { computed, ref } from 'vue'
 
 import { Interval } from '~/components/applications/pomodoro/types/interval'
@@ -71,6 +76,9 @@ const computedRecords = computed(() => {
   return result
 })
 const isCreating = computed(() => Boolean(record.value && recordIndex.value === -1))
+
+onKeyDown('w', () => listeners.addWork())
+onKeyDown('b', () => listeners.addBreak())
 
 const methods = {
   getEndDateOfPrevious(): Date {
