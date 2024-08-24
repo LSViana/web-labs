@@ -21,8 +21,10 @@
     <WlPomodoroRecordDetails
         v-if="record"
         v-model:record="record"
+        :new="isCreating"
         @update:record="listeners.record"
         @close="listeners.close"
+        @delete="listeners.delete"
     />
     <div v-else class="flex flex-col gap-3 sm:flex-row">
       <WlButton variant="secondary" @click="listeners.addWork">Add Work</WlButton>
@@ -67,7 +69,7 @@ const computedRecords = computed(() => {
 
   return result
 })
-const isCreating = computed(() => record.value && recordIndex.value === -1)
+const isCreating = computed(() => Boolean(record.value && recordIndex.value === -1))
 
 function getEndDateOfPrevious(): Date {
   if (records.value.length === 0) {
@@ -130,6 +132,13 @@ const listeners = {
   close(): void {
     record.value = undefined
     recordIndex.value = -1
+  },
+  delete(): void {
+    const newRecords = [...records.value]
+    newRecords.splice(recordIndex.value, 1)
+    records.value = newRecords
+
+    listeners.close()
   },
   addWork(): void {
     record.value = new PomodoroRecord(getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work)

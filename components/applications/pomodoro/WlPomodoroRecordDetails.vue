@@ -16,6 +16,7 @@
     </div>
     <div class="flex gap-3">
       <WlButton variant="primary" @click="listeners.save">Save</WlButton>
+      <WlButton v-if="!props.new" variant="danger" @click="listeners.delete">Delete</WlButton>
       <WlButton variant="secondary" @click="listeners.close">Close</WlButton>
     </div>
   </div>
@@ -32,10 +33,16 @@ import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.
 
 type Emits = {
   (e: 'update:record', value: PomodoroRecord): void;
+  (e: 'delete'): void;
   (e: 'close'): void;
 }
 
+type Props = {
+  new: boolean;
+}
+
 const emits = defineEmits<Emits>()
+const props = defineProps<Props>()
 
 const record = defineModel<PomodoroRecord>('record', { required: true })
 
@@ -60,6 +67,9 @@ const listeners = {
     const newRecord = new PomodoroRecord(startDate.value, endDate.value, type.value)
 
     emits('update:record', newRecord)
+  },
+  delete: (): void => {
+    emits('delete')
   },
   close: (): void => {
     emits('close')
