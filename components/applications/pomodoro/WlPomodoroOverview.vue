@@ -14,7 +14,9 @@
           <WlLabel for="pomodoro-overview-date">Date</WlLabel>
           <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date"/>
         </div>
-        <WlButton variant="secondary" @click="listeners.today">Today</WlButton>
+        <WlButton variant="secondary" @click="listeners.today">
+          <span class="underline">T</span>oday
+        </WlButton>
       </div>
     </div>
     <WlPomodoroOverviewTimeline :records="records" @select="listeners.select"/>
@@ -79,6 +81,7 @@ const isCreating = computed(() => Boolean(record.value && recordIndex.value === 
 
 onKeyDown('w', () => listeners.addWork())
 onKeyDown('b', () => listeners.addBreak())
+onKeyDown('t', () => listeners.today())
 
 const methods = {
   getEndDateOfPrevious(): Date {
