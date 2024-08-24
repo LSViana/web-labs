@@ -120,8 +120,8 @@ const listeners = {
       let index = -1
 
       if (records.value.length === 0) {
-        // If there are no records, add it to the end.
-        index = records.value.length - 1
+        // If there are no records, add it to the beginning.
+        index = 0
       } else if (records.value[0].startDate >= newRecord.endDate) {
         // If the new record starts before the first record, add it to the beginning.
         index = 0
