@@ -31,14 +31,14 @@ type Events = {
 }
 
 const variantClasses: Record<WlButtonVariant, string> = {
-  primary: 'bg-primary-500 text-primary-50 ' +
-      'hover:bg-primary-600 active:bg-primary-700 ' +
+  primary: 'bg-primary-600 text-primary-50 ' +
+      'hover:bg-primary-700 active:bg-primary-800 ' +
       'focus:ring-primary-300',
   secondary: 'bg-gray-500 text-gray-50 ' +
       'hover:bg-gray-600 active:bg-gray-700 ' +
       'focus:ring-gray-300',
-  danger: 'bg-red-500 text-red-50 ' +
-      'hover:bg-red-600 active:bg-red-700 ' +
+  danger: 'bg-red-600 text-red-50 ' +
+      'hover:bg-red-700 active:bg-red-800 ' +
       'focus:ring-red-300',
   transparent: '' // Used when it's necessary to manually set the colors.
 }
