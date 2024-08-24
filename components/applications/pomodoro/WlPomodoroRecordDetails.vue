@@ -64,6 +64,12 @@ watch(
 
 const listeners = {
   save: (): void => {
+    if (startDate.value >= endDate.value) {
+      alert('Start time must be before end time.')
+
+      return
+    }
+
     const newRecord = new PomodoroRecord(startDate.value, endDate.value, type.value)
 
     emits('update:record', newRecord)
