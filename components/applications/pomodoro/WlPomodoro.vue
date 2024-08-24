@@ -36,6 +36,7 @@
 </template>
 
 <script setup lang="ts">
+import { onKeyDown } from '@vueuse/core'
 import { computed, onMounted, onUnmounted } from 'vue'
 
 import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
@@ -57,6 +58,17 @@ type Events = {
 const emits = defineEmits<Events>()
 const pomodoro = usePomodoro()
 const pomodoroColor = computed(() => getPomodoroTypeColor(pomodoro.interval.value.type))
+
+onKeyDown('p', () => {
+  if (pomodoro.isOvertime.value) {
+    listeners.finishClick()
+  } else if (pomodoro.isRunning.value) {
+    listeners.pauseClick()
+  } else {
+    listeners.playClick()
+  }
+})
+onKeyDown('s', () => listeners.skipClick())
 
 onMounted(() => pomodoro.on('interval', listeners.interval))
 onUnmounted(() => pomodoro.off('interval', listeners.interval))
