@@ -1,15 +1,15 @@
 <template>
   <div class="flex flex-wrap items-end gap-3">
     <div class="inline-flex flex-col">
-      <label class="text-muted dark:text-muted-dark" for="pomodoro-record-details-start">Start</label>
+      <WlLabel ref="startDateRef" for="pomodoro-record-details-start">Start</WlLabel>
       <WlTimeInput id="pomodoro-record-details-start" v-model="startDate"/>
     </div>
     <div class="inline-flex flex-col">
-      <label class="text-muted dark:text-muted-dark" for="pomodoro-record-details-end">End</label>
+      <WlLabel for="pomodoro-record-details-end">End</WlLabel>
       <WlTimeInput id="pomodoro-record-details-end" v-model="endDate"/>
     </div>
     <div class="inline-flex flex-col">
-      <label class="text-muted dark:text-muted-dark" for="pomodoro-record-details-type">Type</label>
+      <WlLabel for="pomodoro-record-details-type">Type</WlLabel>
       <WlSelect id="pomodoro-record-details-type" v-model="type">
         <option v-for="item in types" :key="item" :value="item">{{ PomodoroIntervalTypeLabels[item] }}</option>
       </WlSelect>
@@ -30,6 +30,7 @@ import { PomodoroIntervalType, PomodoroIntervalTypeLabels } from '~/components/a
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlSelect from '~/components/experiments/forms-input/input/WlSelect.vue'
 import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
+import WlLabel from '~/components/experiments/forms-input/WlLabel.vue'
 
 type Emits = {
   (e: 'update:record', value: PomodoroRecord): void;

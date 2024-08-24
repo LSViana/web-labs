@@ -2,16 +2,16 @@
   <div class="flex grow flex-col gap-5 rounded border p-5">
     <div class="flex flex-wrap justify-between gap-4 md:justify-start">
       <div class="flex flex-col">
-        <span class="text-muted dark:text-muted-dark">Work</span>
+        <WlLabel>Work</WlLabel>
         <p class="text-4xl font-bold">{{ computedRecords.work }}</p>
       </div>
       <div class="flex flex-col">
-        <span class="text-muted dark:text-muted-dark">Break</span>
+        <WlLabel>Break</WlLabel>
         <p class="text-4xl font-bold">{{ computedRecords.break }}</p>
       </div>
       <div class="flex grow items-end gap-3 sm:grow-0">
         <div class="flex grow flex-col">
-          <label class="text-muted dark:text-muted-dark" for="pomodoro-overview-date">Date</label>
+          <WlLabel for="pomodoro-overview-date">Date</WlLabel>
           <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date"/>
         </div>
         <WlButton variant="secondary" @click="listeners.today">Today</WlButton>
@@ -45,6 +45,7 @@ import WlPomodoroOverviewTimeline from '~/components/applications/pomodoro/WlPom
 import WlPomodoroRecordDetails from '~/components/applications/pomodoro/WlPomodoroRecordDetails.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
+import WlLabel from '~/components/experiments/forms-input/WlLabel.vue'
 
 const records = defineModel<PomodoroRecord[]>('records', { required: true })
 const date = defineModel<Date>('date', { required: true })
