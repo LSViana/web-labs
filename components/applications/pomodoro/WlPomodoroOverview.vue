@@ -82,7 +82,6 @@ function getEndDateOfPrevious(): Date {
 
 const listeners = {
   date(): void {
-    console.log('new date')
     record.value = undefined
     recordIndex.value = -1
   },
@@ -113,8 +112,6 @@ const listeners = {
           index = records.value.length - 1
         }
       }
-
-      console.log('INDEX', index)
 
       records.value.splice(index, 0, newRecord)
       recordIndex.value = index
