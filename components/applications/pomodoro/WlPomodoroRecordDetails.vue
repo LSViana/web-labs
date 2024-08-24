@@ -2,11 +2,11 @@
   <div class="flex flex-wrap items-end gap-3">
     <div class="inline-flex flex-col">
       <WlLabel ref="startDateRef" for="pomodoro-record-details-start">Start</WlLabel>
-      <WlTimeInput id="pomodoro-record-details-start" v-model="startDate"/>
+      <WlTimeInput id="pomodoro-record-details-start" v-model="startDate" @keyup.enter="listeners.enterStartDate"/>
     </div>
     <div class="inline-flex flex-col">
-      <WlLabel for="pomodoro-record-details-end">End</WlLabel>
-      <WlTimeInput id="pomodoro-record-details-end" v-model="endDate"/>
+      <WlLabel ref="endDateRef" for="pomodoro-record-details-end">End</WlLabel>
+      <WlTimeInput id="pomodoro-record-details-end" v-model="endDate" @keyup.enter="listeners.enterEndDate"/>
     </div>
     <div class="inline-flex flex-col">
       <WlLabel for="pomodoro-record-details-type">Type</WlLabel>
@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="flex gap-3">
-    <WlButton variant="primary" @click="listeners.save">
+    <WlButton ref="saveRef" variant="primary" @click="listeners.save">
       <span class="underline">S</span>ave
     </WlButton>
     <WlButton v-if="!props.new" variant="danger" @click="listeners.delete">
@@ -58,6 +58,8 @@ const startDate = ref<Date>(record.value.startDate)
 const endDate = ref<Date>(record.value.endDate)
 const type = ref<PomodoroIntervalType>(record.value.type)
 const startDateRef = ref<ComponentPublicInstance>()
+const endDateRef = ref<ComponentPublicInstance>()
+const saveRef = ref<ComponentPublicInstance>()
 
 const types = Object.values(PomodoroIntervalType)
 
@@ -65,11 +67,7 @@ onKeyDown('s', () => listeners.save())
 onKeyDown('d', () => listeners.delete())
 onKeyDown('c', () => listeners.close())
 
-onMounted(() => {
-  const element = startDateRef.value!.$el as HTMLElement
-
-  element.focus()
-})
+onMounted(() => (startDateRef.value!.$el as HTMLElement).focus())
 
 watch(
     record,
@@ -82,7 +80,13 @@ watch(
 )
 
 const listeners = {
-  save: (): void => {
+  enterStartDate() {
+    (endDateRef.value!.$el as HTMLElement).focus()
+  },
+  enterEndDate() {
+    (saveRef.value!.$el as HTMLElement).focus()
+  },
+  save() {
     if (startDate.value >= endDate.value) {
       alert('Start time must be before end time.')
 
@@ -93,10 +97,10 @@ const listeners = {
 
     emits('update:record', newRecord)
   },
-  delete: (): void => {
+  delete() {
     emits('delete')
   },
-  close: (): void => {
+  close() {
     emits('close')
   }
 }
