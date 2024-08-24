@@ -98,7 +98,9 @@ const listeners = {
     emits('update:record', newRecord)
   },
   delete() {
-    emits('delete')
+    if (confirm('Are you sure you want to delete this record?')) {
+      emits('delete')
+    }
   },
   close() {
     emits('close')
