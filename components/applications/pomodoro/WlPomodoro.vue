@@ -28,7 +28,7 @@
       >
         <WlPlayIcon class="ps-1"/>
       </WlIconButton>
-      <WlIconButton variant="secondary" title="Skip interval (S)" @click="listeners.skipClick()">
+      <WlIconButton variant="secondary" title="Next interval (N)" @click="listeners.nextClick()">
         <WlForwardIcon/>
       </WlIconButton>
     </div>
@@ -68,7 +68,7 @@ onKeyDown('p', () => {
     listeners.playClick()
   }
 })
-onKeyDown('s', () => listeners.skipClick())
+onKeyDown('n', () => listeners.nextClick())
 
 onMounted(() => pomodoro.on('interval', listeners.interval))
 onUnmounted(() => pomodoro.off('interval', listeners.interval))
@@ -89,7 +89,7 @@ const listeners = {
   finishClick() {
     pomodoro.skip()
   },
-  skipClick() {
+  nextClick() {
     pomodoro.skip()
   },
   interval(event: PomodoroIntervalEvent): void {
