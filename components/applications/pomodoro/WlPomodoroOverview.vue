@@ -71,15 +71,17 @@ const computedRecords = computed(() => {
 })
 const isCreating = computed(() => Boolean(record.value && recordIndex.value === -1))
 
-function getEndDateOfPrevious(): Date {
-  if (records.value.length === 0) {
-    // If there are no records, the end date of the previous interval is the current date.
-    return now.get()
+const methods = {
+  getEndDateOfPrevious(): Date {
+    if (records.value.length === 0) {
+      // If there are no records, the end date of the previous interval is the current date.
+      return now.get()
+    }
+
+    const previousRecord = records.value[records.value.length - 1]
+
+    return previousRecord.endDate
   }
-
-  const previousRecord = records.value[records.value.length - 1]
-
-  return previousRecord.endDate
 }
 
 const listeners = {
@@ -141,10 +143,10 @@ const listeners = {
     listeners.close()
   },
   addWork(): void {
-    record.value = new PomodoroRecord(getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work)
+    record.value = new PomodoroRecord(methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work)
   },
   addBreak(): void {
-    record.value = new PomodoroRecord(getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break)
+    record.value = new PomodoroRecord(methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break)
   }
 }
 </script>
