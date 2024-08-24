@@ -100,13 +100,16 @@ const listeners = {
       if (records.value.length === 0) {
         // If there are no records, add it to the end.
         index = records.value.length - 1
+      } else if (records.value[0].startDate >= newRecord.endDate) {
+        // If the new record starts before the first record, add it to the beginning.
+        index = 0
       } else {
-        // Otherwise, add it before the next record.
-        const nextRecordIndex = records.value.findIndex(x => x.startDate > newRecord.endDate)
+        // Otherwise, add it after the previous record.
+        const nextRecordIndex = records.value.findLastIndex(x => x.endDate <= newRecord.startDate)
 
         if (nextRecordIndex !== -1) {
-          // If there is a next record, add the new record before it.
-          index = nextRecordIndex
+          // If there is a previous record, add the new record after it.
+          index = nextRecordIndex + 1
         } else {
           // If there is no next record, add it to the end.
           index = records.value.length - 1
