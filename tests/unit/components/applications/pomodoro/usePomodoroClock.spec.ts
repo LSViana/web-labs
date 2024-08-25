@@ -244,6 +244,13 @@ describe('usePomodoro', () => {
     // Assert
     expect(eventHandler).toHaveBeenCalledTimes(1)
 
+    // Act
+    pomodoro.off('interval', eventHandler)
+    pomodoro.skip()
+
+    // Assert
+    expect(eventHandler).toHaveBeenCalledTimes(1)
+
     // Clean-up
     vi.useRealTimers()
   })
