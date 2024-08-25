@@ -1,47 +1,50 @@
 <template>
-  <div class="flex grow flex-col gap-5 rounded border p-5">
-    <div class="flex flex-wrap justify-between gap-4 md:justify-start">
-      <div class="flex flex-col">
-        <WlLabel>Work</WlLabel>
-        <p class="text-4xl font-bold">{{ computedRecords.work }}</p>
-      </div>
-      <div class="flex flex-col">
-        <WlLabel>Break</WlLabel>
-        <p class="text-4xl font-bold">{{ computedRecords.break }}</p>
-      </div>
-      <div class="flex grow items-end gap-3 sm:grow-0">
-        <div class="flex grow flex-col">
-          <WlLabel for="pomodoro-overview-date">Date</WlLabel>
-          <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date"/>
+  <div class="flex grow flex-col gap-3">
+    <div class="flex grow flex-col gap-5 rounded border p-5">
+      <div class="flex flex-wrap justify-between gap-4 md:justify-start">
+        <div class="flex flex-col">
+          <WlLabel>Work</WlLabel>
+          <p class="text-4xl font-bold">{{ computedRecords.work }}</p>
         </div>
-        <WlButton variant="secondary" title="Select today (T)" @click="listeners.today">
-          <span class="underline">T</span>oday
+        <div class="flex flex-col">
+          <WlLabel>Break</WlLabel>
+          <p class="text-4xl font-bold">{{ computedRecords.break }}</p>
+        </div>
+        <div class="flex grow items-end gap-3 sm:grow-0">
+          <div class="flex grow flex-col">
+            <WlLabel for="pomodoro-overview-date">Date</WlLabel>
+            <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date"/>
+          </div>
+          <WlButton variant="secondary" title="Select today (T)" @click="listeners.today">
+            <span class="underline">T</span>oday
+          </WlButton>
+        </div>
+      </div>
+      <WlPomodoroOverviewTimeline :records="records" @select="listeners.select"/>
+      <template v-if="record">
+        <WlPomodoroRecordDetails
+            v-model:record="record"
+            :new="isCreating"
+            @update:record="listeners.record"
+            @close="listeners.close"
+            @delete="listeners.delete"
+        />
+        <div v-if="!isCreating" class="flex items-center gap-3">
+          <a href="#" class="underline" @click="listeners.previous">Previous</a>
+          <span class="w-16 text-center">{{ recordIndex + 1 }} of {{ records.length }}</span>
+          <a href="#" class="underline" @click="listeners.next">Next</a>
+        </div>
+      </template>
+      <div v-else class="flex flex-col gap-3 sm:flex-row">
+        <WlButton variant="secondary" title="Add work record (W)" @click="listeners.addWork">
+          <span>Add <span class="underline">W</span>ork</span>
+        </WlButton>
+        <WlButton variant="secondary" title="Add break record (W)" @click="listeners.addBreak">
+          <span>Add <span class="underline">B</span>reak</span>
         </WlButton>
       </div>
     </div>
-    <WlPomodoroOverviewTimeline :records="records" @select="listeners.select"/>
-    <template v-if="record">
-      <WlPomodoroRecordDetails
-          v-model:record="record"
-          :new="isCreating"
-          @update:record="listeners.record"
-          @close="listeners.close"
-          @delete="listeners.delete"
-      />
-      <div v-if="!isCreating" class="flex items-center gap-3">
-        <a href="#" class="underline" @click="listeners.previous">Previous</a>
-        <span class="w-16 text-center">{{ recordIndex + 1 }} of {{ records.length }}</span>
-        <a href="#" class="underline" @click="listeners.next">Next</a>
-      </div>
-    </template>
-    <div v-else class="flex flex-col gap-3 sm:flex-row">
-      <WlButton variant="secondary" title="Add work record (W)" @click="listeners.addWork">
-        <span>Add <span class="underline">W</span>ork</span>
-      </WlButton>
-      <WlButton variant="secondary" title="Add break record (W)" @click="listeners.addBreak">
-        <span>Add <span class="underline">B</span>reak</span>
-      </WlButton>
-    </div>
+    <WlPomodoroRecordConflict :records="records" @select="listeners.select"/>
   </div>
 </template>
 
@@ -55,6 +58,7 @@ import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/p
 import { usePomodoroNow } from '~/components/applications/pomodoro/usePomodoroNow'
 import { usePomodoroToday } from '~/components/applications/pomodoro/usePomodoroToday'
 import WlPomodoroOverviewTimeline from '~/components/applications/pomodoro/WlPomodoroOverviewTimeline.vue'
+import WlPomodoroRecordConflict from '~/components/applications/pomodoro/WlPomodoroRecordConflict.vue'
 import WlPomodoroRecordDetails from '~/components/applications/pomodoro/WlPomodoroRecordDetails.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
