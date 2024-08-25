@@ -129,10 +129,21 @@ describe('usePomodoro', () => {
     vi.advanceTimersByTime(37 * 1_000)
     pomodoro.skip()
     vi.advanceTimersByTime(10 * 1_000)
-    const value = pomodoro.interval.value.remainingInterval
+    let remainingInterval = pomodoro.interval.value.remainingInterval
+    let type = pomodoro.interval.value.type
 
     // Assert
-    expect(value).toStrictEqual(new Interval(0, 5, 0))
+    expect(remainingInterval).toStrictEqual(new Interval(0, 5, 0))
+    expect(type).toBe(PomodoroIntervalType.break)
+
+    // Act
+    pomodoro.skip()
+    remainingInterval = pomodoro.interval.value.remainingInterval
+    type = pomodoro.interval.value.type
+
+    // Assert
+    expect(remainingInterval).toStrictEqual(new Interval(0, 25, 0))
+    expect(type).toBe(PomodoroIntervalType.work)
 
     // Clean-up
     vi.useRealTimers()
