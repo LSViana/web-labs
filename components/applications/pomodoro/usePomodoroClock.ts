@@ -30,8 +30,6 @@ export function usePomodoroClock() {
         return new Interval(0, 25, 0)
       case PomodoroIntervalType.break:
         return new Interval(0, 5, 0)
-      default:
-        throw Error(`Unable to calculate duration for ${type}.`)
     }
   }
 
