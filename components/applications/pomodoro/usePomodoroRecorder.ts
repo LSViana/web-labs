@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 
-import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
+import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { useNow } from '~/components/applications/pomodoro/useNow'
 
 export function usePomodoroRecorder() {
@@ -16,7 +16,7 @@ export function usePomodoroRecorder() {
     startDate = now.get()
   }
 
-  function save(pomodoroInterval: PomodoroInterval) {
+  function save(type: PomodoroIntervalType) {
     if (!isRecording) {
       return
     }

@@ -50,7 +50,7 @@ onMounted(() => {
 
 const listeners = {
   interval(interval: PomodoroInterval): void {
-    pomodoroRecorder.save(interval)
+    pomodoroRecorder.save(interval.type)
     pomodoroStorage.saveToday(pomodoroRecorder.records.value)
     records.value = pomodoroRecorder.records.value
     leaveConfirmation.release()
