@@ -8,7 +8,7 @@ import type { TypedEventHandler } from '~/components/applications/pomodoro/types
 import { TypedEventBus } from '~/components/applications/pomodoro/types/typedEventBus'
 import { useNow } from '~/components/applications/pomodoro/useNow'
 
-export function usePomodoro() {
+export function usePomodoroClock() {
   // Private
   let intervalId = -1
   const eventBus = new TypedEventBus()

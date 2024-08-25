@@ -2,7 +2,7 @@
   <NuxtLayout name="home">
     <WlContainer>
       <div class="flex flex-col gap-3 p-3 md:flex-row">
-        <WlPomodoro @interval="listeners.interval" @play="listeners.play"/>
+        <WlPomodoroClock @interval="listeners.interval" @play="listeners.play"/>
         <WlPomodoroOverview
             v-model:date="date"
             :records="pomodoroRecords.value"
@@ -27,7 +27,7 @@ import { usePomodoroRecorder } from '~/components/applications/pomodoro/usePomod
 import { usePomodoroRecords } from '~/components/applications/pomodoro/usePomodoroRecords'
 import { usePomodoroStorage } from '~/components/applications/pomodoro/usePomodoroStorage'
 import { useToday } from '~/components/applications/pomodoro/useToday'
-import WlPomodoro from '~/components/applications/pomodoro/WlPomodoro.vue'
+import WlPomodoroClock from '~/components/applications/pomodoro/WlPomodoroClock.vue'
 import WlPomodoroOverview from '~/components/applications/pomodoro/WlPomodoroOverview.vue'
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
 

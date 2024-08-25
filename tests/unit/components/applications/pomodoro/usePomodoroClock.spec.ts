@@ -4,12 +4,12 @@ import { Interval } from '~/components/applications/pomodoro/types/interval'
 import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
 import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
-import { usePomodoro } from '~/components/applications/pomodoro/usePomodoro'
+import { usePomodoroClock } from '~/components/applications/pomodoro/usePomodoroClock'
 
 describe('usePomodoro', () => {
   test('starts with timer paused, set to 0 min, 25 min duration, and in work type', () => {
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
 
     // Act
     const isRunning = pomodoro.isRunning.value
@@ -30,7 +30,7 @@ describe('usePomodoro', () => {
     vi.useFakeTimers()
 
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
 
     // Act
     vi.advanceTimersByTime(1_000)
@@ -50,7 +50,7 @@ describe('usePomodoro', () => {
     vi.useFakeTimers()
 
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
 
     // Act
     pomodoro.start()
@@ -86,7 +86,7 @@ describe('usePomodoro', () => {
     vi.useFakeTimers()
 
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
 
     // Act
     pomodoro.start()
@@ -110,7 +110,7 @@ describe('usePomodoro', () => {
     vi.useFakeTimers()
 
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
 
     // Act
     pomodoro.start()
@@ -131,7 +131,7 @@ describe('usePomodoro', () => {
     vi.useFakeTimers()
 
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
 
     // Act
     pomodoro.start()
@@ -155,7 +155,7 @@ describe('usePomodoro', () => {
     vi.useFakeTimers()
 
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
 
     // Act
     vi.advanceTimersByTime(25 * 1_000)
@@ -173,7 +173,7 @@ describe('usePomodoro', () => {
     vi.useFakeTimers()
 
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
 
     // Act
     pomodoro.start()
@@ -200,7 +200,7 @@ describe('usePomodoro', () => {
     vi.useFakeTimers()
 
     // Arrange
-    const pomodoro = usePomodoro()
+    const pomodoro = usePomodoroClock()
     const eventHandler = vi.fn()
     pomodoro.on('interval', eventHandler)
 

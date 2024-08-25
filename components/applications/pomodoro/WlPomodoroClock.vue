@@ -42,7 +42,7 @@ import { computed, onMounted, onUnmounted } from 'vue'
 import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
-import { usePomodoro } from '~/components/applications/pomodoro/usePomodoro'
+import { usePomodoroClock } from '~/components/applications/pomodoro/usePomodoroClock'
 import WlPomodoroProgressCircle from '~/components/applications/pomodoro/WlPomodoroProgressCircle.vue'
 import WlIconButton from '~/components/experiments/forms-input/buttons/WlIconButton.vue'
 import WlForwardIcon from '~/components/shared/icons/static/WlForwardIcon.vue'
@@ -56,7 +56,7 @@ type Events = {
 }
 
 const emits = defineEmits<Events>()
-const pomodoro = usePomodoro()
+const pomodoro = usePomodoroClock()
 const pomodoroColor = computed(() => getPomodoroTypeColor(pomodoro.interval.value.type))
 
 onKeyDown('p', () => {

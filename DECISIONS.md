@@ -1,3 +1,5 @@
+- 2024-08-25: Rename `usePomodoro()` to `usePomodoroClock()` for clarity.
+
 - 2024-08-11: The `usePomodoro()` composable must depend on dates because the browser may stop the tab process
   (including intervals), and counting the amount of elapsed seconds fails in that scenario.
 
