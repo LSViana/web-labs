@@ -67,14 +67,14 @@ const formattedDates = computed(() => ({
 }))
 
 const items = computed(() => {
-  return props.records.map<TimelineItem>(x => {
+  return props.records.map<TimelineItem>((x, index) => {
     const type = getPomodoroTypeColor(x.type)
 
     return {
       title: `Start: ${x.startDate.toLocaleTimeString()}, End: ${x.endDate.toLocaleTimeString()}, Duration: ${x.elapsedInterval}`,
       start: (x.startDate.getTime() - dates.value.start.getTime()) / diffMs.value * 100,
       length: (x.endDate.getTime() - x.startDate.getTime()) / diffMs.value * 100,
-      classes: `${type.backgroundInteractive} ${type.border}`
+      classes: `${type.backgroundInteractive} ${type.borderHorizontal} ${index < props.records.length - 1 ? 'border-r' : ''}`
     }
   })
 })
