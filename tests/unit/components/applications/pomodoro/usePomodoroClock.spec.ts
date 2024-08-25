@@ -25,6 +25,18 @@ describe('usePomodoro', () => {
     expect(pomodoroInterval.remainingInterval).toStrictEqual(new Interval(0, 25, 0))
   })
 
+  test('break interval is 5 min', () => {
+    // Arrange
+    const pomodoro = usePomodoroClock()
+
+    // Act
+    pomodoro.skip()
+    const interval = pomodoro.interval.value
+
+    // Assert
+    expect(interval.remainingInterval).toStrictEqual(new Interval(0, 5, 0))
+  })
+
   test('timer only starts counting after started', () => {
     // Set-up
     vi.useFakeTimers()
