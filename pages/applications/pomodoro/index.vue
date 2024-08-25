@@ -56,10 +56,17 @@ const listeners = {
   interval(interval: PomodoroInterval): void {
     const record = recorder.capture(interval.type)
 
-    if (record) {
-      records.add(record)
-      storage.saveToday(records.value)
+    if (!record) {
+      return
     }
+
+    if (!today.isToday(date.value)) {
+      date.value = today.get()
+      records.load(storage.loadToday())
+    }
+
+    records.add(record)
+    storage.saveToday(records.value)
 
     leaveConfirmation.release()
   },
