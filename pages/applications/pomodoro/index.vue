@@ -5,7 +5,7 @@
         <WlPomodoroClock @interval="listeners.interval" @play="listeners.play" @notification="listeners.notification"/>
         <WlPomodoroOverview
             v-model:date="date"
-            :records="pomodoroRecords.value"
+            :records="records.value"
             @update:date="listeners.date"
             @create="listeners.add"
             @update="listeners.update"
@@ -37,54 +37,54 @@ useHead({
   title: 'Pomodoro'
 })
 
-// TODO: Rename these variables.
-const pomodoroRecorder = usePomodoroRecorder()
-const pomodoroStorage = usePomodoroStorage()
-const pomodoroRecords = usePomodoroRecords()
-const pomodoroNotification = usePomodoroNotification()
-const leaveConfirmation = useLeaveConfirmation()
+const recorder = usePomodoroRecorder()
+const storage = usePomodoroStorage()
+const records = usePomodoroRecords()
+const notification = usePomodoroNotification()
 const today = usePomodoroToday()
+
+const leaveConfirmation = useLeaveConfirmation()
 
 const date = ref(today.get())
 
 onMounted(() => {
   // The records are loaded `onMounted` not to cause hydration mismatches.
-  pomodoroRecords.load(pomodoroStorage.loadToday())
+  records.load(storage.loadToday())
 })
 
 const listeners = {
   interval(interval: PomodoroInterval): void {
-    const record = pomodoroRecorder.capture(interval.type)
+    const record = recorder.capture(interval.type)
 
     if (record) {
-      pomodoroRecords.add(record)
-      pomodoroStorage.saveToday(pomodoroRecords.value)
+      records.add(record)
+      storage.saveToday(records.value)
     }
 
     leaveConfirmation.release()
   },
   play(): void {
-    pomodoroRecorder.record()
+    recorder.record()
     leaveConfirmation.hold()
-    pomodoroNotification.requestPermission()
+    notification.requestPermission()
   },
   notification(type: PomodoroIntervalType): void {
-    pomodoroNotification.notify(type)
+    notification.notify(type)
   },
   date(date: Date): void {
-    pomodoroRecords.load(pomodoroStorage.load(date))
+    records.load(storage.load(date))
   },
   add(newRecord: PomodoroRecord): void {
-    pomodoroRecords.add(newRecord)
-    pomodoroStorage.save(date.value, pomodoroRecords.value)
+    records.add(newRecord)
+    storage.save(date.value, records.value)
   },
   update(newRecord: PomodoroRecord, index: number): void {
-    pomodoroRecords.update(newRecord, index)
-    pomodoroStorage.save(date.value, pomodoroRecords.value)
+    records.update(newRecord, index)
+    storage.save(date.value, records.value)
   },
   remove(index: number): void {
-    pomodoroRecords.remove(index)
-    pomodoroStorage.save(date.value, pomodoroRecords.value)
+    records.remove(index)
+    storage.save(date.value, records.value)
   }
 }
 </script>
