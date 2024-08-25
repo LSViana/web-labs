@@ -4,7 +4,7 @@
       <div
           v-for="(item, index) in items"
           :key="item.start"
-          class="absolute inset-0 cursor-pointer outline-none focus-visible:ring-4"
+          class="absolute inset-0 min-w-0.5 cursor-pointer outline-none focus-visible:ring-4"
           tabindex="0"
           :class="item.classes"
           :style="{ left: `${item.start}%`, width: `${item.length}%` }"
