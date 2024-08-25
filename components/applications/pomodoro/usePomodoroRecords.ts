@@ -28,7 +28,8 @@ export function usePomodoroRecords() {
   }
 
   function update(record: PomodoroRecord, index: number) {
-    value.splice(index, 1, record)
+    this.remove(index)
+    this.add(record)
   }
 
   function remove(index: number) {
