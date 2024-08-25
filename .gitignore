@@ -12,3 +12,4 @@ dist
 /playwright-report/
 /playwright/.cache/
 *-win32.png
+/coverage/
