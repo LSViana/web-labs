@@ -26,7 +26,7 @@ import { useLeaveConfirmation } from '~/components/applications/pomodoro/useLeav
 import { usePomodoroRecorder } from '~/components/applications/pomodoro/usePomodoroRecorder'
 import { usePomodoroRecords } from '~/components/applications/pomodoro/usePomodoroRecords'
 import { usePomodoroStorage } from '~/components/applications/pomodoro/usePomodoroStorage'
-import { useToday } from '~/components/applications/pomodoro/useToday'
+import { usePomodoroToday } from '~/components/applications/pomodoro/usePomodoroToday'
 import WlPomodoroClock from '~/components/applications/pomodoro/WlPomodoroClock.vue'
 import WlPomodoroOverview from '~/components/applications/pomodoro/WlPomodoroOverview.vue'
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
@@ -39,7 +39,7 @@ const pomodoroRecorder = usePomodoroRecorder()
 const pomodoroStorage = usePomodoroStorage()
 const pomodoroRecords = usePomodoroRecords()
 const leaveConfirmation = useLeaveConfirmation()
-const today = useToday()
+const today = usePomodoroToday()
 
 const date = ref(today.get())
 

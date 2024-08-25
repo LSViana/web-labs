@@ -1,4 +1,4 @@
-export function useNow() {
+export function usePomodoroNow() {
   function get() {
     const now = new Date()
 

@@ -27,7 +27,7 @@ import { computed } from 'vue'
 
 import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
-import { useToday } from '~/components/applications/pomodoro/useToday'
+import { usePomodoroToday } from '~/components/applications/pomodoro/usePomodoroToday'
 
 type Props = {
   records: PomodoroRecord[];
@@ -44,7 +44,7 @@ type TimelineItem = {
   classes: string;
 }
 
-const today = useToday()
+const today = usePomodoroToday()
 
 const props = defineProps<Props>()
 const emits = defineEmits<Emits>()

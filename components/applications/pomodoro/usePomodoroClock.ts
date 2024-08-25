@@ -6,13 +6,13 @@ import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomod
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import type { TypedEventHandler } from '~/components/applications/pomodoro/types/typedEvent'
 import { TypedEventBus } from '~/components/applications/pomodoro/types/typedEventBus'
-import { useNow } from '~/components/applications/pomodoro/useNow'
+import { usePomodoroNow } from '~/components/applications/pomodoro/usePomodoroNow'
 
 export function usePomodoroClock() {
   // Private
   let intervalId = -1
   const eventBus = new TypedEventBus()
-  const now = useNow()
+  const now = usePomodoroNow()
 
   const type = ref(PomodoroIntervalType.work)
   const startDate = ref(now.get())

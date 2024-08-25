@@ -52,8 +52,8 @@ import { computed, ref } from 'vue'
 import { Interval } from '~/components/applications/pomodoro/types/interval'
 import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
-import { useNow } from '~/components/applications/pomodoro/useNow'
-import { useToday } from '~/components/applications/pomodoro/useToday'
+import { usePomodoroNow } from '~/components/applications/pomodoro/usePomodoroNow'
+import { usePomodoroToday } from '~/components/applications/pomodoro/usePomodoroToday'
 import WlPomodoroOverviewTimeline from '~/components/applications/pomodoro/WlPomodoroOverviewTimeline.vue'
 import WlPomodoroRecordDetails from '~/components/applications/pomodoro/WlPomodoroRecordDetails.vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
@@ -73,8 +73,8 @@ const date = defineModel<Date>('date', { required: true })
 const recordIndex = ref<number>(-1)
 const record = ref<PomodoroRecord>()
 
-const today = useToday()
-const now = useNow()
+const today = usePomodoroToday()
+const now = usePomodoroNow()
 
 const computedRecords = computed(() => {
   const workSeconds = records.value

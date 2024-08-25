@@ -1,4 +1,4 @@
-export function useToday() {
+export function usePomodoroToday() {
   function get() {
     const today = new Date()
 
