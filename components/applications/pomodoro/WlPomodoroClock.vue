@@ -39,8 +39,12 @@
 import { onKeyDown } from '@vueuse/core'
 import { computed, onMounted, onUnmounted } from 'vue'
 
-import type { PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
+import type {
+  PomodoroIntervalEvent,
+  PomodoroNotificationEvent
+} from '~/components/applications/pomodoro/types/pomodoroEvents'
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
+import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
 import { usePomodoroClock } from '~/components/applications/pomodoro/usePomodoroClock'
 import WlPomodoroProgressCircle from '~/components/applications/pomodoro/WlPomodoroProgressCircle.vue'
@@ -52,6 +56,7 @@ import WlStopIcon from '~/components/shared/icons/static/WlStopIcon.vue'
 
 type Events = {
   (e: 'interval', value: PomodoroInterval): void;
+  (e: 'notification', type: PomodoroIntervalType): void;
   (e: 'play'): void;
 }
 
@@ -70,8 +75,14 @@ onKeyDown('p', () => {
 })
 onKeyDown('n', () => listeners.nextClick())
 
-onMounted(() => pomodoro.on('interval', listeners.interval))
-onUnmounted(() => pomodoro.off('interval', listeners.interval))
+onMounted(() => {
+  pomodoro.on('interval', listeners.interval)
+  pomodoro.on('notification', listeners.notification)
+})
+onUnmounted(() => {
+  pomodoro.off('interval', listeners.interval)
+  pomodoro.off('notification', listeners.notification)
+})
 
 const listeners = {
   playClick() {
@@ -94,6 +105,9 @@ const listeners = {
   },
   interval(event: PomodoroIntervalEvent): void {
     emits('interval', event.interval)
+  },
+  notification(event: PomodoroNotificationEvent): void {
+    emits('notification', event.intervalType)
   }
 }
 </script>

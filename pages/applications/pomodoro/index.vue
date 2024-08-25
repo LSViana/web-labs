@@ -2,7 +2,7 @@
   <NuxtLayout name="home">
     <WlContainer>
       <div class="flex flex-col gap-3 p-3 md:flex-row">
-        <WlPomodoroClock @interval="listeners.interval" @play="listeners.play"/>
+        <WlPomodoroClock @interval="listeners.interval" @play="listeners.play" @notification="listeners.notification"/>
         <WlPomodoroOverview
             v-model:date="date"
             :records="pomodoroRecords.value"
@@ -22,7 +22,9 @@ import { onMounted, ref } from 'vue'
 
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
+import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { useLeaveConfirmation } from '~/components/applications/pomodoro/useLeaveConfirmation'
+import { usePomodoroNotification } from '~/components/applications/pomodoro/usePomodoroNotification'
 import { usePomodoroRecorder } from '~/components/applications/pomodoro/usePomodoroRecorder'
 import { usePomodoroRecords } from '~/components/applications/pomodoro/usePomodoroRecords'
 import { usePomodoroStorage } from '~/components/applications/pomodoro/usePomodoroStorage'
@@ -35,9 +37,11 @@ useHead({
   title: 'Pomodoro'
 })
 
+// TODO: Rename these variables.
 const pomodoroRecorder = usePomodoroRecorder()
 const pomodoroStorage = usePomodoroStorage()
 const pomodoroRecords = usePomodoroRecords()
+const pomodoroNotification = usePomodoroNotification()
 const leaveConfirmation = useLeaveConfirmation()
 const today = usePomodoroToday()
 
@@ -62,6 +66,10 @@ const listeners = {
   play(): void {
     pomodoroRecorder.record()
     leaveConfirmation.hold()
+    pomodoroNotification.requestPermission()
+  },
+  notification(type: PomodoroIntervalType): void {
+    pomodoroNotification.notify(type)
   },
   date(date: Date): void {
     pomodoroRecords.load(pomodoroStorage.load(date))

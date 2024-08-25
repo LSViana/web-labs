@@ -1,7 +1,11 @@
 import { computed, ref } from 'vue'
 
 import { Interval } from '~/components/applications/pomodoro/types/interval'
-import { type PomodoroEventMap, PomodoroIntervalEvent } from '~/components/applications/pomodoro/types/pomodoroEvents'
+import {
+  type PomodoroEventMap,
+  PomodoroIntervalEvent,
+  PomodoroNotificationEvent
+} from '~/components/applications/pomodoro/types/pomodoroEvents'
 import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import type { TypedEventHandler } from '~/components/applications/pomodoro/types/typedEvent'
@@ -17,6 +21,7 @@ export function usePomodoroClock() {
   const type = ref(PomodoroIntervalType.work)
   const startDate = ref(now.get())
   const endDate = ref(now.get())
+  const notified = ref(false)
   const periodInterval = computed(() => getPeriodInterval(type.value))
 
   function getPeriodInterval(type: PomodoroIntervalType): Interval {
@@ -54,8 +59,9 @@ export function usePomodoroClock() {
     intervalId = window.setInterval(() => {
       endDate.value = now.get()
 
-      if (interval.value.elapsedInterval.totalSeconds >= periodInterval.value.totalSeconds) {
-        // TODO: Notify.
+      if (notified.value === false && interval.value.elapsedInterval.totalSeconds >= periodInterval.value.totalSeconds) {
+        eventBus.trigger(new PomodoroNotificationEvent(type.value))
+        notified.value = true
       }
     }, 1_000)
 
@@ -65,6 +71,7 @@ export function usePomodoroClock() {
     startDate.value = new Date(now.get().getTime() - totalMs)
 
     isRunning.value = true
+    notified.value = false
   }
 
   function pause() {
