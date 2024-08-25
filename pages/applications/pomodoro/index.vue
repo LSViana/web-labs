@@ -5,9 +5,11 @@
         <WlPomodoro @interval="listeners.interval" @play="listeners.play"/>
         <WlPomodoroOverview
             v-model:date="date"
-            :records="records"
+            :records="pomodoroRecords.value"
             @update:date="listeners.date"
-            @update:records="listeners.records"
+            @create="listeners.add"
+            @update="listeners.update"
+            @remove="listeners.remove"
         />
       </div>
     </WlContainer>
@@ -22,6 +24,7 @@ import type { PomodoroInterval } from '~/components/applications/pomodoro/types/
 import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { useLeaveConfirmation } from '~/components/applications/pomodoro/useLeaveConfirmation'
 import { usePomodoroRecorder } from '~/components/applications/pomodoro/usePomodoroRecorder'
+import { usePomodoroRecords } from '~/components/applications/pomodoro/usePomodoroRecords'
 import { usePomodoroStorage } from '~/components/applications/pomodoro/usePomodoroStorage'
 import { useToday } from '~/components/applications/pomodoro/useToday'
 import WlPomodoro from '~/components/applications/pomodoro/WlPomodoro.vue'
@@ -34,25 +37,26 @@ useHead({
 
 const pomodoroRecorder = usePomodoroRecorder()
 const pomodoroStorage = usePomodoroStorage()
+const pomodoroRecords = usePomodoroRecords()
 const leaveConfirmation = useLeaveConfirmation()
 const today = useToday()
 
-// The current records being shown in the UI.
-// The `pomodoroRecorder` is responsible for saving today's records.
-const records = ref<PomodoroRecord[]>([])
 const date = ref(today.get())
 
 onMounted(() => {
   // The records are loaded `onMounted` not to cause hydration mismatches.
-  records.value = pomodoroStorage.load(date.value)
-  pomodoroRecorder.load(records.value)
+  pomodoroRecords.load(pomodoroStorage.loadToday())
 })
 
 const listeners = {
   interval(interval: PomodoroInterval): void {
-    pomodoroRecorder.save(interval.type)
-    pomodoroStorage.saveToday(pomodoroRecorder.records.value)
-    records.value = pomodoroRecorder.records.value
+    const record = pomodoroRecorder.capture(interval.type)
+
+    if (record) {
+      pomodoroRecords.add(record)
+      pomodoroStorage.saveToday(pomodoroRecords.value)
+    }
+
     leaveConfirmation.release()
   },
   play(): void {
@@ -60,11 +64,19 @@ const listeners = {
     leaveConfirmation.hold()
   },
   date(date: Date): void {
-    records.value = pomodoroStorage.load(date)
+    pomodoroRecords.load(pomodoroStorage.load(date))
   },
-  records(newRecords: PomodoroRecord[]): void {
-    pomodoroStorage.save(date.value, newRecords)
-    records.value = newRecords
+  add(newRecord: PomodoroRecord): void {
+    pomodoroRecords.add(newRecord)
+    pomodoroStorage.save(date.value, pomodoroRecords.value)
+  },
+  update(newRecord: PomodoroRecord, index: number): void {
+    pomodoroRecords.update(newRecord, index)
+    pomodoroStorage.save(date.value, pomodoroRecords.value)
+  },
+  remove(index: number): void {
+    pomodoroRecords.remove(index)
+    pomodoroStorage.save(date.value, pomodoroRecords.value)
   }
 }
 </script>

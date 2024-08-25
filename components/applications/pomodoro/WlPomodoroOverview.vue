@@ -60,10 +60,18 @@ import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
 import WlLabel from '~/components/experiments/forms-input/WlLabel.vue'
 
+type Emits = {
+  (e: 'create', record: PomodoroRecord): void;
+  (e: 'update', record: PomodoroRecord, index: number): void;
+  (e: 'remove', index: number): void;
+}
+
+const emits = defineEmits<Emits>()
+
 const records = defineModel<PomodoroRecord[]>('records', { required: true })
 const date = defineModel<Date>('date', { required: true })
-const record = ref<PomodoroRecord>()
 const recordIndex = ref<number>(-1)
+const record = ref<PomodoroRecord>()
 
 const today = useToday()
 const now = useNow()
@@ -103,62 +111,33 @@ const methods = {
 }
 
 const listeners = {
+  record(newRecord: PomodoroRecord): void {
+    if (isCreating.value) {
+      emits('create', newRecord)
+    } else {
+      emits('update', newRecord, recordIndex.value)
+    }
+  },
+  delete(): void {
+    emits('remove', recordIndex.value)
+
+    listeners.close()
+  },
   date(): void {
-    record.value = undefined
-    recordIndex.value = -1
+    listeners.close()
   },
   today(): void {
     date.value = today.get()
+    recordIndex.value = -1
     record.value = undefined
   },
   select(index: number): void {
     recordIndex.value = index
-    record.value = records.value[index]
-  },
-  record(newRecord: PomodoroRecord): void {
-    if (isCreating.value) {
-      let index = -1
-
-      if (records.value.length === 0) {
-        // If there are no records, add it to the beginning.
-        index = 0
-      } else if (records.value[0].startDate >= newRecord.endDate) {
-        // If the new record starts before the first record, add it to the beginning.
-        index = 0
-      } else {
-        // Otherwise, add it after the previous record.
-        const nextRecordIndex = records.value.findLastIndex(x => x.endDate <= newRecord.startDate)
-
-        if (nextRecordIndex !== -1) {
-          // If there is a previous record, add the new record after it.
-          index = nextRecordIndex + 1
-        } else {
-          // If there is no next record, add it to the end.
-          index = records.value.length - 1
-        }
-      }
-
-      records.value.splice(index, 0, newRecord)
-      recordIndex.value = index
-    }
-
-    const newRecords: PomodoroRecord[] = []
-
-    newRecords.push(...records.value.slice(0, recordIndex.value))
-    newRecords.push(newRecord)
-    newRecords.push(...records.value.slice(recordIndex.value + 1))
-    records.value = newRecords
+    record.value = records.value[recordIndex.value]
   },
   close(): void {
-    record.value = undefined
     recordIndex.value = -1
-  },
-  delete(): void {
-    const newRecords = [...records.value]
-    newRecords.splice(recordIndex.value, 1)
-    records.value = newRecords
-
-    listeners.close()
+    record.value = undefined
   },
   addWork(): void {
     record.value = new PomodoroRecord(methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work)
