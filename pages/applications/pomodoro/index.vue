@@ -60,13 +60,13 @@ const listeners = {
       return
     }
 
-    if (!today.isToday(date.value)) {
-      date.value = today.get()
-      records.load(storage.loadToday())
+    if (!today.isSameDay(date.value, record.startDate)) {
+      date.value = record.startDate
+      records.load(storage.load(record.startDate))
     }
 
     records.add(record)
-    storage.saveToday(records.value)
+    storage.save(date.value, records.value)
 
     leaveConfirmation.release()
   },
