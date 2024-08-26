@@ -6,7 +6,7 @@ import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomod
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { usePomodoroClock } from '~/components/applications/pomodoro/usePomodoroClock'
 
-describe('usePomodoro', () => {
+describe('usePomodoroClock', () => {
   test('starts with timer paused, set to 0 min, 25 min duration, and in work type', () => {
     // Arrange
     const pomodoro = usePomodoroClock()
@@ -218,49 +218,67 @@ describe('usePomodoro', () => {
     vi.useRealTimers()
   })
 
-  test('when the timer pauses or ends, the `interval` event is triggered', () => {
+  test('when the timer pauses or ends, the `interval` and `notification` events are triggered', () => {
     // Set-up
     vi.useFakeTimers()
 
     // Arrange
     const pomodoro = usePomodoroClock()
-    const eventHandler = vi.fn()
-    pomodoro.on('interval', eventHandler)
+    const intervalEvent = vi.fn()
+    const notificationEvent = vi.fn()
+    pomodoro.on('interval', intervalEvent)
+    pomodoro.on('notification', notificationEvent)
 
     // Act
     pomodoro.start()
-    vi.advanceTimersByTime(25 * 60 * 1_000 - 1_000)
+    vi.advanceTimersByTime(25 * 60 * 1_000)
 
     // Assert
-    expect(eventHandler).not.toHaveBeenCalled()
+    expect(intervalEvent).not.toHaveBeenCalled()
+    expect(notificationEvent).toHaveBeenCalledTimes(1)
+
+    // Act
+    vi.advanceTimersByTime(60 * 60 * 1_000 + 1_000)
+
+    // Assert
+    expect(intervalEvent).not.toHaveBeenCalled()
+    expect(notificationEvent).toHaveBeenCalledTimes(1)
 
     // Act
     pomodoro.pause()
-    const parameters = eventHandler.mock.lastCall as [PomodoroIntervalEvent]
+    const parameters = intervalEvent.mock.lastCall as [PomodoroIntervalEvent]
     const interval = parameters[0].interval
 
     // Assert
-    expect(eventHandler).toHaveBeenCalledTimes(1)
+    expect(notificationEvent).toHaveBeenCalledTimes(1)
+    expect(intervalEvent).toHaveBeenCalledTimes(1)
     expect(parameters).toHaveLength(1)
     expect(interval).toStrictEqual(new PomodoroInterval(
-      new Interval(0, 24, 59),
+      new Interval(1, 25, 1),
       new Interval(0, 25, 0),
       PomodoroIntervalType.work
     ))
 
     // Act
-    pomodoro.resume()
-    vi.advanceTimersByTime(25 * 60 * 1_000 * 2)
+    pomodoro.skip()
+    pomodoro.start()
+    vi.advanceTimersByTime(5 * 60 * 1_000 - 1)
 
     // Assert
-    expect(eventHandler).toHaveBeenCalledTimes(1)
+    expect(intervalEvent).toHaveBeenCalledTimes(2)
+    expect(notificationEvent).toHaveBeenCalledTimes(1)
 
     // Act
-    pomodoro.off('interval', eventHandler)
+    pomodoro.off('interval', intervalEvent)
+    pomodoro.off('notification', notificationEvent)
+
+    // Act
+    vi.advanceTimersByTime(1)
     pomodoro.skip()
 
     // Assert
-    expect(eventHandler).toHaveBeenCalledTimes(1)
+    expect(intervalEvent).toHaveBeenCalledTimes(2)
+    expect(notificationEvent).toHaveBeenCalledTimes(1)
 
     // Clean-up
     vi.useRealTimers()
