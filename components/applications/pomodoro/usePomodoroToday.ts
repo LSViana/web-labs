@@ -8,15 +8,19 @@ export function usePomodoroToday() {
   }
 
   function isToday(date: Date) {
-    const today = get()
+    return isSameDay(get(), date)
+  }
 
-    return date.getFullYear() === today.getFullYear()
-      && date.getMonth() === today.getMonth()
-      && date.getDate() === today.getDate()
+  // TODO: Maybe this should be refactored somewhere else.
+  function isSameDay(date1: Date, date2: Date) {
+    return date1.getFullYear() === date2.getFullYear()
+      && date1.getMonth() === date2.getMonth()
+      && date1.getDate() === date2.getDate()
   }
 
   return {
     get,
-    isToday
+    isToday,
+    isSameDay
   }
 }
