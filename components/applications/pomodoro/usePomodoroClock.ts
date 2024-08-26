@@ -69,7 +69,6 @@ export function usePomodoroClock() {
     startDate.value = new Date(now.get().getTime() - totalMs)
 
     isRunning.value = true
-    notified.value = false
   }
 
   function pause() {
@@ -87,6 +86,7 @@ export function usePomodoroClock() {
     const pomodoroInterval = interval.value
 
     isRunning.value = false
+    notified.value = false
     clearInterval(intervalId)
 
     if (type.value === PomodoroIntervalType.work) {
