@@ -1,6 +1,6 @@
 <template>
   <div class="pb-5">
-    <div class="relative bg-slate-900 py-1">
+    <div class="relative overflow-hidden bg-slate-900 py-1">
       <div
           v-for="(item, index) in items"
           :key="item.start"
