@@ -80,7 +80,7 @@ const listeners = {
       return
     }
 
-    emit('save', new WorklogItem(ticket.value, content.value, startTime.value, endTime.value))
+    emit('save', new WorklogItem(ticket.value, content.value, startTime.value, endTime.value, props.item.id, props.item.issueId))
   },
   remove(): void {
     emit('remove')
