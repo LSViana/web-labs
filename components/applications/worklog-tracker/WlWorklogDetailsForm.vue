@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
@@ -63,6 +63,16 @@ const endTime = ref(worklogNow.get())
 
 const worklogLines = computed(() => content.value.split('\n').length)
 const worklogDuration = useWorklogDuration(() => [startTime.value, endTime.value])
+
+watch(
+    () => props.item,
+    (newItem) => {
+      ticket.value = newItem.ticket
+      content.value = newItem.content
+      startTime.value = newItem.startTime
+      endTime.value = newItem.endTime
+    }
+)
 
 const listeners = {
   save(): void {
