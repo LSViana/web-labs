@@ -61,7 +61,7 @@ const content = ref('')
 const startTime = ref(worklogNow.get())
 const endTime = ref(worklogNow.get())
 
-const worklogLines = computed(() => props.item.content.split('\n').length)
+const worklogLines = computed(() => content.value.split('\n').length)
 const worklogDuration = useWorklogDuration(() => [startTime.value, endTime.value])
 
 const listeners = {
