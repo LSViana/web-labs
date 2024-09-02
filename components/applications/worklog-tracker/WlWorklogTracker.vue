@@ -35,14 +35,7 @@ const worklogAuth = useWorklogAuth()
 const worklogList = useWorklogList()
 const worklogStorage = useWorklogStorage()
 
-onMounted(async () => {
-  const items = await worklogStorage.load()
-  worklogList.load(items)
-
-  if (worklogList.value.length > 0) {
-    item.value.startTime = worklogList.value[worklogList.value.length - 1].endTime
-  }
-})
+onMounted(() => methods.loadWorklogs())
 
 const item = ref(new WorklogItem())
 const isEditing = ref(false)
@@ -63,17 +56,31 @@ const listeners = {
   async remove(): Promise<void> {
     await worklogStorage.remove(item.value)
     worklogList.remove(item.value)
+
+    item.value = new WorklogItem()
     isEditing.value = false
   },
   select(selectedItem: WorklogItem): void {
     item.value = selectedItem
     isEditing.value = true
   },
-  login(email: string, password: string): void {
-    worklogAuth.login(email, password)
+  async login(email: string, password: string): Promise<void> {
+    await worklogAuth.login(email, password)
+    await methods.loadWorklogs()
   },
   logout(): void {
     worklogAuth.logout()
+  }
+}
+
+const methods = {
+  async loadWorklogs(): Promise<void> {
+    const items = await worklogStorage.load()
+    worklogList.load(items)
+
+    if (worklogList.value.length > 0) {
+      item.value.startTime = worklogList.value[worklogList.value.length - 1].endTime
+    }
   }
 }
 </script>
