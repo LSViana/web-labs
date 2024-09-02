@@ -37,7 +37,7 @@ import { computed, ref } from 'vue'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
-import type { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
+import { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
 import { useWorklogDuration } from '~/composables/server/worklog-tracker/useWorklogDuration'
 import { useWorklogNow } from '~/composables/server/worklog-tracker/useWorklogNow'
 
@@ -70,7 +70,7 @@ const listeners = {
       return
     }
 
-    emit('save', props.item)
+    emit('save', new WorklogItem(ticket.value, content.value, startTime.value, endTime.value))
   },
   remove(): void {
     emit('remove')

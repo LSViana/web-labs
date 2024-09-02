@@ -63,6 +63,7 @@ const listeners = {
   async remove(): Promise<void> {
     await worklogStorage.remove(item.value)
     worklogList.remove(item.value)
+    isEditing.value = false
   },
   select(selectedItem: WorklogItem): void {
     item.value = selectedItem
