@@ -9,6 +9,11 @@
             </WlCard>
           </li>
           <li>
+            <WlCard to="/applications/worklog-tracker">
+              <span>Worklog Tracker</span>
+            </WlCard>
+          </li>
+          <li>
             <WlCard>
               <span>Chat</span>
               <WlTodoBadge class="ml-2"/>
