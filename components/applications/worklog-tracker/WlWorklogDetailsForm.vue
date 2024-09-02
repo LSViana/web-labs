@@ -93,19 +93,19 @@ const methods = {
   validateSave(): boolean {
     const errors: string[] = []
 
-    if (props.item.ticket.trim().length === 0) {
+    if (ticket.value.trim().length === 0) {
       errors.push('Ticket is required')
     }
 
-    if (props.item.content.trim().length === 0) {
+    if (content.value.trim().length === 0) {
       errors.push('Content is required')
     }
 
-    if (props.item.startTime.getTime() === props.item.endTime.getTime()) {
+    if (startTime.value.getTime() === endTime.value.getTime()) {
       errors.push('Start time and end time must be different')
     }
 
-    if (props.item.startTime.getTime() > props.item.endTime.getTime()) {
+    if (startTime.value.getTime() > endTime.value.getTime()) {
       errors.push('Start time must be before end time')
     }
 
