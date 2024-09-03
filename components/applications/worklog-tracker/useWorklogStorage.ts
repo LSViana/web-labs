@@ -15,8 +15,12 @@ function transformWorklogItem(worklogItem: WorklogItem): WorklogItem {
 }
 
 export function useWorklogStorage() {
-  async function load(): Promise<WorklogItem[]> {
-    const response = await fetch(url)
+  async function load(date: Date): Promise<WorklogItem[]> {
+    const query = new URLSearchParams({
+      date: date.toLocaleDateString()
+    })
+
+    const response = await fetch(`${url}?${query}`)
     const items = await response.json() as WorklogItem[]
 
     return items.map(transformWorklogItem)

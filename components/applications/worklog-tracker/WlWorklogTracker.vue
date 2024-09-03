@@ -2,7 +2,10 @@
   <template v-if="worklogAuth.authenticated.value">
     <div class="flex justify-between">
       <h1 class="text-2xl">Worklog Tracker</h1>
-      <a href="#" class="underline" @click="listeners.logout">Logout</a>
+      <div class="flex items-center gap-3">
+        <WlDateInput v-model="date" @change="listeners.updateDate"/>
+        <a href="#" class="underline" @click="listeners.logout">Logout</a>
+      </div>
     </div>
     <WlWorklogDetailsForm
         :item="item"
@@ -23,9 +26,11 @@ import { onMounted, ref } from 'vue'
 import { useWorklogAuth } from '~/components/applications/worklog-tracker/useWorklogAuth'
 import { useWorklogList } from '~/components/applications/worklog-tracker/useWorklogList'
 import { useWorklogStorage } from '~/components/applications/worklog-tracker/useWorklogStorage'
+import { useWorklogToday } from '~/components/applications/worklog-tracker/useWorklogToday'
 import WlWorklogAuthForm from '~/components/applications/worklog-tracker/WlWorklogAuthForm.vue'
 import WlWorklogDetailsForm from '~/components/applications/worklog-tracker/WlWorklogDetailsForm.vue'
 import WlWorklogList from '~/components/applications/worklog-tracker/WlWorklogList.vue'
+import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
 import { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
 
 useHead({
@@ -35,14 +40,22 @@ useHead({
 const worklogAuth = useWorklogAuth()
 const worklogList = useWorklogList()
 const worklogStorage = useWorklogStorage()
+const worklogToday = useWorklogToday()
 
 onMounted(() => methods.loadWorklogs())
 
 const item = ref(new WorklogItem())
 const isEditing = ref(false)
+const date = ref(worklogToday.get())
 
 const listeners = {
+  updateDate(): void {
+    methods.loadWorklogs()
+  },
   async save(newItem: WorklogItem): Promise<void> {
+    newItem.startTime.setFullYear(date.value.getFullYear(), date.value.getMonth(), date.value.getDate())
+    newItem.endTime.setFullYear(date.value.getFullYear(), date.value.getMonth(), date.value.getDate())
+
     if (isEditing.value) {
       await worklogStorage.update(newItem)
       worklogList.update(newItem)
@@ -82,7 +95,7 @@ const listeners = {
 
 const methods = {
   async loadWorklogs(): Promise<void> {
-    const items = await worklogStorage.load()
+    const items = await worklogStorage.load(date.value)
     worklogList.load(items)
 
     if (worklogList.value.length > 0) {

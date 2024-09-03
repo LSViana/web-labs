@@ -9,8 +9,9 @@ const supabaseClient = useWorklogSupabaseClient()
 
 export function useWorklogStorage() {
   async function load(credentialsId: string, date: Date): Promise<WorklogItem[]> {
-    const startOfDay = new Date(date.setHours(0, 0, 0, 0))
-    const endOfDay = new Date(date.setHours(24, 0, 0, 0))
+    const startOfDay = date
+    const endOfDay = new Date(date)
+    endOfDay.setHours(endOfDay.getHours() + 24)
 
     const result = await supabaseClient
       .from('worklogs')
