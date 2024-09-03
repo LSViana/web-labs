@@ -23,6 +23,7 @@
       <template v-if="edit">
         <WlButton variant="primary" @click="listeners.save">Save</WlButton>
         <WlButton variant="secondary" @click="listeners.remove">Remove</WlButton>
+        <WlButton variant="secondary" @click="listeners.close">Close</WlButton>
       </template>
       <template v-else>
         <WlButton variant="primary" @click="listeners.save">Save</WlButton>
@@ -49,6 +50,7 @@ type Props = {
 type Emits = {
   (e: 'save', item: WorklogItem): void;
   (e: 'remove'): void;
+  (e: 'close'): void;
 }
 
 const props = defineProps<Props>()
@@ -84,6 +86,9 @@ const listeners = {
   },
   remove(): void {
     emit('remove')
+  },
+  close(): void {
+    emit('close')
   },
   testdome3849(): void {
     ticket.value = 'TESTDOME-3849'

@@ -9,6 +9,7 @@
         :edit="isEditing"
         @save="listeners.save"
         @remove="listeners.remove"
+        @close="listeners.close"
     />
     <WlWorklogList :items="worklogList.value" @select="listeners.select"/>
   </template>
@@ -50,15 +51,21 @@ const listeners = {
       worklogList.add(savedItem)
     }
 
-    item.value.startTime = worklogList.value[worklogList.value.length - 1].endTime
-    isEditing.value = false
+    listeners.close()
   },
   async remove(): Promise<void> {
     await worklogStorage.remove(item.value)
     worklogList.remove(item.value)
 
+    listeners.close()
+  },
+  close(): void {
     item.value = new WorklogItem()
     isEditing.value = false
+
+    if (worklogList.value.length > 0) {
+      item.value.startTime = worklogList.value[worklogList.value.length - 1].endTime
+    }
   },
   select(selectedItem: WorklogItem): void {
     item.value = selectedItem
