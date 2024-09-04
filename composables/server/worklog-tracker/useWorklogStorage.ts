@@ -19,6 +19,7 @@ export function useWorklogStorage() {
       .eq('credential_id', credentialsId)
       .filter('started_at', 'gte', startOfDay.toISOString())
       .filter('started_at', 'lt', endOfDay.toISOString())
+      .order('started_at', { ascending: false })
 
     if (!result.data || result.data.length === 0) {
       return []

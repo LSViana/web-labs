@@ -6,7 +6,7 @@ export function useWorklogList() {
   const value = shallowReactive<WorklogItem[]>([])
 
   function add(item: WorklogItem) {
-    value.push(item)
+    value.unshift(item)
   }
 
   function update(item: WorklogItem) {
