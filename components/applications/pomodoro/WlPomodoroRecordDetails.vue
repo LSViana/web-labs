@@ -2,11 +2,17 @@
   <div class="flex flex-wrap items-end gap-3">
     <div class="inline-flex flex-col">
       <WlLabel ref="startDateRef" for="pomodoro-record-details-start">Start</WlLabel>
-      <WlTimeInput id="pomodoro-record-details-start" v-model="startDate" @keyup.enter="listeners.enterStartDate"/>
+      <WlTimeInput
+id="pomodoro-record-details-start" v-model="startDate" show-seconds
+                   @keyup.enter="listeners.enterStartDate"
+      />
     </div>
     <div class="inline-flex flex-col">
       <WlLabel ref="endDateRef" for="pomodoro-record-details-end">End</WlLabel>
-      <WlTimeInput id="pomodoro-record-details-end" v-model="endDate" @keyup.enter="listeners.enterEndDate"/>
+      <WlTimeInput
+id="pomodoro-record-details-end" v-model="endDate" show-seconds
+                   @keyup.enter="listeners.enterEndDate"
+      />
     </div>
     <div class="inline-flex flex-col">
       <WlLabel for="pomodoro-record-details-type">Type</WlLabel>

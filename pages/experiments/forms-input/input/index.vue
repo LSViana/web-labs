@@ -22,9 +22,12 @@
           </div>
         </div>
       </WlExperimentCanvas>
-      <p>The time input:</p>
+      <p>The time input with and without seconds:</p>
       <WlExperimentCanvas>
-        <WlTimeInput v-model="datetime"/>
+        <div class="flex gap-3">
+          <WlTimeInput v-model="datetime"/>
+          <WlTimeInput v-model="datetime" show-seconds/>
+        </div>
         <p class="mt-3">Time: <code>{{ datetime.toLocaleString() }}</code></p>
       </WlExperimentCanvas>
       <p>The date input:</p>

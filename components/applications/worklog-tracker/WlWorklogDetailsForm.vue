@@ -15,8 +15,8 @@
           <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.clear">Clear</a>
         </div>
       </div>
-      <WlTimeInput v-model="startTime" :step="60"/>
-      <WlTimeInput v-model="endTime" :step="60"/>
+      <WlTimeInput v-model="startTime"/>
+      <WlTimeInput v-model="endTime"/>
       <span class="w-16 text-center">{{ worklogDuration }}</span>
     </div>
     <div class="flex gap-3">
