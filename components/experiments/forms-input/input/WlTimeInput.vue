@@ -2,6 +2,7 @@
   <WlInput
       v-model="innerValue"
       type="text"
+      :class="classes"
       @update:model-value="listeners.update"
       @keydown.enter="listeners.input"
       @blur="listeners.input"
@@ -9,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 
@@ -23,6 +24,11 @@ const props = withDefaults(defineProps<Props>(), {
 
 const model = defineModel<Date>({ required: true })
 const innerValue = ref('')
+
+const classes = computed(() => [
+    'text-center',
+    props.showSeconds ? 'w-24' : 'w-20'
+])
 
 onMounted(() => innerValue.value = methods.formatFromDate(model.value))
 
