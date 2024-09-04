@@ -77,7 +77,7 @@ const listeners = {
     isEditing.value = false
 
     if (worklogList.value.length > 0) {
-      item.value.startTime = worklogList.value[worklogList.value.length - 1].endTime
+      item.value.startTime = worklogList.value[0].endTime
     }
   },
   select(selectedItem: WorklogItem): void {
@@ -99,7 +99,7 @@ const methods = {
     worklogList.load(items)
 
     if (worklogList.value.length > 0) {
-      item.value.startTime = worklogList.value[worklogList.value.length - 1].endTime
+      item.value.startTime = worklogList.value[0].endTime
     }
   }
 }
