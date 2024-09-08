@@ -38,7 +38,7 @@ export function useWorklogStorage() {
   async function save(worklogItem: WorklogItem, credentialsId: string): Promise<WorklogItem> {
     const {
       email,
-      password
+      api_password
     } = await getCredentials(credentialsId)
 
     const startTime = new Date(worklogItem.startTime)
@@ -71,7 +71,7 @@ export function useWorklogStorage() {
       body: JSON.stringify(payload),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Basic ${btoa(email + ':' + password)}`
+        'Authorization': `Basic ${btoa(email + ':' + api_password)}`
       }
     })
 
@@ -106,13 +106,13 @@ export function useWorklogStorage() {
   async function remove(issueId: string, worklogId: string, credentialsId: string): Promise<void> {
     const {
       email,
-      password
+      api_password
     } = await getCredentials(credentialsId)
 
     const response = await fetch(getWorklogUrl(issueId) + '/' + worklogId + '?adjustEstimate=leave', {
       method: 'DELETE',
       headers: {
-        'Authorization': `Basic ${btoa(email + ':' + password)}`
+        'Authorization': `Basic ${btoa(email + ':' + api_password)}`
       }
     })
 
@@ -126,7 +126,7 @@ export function useWorklogStorage() {
   async function update(worklogItem: WorklogItem, credentialsId: string): Promise<void> {
     const {
       email,
-      password
+      api_password
     } = await getCredentials(credentialsId)
 
     const startTime = new Date(worklogItem.startTime)
@@ -160,7 +160,7 @@ export function useWorklogStorage() {
       body: JSON.stringify(payload),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Basic ${btoa(email + ':' + password)}`
+        'Authorization': `Basic ${btoa(email + ':' + api_password)}`
       }
     })
 
@@ -182,16 +182,16 @@ export function useWorklogStorage() {
       .eq('id', jiraResponseBody.id)
   }
 
-  async function getCredentials(credentialsId: string): Promise<{ email: string, password: string }> {
+  async function getCredentials(credentialsId: string): Promise<{ email: string, api_password: string }> {
     return supabaseClient
       .from('credentials')
-      .select('email, password')
+      .select('email, api_password')
       .eq('id', credentialsId)
       .single()
       .then(x => {
         return {
           email: x.data!.email,
-          password: x.data!.password
+          api_password: x.data!.api_password
         }
       })
   }
