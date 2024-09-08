@@ -14,7 +14,7 @@
 import { computed } from 'vue'
 
 import type { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
-import { useWorklogDuration } from '~/composables/server/worklog-tracker/useWorklogDuration'
+import { useWorklogDurationFormat } from '~/composables/server/worklog-tracker/useWorklogDurationFormat'
 
 type Props = {
   item: WorklogItem
@@ -39,7 +39,7 @@ const formattedDates = computed(() => ({
     hour12: false,
   })
 }))
-const duration = useWorklogDuration(() => [props.item.startTime, props.item.endTime])
+const duration = useWorklogDurationFormat(props.item.durationSeconds)
 
 const listeners = {
   click(): void {

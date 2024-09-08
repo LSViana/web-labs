@@ -39,7 +39,7 @@ import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
 import { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
-import { useWorklogDuration } from '~/composables/server/worklog-tracker/useWorklogDuration'
+import { useWorklogDurationFormat } from '~/composables/server/worklog-tracker/useWorklogDurationFormat'
 import { useWorklogNow } from '~/composables/server/worklog-tracker/useWorklogNow'
 
 type Props = {
@@ -64,7 +64,7 @@ const startTime = ref(worklogNow.get())
 const endTime = ref(worklogNow.get())
 
 const worklogLines = computed(() => content.value.split('\n').length)
-const worklogDuration = useWorklogDuration(() => [startTime.value, endTime.value])
+const worklogDuration = useWorklogDurationFormat(WorklogItem.calculateDuration(startTime.value, endTime.value))
 
 watch(
     () => props.item,

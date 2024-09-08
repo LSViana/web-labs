@@ -13,6 +13,7 @@ import { computed } from 'vue'
 
 import WlWorklogListItem from '~/components/applications/worklog-tracker/WlWorklogListItem.vue'
 import type { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
+import { useWorklogDurationFormat } from '~/composables/server/worklog-tracker/useWorklogDurationFormat'
 
 type Props = {
   items: WorklogItem[]
@@ -25,7 +26,8 @@ type Emits = {
 const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
 
-const totalDuration = computed(() => '0 min')
+const totalDurationSeconds = computed(() => props.items.reduce((acc, item) => acc + item.durationSeconds, 0))
+const totalDuration = useWorklogDurationFormat(totalDurationSeconds)
 
 const listeners = {
   click(item: WorklogItem): void {
