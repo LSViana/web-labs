@@ -25,4 +25,12 @@ export class WorklogItem {
     this.id = workogId
     this.issueId = issueId
   }
+
+  public get durationSeconds(): number {
+    return WorklogItem.calculateDuration(this.startTime, this.endTime)
+  }
+
+  public static calculateDuration(startTime: Date, endTime: Date): number {
+    return Math.round((endTime.getTime() - startTime.getTime()) / 1000)
+  }
 }
