@@ -64,7 +64,8 @@ const startTime = ref(worklogNow.get())
 const endTime = ref(worklogNow.get())
 
 const worklogLines = computed(() => content.value.split('\n').length)
-const worklogDuration = useWorklogDurationFormat(WorklogItem.calculateDuration(startTime.value, endTime.value))
+const worklogDurationSeconds = computed(() => WorklogItem.calculateDuration(startTime.value, endTime.value))
+const worklogDuration = useWorklogDurationFormat(worklogDurationSeconds)
 
 watch(
     () => props.item,
