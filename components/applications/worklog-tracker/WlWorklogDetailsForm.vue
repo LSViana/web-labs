@@ -16,7 +16,7 @@
       </div>
       <WlTimeInput v-model="startTime"/>
       <WlTimeInput v-model="endTime"/>
-      <span class="w-16 text-center">{{ worklogDuration }}</span>
+      <span class="w-16 pt-2 text-center">{{ worklogDuration }}</span>
     </div>
     <div class="flex gap-3">
       <template v-if="edit">
