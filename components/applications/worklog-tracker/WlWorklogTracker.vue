@@ -14,7 +14,7 @@
         @remove="listeners.remove"
         @close="listeners.close"
     />
-    <WlWorklogList :items="worklogList.value" @select="listeners.select"/>
+    <WlWorklogList :selected-index="selectedIndex" :items="worklogList.value" @select="listeners.select"/>
   </template>
   <WlWorklogAuthForm v-else @login="listeners.login"/>
 </template>
@@ -47,12 +47,13 @@ onMounted(() => methods.loadWorklogs())
 const item = ref(new WorklogItem())
 const isEditing = ref(false)
 const date = ref(worklogToday.get())
+const selectedIndex = ref(-1)
 
 const listeners = {
-  updateDate(): void {
+  updateDate (): void {
     methods.loadWorklogs()
   },
-  async save(newItem: WorklogItem): Promise<void> {
+  async save (newItem: WorklogItem): Promise<void> {
     newItem.startTime.setFullYear(date.value.getFullYear(), date.value.getMonth(), date.value.getDate())
     newItem.endTime.setFullYear(date.value.getFullYear(), date.value.getMonth(), date.value.getDate())
 
@@ -66,35 +67,37 @@ const listeners = {
 
     listeners.close()
   },
-  async remove(): Promise<void> {
+  async remove (): Promise<void> {
     await worklogStorage.remove(item.value)
     worklogList.remove(item.value)
 
     listeners.close()
   },
-  close(): void {
+  close (): void {
     item.value = new WorklogItem()
+    selectedIndex.value = -1
     isEditing.value = false
 
     if (worklogList.value.length > 0) {
       item.value.startTime = worklogList.value[0].endTime
     }
   },
-  select(selectedItem: WorklogItem): void {
-    item.value = selectedItem
+  select (index: number): void {
+    item.value = worklogList.value[index]
+    selectedIndex.value = index
     isEditing.value = true
   },
-  async login(email: string, password: string): Promise<void> {
+  async login (email: string, password: string): Promise<void> {
     await worklogAuth.login(email, password)
     await methods.loadWorklogs()
   },
-  logout(): void {
+  logout (): void {
     worklogAuth.logout()
   }
 }
 
 const methods = {
-  async loadWorklogs(): Promise<void> {
+  async loadWorklogs (): Promise<void> {
     const items = await worklogStorage.load(date.value)
     worklogList.load(items)
 
