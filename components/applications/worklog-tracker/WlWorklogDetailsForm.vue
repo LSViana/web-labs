@@ -12,7 +12,6 @@
         <div class="flex gap-1 text-xs">
           <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome3849">TESTDOME-3849</a>
           <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome5928">TESTDOME-5928</a>
-          <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.clear">Clear</a>
         </div>
       </div>
       <WlTimeInput v-model="startTime"/>
@@ -27,6 +26,7 @@
       </template>
       <template v-else>
         <WlButton variant="primary" @click="listeners.save">Save</WlButton>
+        <WlButton variant="secondary" @click="listeners.clear">Clear</WlButton>
       </template>
     </div>
   </div>
