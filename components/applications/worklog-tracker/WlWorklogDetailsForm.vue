@@ -9,10 +9,6 @@
             placeholder="Enter worklog here..."
             :rows="worklogLines"
         />
-        <div class="flex gap-1 text-xs">
-          <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome3849">TESTDOME-3849</a>
-          <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome5928">TESTDOME-5928</a>
-        </div>
       </div>
       <WlTimeInput v-model="startTime"/>
       <WlTimeInput v-model="endTime"/>
@@ -28,6 +24,11 @@
         <WlButton variant="primary" @click="listeners.save">Save</WlButton>
         <WlButton variant="secondary" @click="listeners.clear">Clear</WlButton>
       </template>
+      <div class="grow"/>
+      <div class="flex gap-1 self-center text-xs">
+        <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome3849">TESTDOME-3849</a>
+        <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome5928">TESTDOME-5928</a>
+      </div>
     </div>
   </div>
 </template>
