@@ -99,7 +99,9 @@ const methods = {
     worklogList.load(items)
 
     if (worklogList.value.length > 0) {
-      item.value.startTime = worklogList.value[0].endTime
+      const newValue = new WorklogItem()
+      newValue.startTime = worklogList.value[0].endTime
+      item.value = newValue
     }
   }
 }
