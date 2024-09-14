@@ -14,6 +14,11 @@
             </WlCard>
           </li>
           <li>
+            <WlCard to="/applications/to-do">
+              <span>To Do</span>
+            </WlCard>
+          </li>
+          <li>
             <WlCard>
               <span>Chat</span>
               <WlTodoBadge class="ml-2"/>
