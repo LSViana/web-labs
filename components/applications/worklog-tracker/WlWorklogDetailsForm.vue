@@ -84,6 +84,8 @@ const listeners = {
       return
     }
 
+    methods.normalize()
+
     emit('save', new WorklogItem(ticket.value, content.value, startTime.value, endTime.value, props.item.id, props.item.issueId))
   },
   remove(): void {
@@ -131,6 +133,9 @@ const methods = {
     }
 
     return errors.length === 0
+  },
+  normalize(): void {
+    ticket.value = ticket.value.trim().toUpperCase()
   }
 }
 </script>
