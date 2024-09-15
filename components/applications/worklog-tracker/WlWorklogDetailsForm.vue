@@ -5,7 +5,7 @@
       <div class="flex grow flex-col gap-1">
         <textarea
             v-model="content"
-            class="max-h-40 min-h-10 overflow-y-hidden rounded border bg-slate-200 px-3 py-2 outline-0 focus:border-slate-400 dark:bg-slate-800"
+            class="wl-worklog-content overflow-y-hidden rounded border bg-slate-200 px-3 py-2 outline-0 focus:border-slate-400 dark:bg-slate-800"
             placeholder="Enter worklog here..."
             :rows="worklogLines"
         />
@@ -134,3 +134,9 @@ const methods = {
   }
 }
 </script>
+
+<style lang="postcss" scoped>
+.wl-worklog-content {
+  field-sizing: content;
+}
+</style>
