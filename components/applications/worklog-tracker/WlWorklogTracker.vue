@@ -50,10 +50,10 @@ const date = ref(worklogToday.get())
 const selectedIndex = ref(-1)
 
 const listeners = {
-  updateDate (): void {
+  updateDate(): void {
     methods.loadWorklogs()
   },
-  async save (newItem: WorklogItem): Promise<void> {
+  async save(newItem: WorklogItem): Promise<void> {
     newItem.startTime.setFullYear(date.value.getFullYear(), date.value.getMonth(), date.value.getDate())
     newItem.endTime.setFullYear(date.value.getFullYear(), date.value.getMonth(), date.value.getDate())
 
@@ -67,13 +67,13 @@ const listeners = {
 
     listeners.close()
   },
-  async remove (): Promise<void> {
+  async remove(): Promise<void> {
     await worklogStorage.remove(item.value)
     worklogList.remove(item.value)
 
     listeners.close()
   },
-  close (): void {
+  close(): void {
     item.value = new WorklogItem()
     selectedIndex.value = -1
     isEditing.value = false
@@ -82,22 +82,22 @@ const listeners = {
       item.value.startTime = worklogList.value[0].endTime
     }
   },
-  select (index: number): void {
+  select(index: number): void {
     item.value = worklogList.value[index]
     selectedIndex.value = index
     isEditing.value = true
   },
-  async login (email: string, password: string): Promise<void> {
+  async login(email: string, password: string): Promise<void> {
     await worklogAuth.login(email, password)
     await methods.loadWorklogs()
   },
-  logout (): void {
+  logout(): void {
     worklogAuth.logout()
   }
 }
 
 const methods = {
-  async loadWorklogs (): Promise<void> {
+  async loadWorklogs(): Promise<void> {
     const items = await worklogStorage.load(date.value)
     worklogList.load(items)
 
