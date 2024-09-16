@@ -12,7 +12,7 @@
       </div>
       <WlTimeInput v-model="startTime"/>
       <WlTimeInput v-model="endTime"/>
-      <span class="w-16 pt-2 text-center">{{ worklogDuration }}</span>
+      <span class="w-16 shrink-0 pt-2 text-center">{{ worklogDuration }}</span>
     </div>
     <div class="flex gap-3">
       <template v-if="edit">
@@ -79,7 +79,7 @@ watch(
 )
 
 const listeners = {
-  save(): void {
+  save (): void {
     if (!methods.validateSave()) {
       return
     }
@@ -88,28 +88,28 @@ const listeners = {
 
     emit('save', new WorklogItem(ticket.value, content.value, startTime.value, endTime.value, props.item.id, props.item.issueId))
   },
-  remove(): void {
+  remove (): void {
     emit('remove')
   },
-  close(): void {
+  close (): void {
     emit('close')
   },
-  testdome3849(): void {
+  testdome3849 (): void {
     ticket.value = 'TESTDOME-3849'
     content.value = '- Check multiple mentions from Jira, Docs, and Gmail\n- Plan tasks for the day'
   },
-  testdome5928(): void {
+  testdome5928 (): void {
     ticket.value = 'TESTDOME-5928'
     content.value = 'Platform team daily meeting'
   },
-  clear(): void {
+  clear (): void {
     ticket.value = ''
     content.value = ''
   }
 }
 
 const methods = {
-  validateSave(): boolean {
+  validateSave (): boolean {
     const errors: string[] = []
 
     if (ticket.value.trim().length === 0) {
@@ -134,7 +134,7 @@ const methods = {
 
     return errors.length === 0
   },
-  normalize(): void {
+  normalize (): void {
     ticket.value = ticket.value.trim().toUpperCase()
   }
 }
