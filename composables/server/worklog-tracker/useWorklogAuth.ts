@@ -3,22 +3,28 @@ import { setCookie } from 'h3'
 
 const millisecondsPerHour = 1000 * 60 * 60
 
-export function useWorklogAuth() {
-  function setCredentials(event: H3Event, credentialsId: string) {
+export function useWorklogAuth () {
+  function setCredentials (event: H3Event, credentialsId: string) {
+    const expires = new Date(Date.now() + (millisecondsPerHour * 8))
+
     setCookie(event, 'credentials_id', credentialsId, {
       httpOnly: true,
       secure: true,
-      expires: new Date(Date.now() + (millisecondsPerHour * 8)),
+      expires: expires,
     })
-    setCookie(event, 'authenticated', 'true', { secure: true })
+    setCookie(event, 'authenticated', 'true', {
+      httpOnly: false, // Must be accessible from JavaScript to show the auth state.
+      secure: true,
+      expires: expires,
+    })
   }
 
-  function removeCredentials(event: H3Event) {
+  function removeCredentials (event: H3Event) {
     deleteCookie(event, 'credentials_id', { secure: true })
     deleteCookie(event, 'authenticated', { secure: true })
   }
 
-  function getCredentials(event: H3Event): string {
+  function getCredentials (event: H3Event): string {
     const credentialsId = getCookie(event, 'credentials_id')
 
     if (!credentialsId) {
