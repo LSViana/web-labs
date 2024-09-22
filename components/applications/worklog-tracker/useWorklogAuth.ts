@@ -1,10 +1,13 @@
+import { useEventListener } from '@vueuse/core'
 import { ref } from 'vue'
 
 import { useCookie } from '#app'
 
 export function useWorklogAuth() {
-  const authCookie = useCookie('authenticated')
-  const authenticated = ref(Boolean(authCookie.value))
+  const authenticated = ref(false)
+
+  updateAuthenticated()
+  useEventListener(window, 'focus', updateAuthenticated)
 
   async function login(email: string, password: string) {
     const response = await fetch('/api/worklog-tracker/worklogs/auth', {
@@ -31,6 +34,10 @@ export function useWorklogAuth() {
     })
 
     authenticated.value = false
+  }
+
+  function updateAuthenticated() {
+    authenticated.value = Boolean(useCookie('authenticated').value)
   }
 
   return {
