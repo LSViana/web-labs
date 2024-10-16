@@ -89,7 +89,10 @@ const listeners = {
   },
   async login(email: string, password: string): Promise<void> {
     await worklogAuth.login(email, password)
-    await methods.loadWorklogs()
+
+    if (worklogAuth.authenticated.value) {
+      await methods.loadWorklogs()
+    }
   },
   logout(): void {
     worklogAuth.logout()
