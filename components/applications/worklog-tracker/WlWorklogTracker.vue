@@ -91,6 +91,8 @@ const listeners = {
     await worklogAuth.login(email, password)
 
     if (worklogAuth.authenticated.value) {
+      date.value = worklogToday.get()
+
       await methods.loadWorklogs()
     }
   },
