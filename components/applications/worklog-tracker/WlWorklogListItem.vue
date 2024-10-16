@@ -44,10 +44,11 @@ const formattedDates = computed(() => ({
 const classes = computed(() => ({
   'bg-slate-100 dark:bg-slate-700': props.selected
 }))
-const duration = useWorklogDurationFormat(props.item.durationSeconds)
+const durationSeconds = computed(() => props.item.durationSeconds)
+const duration = useWorklogDurationFormat(durationSeconds)
 
 const listeners = {
-  click (): void {
+  click(): void {
     emit('click')
   }
 }
