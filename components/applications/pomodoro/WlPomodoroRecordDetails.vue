@@ -3,15 +3,15 @@
     <div class="inline-flex flex-col">
       <WlLabel ref="startDateRef" for="pomodoro-record-details-start">Start</WlLabel>
       <WlTimeInput
-id="pomodoro-record-details-start" v-model="startDate" show-seconds
-                   @keyup.enter="listeners.enterStartDate"
+          id="pomodoro-record-details-start" v-model="startDate" show-seconds
+          @keyup.enter="listeners.enterStartDate"
       />
     </div>
     <div class="inline-flex flex-col">
       <WlLabel ref="endDateRef" for="pomodoro-record-details-end">End</WlLabel>
       <WlTimeInput
-id="pomodoro-record-details-end" v-model="endDate" show-seconds
-                   @keyup.enter="listeners.enterEndDate"
+          id="pomodoro-record-details-end" v-model="endDate" show-seconds
+          @keyup.enter="listeners.enterEndDate"
       />
     </div>
     <div class="inline-flex flex-col">
@@ -109,6 +109,11 @@ const listeners = {
     }
   },
   close() {
+    if (document.activeElement?.tagName === 'INPUT') {
+      // Avoids a copy operation will close the record.
+      return
+    }
+
     emits('close')
   }
 }
