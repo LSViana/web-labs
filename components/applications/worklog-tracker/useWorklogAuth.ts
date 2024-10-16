@@ -5,6 +5,7 @@ import { useCookie } from '#app'
 
 export function useWorklogAuth() {
   const authenticated = ref(false)
+  const invalidCredentials = ref(false)
 
   updateAuthenticated()
   useEventListener(window, 'focus', updateAuthenticated)
@@ -22,10 +23,12 @@ export function useWorklogAuth() {
     })
 
     if (response.status !== 204) {
-      throw new Error('Failed to authenticate')
+      invalidCredentials.value = true
+      authenticated.value = false
+    } else {
+      invalidCredentials.value = false
+      authenticated.value = true
     }
-
-    authenticated.value = true
   }
 
   async function logout() {
@@ -42,6 +45,7 @@ export function useWorklogAuth() {
 
   return {
     authenticated,
+    invalidCredentials,
     login,
     logout
   }
