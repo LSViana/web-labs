@@ -16,7 +16,7 @@
     />
     <WlWorklogList :selected-index="selectedIndex" :items="worklogList.value" @select="listeners.select"/>
   </template>
-  <WlWorklogAuthForm v-else @login="listeners.login"/>
+  <WlWorklogAuthForm v-else :invalid-credentials="worklogAuth.invalidCredentials.value" @login="listeners.login"/>
 </template>
 
 <script setup lang="ts">
