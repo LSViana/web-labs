@@ -81,6 +81,8 @@ const listeners = {
     if (worklogList.value.length > 0) {
       item.value.startTime = worklogList.value[0].endTime
     }
+
+    item.value.endTime = item.value.startTime
   },
   select(index: number): void {
     item.value = worklogList.value[index]
@@ -109,6 +111,7 @@ const methods = {
     if (worklogList.value.length > 0) {
       const newValue = new WorklogItem()
       newValue.startTime = worklogList.value[0].endTime
+      newValue.endTime = newValue.startTime
       item.value = newValue
     }
   }
