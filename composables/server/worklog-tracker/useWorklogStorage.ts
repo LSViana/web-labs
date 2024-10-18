@@ -81,7 +81,7 @@ export function useWorklogStorage() {
 
     const jiraResponseBody = await response.json() as { id: string; issueId: string; }
 
-    const result = await supabaseClient.from('worklogs').insert({
+    await supabaseClient.from('worklogs').insert({
       id: jiraResponseBody.id,
       issue_id: jiraResponseBody.issueId,
       ticket: worklogItem.ticket,
@@ -90,8 +90,6 @@ export function useWorklogStorage() {
       ended_at: worklogItem.endTime,
       credential_id: credentialsId
     })
-
-    console.log(result)
 
     return new WorklogItem(
       worklogItem.ticket,
