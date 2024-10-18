@@ -6,7 +6,13 @@ export function useWorklogList() {
   const value = shallowReactive<WorklogItem[]>([])
 
   function add(item: WorklogItem) {
-    value.unshift(item)
+    const indexToAdd = value.findLastIndex(x => x.startTime > item.startTime)
+
+    if (indexToAdd === -1) {
+      value.unshift(item)
+    } else {
+      value.splice(indexToAdd + 1, 0, item)
+    }
   }
 
   function update(item: WorklogItem) {
