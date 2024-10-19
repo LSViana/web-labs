@@ -10,6 +10,7 @@
 import { navigateTo } from '#app'
 import { definePageMeta } from '#imports'
 import { useWorklogAuth } from '~/components/applications/worklog-tracker/useWorklogAuth'
+import { provideWorklogStorage } from '~/components/applications/worklog-tracker/useWorklogStorage'
 import WlWorklogTracker from '~/components/applications/worklog-tracker/WlWorklogTracker.vue'
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
@@ -22,4 +23,6 @@ definePageMeta({
     }
   }
 })
+
+provideWorklogStorage()
 </script>

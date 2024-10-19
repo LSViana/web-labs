@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { inject, provide, ref } from 'vue'
 
 import { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
 
@@ -16,7 +16,7 @@ function transformWorklogItem(worklogItem: WorklogItem): WorklogItem {
   )
 }
 
-export function useWorklogStorage() {
+function buildWorklogStorage() {
   const operationLoading = ref(false)
 
   async function load(date: Date): Promise<WorklogItem[]> {
@@ -90,4 +90,12 @@ export function useWorklogStorage() {
     remove,
     update
   }
+}
+
+export function provideWorklogStorage() {
+  provide('worklogStorage', buildWorklogStorage())
+}
+
+export function useWorklogStorage() {
+  return inject('worklogStorage') as ReturnType<typeof buildWorklogStorage>
 }
