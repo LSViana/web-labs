@@ -15,14 +15,14 @@
       <span class="w-16 shrink-0 pt-2 text-center">{{ worklogDuration }}</span>
     </div>
     <div class="flex gap-3">
-      <template v-if="edit">
-        <WlButton variant="primary" @click="listeners.save">Save</WlButton>
-        <WlButton variant="secondary" @click="listeners.remove">Remove</WlButton>
-        <WlButton variant="secondary" @click="listeners.close">Close</WlButton>
+      <template v-if="props.edit">
+        <WlButton variant="primary" :disabled="props.disabled" @click="listeners.save">Save</WlButton>
+        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.remove">Remove</WlButton>
+        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.close">Close</WlButton>
       </template>
       <template v-else>
-        <WlButton variant="primary" @click="listeners.save">Save</WlButton>
-        <WlButton variant="secondary" @click="listeners.clear">Clear</WlButton>
+        <WlButton variant="primary" :disabled="props.disabled" @click="listeners.save">Save</WlButton>
+        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.clear">Clear</WlButton>
       </template>
       <div class="grow"/>
       <div class="flex gap-1 self-center text-xs">
@@ -46,6 +46,7 @@ import { useWorklogNow } from '~/composables/server/worklog-tracker/useWorklogNo
 type Props = {
   item: WorklogItem;
   edit: boolean;
+  disabled: boolean;
 }
 
 type Emits = {
@@ -79,7 +80,7 @@ watch(
 )
 
 const listeners = {
-  save (): void {
+  save(): void {
     if (!methods.validateSave()) {
       return
     }
@@ -88,28 +89,28 @@ const listeners = {
 
     emit('save', new WorklogItem(ticket.value, content.value, startTime.value, endTime.value, props.item.id, props.item.issueId))
   },
-  remove (): void {
+  remove(): void {
     emit('remove')
   },
-  close (): void {
+  close(): void {
     emit('close')
   },
-  testdome3849 (): void {
+  testdome3849(): void {
     ticket.value = 'TESTDOME-3849'
     content.value = '- Check multiple mentions from Jira, Docs, and Gmail\n- Plan tasks for the day'
   },
-  testdome5928 (): void {
+  testdome5928(): void {
     ticket.value = 'TESTDOME-5928'
     content.value = 'Platform team daily meeting'
   },
-  clear (): void {
+  clear(): void {
     ticket.value = ''
     content.value = ''
   }
 }
 
 const methods = {
-  validateSave (): boolean {
+  validateSave(): boolean {
     const errors: string[] = []
 
     if (ticket.value.trim().length === 0) {
@@ -134,7 +135,7 @@ const methods = {
 
     return errors.length === 0
   },
-  normalize (): void {
+  normalize(): void {
     ticket.value = ticket.value.trim().toUpperCase()
   }
 }

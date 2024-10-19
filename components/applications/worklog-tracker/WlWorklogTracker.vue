@@ -10,6 +10,7 @@
     <WlWorklogDetailsForm
         :item="item"
         :edit="isEditing"
+        :disabled="worklogStorage.operationLoading.value"
         @save="listeners.save"
         @remove="listeners.remove"
         @close="listeners.close"
