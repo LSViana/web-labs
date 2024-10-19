@@ -43,7 +43,11 @@ const worklogList = useWorklogList()
 const worklogStorage = useWorklogStorage()
 const worklogToday = useWorklogToday()
 
-onMounted(() => methods.loadWorklogs())
+onMounted(() => {
+  if (worklogAuth.authenticated.value) {
+    methods.loadWorklogs()
+  }
+})
 
 const item = ref(new WorklogItem())
 const isEditing = ref(false)
