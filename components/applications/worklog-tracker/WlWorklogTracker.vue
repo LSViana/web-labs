@@ -1,34 +1,31 @@
 <template>
-  <template v-if="worklogAuth.authenticated.value">
-    <div class="flex justify-between">
-      <h1 class="text-2xl">Worklog Tracker</h1>
-      <div class="flex items-center gap-3">
-        <WlDateInput v-model="date" @change="listeners.updateDate"/>
-        <a href="#" class="underline" @click="listeners.logout">Logout</a>
-      </div>
+  <div class="flex justify-between">
+    <h1 class="text-2xl">Worklog Tracker</h1>
+    <div class="flex items-center gap-3">
+      <WlDateInput v-model="date" @change="listeners.updateDate"/>
+      <a href="#" class="underline" @click="listeners.logout">Logout</a>
     </div>
-    <WlWorklogDetailsForm
-        :item="item"
-        :edit="isEditing"
-        :disabled="worklogStorage.operationLoading.value"
-        @save="listeners.save"
-        @remove="listeners.remove"
-        @close="listeners.close"
-    />
-    <WlWorklogList :selected-index="selectedIndex" :items="worklogList.value" @select="listeners.select"/>
-  </template>
-  <WlWorklogAuthForm v-else :invalid-credentials="worklogAuth.invalidCredentials.value" @login="listeners.login"/>
+  </div>
+  <WlWorklogDetailsForm
+      :item="item"
+      :edit="isEditing"
+      :disabled="worklogStorage.operationLoading.value"
+      @save="listeners.save"
+      @remove="listeners.remove"
+      @close="listeners.close"
+  />
+  <WlWorklogList :selected-index="selectedIndex" :items="worklogList.value" @select="listeners.select"/>
 </template>
 
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
 import { onMounted, ref } from 'vue'
 
+import { useRouter } from '#app'
 import { useWorklogAuth } from '~/components/applications/worklog-tracker/useWorklogAuth'
 import { useWorklogList } from '~/components/applications/worklog-tracker/useWorklogList'
 import { useWorklogStorage } from '~/components/applications/worklog-tracker/useWorklogStorage'
 import { useWorklogToday } from '~/components/applications/worklog-tracker/useWorklogToday'
-import WlWorklogAuthForm from '~/components/applications/worklog-tracker/WlWorklogAuthForm.vue'
 import WlWorklogDetailsForm from '~/components/applications/worklog-tracker/WlWorklogDetailsForm.vue'
 import WlWorklogList from '~/components/applications/worklog-tracker/WlWorklogList.vue'
 import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
@@ -38,16 +35,14 @@ useHead({
   title: 'Worklog Tracker'
 })
 
+const router = useRouter()
+
 const worklogAuth = useWorklogAuth()
 const worklogList = useWorklogList()
 const worklogStorage = useWorklogStorage()
 const worklogToday = useWorklogToday()
 
-onMounted(() => {
-  if (worklogAuth.authenticated.value) {
-    methods.loadWorklogs()
-  }
-})
+onMounted(() => methods.loadWorklogs())
 
 const item = ref(new WorklogItem())
 const isEditing = ref(false)
@@ -94,17 +89,9 @@ const listeners = {
     selectedIndex.value = index
     isEditing.value = true
   },
-  async login(email: string, password: string): Promise<void> {
-    await worklogAuth.login(email, password)
-
-    if (worklogAuth.authenticated.value) {
-      date.value = worklogToday.get()
-
-      await methods.loadWorklogs()
-    }
-  },
-  logout(): void {
-    worklogAuth.logout()
+  async logout(): Promise<void> {
+    await worklogAuth.logout()
+    await router.push('/applications/worklog-tracker/login')
   }
 }
 
