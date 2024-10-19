@@ -1,13 +1,30 @@
 <template>
   <NuxtLayout name="home">
     <WlContainer class="flex flex-col gap-3 p-3">
-      <p>The <code>primary</code> button:</p>
+      <p>The variants of a button:</p>
       <WlExperimentCanvas>
-        <WlButton variant="primary" @click="listeners.click">
-          Get Started
-        </WlButton>
+        <div class="flex flex-col gap-3">
+          <div class="flex gap-3">
+            <WlButton variant="primary" :disabled="disabled" @click="listeners.clickCounter">
+              Primary
+            </WlButton>
+            <WlButton variant="secondary" :disabled="disabled" @click="listeners.clickCounter">
+              Secondary
+            </WlButton>
+            <WlButton variant="warning" :disabled="disabled" @click="listeners.clickCounter">
+              Warning
+            </WlButton>
+            <WlButton variant="danger" :disabled="disabled" @click="listeners.clickCounter">
+              Danger
+            </WlButton>
+          </div>
+          <div class="flex gap-2">
+            <input id="disabled" v-model="disabled" type="checkbox">
+            <label for="disabled">Disabled</label>
+          </div>
+        </div>
         <template #caption>
-          Used to perform the main actions. Clicked <code>{{ counter }}</code> times.
+          <span>Used to expose actions. Clicked <code>{{ counter }}</code> times. </span>
         </template>
       </WlExperimentCanvas>
       <p>
@@ -75,10 +92,14 @@ import WlContainer from '~/components/shared/layout/WlContainer.vue'
 const counter = ref(0)
 const confirmed = ref(false)
 const rating = ref(3)
+const disabled = ref(false)
 
 const listeners = {
-  click(): void {
+  clickCounter(): void {
     counter.value++
+  },
+  clickDisable(): void {
+    disabled.value = !disabled.value
   },
   confirm(): void {
     confirmed.value = true
