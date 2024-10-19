@@ -1,3 +1,5 @@
+import { ref } from 'vue'
+
 import { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
 
 const url = '/api/worklog-tracker/worklogs'
@@ -15,6 +17,8 @@ function transformWorklogItem(worklogItem: WorklogItem): WorklogItem {
 }
 
 export function useWorklogStorage() {
+  const operationLoading = ref(false)
+
   async function load(date: Date): Promise<WorklogItem[]> {
     const query = new URLSearchParams({
       date: date.toLocaleDateString()
@@ -27,41 +31,60 @@ export function useWorklogStorage() {
   }
 
   async function save(worklogItem: WorklogItem): Promise<WorklogItem> {
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify(worklogItem),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    try {
+      operationLoading.value = true
 
-    const result = await response.json()
+      const response = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(worklogItem),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
 
-    return transformWorklogItem(result)
+      const result = await response.json()
+
+      return transformWorklogItem(result)
+    } finally {
+      operationLoading.value = false
+    }
   }
 
   async function remove(worklogItem: WorklogItem): Promise<void> {
-    const query = new URLSearchParams({
-      issueId: worklogItem.issueId,
-      worklogId: worklogItem.id
-    })
+    try {
+      operationLoading.value = true
 
-    await fetch(`${url}?${query.toString()}`, {
-      method: 'DELETE'
-    })
+      const query = new URLSearchParams({
+        issueId: worklogItem.issueId,
+        worklogId: worklogItem.id
+      })
+
+      await fetch(`${url}?${query.toString()}`, {
+        method: 'DELETE'
+      })
+    } finally {
+      operationLoading.value = false
+    }
   }
 
   async function update(worklogItem: WorklogItem): Promise<void> {
-    await fetch(url, {
-      method: 'PUT',
-      body: JSON.stringify(worklogItem),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    try {
+      operationLoading.value = true
+
+      await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(worklogItem),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    } finally {
+      operationLoading.value = false
+    }
   }
 
   return {
+    operationLoading,
     load,
     save,
     remove,
