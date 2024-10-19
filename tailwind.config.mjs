@@ -13,6 +13,8 @@ const config = {
     extend: {
       colors: {
         primary: colors.sky,
+        secondary: colors.gray,
+        danger: colors.red,
         warning: colors.amber,
         muted: {
           DEFAULT: colors.slate[500],
