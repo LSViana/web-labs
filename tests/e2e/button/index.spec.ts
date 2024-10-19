@@ -16,13 +16,13 @@ test.describe('Button experiments page', () => {
   })
 
   test('has primary button', async () => {
-    await expect(page.locator('text=The primary button:')).toBeVisible()
+    await expect(page.locator('text=The variants of a button:')).toBeVisible()
     await expect(page.locator('text=Clicked 0 times.')).toBeVisible()
 
     await expect(page.locator('span[data-test=hydrated]')).toHaveCount(1)
     await page.waitForTimeout(100)
 
-    await page.locator('text=Get Started').click()
+    await page.locator('text=Primary').click()
     await expect(page.locator('text=Clicked 1 times.')).toBeVisible()
   })
 
@@ -51,7 +51,9 @@ test.describe('Button experiments page', () => {
     await expect(page.locator('text=Confirmed: true.')).toBeVisible()
   })
 
-  test.skip('has button group', () => { })
+  test.skip('has button group', () => {
+  })
 
-  test.skip('has rating button', () => { })
+  test.skip('has rating button', () => {
+  })
 })
