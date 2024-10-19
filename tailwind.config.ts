@@ -1,10 +1,7 @@
+import type { Config } from 'tailwindcss'
 import colors from 'tailwindcss/colors'
 
-/**
- * @typedef {import('tailwindcss').Config} Config
- * @type {Partial<Config>}
- */
-const config = {
+const config: Partial<Config> = {
   theme: {
     fontFamily: {
       sans: ['Lato', 'sans-serif'],
