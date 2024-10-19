@@ -11,6 +11,7 @@
         <WlTriangleExclamationIcon/>
         <span>Invalid credentials</span>
       </div>
+      <a href="#" class="text-center underline" @click.prevent="listeners.demo">Try without an account</a>
     </form>
   </div>
 </template>
@@ -38,6 +39,9 @@ const listeners = {
     if (worklogAuth.authenticated.value) {
       await router.push('/applications/worklog-tracker')
     }
+  },
+  async demo(): Promise<void> {
+    await router.push('/applications/worklog-tracker/demo')
   }
 }
 </script>
