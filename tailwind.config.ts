@@ -16,7 +16,8 @@ const config: Partial<Config> = {
         muted: {
           DEFAULT: colors.slate[500],
           dark: colors.slate[300]
-        }
+        },
+        code: colors.pink
       }
     }
   }
