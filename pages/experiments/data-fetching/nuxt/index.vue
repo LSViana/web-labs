@@ -29,7 +29,10 @@
         <p><code>useFetch()</code> = <code>{{ useLazyFetchResponse.data.value?.value ?? 0 }}</code></p>
       </WlExperimentCanvas>
       <h2 class="mt-3 text-lg"><code>useAsyncData()</code></h2>
-      <code>WIP</code>
+      <p>Allows loading data asynchronously and passing it from the server to the client:</p>
+      <WlExperimentCanvas>
+        <p><code>useAsyncData()</code> = <code>{{ useAsyncDataResponse.data.value }}</code></p>
+      </WlExperimentCanvas>
       <h2 class="mt-3 text-lg">Server-sent Events</h2>
       <p>Streaming data from the server using <code>EventSource</code> in the API routes:</p>
       <WlExperimentCanvas>
@@ -50,7 +53,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 
-import { useFetch, useLazyFetch } from '#app'
+import { useAsyncData, useFetch, useLazyFetch } from '#app'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
@@ -61,6 +64,12 @@ const useFetchResponse = await useFetch('/api/data-fetching/nuxt/use-fetch')
 
 // Works when `await` is used, and it's a client-side navigation.
 const useLazyFetchResponse = await useLazyFetch('/api/data-fetching/nuxt/use-lazy-fetch')
+
+// Add timeout to simulate.
+const useAsyncDataResponse = await useAsyncData(
+    'use-async-data',
+    () => new Promise(resolve => setInterval(() => resolve(3), 0))
+)
 
 const data = reactive({
   sse: [] as string[]
