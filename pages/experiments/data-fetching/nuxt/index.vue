@@ -28,12 +28,30 @@
         <p><code>status</code> = <code>{{ useLazyFetchResponse.status }}</code></p>
         <p><code>useFetch()</code> = <code>{{ useLazyFetchResponse.data.value?.value ?? 0 }}</code></p>
       </WlExperimentCanvas>
+      <h2 class="mt-3 text-lg"><code>useAsyncData()</code></h2>
+      <code>WIP</code>
+      <h2 class="mt-3 text-lg">Server-sent Events</h2>
+      <p>Streaming data from the server using <code>EventSource</code> in the API routes:</p>
+      <WlExperimentCanvas>
+        <p>Items:</p>
+        <ul v-if="data.sse.length">
+          <li v-for="item in data.sse" :key="item">{{ item }}</li>
+        </ul>
+        <p v-else class="italic">(Empty)</p>
+        <div class="mt-5 flex gap-3">
+          <WlButton variant="primary" @click="listeners.sse.request">Request</WlButton>
+          <WlButton variant="secondary" @click="listeners.sse.clear">Clear</WlButton>
+        </div>
+      </WlExperimentCanvas>
     </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
+import { reactive } from 'vue'
+
 import { useFetch, useLazyFetch } from '#app'
+import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
@@ -43,5 +61,39 @@ const useFetchResponse = await useFetch('/api/data-fetching/nuxt/use-fetch')
 
 // Works when `await` is used, and it's a client-side navigation.
 const useLazyFetchResponse = await useLazyFetch('/api/data-fetching/nuxt/use-lazy-fetch')
+
+const data = reactive({
+  sse: [] as string[]
+})
+
+let reader: ReadableStreamDefaultReader<string>
+
+const listeners = {
+  sse: {
+    clear () {
+      data.sse = []
+
+      reader?.cancel('User canceled.')
+    },
+    async request () {
+      const response = await $fetch<ReadableStream<Uint8Array>>('/api/data-fetching/nuxt/sse', {
+        method: 'POST',
+        responseType: 'stream'
+      })
+
+      reader = response.pipeThrough(new TextDecoderStream()).getReader()
+
+      while (reader) {
+        const item = await reader.read()
+
+        if (item.done) {
+          break
+        }
+
+        data.sse.push(item.value.substring(6))
+      }
+    }
+  }
+}
 </script>
 
