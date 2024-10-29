@@ -58,12 +58,12 @@ import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
-const fetchResponse = await $fetch('/api/data-fetching/nuxt/fetch')
+const fetchResponse = await $fetch('/api/nuxt/data-fetching/fetch')
 
-const useFetchResponse = await useFetch('/api/data-fetching/nuxt/use-fetch')
+const useFetchResponse = await useFetch('/api/nuxt/data-fetching/use-fetch')
 
 // Works when `await` is used, and it's a client-side navigation.
-const useLazyFetchResponse = await useLazyFetch('/api/data-fetching/nuxt/use-lazy-fetch')
+const useLazyFetchResponse = await useLazyFetch('/api/nuxt/data-fetching/use-lazy-fetch')
 
 // Add timeout to simulate.
 const useAsyncDataResponse = await useAsyncData(
@@ -85,7 +85,7 @@ const listeners = {
       reader?.cancel('User canceled.')
     },
     async request () {
-      const response = await $fetch<ReadableStream<Uint8Array>>('/api/data-fetching/nuxt/sse', {
+      const response = await $fetch<ReadableStream<Uint8Array>>('/api/nuxt/data-fetching/sse', {
         method: 'POST',
         responseType: 'stream'
       })

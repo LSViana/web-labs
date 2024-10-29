@@ -50,15 +50,6 @@ const groups: ExperimentGroup[] = [
     ]
   },
   {
-    target: 'Data Fetching',
-    experiments: [
-      {
-        name: 'Nuxt',
-        route: '/experiments/data-fetching/nuxt'
-      }
-    ]
-  },
-  {
     target: 'Micro-interactions',
     experiments: [
       {
@@ -116,6 +107,15 @@ const groups: ExperimentGroup[] = [
       {
         name: 'Web Workers',
         route: '/experiments/threading/web-workers'
+      }
+    ]
+  },
+  {
+    target: 'Nuxt',
+    experiments: [
+      {
+        name: 'Data Fetching',
+        route: '/experiments/nuxt/data-fetching'
       }
     ]
   }
