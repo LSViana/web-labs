@@ -116,6 +116,10 @@ const groups: ExperimentGroup[] = [
       {
         name: 'Data Fetching',
         route: '/experiments/nuxt/data-fetching'
+      },
+      {
+        name: 'State Management',
+        route: '/experiments/nuxt/state-management'
       }
     ]
   }
