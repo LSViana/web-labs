@@ -120,6 +120,10 @@ const groups: ExperimentGroup[] = [
       {
         name: 'State Management',
         route: '/experiments/nuxt/state-management'
+      },
+      {
+        name: 'Error Handling',
+        route: '/experiments/nuxt/error-handling'
       }
     ]
   }
