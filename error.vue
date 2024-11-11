@@ -24,4 +24,9 @@ type Props = {
 }
 
 const props = defineProps<Props>()
+
+// This composable allows accessing the global error being handled.
+//
+// The instance returned here is the same as `props.error`.
+// const globalError = useError()
 </script>
