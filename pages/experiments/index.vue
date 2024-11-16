@@ -124,6 +124,10 @@ const groups: ExperimentGroup[] = [
       {
         name: 'Error Handling',
         route: '/experiments/nuxt/error-handling'
+      },
+      {
+        name: 'Layers',
+        route: '/experiments/nuxt/layers'
       }
     ]
   }
