@@ -1,14 +1,16 @@
 <template>
   <div class="relative flex rounded border bg-slate-200 p-2 dark:bg-slate-800">
     <button
-      v-for="(option, index) in props.options"
-      :key="option"
-      class="z-10 px-3 py-2"
-      @click="listeners.clickButton(index)"
+        v-for="(option, index) in props.options"
+        :key="option"
+        class="z-10 px-3 py-2"
+        @click="listeners.clickButton(index)"
     >
       {{ option }}
     </button>
-    <div ref="selectedOverlay" class="absolute rounded bg-slate-300 opacity-0 transition-[left,width,opacity] dark:bg-slate-600" />
+    <div ref="selectedOverlay"
+         class="absolute rounded bg-slate-300 opacity-0 transition-[left,width,opacity] dark:bg-slate-600"
+    />
   </div>
 </template>
 
@@ -60,6 +62,3 @@ const methods = {
 onUpdated(() => methods.updateSelectedOverlay())
 onMounted(() => methods.updateSelectedOverlay())
 </script>
-
-<style lang="scss" scoped>
-</style>

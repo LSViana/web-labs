@@ -89,6 +89,3 @@ const methods = {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-</style>

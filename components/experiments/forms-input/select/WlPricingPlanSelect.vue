@@ -1,15 +1,15 @@
 <template>
   <div class="flex flex-col gap-3">
     <div
-      v-for="(plan, index) in plans"
-      :key="plan.name"
-      class="w-72 cursor-pointer rounded border px-3 py-2 transition-[background-color,border-color,color]"
-      :class="methods.getPlanClasses(index)"
-      @click="listeners.onClick(index)"
+        v-for="(plan, index) in plans"
+        :key="plan.name"
+        class="w-72 cursor-pointer rounded border px-3 py-2 transition-[background-color,border-color,color]"
+        :class="methods.getPlanClasses(index)"
+        @click="listeners.onClick(index)"
     >
       <div class="flex items-center justify-between">
         <span class="font-bold">{{ plan.name }}</span>
-        <WlCheckIcon class="transition-opacity" :class="methods.getPlanCheckIconClasses(index)" />
+        <WlCheckIcon class="transition-opacity" :class="methods.getPlanCheckIconClasses(index)"/>
       </div>
       <div class="flex items-end justify-between">
         <ul class="text-sm">
@@ -85,16 +85,13 @@ const methods = {
   },
   getPlanClasses (index: number): string {
     return methods.isPlanActive(index)
-      ? 'bg-green-800 text-green-100 border-green-400'
-      : 'bg-slate-800'
+        ? 'bg-green-800 text-green-100 border-green-400'
+        : 'bg-slate-800'
   },
   getPlanCheckIconClasses (index: number): string {
     return methods.isPlanActive(index)
-      ? 'opacity-100'
-      : 'opacity-0'
+        ? 'opacity-100'
+        : 'opacity-0'
   }
 }
 </script>
-
-<style lang="scss" scoped>
-</style>
