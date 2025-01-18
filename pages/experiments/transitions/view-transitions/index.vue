@@ -35,7 +35,7 @@ useCustomViewTransitions()
 const containerTransition = ref(false)
 
 const classes = computed(() => ({
-  container: containerTransition.value ? 'translate-x-12 rotate-90 bg-danger-500' : 'bg-white'
+  container: containerTransition.value ? 'translate-x-12 rotate-90 bg-danger-600' : 'bg-primary-600'
 }))
 
 const listeners = {
