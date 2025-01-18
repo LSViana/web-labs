@@ -9,15 +9,40 @@
           </WlButton>
         </NuxtLink>
       </WlExperimentCanvas>
+      <p>The same-page View Transitions API example:</p>
+      <WlExperimentCanvas>
+        <div
+            class="size-12 rounded"
+            :class="classes.container"
+            style="view-transition-name: container"
+            @click="listeners.containerClick"
+        />
+      </WlExperimentCanvas>
     </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
+import { computed, ref } from 'vue'
+
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanvas.vue'
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
 import { useCustomViewTransitions } from '~/composables/view-transitions'
 
 useCustomViewTransitions()
+
+const containerTransition = ref(false)
+
+const classes = computed(() => ({
+  container: containerTransition.value ? 'translate-x-12 rotate-90 bg-danger-500' : 'bg-white'
+}))
+
+const listeners = {
+  containerClick () {
+    document.startViewTransition(() => {
+      containerTransition.value = !containerTransition.value
+    })
+  }
+}
 </script>
