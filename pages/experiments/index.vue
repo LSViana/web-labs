@@ -75,11 +75,15 @@ const groups: ExperimentGroup[] = [
     ]
   },
   {
-    target: 'Navigation',
+    target: 'Transitions',
     experiments: [
       {
-        name: 'Transitions',
-        route: '/experiments/navigation/transitions'
+        name: 'View Transitions',
+        route: '/experiments/transitions/view-transitions'
+      },
+      {
+        name: 'Web Animations',
+        route: '/experiments/transitions/web-animations'
       }
     ]
   },
