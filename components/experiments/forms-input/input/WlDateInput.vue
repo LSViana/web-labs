@@ -30,7 +30,11 @@ const computedValue = computed(() => {
 })
 
 const listeners = {
-  update(date: string): void {
+  update(date?: string): void {
+    if (!date) {
+      return
+    }
+
     const time = model.value.toLocaleTimeString()
 
     model.value = new Date(`${date} ${time}`)
