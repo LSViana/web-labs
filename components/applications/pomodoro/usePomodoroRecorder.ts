@@ -22,7 +22,7 @@ export function usePomodoroRecorder() {
 
     const endDate = now.get()
 
-    return new PomodoroRecord(startDate, endDate, type)
+    return new PomodoroRecord(0, startDate, endDate, type)
   }
 
   return {

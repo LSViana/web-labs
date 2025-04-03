@@ -60,8 +60,8 @@ const props = defineProps<Props>()
 
 const record = defineModel<PomodoroRecord>('record', { required: true })
 
-const startDate = ref<Date>(record.value.startDate)
-const endDate = ref<Date>(record.value.endDate)
+const startDate = ref<Date>(record.value.startTime)
+const endDate = ref<Date>(record.value.endTime)
 const type = ref<PomodoroIntervalType>(record.value.type)
 const startDateRef = ref<ComponentPublicInstance>()
 const endDateRef = ref<ComponentPublicInstance>()
@@ -78,8 +78,8 @@ onMounted(() => (startDateRef.value!.$el as HTMLElement).focus())
 watch(
     record,
     () => {
-      startDate.value = record.value.startDate
-      endDate.value = record.value.endDate
+      startDate.value = record.value.startTime
+      endDate.value = record.value.endTime
       type.value = record.value.type
     },
     { immediate: true }
@@ -99,7 +99,7 @@ const listeners = {
       return
     }
 
-    const newRecord = new PomodoroRecord(startDate.value, endDate.value, type.value)
+    const newRecord = new PomodoroRecord(record.value.id, startDate.value, endDate.value, type.value)
 
     emits('update:record', newRecord)
   },
