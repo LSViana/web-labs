@@ -12,6 +12,9 @@ export default withNuxt([
   {
     plugins: {
       '@stylistic': stylisticPlugin
+    },
+    rules: {
+      '@stylistic/indent': ['error', 2]
     }
   },
 
