@@ -9,7 +9,7 @@ const supabaseClient = createClient(
   config.supabase.key,
   {
     db: {
-      schema: 'worklog_tracker'
+      schema: 'productivity'
     }
   }
 )
