@@ -2,15 +2,15 @@
   <div class="pb-5">
     <div class="relative overflow-hidden bg-slate-900 py-1">
       <div
-          v-for="(item, index) in items"
-          :key="item.start"
-          class="absolute inset-0 min-w-0.5 cursor-pointer outline-none focus-visible:ring-4"
-          tabindex="0"
-          :class="item.classes"
-          :style="{ left: `${item.start}%`, width: `${item.length}%` }"
-          :title="item.title"
-          @click="listeners.select(index)"
-          @keyup.enter="listeners.select(index)"
+        v-for="(item, index) in items"
+        :key="item.start"
+        class="absolute inset-0 min-w-0.5 cursor-pointer outline-none focus-visible:ring-4"
+        tabindex="0"
+        :class="item.classes"
+        :style="{ left: `${item.start}%`, width: `${item.length}%` }"
+        :title="item.title"
+        @click="listeners.select(index)"
+        @keyup.enter="listeners.select(index)"
       />
       <div class="absolute left-0 top-full" title="Start time of first interval">
         {{ formattedDates.start }}
@@ -30,18 +30,18 @@ import { usePomodoroToday } from '~/components/applications/pomodoro/usePomodoro
 import type { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 type Props = {
-  records: PomodoroRecord[];
-};
+  records: PomodoroRecord[]
+}
 
 type Emits = {
-  (e: 'select', index: number): void;
+  (e: 'select', index: number): void
 }
 
 type TimelineItem = {
-  title: string;
-  start: number;
-  length: number;
-  classes: string;
+  title: string
+  start: number
+  length: number
+  classes: string
 }
 
 const today = usePomodoroToday()
@@ -58,12 +58,12 @@ const diffMs = computed(() => dates.value.end.getTime() - dates.value.start.getT
 const formattedDates = computed(() => ({
   start: dates.value.start.toLocaleTimeString([], {
     hour: '2-digit',
-    minute: '2-digit'
+    minute: '2-digit',
   }),
   end: dates.value.end.toLocaleTimeString([], {
     hour: '2-digit',
-    minute: '2-digit'
-  })
+    minute: '2-digit',
+  }),
 }))
 
 const items = computed(() => {
@@ -74,7 +74,7 @@ const items = computed(() => {
       title: `Start: ${x.startTime.toLocaleTimeString()}, End: ${x.endTime.toLocaleTimeString()}, Duration: ${x.elapsedInterval}`,
       start: (x.startTime.getTime() - dates.value.start.getTime()) / diffMs.value * 100,
       length: (x.endTime.getTime() - x.startTime.getTime()) / diffMs.value * 100,
-      classes: `${type.backgroundInteractive} ${type.borderHorizontal} ${index < props.records.length - 1 ? 'border-r' : ''}`
+      classes: `${type.backgroundInteractive} ${type.borderHorizontal} ${index < props.records.length - 1 ? 'border-r' : ''}`,
     }
   })
 })
@@ -82,6 +82,6 @@ const items = computed(() => {
 const listeners = {
   select(recordIndex: number): void {
     emits('select', recordIndex)
-  }
+  },
 }
 </script>

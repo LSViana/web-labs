@@ -10,8 +10,8 @@ export default defineEventHandler(async (event) => {
   const issueId = query.issueId
   const worklogId = query.worklogId
 
-  if (typeof issueId !== 'string' || typeof worklogId !== 'string' ||
-    issueId.trim().length === 0 || worklogId.trim().length === 0) {
+  if (typeof issueId !== 'string' || typeof worklogId !== 'string'
+    || issueId.trim().length === 0 || worklogId.trim().length === 0) {
     throw new Error('Invalid query')
   }
 
@@ -22,6 +22,6 @@ export default defineEventHandler(async (event) => {
 
   return {
     status: 204,
-    valid: query
+    valid: query,
   }
 })

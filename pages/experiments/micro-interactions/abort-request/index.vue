@@ -4,8 +4,12 @@
       <p>Cancel an event using an <code>AbortSignal</code> instance:</p>
       <WlExperimentCanvas>
         <div class="flex items-center gap-3">
-          <WlButton ref="button" variant="primary" @click="listeners.click">Click</WlButton>
-          <WlButton ref="button" variant="secondary" @click="listeners.cancel">Cancel</WlButton>
+          <WlButton ref="button" variant="primary" @click="listeners.click">
+            Click
+          </WlButton>
+          <WlButton ref="button" variant="secondary" @click="listeners.cancel">
+            Cancel
+          </WlButton>
           <p>Result: <code>{{ result }}</code></p>
         </div>
       </WlExperimentCanvas>
@@ -25,32 +29,34 @@ const loading = ref(false)
 let abortController = new AbortController()
 
 class UserCancelledError extends Error {
-  constructor () {
+  constructor() {
     super('User cancelled the request.')
     this.name = 'UserCancelledError'
   }
 }
 
 const listeners = {
-  async click () {
+  async click() {
     loading.value = true
 
     try {
       const response = await fetch('/api/abort-request', {
-        signal: abortController.signal
+        signal: abortController.signal,
       })
       result.value = await response.json()
-    } catch (error) {
+    }
+    catch (error) {
       if (error instanceof UserCancelledError) {
         result.value = '<cancelled>'
-      } else {
+      }
+      else {
         throw error
       }
     }
 
     loading.value = false
   },
-  async cancel () {
+  async cancel() {
     if (!loading.value) {
       alert('No operation in progress.')
 
@@ -61,6 +67,6 @@ const listeners = {
     loading.value = false
 
     abortController = new AbortController()
-  }
+  },
 }
 </script>

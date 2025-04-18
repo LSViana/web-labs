@@ -28,4 +28,3 @@ const hasCaption = computed(() => Boolean(slots.caption))
   @apply dark:bg-[radial-gradient(#{theme('colors.slate.700')}_1px,transparent_0)];
 }
 </style>
-

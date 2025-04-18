@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout name="home">
     <WlContainer class="p-3">
-      <WlPomodoroAuthForm/>
+      <WlPomodoroAuthForm />
     </WlContainer>
   </NuxtLayout>
 </template>

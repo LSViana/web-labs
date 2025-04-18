@@ -20,6 +20,6 @@ export default defineEventHandler(async (event) => {
 
   return {
     status: 204,
-    valid: query
+    valid: query,
   }
 })

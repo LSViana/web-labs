@@ -1,17 +1,21 @@
 <template>
   <template v-if="props.items.length > 0">
-    <p class="text-right">{{ totalDuration }}</p>
+    <p class="text-right">
+      {{ totalDuration }}
+    </p>
     <ul>
       <WlWorklogListItem
-          v-for="(item, index) in props.items"
-          :key="item.id"
-          :item="item"
-          :selected="props.selectedIndex === index"
-          @click="listeners.click(index)"
+        v-for="(item, index) in props.items"
+        :key="item.id"
+        :item="item"
+        :selected="props.selectedIndex === index"
+        @click="listeners.click(index)"
       />
     </ul>
   </template>
-  <p v-else>No worklogs found.</p>
+  <p v-else>
+    No worklogs found.
+  </p>
 </template>
 
 <script lang="ts" setup>
@@ -22,8 +26,8 @@ import type { WorklogItem } from '~/composables/server/worklog-tracker/types/wor
 import { useWorklogDurationFormat } from '~/composables/server/worklog-tracker/useWorklogDurationFormat'
 
 type Props = {
-  items: WorklogItem[];
-  selectedIndex: number;
+  items: WorklogItem[]
+  selectedIndex: number
 }
 
 type Emits = {
@@ -37,8 +41,8 @@ const totalDurationSeconds = computed(() => props.items.reduce((acc, item) => ac
 const totalDuration = useWorklogDurationFormat(totalDurationSeconds)
 
 const listeners = {
-  click (index: number): void {
+  click(index: number): void {
     emits('select', index)
-  }
+  },
 }
 </script>

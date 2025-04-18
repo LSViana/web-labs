@@ -16,8 +16,8 @@
 import { computed } from 'vue'
 
 type Props = {
-  value: number;
-};
+  value: number
+}
 
 const props = defineProps<Props>()
 const digits = computed(() => props.value.toString().split(''))

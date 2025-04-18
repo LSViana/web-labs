@@ -1,23 +1,29 @@
 <template>
   <div class="flex items-center justify-center">
     <form class="flex flex-col gap-3 rounded border p-3" @submit.prevent="listeners.submit">
-      <p class="text-2xl">Sign In</p>
+      <p class="text-2xl">
+        Sign In
+      </p>
       <label for="email">Email</label>
       <WlInput
-id="email"
-v-model="email"
-label="Email"
-placeholder="example@example.com"/>
+        id="email"
+        v-model="email"
+        label="Email"
+        placeholder="example@example.com"
+      />
       <label for="password">Password</label>
       <WlInput
-id="password"
-v-model="password"
-label="Password"
-type="password"
-placeholder="••••••••"/>
-      <WlButton variant="primary" type="submit">Login</WlButton>
+        id="password"
+        v-model="password"
+        label="Password"
+        type="password"
+        placeholder="••••••••"
+      />
+      <WlButton variant="primary" type="submit">
+        Login
+      </WlButton>
       <div v-if="pomodoroAuth.invalidCredentials.value" class="flex items-center justify-center gap-2 text-warning-400">
-        <WlTriangleExclamationIcon/>
+        <WlTriangleExclamationIcon />
         <span>Invalid credentials</span>
       </div>
       <a href="#" class="text-center underline" @click.prevent="listeners.demo">Try without an account</a>
@@ -51,6 +57,6 @@ const listeners = {
   },
   async demo(): Promise<void> {
     await router.push('/applications/pomodoro/demo')
-  }
+  },
 }
 </script>

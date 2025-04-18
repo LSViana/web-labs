@@ -5,7 +5,7 @@
       <WlExperimentCanvas>
         <div class="flex w-56 flex-col">
           <WlInput v-model="password" type="password">
-            <WlPasswordStrength :value="password"/>
+            <WlPasswordStrength :value="password" />
           </wlinput>
         </div>
         <template #caption>
@@ -15,25 +15,29 @@
       <p>The number input with an animated display:</p>
       <WlExperimentCanvas>
         <div class="flex w-56 flex-col">
-          <WlInput v-model="amount" type="number"/>
+          <WlInput v-model="amount" type="number" />
           <div class="mt-3 flex h-6 items-center gap-1">
             <small>US$</small>
-            <WlNumberDisplay :value="amount"/>
+            <WlNumberDisplay :value="amount" />
           </div>
         </div>
       </WlExperimentCanvas>
       <p>The time input with and without seconds:</p>
       <WlExperimentCanvas>
         <div class="flex gap-3">
-          <WlTimeInput v-model="datetime"/>
-          <WlTimeInput v-model="datetime" show-seconds/>
+          <WlTimeInput v-model="datetime" />
+          <WlTimeInput v-model="datetime" show-seconds />
         </div>
-        <p class="mt-3">Time: <code>{{ datetime.toLocaleString() }}</code></p>
+        <p class="mt-3">
+          Time: <code>{{ datetime.toLocaleString() }}</code>
+        </p>
       </WlExperimentCanvas>
       <p>The date input:</p>
       <WlExperimentCanvas>
-        <WlDateInput v-model="datetime"/>
-        <p class="mt-3">Date: <code>{{ datetime.toLocaleString() }}</code></p>
+        <WlDateInput v-model="datetime" />
+        <p class="mt-3">
+          Date: <code>{{ datetime.toLocaleString() }}</code>
+        </p>
       </WlExperimentCanvas>
     </WlContainer>
   </NuxtLayout>

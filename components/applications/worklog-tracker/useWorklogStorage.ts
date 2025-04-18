@@ -12,7 +12,7 @@ function transformWorklogItem(worklogItem: WorklogItem): WorklogItem {
     new Date(worklogItem.startTime),
     new Date(worklogItem.endTime),
     worklogItem.id,
-    worklogItem.issueId
+    worklogItem.issueId,
   )
 }
 
@@ -21,7 +21,7 @@ function buildWorklogStorage() {
 
   async function load(date: Date): Promise<WorklogItem[]> {
     const query = new URLSearchParams({
-      date: date.toLocaleDateString()
+      date: date.toLocaleDateString(),
     })
 
     const response = await fetch(`${url}?${query}`)
@@ -38,14 +38,15 @@ function buildWorklogStorage() {
         method: 'POST',
         body: JSON.stringify(worklogItem),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       })
 
       const result = await response.json()
 
       return transformWorklogItem(result)
-    } finally {
+    }
+    finally {
       operationLoading.value = false
     }
   }
@@ -56,13 +57,14 @@ function buildWorklogStorage() {
 
       const query = new URLSearchParams({
         issueId: worklogItem.issueId,
-        worklogId: worklogItem.id
+        worklogId: worklogItem.id,
       })
 
       await fetch(`${url}?${query.toString()}`, {
-        method: 'DELETE'
+        method: 'DELETE',
       })
-    } finally {
+    }
+    finally {
       operationLoading.value = false
     }
   }
@@ -75,10 +77,11 @@ function buildWorklogStorage() {
         method: 'PUT',
         body: JSON.stringify(worklogItem),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       })
-    } finally {
+    }
+    finally {
       operationLoading.value = false
     }
   }
@@ -88,7 +91,7 @@ function buildWorklogStorage() {
     load,
     save,
     remove,
-    update
+    update,
   }
 }
 

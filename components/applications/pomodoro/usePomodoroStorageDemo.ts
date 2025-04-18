@@ -9,7 +9,7 @@ function buildPomodoroStorage(): ReturnType<typeof usePomodoroStorage> {
     save: async (_record: PomodoroRecord) => _record,
     update: async (_record: PomodoroRecord) => { },
     remove: async (_record: PomodoroRecord) => { },
-    loadToday: async () => []
+    loadToday: async () => [],
   }
 }
 

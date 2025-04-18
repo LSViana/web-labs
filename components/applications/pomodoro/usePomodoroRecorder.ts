@@ -27,6 +27,6 @@ export function usePomodoroRecorder() {
 
   return {
     record,
-    capture
+    capture,
   }
 }

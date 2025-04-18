@@ -19,8 +19,8 @@
 import { computed, ref } from 'vue'
 
 type Events = {
-  (e: 'confirm'): void;
-};
+  (e: 'confirm'): void
+}
 
 const emits = defineEmits<Events>()
 
@@ -29,29 +29,29 @@ const dragging = ref(false)
 const offset = ref(0)
 
 const handleClasses = computed(() => ({
-  'border border-gray-300': dragging.value
+  'border border-gray-300': dragging.value,
 }))
 
 const handleStyles = computed(() => ({
-  marginLeft: `${offset.value}px`
+  marginLeft: `${offset.value}px`,
 }))
 
 const maxOffset = 134 // 192-56-2 => [width of the track]-[padding of the track]-[border of the track]
 
 const listeners = {
-  pointerup (): void {
+  pointerup(): void {
     dragging.value = false
 
     document.body.removeEventListener('pointermove', this.pointermove)
     document.body.removeEventListener('pointerup', this.pointerup)
   },
-  pointerdown (): void {
+  pointerdown(): void {
     dragging.value = true
 
     document.body.addEventListener('pointermove', this.pointermove)
     document.body.addEventListener('pointerup', this.pointerup)
   },
-  pointermove (event: PointerEvent): void {
+  pointermove(event: PointerEvent): void {
     if (!dragging.value) {
       return
     }
@@ -62,22 +62,23 @@ const listeners = {
 
     if (offset.value < 0) {
       offset.value = 0
-    } else if (offset.value > maxOffset) {
+    }
+    else if (offset.value > maxOffset) {
       methods.onConfirm()
 
       offset.value = maxOffset
     }
-  }
+  },
 }
 
 const methods = {
-  onConfirm (): void {
+  onConfirm(): void {
     if (confirmed.value) {
       return
     }
 
     confirmed.value = true
     emits('confirm')
-  }
+  },
 }
 </script>

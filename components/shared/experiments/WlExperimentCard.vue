@@ -9,6 +9,6 @@ import WlCard from '~/components/shared/card/WlCard.vue'
 import type { Experiment } from '~/utils/types/experiments'
 
 const props = defineProps<{
-  experiment: Experiment;
+  experiment: Experiment
 }>()
 </script>

@@ -1,4 +1,4 @@
-import { PomodoroRecord } from "~/composables/server/pomodoro/types/pomodoroRecord"
+import { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 import { useProductivitySupabaseClient } from '~/server/services/productivity/database'
 
 const supabaseClient = useProductivitySupabaseClient()
@@ -36,7 +36,7 @@ export function usePomodoroStorage() {
         started_at: pomodoroRecord.startTime,
         ended_at: pomodoroRecord.endTime,
         type: pomodoroRecord.type,
-        credential_id: credentialsId
+        credential_id: credentialsId,
       })
       .select()
 
@@ -44,7 +44,7 @@ export function usePomodoroStorage() {
       result.data![0].id,
       pomodoroRecord.startTime,
       pomodoroRecord.endTime,
-      pomodoroRecord.type
+      pomodoroRecord.type,
     )
   }
 
@@ -54,7 +54,7 @@ export function usePomodoroStorage() {
       .eq('id', pomodoroRecordId)
       .eq('credential_id', credentialsId)
 
-    console.log(result);
+    console.log(result)
   }
 
   async function update(pomodoroRecord: PomodoroRecord, credentialsId: string): Promise<void> {
@@ -63,18 +63,18 @@ export function usePomodoroStorage() {
         id: pomodoroRecord.id,
         started_at: pomodoroRecord.startTime,
         ended_at: pomodoroRecord.endTime,
-        type: pomodoroRecord.type
+        type: pomodoroRecord.type,
       })
       .eq('id', pomodoroRecord.id)
       .eq('credential_id', credentialsId)
 
-    console.log(result);
+    console.log(result)
   }
 
   return {
     save,
     load,
     remove,
-    update
+    update,
   }
 }

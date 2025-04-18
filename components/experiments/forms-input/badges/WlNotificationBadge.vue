@@ -12,12 +12,12 @@
 import { computed } from 'vue'
 
 type Props = {
-  value: boolean;
-};
+  value: boolean
+}
 
 const props = defineProps<Props>()
 
 const classes = computed(() => ({
-  'scale-0': !props.value
+  'scale-0': !props.value,
 }))
 </script>

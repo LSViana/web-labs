@@ -1,9 +1,9 @@
 <template>
   <WlInput
-      type="date"
-      :model-value="computedValue"
-      :step="props.step"
-      @update:model-value="listeners.update"
+    type="date"
+    :model-value="computedValue"
+    :step="props.step"
+    @update:model-value="listeners.update"
   />
 </template>
 
@@ -13,11 +13,11 @@ import { computed } from 'vue'
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 
 type Props = {
-  step?: number;
+  step?: number
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  step: 1
+  step: 1,
 })
 
 const model = defineModel<Date>({ required: true })
@@ -38,7 +38,6 @@ const listeners = {
     const time = model.value.toLocaleTimeString()
 
     model.value = new Date(`${date} ${time}`)
-  }
+  },
 }
 </script>
-

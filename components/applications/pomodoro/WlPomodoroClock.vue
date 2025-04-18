@@ -1,35 +1,35 @@
 <template>
   <div class="flex flex-col items-center gap-3 rounded border p-5">
-    <WlPomodoroProgressCircle :interval="pomodoro.interval.value"/>
+    <WlPomodoroProgressCircle :interval="pomodoro.interval.value" />
     <div class="flex gap-3">
       <WlIconButton
-          v-if="pomodoro.isOvertime.value"
-          variant="danger"
-          title="Finish interval (P)"
-          @click="listeners.finishClick"
+        v-if="pomodoro.isOvertime.value"
+        variant="danger"
+        title="Finish interval (P)"
+        @click="listeners.finishClick"
       >
-        <WlStopIcon/>
+        <WlStopIcon />
       </WlIconButton>
       <WlIconButton
-          v-else-if="pomodoro.isRunning.value"
-          variant="transparent"
-          :class="pomodoroColor.backgroundInteractive"
-          title="Pause timer (P)"
-          @click="listeners.pauseClick"
+        v-else-if="pomodoro.isRunning.value"
+        variant="transparent"
+        :class="pomodoroColor.backgroundInteractive"
+        title="Pause timer (P)"
+        @click="listeners.pauseClick"
       >
-        <WlPauseIcon/>
+        <WlPauseIcon />
       </WlIconButton>
       <WlIconButton
-          v-else
-          variant="transparent"
-          :class="pomodoroColor.backgroundInteractive"
-          title="Start timer (P)"
-          @click="listeners.playClick"
+        v-else
+        variant="transparent"
+        :class="pomodoroColor.backgroundInteractive"
+        title="Start timer (P)"
+        @click="listeners.playClick"
       >
-        <WlPlayIcon class="ps-1"/>
+        <WlPlayIcon class="ps-1" />
       </WlIconButton>
       <WlIconButton variant="secondary" title="Next interval (N)" @click="listeners.nextClick()">
-        <WlForwardIcon/>
+        <WlForwardIcon />
       </WlIconButton>
     </div>
   </div>
@@ -41,7 +41,7 @@ import { computed, onMounted, onUnmounted } from 'vue'
 
 import type {
   PomodoroIntervalEvent,
-  PomodoroNotificationEvent
+  PomodoroNotificationEvent,
 } from '~/components/applications/pomodoro/types/pomodoroEvents'
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
@@ -55,9 +55,9 @@ import WlPlayIcon from '~/components/shared/icons/static/WlPlayIcon.vue'
 import WlStopIcon from '~/components/shared/icons/static/WlStopIcon.vue'
 
 type Events = {
-  (e: 'interval', value: PomodoroInterval): void;
-  (e: 'notification', type: PomodoroIntervalType): void;
-  (e: 'play'): void;
+  (e: 'interval', value: PomodoroInterval): void
+  (e: 'notification', type: PomodoroIntervalType): void
+  (e: 'play'): void
 }
 
 const emits = defineEmits<Events>()
@@ -67,9 +67,11 @@ const pomodoroColor = computed(() => getPomodoroTypeColor(pomodoro.interval.valu
 onKeyDown('p', () => {
   if (pomodoro.isOvertime.value) {
     listeners.finishClick()
-  } else if (pomodoro.isRunning.value) {
+  }
+  else if (pomodoro.isRunning.value) {
     listeners.pauseClick()
-  } else {
+  }
+  else {
     listeners.playClick()
   }
 })
@@ -88,7 +90,8 @@ const listeners = {
   playClick() {
     if (pomodoro.isInProgress.value) {
       pomodoro.resume()
-    } else {
+    }
+    else {
       pomodoro.start()
     }
 
@@ -108,6 +111,6 @@ const listeners = {
   },
   notification(event: PomodoroNotificationEvent): void {
     emits('notification', event.intervalType)
-  }
+  },
 }
 </script>

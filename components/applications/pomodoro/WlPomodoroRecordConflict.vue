@@ -1,6 +1,6 @@
 <template>
   <div v-if="hasConflicts" class="flex items-center gap-2 rounded border border-amber-400 p-3">
-    <WlTriangleExclamationIcon class="text-amber-400"/>
+    <WlTriangleExclamationIcon class="text-amber-400" />
     <span>Conflicts:</span>
     <template v-for="conflict in conflictIndexes" :key="conflict">
       <span>
@@ -20,11 +20,11 @@ import WlTriangleExclamationIcon from '~/components/shared/icons/static/WlTriang
 import type { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 type Emits = {
-  (e: 'select', index: number): void;
+  (e: 'select', index: number): void
 }
 
 type Props = {
-  records: PomodoroRecord[];
+  records: PomodoroRecord[]
 }
 
 const props = defineProps<Props>()
@@ -53,6 +53,6 @@ const hasConflicts = computed(() => conflictIndexes.value.length > 0)
 const listeners = {
   select(index: number): void {
     emits('select', index)
-  }
+  },
 }
 </script>

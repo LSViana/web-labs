@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout name="home">
     <WlContainer class="flex flex-col gap-3 p-3">
-      <WlWorklogTracker/>
+      <WlWorklogTracker />
     </WlContainer>
   </NuxtLayout>
 </template>
@@ -21,7 +21,7 @@ definePageMeta({
     if (!auth.authenticated.value) {
       return navigateTo('/applications/worklog-tracker/login')
     }
-  }
+  },
 })
 
 provideWorklogStorage()

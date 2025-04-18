@@ -10,7 +10,7 @@ function transform(record: PomodoroRecord): PomodoroRecord {
     record.id,
     new Date(record.startTime),
     new Date(record.endTime),
-    record.type
+    record.type,
   )
 }
 
@@ -22,8 +22,8 @@ function buildPomodoroStorage() {
       method: 'POST',
       body: JSON.stringify(record),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
 
     const result = await response.json()
@@ -36,14 +36,14 @@ function buildPomodoroStorage() {
       method: 'PUT',
       body: JSON.stringify(record),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
   }
 
   async function load(date: Date): Promise<PomodoroRecord[]> {
     const query = new URLSearchParams({
-      date: date.toLocaleDateString()
+      date: date.toLocaleDateString(),
     })
 
     const response = await fetch(`${url}?${query}`)
@@ -55,7 +55,7 @@ function buildPomodoroStorage() {
 
   async function remove(record: PomodoroRecord): Promise<void> {
     const query = new URLSearchParams({
-      id: record.id.toString()
+      id: record.id.toString(),
     })
 
     await fetch(`${url}?${query.toString()}`, {
@@ -72,10 +72,9 @@ function buildPomodoroStorage() {
     update,
     load,
     remove,
-    loadToday
+    loadToday,
   }
 }
-
 
 export function providePomodoroStorage() {
   provide('pomodoroStorage', buildPomodoroStorage())

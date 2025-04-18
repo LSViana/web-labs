@@ -1,9 +1,9 @@
 import fibonacci from '~/composables/threading/fibonacci/fibonacci'
 
 type FibonacciResult = {
-  calculate(iterations: number): number;
-  calculateAsync(iterations: number): Promise<number>;
-};
+  calculate(iterations: number): number
+  calculateAsync(iterations: number): Promise<number>
+}
 
 function useFibonacci(): FibonacciResult {
   return {
@@ -13,7 +13,7 @@ function useFibonacci(): FibonacciResult {
     calculateAsync(iterations: number): Promise<number> {
       return new Promise((resolve, reject) => {
         const worker = new Worker(new URL('./worker.ts', import.meta.url), {
-          type: 'module'
+          type: 'module',
         })
 
         worker.postMessage(iterations)
@@ -29,7 +29,7 @@ function useFibonacci(): FibonacciResult {
           worker.terminate()
         }
       })
-    }
+    },
   }
 }
 

@@ -11,8 +11,8 @@ import type { WlIconSize } from '~/components/shared/icons/WlIcon.vue'
 import WlIcon from '~/components/shared/icons/WlIcon.vue'
 
 type Props = {
-  size?: WlIconSize;
-};
+  size?: WlIconSize
+}
 
 const props = defineProps<Props>()
 </script>

@@ -1,23 +1,23 @@
 <template>
   <WlButton
-      :variant="props.variant"
-      class="wl-confirm-button relative"
-      @mousedown="listeners.mousedown"
-      @mouseup="listeners.mouseup"
-      @mouseleave="listeners.mouseleave"
-      @touchstart="listeners.touchstart"
-      @touchend="listeners.touchend"
-      @keydown="listeners.keydown"
-      @keyup="listeners.keyup"
+    :variant="props.variant"
+    class="wl-confirm-button relative"
+    @mousedown="listeners.mousedown"
+    @mouseup="listeners.mouseup"
+    @mouseleave="listeners.mouseleave"
+    @touchstart="listeners.touchstart"
+    @touchend="listeners.touchend"
+    @keydown="listeners.keydown"
+    @keyup="listeners.keyup"
   >
     <span class="wl-progress-container absolute inset-0 overflow-hidden rounded-[inherit]">
       <span
-          class="wl-progress block h-full bg-white opacity-20 mix-blend-plus-lighter transition-[width] duration-1000"
-          :class="progressClasses"
-          @transitionend="listeners.transitionend"
+        class="wl-progress block h-full bg-white opacity-20 mix-blend-plus-lighter transition-[width] duration-1000"
+        :class="progressClasses"
+        @transitionend="listeners.transitionend"
       />
     </span>
-    <slot/>
+    <slot />
   </WlButton>
 </template>
 
@@ -29,22 +29,22 @@ import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import { KeyboardCode } from '~/utils/types/ui/keyboardEvent'
 
 type Props = {
-  variant?: WlButtonVariant;
-};
+  variant?: WlButtonVariant
+}
 type Events = {
-  (e: 'confirm'): void;
-  (e: 'start-confirm'): void;
-  (e: 'stop-confirm'): void;
-};
+  (e: 'confirm'): void
+  (e: 'start-confirm'): void
+  (e: 'stop-confirm'): void
+}
 
 const props = withDefaults(defineProps<Props>(), {
-  variant: 'primary'
+  variant: 'primary',
 })
 const emits = defineEmits<Events>()
 
 const loading = ref(false)
 const progressClasses = computed(() => ([
-  loading.value ? 'wl-loading' : ''
+  loading.value ? 'wl-loading' : '',
 ]))
 
 const listeners = {
@@ -77,7 +77,7 @@ const listeners = {
     if (loading.value) {
       methods.onConfirm()
     }
-  }
+  },
 }
 
 const methods = {
@@ -91,7 +91,7 @@ const methods = {
   },
   onConfirm(): void {
     emits('confirm')
-  }
+  },
 }
 </script>
 

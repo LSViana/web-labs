@@ -10,7 +10,7 @@ const overScrolledClass = 'overscrolled'
 const childrenClasses = ['transition-transform', 'origin-left', 'duration-500']
 
 const listeners = {
-  scroll (event: Event): void {
+  scroll(event: Event): void {
     const target = event.target as HTMLElement
 
     const scrollLeft = target.scrollLeft
@@ -44,11 +44,12 @@ const listeners = {
 
       if (overScrolled) {
         child.classList.add(overScrolledClass)
-      } else if (scrolled) {
+      }
+      else if (scrolled) {
         child.classList.add(scrolledClass)
       }
     }
-  }
+  },
 }
 </script>
 

@@ -9,9 +9,9 @@ const supabaseClient = createClient(
   config.supabase.key,
   {
     db: {
-      schema: 'productivity'
-    }
-  }
+      schema: 'productivity',
+    },
+  },
 )
 
 export function useProductivitySupabaseClient() {

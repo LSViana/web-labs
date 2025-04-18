@@ -5,9 +5,9 @@ import { createClient } from '@supabase/supabase-js'
 import { useAppConfig } from '#imports'
 
 type Supabase = {
-  client: SupabaseClient;
-  channel: RealtimeChannel;
-  channelConnected: Promise<void>;
+  client: SupabaseClient
+  channel: RealtimeChannel
+  channelConnected: Promise<void>
 }
 
 function buildSupabase(): Supabase {
@@ -15,8 +15,8 @@ function buildSupabase(): Supabase {
 
   const client = createClient(config.supabase.url, config.supabase.key, {
     auth: {
-      persistSession: false
-    }
+      persistSession: false,
+    },
   })
   const channel = client.channel('web-labs')
   const channelConnected = getChannelConnectedPromise(channel)
@@ -24,7 +24,7 @@ function buildSupabase(): Supabase {
   return {
     client,
     channel,
-    channelConnected
+    channelConnected,
   }
 }
 
@@ -33,7 +33,8 @@ function getChannelConnectedPromise(channel: RealtimeChannel): Promise<void> {
     channel.subscribe((status, error) => {
       if (status === 'SUBSCRIBED') {
         resolve()
-      } else {
+      }
+      else {
         reject(error)
       }
     })

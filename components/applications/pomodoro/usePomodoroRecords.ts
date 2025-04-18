@@ -10,9 +10,11 @@ export function usePomodoroRecords() {
 
     if (value.length === 0) {
       index = 0
-    } else if (value[0].startTime >= record.endTime) {
+    }
+    else if (value[0].startTime >= record.endTime) {
       index = 0
-    } else {
+    }
+    else {
       const nextIndex = value.findLastIndex(x => x.endTime <= record.startTime)
 
       // There will always be a next record since the first one starts before the new record.
@@ -40,7 +42,6 @@ export function usePomodoroRecords() {
     add,
     update,
     remove,
-    load
+    load,
   }
 }
-

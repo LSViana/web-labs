@@ -7,8 +7,8 @@ describe('WlButton', () => {
   test('should render a <button>', () => {
     const wrapper = mount(WlButton, {
       props: {
-        variant: 'primary'
-      }
+        variant: 'primary',
+      },
     })
 
     expect(wrapper.get('button').isVisible()).toBeTruthy()
@@ -17,11 +17,11 @@ describe('WlButton', () => {
   test('should render the content of the default slot', () => {
     const wrapper = mount(WlButton, {
       props: {
-        variant: 'primary'
+        variant: 'primary',
       },
       slots: {
-        default: 'Sign In'
-      }
+        default: 'Sign In',
+      },
     })
 
     expect(wrapper.text()).toBe('Sign In')

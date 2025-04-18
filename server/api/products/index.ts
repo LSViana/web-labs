@@ -8,6 +8,6 @@ export default defineEventHandler(async () => {
   await productsStorage.loadProducts()
 
   return {
-    products: productsStorage.products
+    products: productsStorage.products,
   }
 })

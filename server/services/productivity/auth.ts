@@ -41,6 +41,6 @@ export function useProductivityAuth() {
   return {
     setCredentials,
     removeCredentials,
-    getCredentials
+    getCredentials,
   }
 }

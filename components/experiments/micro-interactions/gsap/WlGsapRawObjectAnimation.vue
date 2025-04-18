@@ -21,15 +21,15 @@ const methods = {
       source,
       {
         value: 100,
-        duration: 2
+        duration: 2,
       })
-  }
+  },
 }
 
 const listeners = {
   onRestart(): void {
     methods.animate()
-  }
+  },
 }
 
 onMounted(methods.animate)

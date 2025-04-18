@@ -19,6 +19,6 @@ export function usePomodoroNotification() {
 
   return {
     notify,
-    requestPermission
+    requestPermission,
   }
 }

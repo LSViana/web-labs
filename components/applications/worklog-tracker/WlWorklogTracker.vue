@@ -1,20 +1,22 @@
 <template>
   <div class="flex justify-between">
-    <h1 class="text-2xl">Worklog Tracker</h1>
+    <h1 class="text-2xl">
+      Worklog Tracker
+    </h1>
     <div class="flex items-center gap-3">
-      <WlDateInput v-model="date" @change="listeners.updateDate"/>
+      <WlDateInput v-model="date" @change="listeners.updateDate" />
       <a href="#" class="underline" @click="listeners.logout">Logout</a>
     </div>
   </div>
   <WlWorklogDetailsForm
-      :item="item"
-      :edit="isEditing"
-      :disabled="worklogStorage.operationLoading.value"
-      @save="listeners.save"
-      @remove="listeners.remove"
-      @close="listeners.close"
+    :item="item"
+    :edit="isEditing"
+    :disabled="worklogStorage.operationLoading.value"
+    @save="listeners.save"
+    @remove="listeners.remove"
+    @close="listeners.close"
   />
-  <WlWorklogList :selected-index="selectedIndex" :items="worklogList.value" @select="listeners.select"/>
+  <WlWorklogList :selected-index="selectedIndex" :items="worklogList.value" @select="listeners.select" />
 </template>
 
 <script setup lang="ts">
@@ -32,7 +34,7 @@ import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.
 import { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
 
 useHead({
-  title: 'Worklog Tracker'
+  title: 'Worklog Tracker',
 })
 
 const router = useRouter()
@@ -60,7 +62,8 @@ const listeners = {
     if (isEditing.value) {
       await worklogStorage.update(newItem)
       worklogList.update(newItem)
-    } else {
+    }
+    else {
       const savedItem = await worklogStorage.save(newItem)
       worklogList.add(savedItem)
     }
@@ -92,7 +95,7 @@ const listeners = {
   async logout(): Promise<void> {
     await worklogAuth.logout()
     await router.push('/applications/worklog-tracker/login')
-  }
+  },
 }
 
 const methods = {
@@ -106,6 +109,6 @@ const methods = {
       newValue.endTime = newValue.startTime
       item.value = newValue
     }
-  }
+  },
 }
 </script>

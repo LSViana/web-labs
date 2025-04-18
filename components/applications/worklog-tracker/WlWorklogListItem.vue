@@ -1,8 +1,8 @@
 <template>
   <li
-      class="flex cursor-pointer border-x border-t first:rounded-t last:rounded-b last:border-b"
-      :class="classes"
-      @click="listeners.click"
+    class="flex cursor-pointer border-x border-t first:rounded-t last:rounded-b last:border-b"
+    :class="classes"
+    @click="listeners.click"
   >
     <span class="w-40 border-r p-3">{{ props.item.ticket }}</span>
     <span class="grow basis-0 whitespace-pre-wrap border-r p-3">{{ props.item.content }}</span>
@@ -18,8 +18,8 @@ import type { WorklogItem } from '~/composables/server/worklog-tracker/types/wor
 import { useWorklogDurationFormat } from '~/composables/server/worklog-tracker/useWorklogDurationFormat'
 
 type Props = {
-  item: WorklogItem;
-  selected: boolean;
+  item: WorklogItem
+  selected: boolean
 }
 
 type Emits = {
@@ -33,16 +33,16 @@ const formattedDates = computed(() => ({
   start: props.item.startTime.toLocaleTimeString([], {
     hour: 'numeric',
     minute: '2-digit',
-    hour12: false
+    hour12: false,
   }),
   end: props.item.endTime.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
-  })
+  }),
 }))
 const classes = computed(() => ({
-  'bg-slate-100 dark:bg-slate-700': props.selected
+  'bg-slate-100 dark:bg-slate-700': props.selected,
 }))
 const durationSeconds = computed(() => props.item.durationSeconds)
 const duration = useWorklogDurationFormat(durationSeconds)
@@ -50,6 +50,6 @@ const duration = useWorklogDurationFormat(durationSeconds)
 const listeners = {
   click(): void {
     emit('click')
-  }
+  },
 }
 </script>

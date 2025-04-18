@@ -83,7 +83,7 @@ describe('Interval', () => {
     const {
       hours,
       minutes,
-      seconds
+      seconds,
     } = interval
 
     // Assert

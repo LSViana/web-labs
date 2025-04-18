@@ -1,42 +1,53 @@
 <template>
   <div class="flex flex-wrap items-end gap-3">
     <div class="inline-flex flex-col">
-      <WlLabel ref="startDateRef" for="pomodoro-record-details-start">Start</WlLabel>
-      <WlTimeInput 
+      <WlLabel ref="startDateRef" for="pomodoro-record-details-start">
+        Start
+      </WlLabel>
+      <WlTimeInput
         id="pomodoro-record-details-start"
-        v-model="startDate" 
+        v-model="startDate"
         show-seconds
-        @keyup.enter="listeners.enterStartDate" 
+        @keyup.enter="listeners.enterStartDate"
       />
     </div>
     <div class="inline-flex flex-col">
-      <WlLabel ref="endDateRef" for="pomodoro-record-details-end">End</WlLabel>
+      <WlLabel ref="endDateRef" for="pomodoro-record-details-end">
+        End
+      </WlLabel>
       <WlTimeInput
-id="pomodoro-record-details-end"
-v-model="endDate"
-show-seconds
-        @keyup.enter="listeners.enterEndDate" />
+        id="pomodoro-record-details-end"
+        v-model="endDate"
+        show-seconds
+        @keyup.enter="listeners.enterEndDate"
+      />
     </div>
     <div class="inline-flex flex-col">
-      <WlLabel for="pomodoro-record-details-type">Type</WlLabel>
+      <WlLabel for="pomodoro-record-details-type">
+        Type
+      </WlLabel>
       <WlSelect id="pomodoro-record-details-type" v-model="type">
-        <option v-for="item in types" :key="item" :value="item">{{ PomodoroIntervalTypeLabels[item] }}</option>
+        <option v-for="item in types" :key="item" :value="item">
+          {{ PomodoroIntervalTypeLabels[item] }}
+        </option>
       </WlSelect>
     </div>
   </div>
   <div class="flex gap-3">
     <WlButton
-ref="saveRef"
-variant="primary"
-title="Save record (S)"
-@click="listeners.save">
+      ref="saveRef"
+      variant="primary"
+      title="Save record (S)"
+      @click="listeners.save"
+    >
       <span class="underline">S</span>ave
     </WlButton>
     <WlButton
-v-if="!props.new"
-variant="danger"
-title="Delete record (D)"
-@click="listeners.delete">
+      v-if="!props.new"
+      variant="danger"
+      title="Delete record (D)"
+      @click="listeners.delete"
+    >
       <span class="underline">D</span>elete
     </WlButton>
     <WlButton variant="secondary" title="Close record (C)" @click="listeners.close">
@@ -57,13 +68,13 @@ import WlLabel from '~/components/experiments/forms-input/WlLabel.vue'
 import { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 type Emits = {
-  (e: 'update:record', value: PomodoroRecord): void;
-  (e: 'delete'): void;
-  (e: 'close'): void;
+  (e: 'update:record', value: PomodoroRecord): void
+  (e: 'delete'): void
+  (e: 'close'): void
 }
 
 type Props = {
-  new: boolean;
+  new: boolean
 }
 
 const emits = defineEmits<Emits>()
@@ -93,7 +104,7 @@ watch(
     endDate.value = record.value.endTime
     type.value = record.value.type
   },
-  { immediate: true }
+  { immediate: true },
 )
 
 const listeners = {
@@ -126,6 +137,6 @@ const listeners = {
     }
 
     emits('close')
-  }
+  },
 }
 </script>

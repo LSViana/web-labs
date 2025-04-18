@@ -15,17 +15,18 @@ export function useWorklogAuth() {
       method: 'POST',
       body: JSON.stringify({
         email: email,
-        password: password
+        password: password,
       }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
 
     if (response.status !== 204) {
       invalidCredentials.value = true
       authenticated.value = false
-    } else {
+    }
+    else {
       invalidCredentials.value = false
       authenticated.value = true
     }
@@ -33,7 +34,7 @@ export function useWorklogAuth() {
 
   async function logout() {
     await fetch('/api/worklog-tracker/worklogs/auth', {
-      method: 'DELETE'
+      method: 'DELETE',
     })
 
     authenticated.value = false
@@ -47,6 +48,6 @@ export function useWorklogAuth() {
     authenticated,
     invalidCredentials,
     login,
-    logout
+    logout,
   }
 }

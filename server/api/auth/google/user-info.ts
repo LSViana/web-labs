@@ -11,8 +11,8 @@ export default defineEventHandler(async (event) => {
 
   const response = await fetch('https://www.googleapis.com/userinfo/v2/me', {
     headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
+      Authorization: `Bearer ${accessToken}`,
+    },
   })
 
   return await response.json()

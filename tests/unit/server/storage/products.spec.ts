@@ -18,7 +18,7 @@ describe('Products Storage', () => {
 
     await Promise.all([
       vi.runAllTimersAsync(),
-      store.loadProducts()
+      store.loadProducts(),
     ])
 
     expect(store.products.length).toBe(3)

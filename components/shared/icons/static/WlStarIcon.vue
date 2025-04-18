@@ -13,13 +13,13 @@ import type { WlIconSize } from '~/components/shared/icons/WlIcon.vue'
 import WlIcon from '~/components/shared/icons/WlIcon.vue'
 
 type Props = {
-  size?: WlIconSize;
-  value: boolean;
-};
+  size?: WlIconSize
+  value: boolean
+}
 
 const props = defineProps<Props>()
 
 const classes = computed(() => ({
-  'opacity-30': !props.value
+  'opacity-30': !props.value,
 }))
 </script>

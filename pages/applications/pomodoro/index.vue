@@ -21,7 +21,7 @@ definePageMeta({
     if (!auth.authenticated.value) {
       return navigateTo('/applications/pomodoro/login')
     }
-  }
+  },
 })
 
 providePomodoroStorage()

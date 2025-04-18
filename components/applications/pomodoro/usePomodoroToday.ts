@@ -21,6 +21,6 @@ export function usePomodoroToday() {
   return {
     get,
     isToday,
-    isSameDay
+    isSameDay,
   }
 }

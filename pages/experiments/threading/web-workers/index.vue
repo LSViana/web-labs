@@ -32,11 +32,11 @@ const fibonacci = useFibonacci()
 
 const singleThread = reactive({
   result: 0,
-  duration: 0
+  duration: 0,
 })
 const multiThread = reactive({
   result: 0,
-  duration: 0
+  duration: 0,
 })
 
 const listeners = {
@@ -59,6 +59,6 @@ const listeners = {
     const now = performance.now()
     multiThread.result = await fibonacci.calculateAsync(iterations)
     multiThread.duration = Math.round(performance.now() - now)
-  }
+  },
 }
 </script>

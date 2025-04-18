@@ -8,7 +8,7 @@ const supabaseClient = useProductivitySupabaseClient()
 export default defineEventHandler(async (event) => {
   const {
     email,
-    password
+    password,
   } = await readBody(event, { strict: true })
 
   const existingCredentials = await supabaseClient

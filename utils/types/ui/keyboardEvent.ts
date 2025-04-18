@@ -1,3 +1,3 @@
 export enum KeyboardCode {
-  space = 'Space'
+  space = 'Space',
 }

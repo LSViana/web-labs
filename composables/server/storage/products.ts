@@ -3,8 +3,8 @@ import { reactive } from 'vue'
 import { Product } from '~/utils/models/products'
 
 type ProductsStorage = {
-  products: Product[];
-  loadProducts: () => Promise<void>;
+  products: Product[]
+  loadProducts: () => Promise<void>
 }
 
 export function useProductsStorage(): ProductsStorage {
@@ -16,12 +16,12 @@ export function useProductsStorage(): ProductsStorage {
     products.push(
       new Product('Milk'),
       new Product('Banana'),
-      new Product('Cookies')
+      new Product('Cookies'),
     )
   }
 
   return {
     products,
-    loadProducts
+    loadProducts,
   }
 }

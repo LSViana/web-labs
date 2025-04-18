@@ -1,11 +1,11 @@
 <template>
   <WlInput
-      v-model="innerValue"
-      type="text"
-      :class="classes"
-      @update:model-value="listeners.update"
-      @keydown.enter="listeners.input"
-      @blur="listeners.input"
+    v-model="innerValue"
+    type="text"
+    :class="classes"
+    @update:model-value="listeners.update"
+    @keydown.enter="listeners.input"
+    @blur="listeners.input"
   />
 </template>
 
@@ -15,11 +15,11 @@ import { computed, onMounted, ref, watch } from 'vue'
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 
 type Props = {
-  showSeconds?: boolean;
+  showSeconds?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  showSeconds: false
+  showSeconds: false,
 })
 
 const model = defineModel<Date>({ required: true })
@@ -27,7 +27,7 @@ const innerValue = ref('')
 
 const classes = computed(() => [
   'text-center',
-  props.showSeconds ? 'w-24' : 'w-20'
+  props.showSeconds ? 'w-24' : 'w-20',
 ])
 
 onMounted(() => innerValue.value = methods.formatFromDate(model.value))
@@ -53,7 +53,8 @@ const listeners = {
 
       if (numberTime == 0 || numberTime === 1 || numberTime === 2) {
         return
-      } else {
+      }
+      else {
         innerValue.value += ':'
       }
     }
@@ -95,7 +96,7 @@ const listeners = {
     const newDate = methods.formatToDate(`${hours}:${minutes}:${seconds}`)
 
     model.value = newDate
-  }
+  },
 }
 
 const methods = {
@@ -106,7 +107,8 @@ const methods = {
 
     if (props.showSeconds) {
       return `${hours}:${minutes}:${seconds}`
-    } else {
+    }
+    else {
       return `${hours}:${minutes}`
     }
   },
@@ -117,7 +119,6 @@ const methods = {
     const currentDate = model.value.getDate()
 
     return new Date(currentYear, currentMonth, currentDate, Number(hours), Number(minutes), Number(seconds))
-  }
+  },
 }
 </script>
-

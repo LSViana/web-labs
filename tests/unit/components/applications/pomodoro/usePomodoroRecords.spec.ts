@@ -29,13 +29,13 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:10:00.000Z'),
       new Date('2022-01-01T00:20:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
     records.add(new PomodoroRecord(
       0,
       new Date('2022-01-01T00:30:00.000Z'),
       new Date('2022-01-01T00:40:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
 
     // Act (adds to the beginning of the list)
@@ -43,7 +43,7 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:05:00.000Z'),
       new Date('2022-01-01T00:10:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     )
     records.add(record)
 
@@ -56,7 +56,7 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:20:00.000Z'),
       new Date('2022-01-01T00:25:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     )
     records.add(record)
 
@@ -69,7 +69,7 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:45:00.000Z'),
       new Date('2022-01-01T00:50:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     )
     records.add(record)
 
@@ -85,19 +85,19 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:10:00.000Z'),
       new Date('2022-01-01T00:20:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
     records.add(new PomodoroRecord(
       0,
       new Date('2022-01-01T00:20:00.000Z'),
       new Date('2022-01-01T00:30:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
     records.add(new PomodoroRecord(
       0,
       new Date('2022-01-01T00:30:00.000Z'),
       new Date('2022-01-01T00:40:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
 
     // Act (updates the first record)
@@ -105,7 +105,7 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:12:00.000Z'),
       new Date('2022-01-01T00:20:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     )
     records.update(record, 0)
 
@@ -118,7 +118,7 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:22:00.000Z'),
       new Date('2022-01-01T00:30:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     )
     records.update(record, 1)
 
@@ -131,7 +131,7 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:30:00.000Z'),
       new Date('2022-01-01T00:35:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     )
     records.update(record, 2)
 
@@ -144,7 +144,7 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:10:00.000Z'),
       new Date('2022-01-01T00:12:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     )
     records.update(record, 2)
 
@@ -157,7 +157,7 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:35:00.000Z'),
       new Date('2022-01-01T00:40:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     )
     records.update(record, 0)
 
@@ -173,19 +173,19 @@ describe('usePomodoroRecords', () => {
       0,
       new Date('2022-01-01T00:10:00.000Z'),
       new Date('2022-01-01T00:20:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
     records.add(new PomodoroRecord(
       0,
       new Date('2022-01-01T00:20:00.000Z'),
       new Date('2022-01-01T00:30:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
     records.add(new PomodoroRecord(
       0,
       new Date('2022-01-01T00:30:00.000Z'),
       new Date('2022-01-01T00:40:00.000Z'),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
 
     // Assert
@@ -220,20 +220,20 @@ describe('usePomodoroRecords', () => {
         0,
         new Date('2022-01-01T00:10:00.000Z'),
         new Date('2022-01-01T00:20:00.000Z'),
-        PomodoroIntervalType.work
+        PomodoroIntervalType.work,
       ),
       new PomodoroRecord(
         0,
         new Date('2022-01-01T00:20:00.000Z'),
         new Date('2022-01-01T00:30:00.000Z'),
-        PomodoroIntervalType.work
+        PomodoroIntervalType.work,
       ),
       new PomodoroRecord(
         0,
         new Date('2022-01-01T00:30:00.000Z'),
         new Date('2022-01-01T00:40:00.000Z'),
-        PomodoroIntervalType.work
-      )
+        PomodoroIntervalType.work,
+      ),
     ]
     records.load(pomodoroRecords)
 

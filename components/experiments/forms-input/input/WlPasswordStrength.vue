@@ -6,7 +6,7 @@
         v-for="(label, key, index) in PasswordStrength"
         :key="key"
         class="absolute text-sm font-semibold transition-[opacity,transform] duration-300"
-        :class="[ strengthValue === index ? 'delay-100' : '-translate-y-3 opacity-0', passwordStrengthTextClasses[label] ]"
+        :class="[strengthValue === index ? 'delay-100' : '-translate-y-3 opacity-0', passwordStrengthTextClasses[label]]"
       >
         {{ label }}
       </span>
@@ -17,7 +17,7 @@
         v-for="(_, key, index) in PasswordStrength"
         :key="key"
         class="mt-0.5 h-1 w-4 rounded transition-colors"
-        :class="[ strengthValue >= index ? passwordStrengthContainerClasses[strength] : 'bg-slate-600' ]"
+        :class="[strengthValue >= index ? passwordStrengthContainerClasses[strength] : 'bg-slate-600']"
       />
     </div>
   </div>
@@ -29,12 +29,12 @@ import { computed } from 'vue'
 import {
   PasswordStrength,
   passwordStrengthContainerClasses,
-  passwordStrengthTextClasses
+  passwordStrengthTextClasses,
 } from '~/components/experiments/forms-input/input/passwordStrength'
 
 type Props = {
-  value: string;
-};
+  value: string
+}
 
 const props = defineProps<Props>()
 
@@ -54,6 +54,6 @@ const strength = computed(() => {
 })
 const strengthValue = computed(() => Object.values(PasswordStrength).indexOf(strength.value))
 const classes = computed(() => [
-  props.value.length === 0 ? 'opacity-0' : ''
+  props.value.length === 0 ? 'opacity-0' : '',
 ])
 </script>

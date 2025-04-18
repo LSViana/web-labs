@@ -10,15 +10,15 @@ export class Interval {
   constructor(hours: number, minutes: number, seconds: number) {
     const totalSeconds = hours * Interval.secondsPerHour + minutes * Interval.secondsPerMinutes + seconds
 
-    const finalHours = totalSeconds > 0 ?
-      Math.floor(totalSeconds / Interval.secondsPerHour) :
-      Math.ceil(totalSeconds / Interval.secondsPerHour)
-    const finalMinutes = (totalSeconds > 0 ?
-      Math.floor(totalSeconds / Interval.secondsPerMinutes) :
-      Math.ceil(totalSeconds / Interval.secondsPerMinutes)) % Interval.minutesPerHour
-    const finalSeconds = totalSeconds > 0 ?
-      Math.floor(totalSeconds % Interval.secondsPerMinutes) :
-      Math.ceil(totalSeconds % Interval.secondsPerMinutes)
+    const finalHours = totalSeconds > 0
+      ? Math.floor(totalSeconds / Interval.secondsPerHour)
+      : Math.ceil(totalSeconds / Interval.secondsPerHour)
+    const finalMinutes = (totalSeconds > 0
+      ? Math.floor(totalSeconds / Interval.secondsPerMinutes)
+      : Math.ceil(totalSeconds / Interval.secondsPerMinutes)) % Interval.minutesPerHour
+    const finalSeconds = totalSeconds > 0
+      ? Math.floor(totalSeconds % Interval.secondsPerMinutes)
+      : Math.ceil(totalSeconds % Interval.secondsPerMinutes)
 
     this.hours = finalHours
     this.minutes = finalMinutes
@@ -26,9 +26,9 @@ export class Interval {
   }
 
   get totalSeconds(): number {
-    return this.hours * Interval.secondsPerHour +
-      this.minutes * Interval.secondsPerMinutes +
-      this.seconds
+    return this.hours * Interval.secondsPerHour
+      + this.minutes * Interval.secondsPerMinutes
+      + this.seconds
   }
 
   public addInterval(interval: Interval): Interval {
