@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-between">
-    <h1 class="text-2xl">
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl">
       Worklog Tracker
     </h1>
     <div class="flex items-center gap-3">

@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="home">
-    <WlContainer class="flex flex-col gap-3 p-3 md:flex-row">
+    <WlContainer class="flex flex-col gap-3 p-3">
       <WlPomodoro />
     </WlContainer>
   </NuxtLayout>

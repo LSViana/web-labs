@@ -1,22 +1,34 @@
 <template>
-  <WlPomodoroClock @interval="listeners.interval" @play="listeners.play" @notification="listeners.notification" />
-  <WlPomodoroOverview
-    v-model:date="date"
-    :records="records.value"
-    @update:date="listeners.date"
-    @create="listeners.add"
-    @update="listeners.update"
-    @remove="listeners.remove"
-  />
+  <div class="flex items-center justify-between">
+    <h1 class="text-xl">
+      Pomodoro
+    </h1>
+    <div class="flex items-center gap-3">
+      <a href="#" class="underline" @click="listeners.logout">Logout</a>
+    </div>
+  </div>
+  <div class="flex gap-3 md:flex-row">
+    <WlPomodoroClock @interval="listeners.interval" @play="listeners.play" @notification="listeners.notification" />
+    <WlPomodoroOverview
+      v-model:date="date"
+      :records="records.value"
+      @update:date="listeners.date"
+      @create="listeners.add"
+      @update="listeners.update"
+      @remove="listeners.remove"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { useHead } from '@vueuse/head'
 import { onMounted, ref } from 'vue'
 
+import { useRouter } from '#app'
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { useLeaveConfirmation } from '~/components/applications/pomodoro/useLeaveConfirmation'
+import { usePomodoroAuth } from '~/components/applications/pomodoro/usePomodoroAuth'
 import { usePomodoroNotification } from '~/components/applications/pomodoro/usePomodoroNotification'
 import { usePomodoroRecorder } from '~/components/applications/pomodoro/usePomodoroRecorder'
 import { usePomodoroRecords } from '~/components/applications/pomodoro/usePomodoroRecords'
@@ -30,6 +42,9 @@ useHead({
   title: 'Pomodoro',
 })
 
+const router = useRouter()
+
+const auth = usePomodoroAuth()
 const recorder = usePomodoroRecorder()
 const storage = usePomodoroStorage()
 const records = usePomodoroRecords()
@@ -93,6 +108,10 @@ const listeners = {
 
     records.remove(index)
     await storage.remove(record)
+  },
+  async logout(): Promise<void> {
+    await auth.logout()
+    await router.push('/applications/pomodoro/login')
   },
 }
 </script>
