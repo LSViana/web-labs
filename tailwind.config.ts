@@ -5,7 +5,7 @@ const config: Partial<Config> = {
   theme: {
     fontFamily: {
       sans: ['Lato', 'sans-serif'],
-      mono: ['Roboto\\ Mono', 'monospace']
+      mono: ['Roboto\\ Mono', 'monospace'],
     },
     extend: {
       colors: {
@@ -15,12 +15,12 @@ const config: Partial<Config> = {
         warning: colors.amber,
         muted: {
           DEFAULT: colors.slate[500],
-          dark: colors.slate[300]
+          dark: colors.slate[300],
         },
-        code: colors.pink
-      }
-    }
-  }
+        code: colors.pink,
+      },
+    },
+  },
 }
 
 export default config

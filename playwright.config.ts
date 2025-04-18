@@ -27,9 +27,9 @@ export default defineConfig({
       {
         open: 'on-failure',
         host: '0.0.0.0',
-        port: 9323
-      }
-    ]
+        port: 9323,
+      },
+    ],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -37,15 +37,15 @@ export default defineConfig({
     baseURL: process.env.BASE_URL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
-    }
+      use: { ...devices['Desktop Chrome'] },
+    },
 
     /* Disabled profiles */
     // {
@@ -77,7 +77,7 @@ export default defineConfig({
     //   name: 'Google Chrome',
     //   use: { ..devices['Desktop Chrome'], channel: 'chrome' },
     // },
-  ]
+  ],
 
   /* Run your local dev server before starting the tests */
   // webServer: {

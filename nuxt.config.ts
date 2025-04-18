@@ -4,25 +4,11 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxt/eslint',
   ],
-  typescript: {
-    typeCheck: true,
-  },
-  imports: {
-    autoImport: false,
-  },
   components: {
     dirs: [],
   },
-  tailwindcss: {
-    cssPath: '~/assets/styles/tailwind.scss',
-  },
-  experimental: {
-    viewTransition: true,
-  },
-  eslint: {
-    config: {
-      stylistic: false,
-    },
+  imports: {
+    autoImport: false,
   },
   appConfig: {
     supabase: {
@@ -33,5 +19,19 @@ export default defineNuxtConfig({
   devServer: {
     host: '0.0.0.0',
   },
+  experimental: {
+    viewTransition: true,
+  },
   compatibilityDate: '2024-08-04',
+  typescript: {
+    typeCheck: true,
+  },
+  eslint: {
+    config: {
+      stylistic: true,
+    },
+  },
+  tailwindcss: {
+    cssPath: '~/assets/styles/tailwind.scss',
+  },
 })
