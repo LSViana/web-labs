@@ -70,13 +70,13 @@ const worklogDurationSeconds = computed(() => WorklogItem.calculateDuration(star
 const worklogDuration = useWorklogDurationFormat(worklogDurationSeconds)
 
 watch(
-    () => props.item,
-    (newItem) => {
-      ticket.value = newItem.ticket
-      content.value = newItem.content
-      startTime.value = newItem.startTime
-      endTime.value = newItem.endTime
-    }
+  () => props.item,
+  (newItem) => {
+    ticket.value = newItem.ticket
+    content.value = newItem.content
+    startTime.value = newItem.startTime
+    endTime.value = newItem.endTime
+  }
 )
 
 const listeners = {
