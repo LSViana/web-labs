@@ -11,7 +11,7 @@ export function useWorklogAuth() {
   useEventListener(window, 'focus', updateAuthenticated)
 
   async function login(email: string, password: string) {
-    const response = await fetch('/api/worklog-tracker/worklogs/auth', {
+    const response = await fetch('/api/productivity/auth', {
       method: 'POST',
       body: JSON.stringify({
         email: email,
