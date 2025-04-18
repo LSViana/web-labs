@@ -1,7 +1,13 @@
 <template>
   <WlPomodoroClock @interval="listeners.interval" @play="listeners.play" @notification="listeners.notification" />
-  <WlPomodoroOverview v-model:date="date" :records="records.value" @update:date="listeners.date" @create="listeners.add"
-    @update="listeners.update" @remove="listeners.remove" />
+  <WlPomodoroOverview
+    v-model:date="date"
+    :records="records.value"
+    @update:date="listeners.date"
+    @create="listeners.add"
+    @update="listeners.update"
+    @remove="listeners.remove"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -21,7 +27,7 @@ import WlPomodoroOverview from '~/components/applications/pomodoro/WlPomodoroOve
 import type { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 useHead({
-  title: 'Pomodoro'
+  title: 'Pomodoro',
 })
 
 const recorder = usePomodoroRecorder()
@@ -87,6 +93,6 @@ const listeners = {
 
     records.remove(index)
     await storage.remove(record)
-  }
+  },
 }
 </script>

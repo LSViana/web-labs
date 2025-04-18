@@ -3,12 +3,18 @@
     <svg class="absolute inset-0 overflow-hidden rounded-full" width="100%" height="100%">
       <circle
           class="wl-circle relative fill-none stroke-slate-900"
-          cx="50%" cy="50%" r="50%" stroke-width="1rem"
+          cx="50%"
+cy="50%"
+r="50%"
+stroke-width="1rem"
       />
       <circle
           class="fill-none"
           :class="pomodoroColor.stroke"
-          cx="50%" cy="50%" r="50%" stroke-width="1rem"
+          cx="50%"
+cy="50%"
+r="50%"
+stroke-width="1rem"
           :stroke-dasharray="dashArray"
           :stroke-dashoffset="dashOffset"
       />
