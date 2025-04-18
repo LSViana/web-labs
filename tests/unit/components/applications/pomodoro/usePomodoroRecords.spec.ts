@@ -1,9 +1,9 @@
 import { toRaw } from '@vue/reactivity'
 import { describe, expect, test } from 'vitest'
 
-import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { usePomodoroRecords } from '~/components/applications/pomodoro/usePomodoroRecords'
+import { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 describe('usePomodoroRecords', () => {
   test('adds a record to the empty list', () => {
@@ -14,7 +14,7 @@ describe('usePomodoroRecords', () => {
     expect(records.value).toHaveLength(0)
 
     // Act
-    const record = new PomodoroRecord(new Date(), new Date(), PomodoroIntervalType.work)
+    const record = new PomodoroRecord(0, new Date(), new Date(), PomodoroIntervalType.work)
     records.add(record)
 
     // Assert
@@ -26,11 +26,13 @@ describe('usePomodoroRecords', () => {
     // Arrange
     const records = usePomodoroRecords()
     records.add(new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:10:00.000Z'),
       new Date('2022-01-01T00:20:00.000Z'),
       PomodoroIntervalType.work
     ))
     records.add(new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:30:00.000Z'),
       new Date('2022-01-01T00:40:00.000Z'),
       PomodoroIntervalType.work
@@ -38,6 +40,7 @@ describe('usePomodoroRecords', () => {
 
     // Act (adds to the beginning of the list)
     let record = new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:05:00.000Z'),
       new Date('2022-01-01T00:10:00.000Z'),
       PomodoroIntervalType.work
@@ -50,6 +53,7 @@ describe('usePomodoroRecords', () => {
 
     // Act (adds to the middle of the list)
     record = new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:20:00.000Z'),
       new Date('2022-01-01T00:25:00.000Z'),
       PomodoroIntervalType.work
@@ -62,6 +66,7 @@ describe('usePomodoroRecords', () => {
 
     // Act (adds to the end of the list)
     record = new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:45:00.000Z'),
       new Date('2022-01-01T00:50:00.000Z'),
       PomodoroIntervalType.work
@@ -77,16 +82,19 @@ describe('usePomodoroRecords', () => {
     // Arrange
     const records = usePomodoroRecords()
     records.add(new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:10:00.000Z'),
       new Date('2022-01-01T00:20:00.000Z'),
       PomodoroIntervalType.work
     ))
     records.add(new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:20:00.000Z'),
       new Date('2022-01-01T00:30:00.000Z'),
       PomodoroIntervalType.work
     ))
     records.add(new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:30:00.000Z'),
       new Date('2022-01-01T00:40:00.000Z'),
       PomodoroIntervalType.work
@@ -94,6 +102,7 @@ describe('usePomodoroRecords', () => {
 
     // Act (updates the first record)
     let record = new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:12:00.000Z'),
       new Date('2022-01-01T00:20:00.000Z'),
       PomodoroIntervalType.work
@@ -106,6 +115,7 @@ describe('usePomodoroRecords', () => {
 
     // Act (updates the middle record)
     record = new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:22:00.000Z'),
       new Date('2022-01-01T00:30:00.000Z'),
       PomodoroIntervalType.work
@@ -118,6 +128,7 @@ describe('usePomodoroRecords', () => {
 
     // Act (updates the last record)
     record = new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:30:00.000Z'),
       new Date('2022-01-01T00:35:00.000Z'),
       PomodoroIntervalType.work
@@ -130,6 +141,7 @@ describe('usePomodoroRecords', () => {
 
     // Act (updates the middle record and move it to the beginning)
     record = new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:10:00.000Z'),
       new Date('2022-01-01T00:12:00.000Z'),
       PomodoroIntervalType.work
@@ -142,6 +154,7 @@ describe('usePomodoroRecords', () => {
 
     // Act (updates the first record and move it to the end)
     record = new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:35:00.000Z'),
       new Date('2022-01-01T00:40:00.000Z'),
       PomodoroIntervalType.work
@@ -157,16 +170,19 @@ describe('usePomodoroRecords', () => {
     // Arrange
     const records = usePomodoroRecords()
     records.add(new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:10:00.000Z'),
       new Date('2022-01-01T00:20:00.000Z'),
       PomodoroIntervalType.work
     ))
     records.add(new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:20:00.000Z'),
       new Date('2022-01-01T00:30:00.000Z'),
       PomodoroIntervalType.work
     ))
     records.add(new PomodoroRecord(
+      0,
       new Date('2022-01-01T00:30:00.000Z'),
       new Date('2022-01-01T00:40:00.000Z'),
       PomodoroIntervalType.work
@@ -201,16 +217,19 @@ describe('usePomodoroRecords', () => {
     // Act
     const pomodoroRecords = [
       new PomodoroRecord(
+        0,
         new Date('2022-01-01T00:10:00.000Z'),
         new Date('2022-01-01T00:20:00.000Z'),
         PomodoroIntervalType.work
       ),
       new PomodoroRecord(
+        0,
         new Date('2022-01-01T00:20:00.000Z'),
         new Date('2022-01-01T00:30:00.000Z'),
         PomodoroIntervalType.work
       ),
       new PomodoroRecord(
+        0,
         new Date('2022-01-01T00:30:00.000Z'),
         new Date('2022-01-01T00:40:00.000Z'),
         PomodoroIntervalType.work
