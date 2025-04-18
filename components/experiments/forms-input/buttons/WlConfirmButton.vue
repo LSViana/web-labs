@@ -29,7 +29,7 @@ import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import { KeyboardCode } from '~/utils/types/ui/keyboardEvent'
 
 type Props = {
-  variant: WlButtonVariant;
+  variant?: WlButtonVariant;
 };
 type Events = {
   (e: 'confirm'): void;

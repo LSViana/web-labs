@@ -21,8 +21,8 @@ import WlHeader from '~/components/shared/surroundings/WlHeader.vue'
 useHead({
   titleTemplate: (pageTitle) => {
     return pageTitle
-        ? `${pageTitle} - Web Labs`
-        : 'Web Labs'
+      ? `${pageTitle} - Web Labs`
+      : 'Web Labs'
   },
   meta: [
     {

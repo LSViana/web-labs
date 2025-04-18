@@ -26,8 +26,8 @@ const model = defineModel<Date>({ required: true })
 const innerValue = ref('')
 
 const classes = computed(() => [
-    'text-center',
-    props.showSeconds ? 'w-24' : 'w-20'
+  'text-center',
+  props.showSeconds ? 'w-24' : 'w-20'
 ])
 
 onMounted(() => innerValue.value = methods.formatFromDate(model.value))

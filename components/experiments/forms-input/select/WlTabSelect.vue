@@ -8,7 +8,8 @@
     >
       {{ option }}
     </button>
-    <div ref="selectedOverlay"
+    <div
+ref="selectedOverlay"
          class="absolute rounded bg-slate-300 opacity-0 transition-[left,width,opacity] dark:bg-slate-600"
     />
   </div>

@@ -85,13 +85,13 @@ const methods = {
   },
   getPlanClasses (index: number): string {
     return methods.isPlanActive(index)
-        ? 'bg-green-800 text-green-100 border-green-400'
-        : 'bg-slate-800'
+      ? 'bg-green-800 text-green-100 border-green-400'
+      : 'bg-slate-800'
   },
   getPlanCheckIconClasses (index: number): string {
     return methods.isPlanActive(index)
-        ? 'opacity-100'
-        : 'opacity-0'
+      ? 'opacity-100'
+      : 'opacity-0'
   }
 }
 </script>

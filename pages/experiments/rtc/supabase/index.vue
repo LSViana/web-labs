@@ -3,7 +3,11 @@
     <WlContainer class="flex flex-col gap-3 p-3">
       <p>The shared text input:</p>
       <WlExperimentCanvas>
-        <input v-model="value" type="text" class="rounded border bg-slate-200 px-2 py-1 outline-0 dark:bg-slate-800" @input="listeners.input">
+        <input
+v-model="value"
+type="text"
+class="rounded border bg-slate-200 px-2 py-1 outline-0 dark:bg-slate-800"
+@input="listeners.input">
         <template #caption>
           Synchronized via Supabase. <span class="cursor-pointer underline" @click="listeners.clickUpdateServer">Update from server</span>.
         </template>

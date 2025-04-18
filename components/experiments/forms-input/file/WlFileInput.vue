@@ -52,15 +52,15 @@ const dragging = ref(false)
 
 const labelClasses = computed(() => ([
   dragging.value
-      ? 'dark:border-blue-500 dark:bg-blue-500 text-blue-100' +
+    ? 'dark:border-blue-500 dark:bg-blue-500 text-blue-100' +
       'border-blue-300 bg-blue-300 hover:border-blue-400 hover:bg-blue-400'
-      : 'dark:border-slate-500 dark:bg-slate-500 ' +
+    : 'dark:border-slate-500 dark:bg-slate-500 ' +
       'border-slate-300 bg-slate-300 hover:border-slate-400 hover:bg-slate-400'
 ]))
 const chooseFileClasses = computed(() => ([
   dragging.value
-      ? 'bg-blue-100 dark:bg-blue-500'
-      : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 dark:active:bg-slate-500'
+    ? 'bg-blue-100 dark:bg-blue-500'
+    : 'bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 dark:active:bg-slate-500'
 ]))
 
 const listeners = {

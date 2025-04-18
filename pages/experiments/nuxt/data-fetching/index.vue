@@ -67,8 +67,8 @@ const useLazyFetchResponse = await useLazyFetch('/api/nuxt/data-fetching/use-laz
 
 // Add timeout to simulate.
 const useAsyncDataResponse = await useAsyncData(
-    'use-async-data',
-    () => new Promise(resolve => setInterval(() => resolve(3), 0))
+  'use-async-data',
+  () => new Promise(resolve => setInterval(() => resolve(3), 0))
 )
 
 const data = reactive({

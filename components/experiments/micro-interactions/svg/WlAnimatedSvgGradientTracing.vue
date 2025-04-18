@@ -31,7 +31,11 @@
     </defs>
   </svg>
   <div class="mt-3">
-    <input v-model.number="progress" type="range" min="0" max="100">
+    <input
+v-model.number="progress"
+type="range"
+min="0"
+max="100">
   </div>
 </template>
 

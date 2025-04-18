@@ -62,8 +62,8 @@ const props = withDefaults(defineProps<Props>(), {
 const emits = defineEmits<Events>()
 
 const classes = computed(() => props.disabled
-    ? disabledVariantClasses[props.variant]
-    : variantClasses[props.variant]
+  ? disabledVariantClasses[props.variant]
+  : variantClasses[props.variant]
 )
 
 const listeners = {
