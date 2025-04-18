@@ -35,14 +35,14 @@
 import { ref } from 'vue'
 
 import { useRouter } from '#app'
-import { usePomodoroAuth } from '~/components/applications/pomodoro/usePomodoroAuth'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 import WlTriangleExclamationIcon from '~/components/shared/icons/static/WlTriangleExclamationIcon.vue'
+import { useProductivityAuth } from '~/composables/productivity/useProductivityAuth'
 
 const router = useRouter()
 
-const pomodoroAuth = usePomodoroAuth()
+const pomodoroAuth = useProductivityAuth()
 
 const email = ref('')
 const password = ref('')

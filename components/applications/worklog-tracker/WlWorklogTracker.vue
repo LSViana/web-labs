@@ -24,13 +24,13 @@ import { useHead } from '@vueuse/head'
 import { onMounted, ref } from 'vue'
 
 import { useRouter } from '#app'
-import { useWorklogAuth } from '~/components/applications/worklog-tracker/useWorklogAuth'
 import { useWorklogList } from '~/components/applications/worklog-tracker/useWorklogList'
 import { useWorklogStorage } from '~/components/applications/worklog-tracker/useWorklogStorage'
 import { useWorklogToday } from '~/components/applications/worklog-tracker/useWorklogToday'
 import WlWorklogDetailsForm from '~/components/applications/worklog-tracker/WlWorklogDetailsForm.vue'
 import WlWorklogList from '~/components/applications/worklog-tracker/WlWorklogList.vue'
 import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
+import { useProductivityAuth } from '~/composables/productivity/useProductivityAuth'
 import { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
 
 useHead({
@@ -39,7 +39,8 @@ useHead({
 
 const router = useRouter()
 
-const worklogAuth = useWorklogAuth()
+const auth = useProductivityAuth()
+
 const worklogList = useWorklogList()
 const worklogStorage = useWorklogStorage()
 const worklogToday = useWorklogToday()
@@ -93,7 +94,7 @@ const listeners = {
     isEditing.value = true
   },
   async logout(): Promise<void> {
-    await worklogAuth.logout()
+    await auth.logout()
     await router.push('/applications/worklog-tracker/login')
   },
 }

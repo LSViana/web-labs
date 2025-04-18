@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 import { useCookie } from '#app'
 
-export function usePomodoroAuth() {
+export function useProductivityAuth() {
   const authenticated = ref(false)
   const invalidCredentials = ref(false)
 

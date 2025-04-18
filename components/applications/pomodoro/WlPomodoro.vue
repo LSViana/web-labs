@@ -28,7 +28,6 @@ import { useRouter } from '#app'
 import type { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { useLeaveConfirmation } from '~/components/applications/pomodoro/useLeaveConfirmation'
-import { usePomodoroAuth } from '~/components/applications/pomodoro/usePomodoroAuth'
 import { usePomodoroNotification } from '~/components/applications/pomodoro/usePomodoroNotification'
 import { usePomodoroRecorder } from '~/components/applications/pomodoro/usePomodoroRecorder'
 import { usePomodoroRecords } from '~/components/applications/pomodoro/usePomodoroRecords'
@@ -36,6 +35,7 @@ import { usePomodoroStorage } from '~/components/applications/pomodoro/usePomodo
 import { usePomodoroToday } from '~/components/applications/pomodoro/usePomodoroToday'
 import WlPomodoroClock from '~/components/applications/pomodoro/WlPomodoroClock.vue'
 import WlPomodoroOverview from '~/components/applications/pomodoro/WlPomodoroOverview.vue'
+import { useProductivityAuth } from '~/composables/productivity/useProductivityAuth'
 import type { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 useHead({
@@ -44,7 +44,7 @@ useHead({
 
 const router = useRouter()
 
-const auth = usePomodoroAuth()
+const auth = useProductivityAuth()
 const recorder = usePomodoroRecorder()
 const storage = usePomodoroStorage()
 const records = usePomodoroRecords()

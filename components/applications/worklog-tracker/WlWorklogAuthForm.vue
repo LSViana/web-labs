@@ -22,7 +22,7 @@
       <WlButton variant="primary" type="submit">
         Login
       </WlButton>
-      <div v-if="worklogAuth.invalidCredentials.value" class="flex items-center justify-center gap-2 text-warning-400">
+      <div v-if="auth.invalidCredentials.value" class="flex items-center justify-center gap-2 text-warning-400">
         <WlTriangleExclamationIcon />
         <span>Invalid credentials</span>
       </div>
@@ -35,23 +35,23 @@
 import { ref } from 'vue'
 
 import { useRouter } from '#app'
-import { useWorklogAuth } from '~/components/applications/worklog-tracker/useWorklogAuth'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
 import WlTriangleExclamationIcon from '~/components/shared/icons/static/WlTriangleExclamationIcon.vue'
+import { useProductivityAuth } from '~/composables/productivity/useProductivityAuth'
 
 const router = useRouter()
 
-const worklogAuth = useWorklogAuth()
+const auth = useProductivityAuth()
 
 const email = ref('')
 const password = ref('')
 
 const listeners = {
   async submit(): Promise<void> {
-    await worklogAuth.login(email.value, password.value)
+    await auth.login(email.value, password.value)
 
-    if (worklogAuth.authenticated.value) {
+    if (auth.authenticated.value) {
       await router.push('/applications/worklog-tracker')
     }
   },
