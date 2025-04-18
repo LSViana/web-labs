@@ -10,8 +10,10 @@ export function useWorklogAuth() {
   updateAuthenticated()
   useEventListener(window, 'focus', updateAuthenticated)
 
+  const url = '/api/productivity/auth'
+
   async function login(email: string, password: string) {
-    const response = await fetch('/api/productivity/auth', {
+    const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -33,7 +35,7 @@ export function useWorklogAuth() {
   }
 
   async function logout() {
-    await fetch('/api/worklog-tracker/worklogs/auth', {
+    await fetch(url, {
       method: 'DELETE',
     })
 
