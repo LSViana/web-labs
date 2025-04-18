@@ -1,6 +1,6 @@
 import { shallowReactive } from 'vue'
 
-import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
+import type { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 export function usePomodoroRecords() {
   const value = shallowReactive<PomodoroRecord[]>([])
@@ -10,10 +10,10 @@ export function usePomodoroRecords() {
 
     if (value.length === 0) {
       index = 0
-    } else if (value[0].startDate >= record.endDate) {
+    } else if (value[0].startTime >= record.endTime) {
       index = 0
     } else {
-      const nextIndex = value.findLastIndex(x => x.endDate <= record.startDate)
+      const nextIndex = value.findLastIndex(x => x.endTime <= record.startTime)
 
       // There will always be a next record since the first one starts before the new record.
       index = nextIndex + 1

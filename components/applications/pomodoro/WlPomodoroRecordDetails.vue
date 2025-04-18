@@ -2,17 +2,13 @@
   <div class="flex flex-wrap items-end gap-3">
     <div class="inline-flex flex-col">
       <WlLabel ref="startDateRef" for="pomodoro-record-details-start">Start</WlLabel>
-      <WlTimeInput
-          id="pomodoro-record-details-start" v-model="startDate" show-seconds
-          @keyup.enter="listeners.enterStartDate"
-      />
+      <WlTimeInput id="pomodoro-record-details-start" v-model="startDate" show-seconds
+        @keyup.enter="listeners.enterStartDate" />
     </div>
     <div class="inline-flex flex-col">
       <WlLabel ref="endDateRef" for="pomodoro-record-details-end">End</WlLabel>
-      <WlTimeInput
-          id="pomodoro-record-details-end" v-model="endDate" show-seconds
-          @keyup.enter="listeners.enterEndDate"
-      />
+      <WlTimeInput id="pomodoro-record-details-end" v-model="endDate" show-seconds
+        @keyup.enter="listeners.enterEndDate" />
     </div>
     <div class="inline-flex flex-col">
       <WlLabel for="pomodoro-record-details-type">Type</WlLabel>
@@ -38,12 +34,12 @@
 import { onKeyDown } from '@vueuse/core'
 import { type ComponentPublicInstance, onMounted, ref, watch } from 'vue'
 
-import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { PomodoroIntervalType, PomodoroIntervalTypeLabels } from '~/components/applications/pomodoro/types/pomodoroType'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlSelect from '~/components/experiments/forms-input/input/WlSelect.vue'
 import WlTimeInput from '~/components/experiments/forms-input/input/WlTimeInput.vue'
 import WlLabel from '~/components/experiments/forms-input/WlLabel.vue'
+import { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 type Emits = {
   (e: 'update:record', value: PomodoroRecord): void;
@@ -60,8 +56,8 @@ const props = defineProps<Props>()
 
 const record = defineModel<PomodoroRecord>('record', { required: true })
 
-const startDate = ref<Date>(record.value.startDate)
-const endDate = ref<Date>(record.value.endDate)
+const startDate = ref<Date>(record.value.startTime)
+const endDate = ref<Date>(record.value.endTime)
 const type = ref<PomodoroIntervalType>(record.value.type)
 const startDateRef = ref<ComponentPublicInstance>()
 const endDateRef = ref<ComponentPublicInstance>()
@@ -76,13 +72,13 @@ onKeyDown('c', () => listeners.close())
 onMounted(() => (startDateRef.value!.$el as HTMLElement).focus())
 
 watch(
-    record,
-    () => {
-      startDate.value = record.value.startDate
-      endDate.value = record.value.endDate
-      type.value = record.value.type
-    },
-    { immediate: true }
+  record,
+  () => {
+    startDate.value = record.value.startTime
+    endDate.value = record.value.endTime
+    type.value = record.value.type
+  },
+  { immediate: true }
 )
 
 const listeners = {
@@ -99,7 +95,7 @@ const listeners = {
       return
     }
 
-    const newRecord = new PomodoroRecord(startDate.value, endDate.value, type.value)
+    const newRecord = new PomodoroRecord(record.value.id, startDate.value, endDate.value, type.value)
 
     emits('update:record', newRecord)
   },

@@ -1,6 +1,6 @@
-import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { usePomodoroNow } from '~/components/applications/pomodoro/usePomodoroNow'
+import { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 export function usePomodoroRecorder() {
   const now = usePomodoroNow()
@@ -22,7 +22,7 @@ export function usePomodoroRecorder() {
 
     const endDate = now.get()
 
-    return new PomodoroRecord(startDate, endDate, type)
+    return new PomodoroRecord(0, startDate, endDate, type)
   }
 
   return {

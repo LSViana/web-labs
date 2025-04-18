@@ -1,47 +1,86 @@
-import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
-import type { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
-import { usePomodoroNow } from '~/components/applications/pomodoro/usePomodoroNow'
+import { inject, provide } from 'vue'
 
-export function usePomodoroStorage() {
+import { usePomodoroNow } from '~/components/applications/pomodoro/usePomodoroNow'
+import { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
+
+const url = '/api/pomodoro/records'
+
+function transform(record: PomodoroRecord): PomodoroRecord {
+  return new PomodoroRecord(
+    record.id,
+    new Date(record.startTime),
+    new Date(record.endTime),
+    record.type
+  )
+}
+
+function buildPomodoroStorage() {
   const now = usePomodoroNow()
 
-  function getKey(date: Date) {
-    return `pomodoro-records-${date.toLocaleDateString(['en-US'])}`
+  async function save(record: PomodoroRecord): Promise<PomodoroRecord> {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify(record),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    const result = await response.json()
+
+    return result
   }
 
-  function save(date: Date, records: PomodoroRecord[]) {
-    localStorage.setItem(getKey(date), JSON.stringify(records))
+  async function update(record: PomodoroRecord): Promise<void> {
+    await fetch(url, {
+      method: 'PUT',
+      body: JSON.stringify(record),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 
-  function load(date: Date): PomodoroRecord[] {
-    const value = localStorage.getItem(getKey(date))
+  async function load(date: Date): Promise<PomodoroRecord[]> {
+    const query = new URLSearchParams({
+      date: date.toLocaleDateString()
+    })
 
-    if (!value) {
-      return []
-    }
+    const response = await fetch(`${url}?${query}`)
 
-    const items: SerializedPomodoroRecord[] = JSON.parse(value)
+    const items = await response.json() as PomodoroRecord[]
 
-    return items.map(x => new PomodoroRecord(new Date(x.startDate), new Date(x.endDate), x.type))
+    return items.map(transform)
   }
 
-  function saveToday(records: PomodoroRecord[]) {
-    save(now.get(), records)
+  async function remove(record: PomodoroRecord): Promise<void> {
+    const query = new URLSearchParams({
+      id: record.id.toString()
+    })
+
+    await fetch(`${url}?${query.toString()}`, {
+      method: 'DELETE',
+    })
   }
 
-  function loadToday(): PomodoroRecord[] {
+  async function loadToday(): Promise<PomodoroRecord[]> {
     return load(now.get())
   }
 
   return {
     save,
+    update,
     load,
-    saveToday,
+    remove,
     loadToday
   }
 }
 
-/**
- * This type exists to help deserializing and loading the records into correct instances.
- */
-type SerializedPomodoroRecord = { startDate: string; endDate: string; type: PomodoroIntervalType }
+
+export function providePomodoroStorage() {
+  provide('pomodoroStorage', buildPomodoroStorage())
+}
+
+export function usePomodoroStorage() {
+  return inject('pomodoroStorage') as ReturnType<typeof buildPomodoroStorage>
+}

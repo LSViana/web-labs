@@ -25,9 +25,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { getPomodoroTypeColor } from '~/components/applications/pomodoro/types/pomodoroTypeColor'
 import { usePomodoroToday } from '~/components/applications/pomodoro/usePomodoroToday'
+import type { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 type Props = {
   records: PomodoroRecord[];
@@ -50,8 +50,8 @@ const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
 
 const dates = computed(() => ({
-  start: props.records[0]?.startDate ?? today.get(),
-  end: props.records[props.records.length - 1]?.endDate ?? today.get(),
+  start: props.records[0]?.startTime ?? today.get(),
+  end: props.records[props.records.length - 1]?.endTime ?? today.get(),
 }))
 const diffMs = computed(() => dates.value.end.getTime() - dates.value.start.getTime())
 
@@ -71,9 +71,9 @@ const items = computed(() => {
     const type = getPomodoroTypeColor(x.type)
 
     return {
-      title: `Start: ${x.startDate.toLocaleTimeString()}, End: ${x.endDate.toLocaleTimeString()}, Duration: ${x.elapsedInterval}`,
-      start: (x.startDate.getTime() - dates.value.start.getTime()) / diffMs.value * 100,
-      length: (x.endDate.getTime() - x.startDate.getTime()) / diffMs.value * 100,
+      title: `Start: ${x.startTime.toLocaleTimeString()}, End: ${x.endTime.toLocaleTimeString()}, Duration: ${x.elapsedInterval}`,
+      start: (x.startTime.getTime() - dates.value.start.getTime()) / diffMs.value * 100,
+      length: (x.endTime.getTime() - x.startTime.getTime()) / diffMs.value * 100,
       classes: `${type.backgroundInteractive} ${type.borderHorizontal} ${index < props.records.length - 1 ? 'border-r' : ''}`
     }
   })

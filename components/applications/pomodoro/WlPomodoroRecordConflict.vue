@@ -16,8 +16,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import WlTriangleExclamationIcon from '~/components/shared/icons/static/WlTriangleExclamationIcon.vue'
+import type { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 type Emits = {
   (e: 'select', index: number): void;
@@ -41,7 +41,7 @@ const conflictIndexes = computed(() => {
     const record = props.records[i]
     const nextRecord = props.records[i + 1]
 
-    if (record.endDate > nextRecord.startDate && record.startDate < nextRecord.endDate) {
+    if (record.endTime > nextRecord.startTime && record.startTime < nextRecord.endTime) {
       indexes.push(i)
     }
   }
