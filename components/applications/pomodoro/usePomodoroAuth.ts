@@ -10,8 +10,10 @@ export function usePomodoroAuth() {
   updateAuthenticated()
   useEventListener(window, 'focus', updateAuthenticated)
 
+  const url = '/api/productivity/auth'
+
   async function login(email: string, password: string) {
-    const response = await fetch('/api/pomodoro/auth', {
+    const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
         email: email,
@@ -33,7 +35,7 @@ export function usePomodoroAuth() {
   }
 
   async function logout() {
-    await fetch('/api/pomodoro/auth', {
+    await fetch(url, {
       method: 'DELETE',
     })
 
