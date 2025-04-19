@@ -1,25 +1,25 @@
-import { defineEventHandler, send, setResponseStatus } from 'h3'
+import { defineEventHandler, send, setResponseStatus } from 'h3';
 
-import { useSupabaseServer } from '~/composables/rtc/supabase'
+import { useSupabaseServer } from '~~/layers/experiments/composables/rtc/supabase';
 
 export default defineEventHandler(async (event): Promise<void> => {
-  const supabase = useSupabaseServer()
+  const supabase = useSupabaseServer();
 
   if (!supabase) {
-    setResponseStatus(event, 500)
+    setResponseStatus(event, 500);
 
-    return await send(event)
+    return await send(event);
   }
 
-  await supabase.channelConnected
+  await supabase.channelConnected;
 
   await supabase.channel.send({
     type: 'broadcast',
     event: 'value',
     value: 'This value is from the server',
-  })
+  });
 
-  setResponseStatus(event, 200)
+  setResponseStatus(event, 200);
 
-  return await send(event)
-})
+  return await send(event);
+});

@@ -1,25 +1,25 @@
-import { defineEventHandler, getQuery } from 'h3'
+import { defineEventHandler, getQuery } from 'h3';
 
-import { usePomodoroStorage } from '~/server/services/pomodoro/storage'
-import { useProductivityAuth } from '~/server/services/productivity/auth'
+import { usePomodoroStorage } from '~~/server/services/pomodoro/storage';
+import { useProductivityAuth } from '~~/server/services/productivity/auth';
 
-const storage = usePomodoroStorage()
+const storage = usePomodoroStorage();
 
 export default defineEventHandler(async (event) => {
-  const query = getQuery(event)
-  const id = query.id
+  const query = getQuery(event);
+  const id = query.id;
 
   if (typeof id !== 'string' || id.trim().length === 0) {
-    throw new Error('Invalid query')
+    throw new Error('Invalid query');
   }
 
-  const auth = useProductivityAuth()
-  const credentialsId = auth.getCredentials(event)
+  const auth = useProductivityAuth();
+  const credentialsId = auth.getCredentials(event);
 
-  await storage.remove(id, credentialsId)
+  await storage.remove(id, credentialsId);
 
   return {
     status: 204,
     valid: query,
-  }
-})
+  };
+});

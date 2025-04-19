@@ -22,16 +22,16 @@
 </template>
 
 <script setup lang="ts">
-import { clearError, type NuxtError } from '#app'
-import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
-import WlTriangleExclamationIcon from '~/components/shared/icons/static/WlTriangleExclamationIcon.vue'
-import WlContainer from '~/components/shared/layout/WlContainer.vue'
+import { clearError, type NuxtError } from '#app';
+import WlTriangleExclamationIcon from '~~/layers/base/components/icons/static/WlTriangleExclamationIcon.vue';
+import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
+import WlButton from '~~/layers/experiments/components/forms-input/buttons/WlButton.vue';
 
 type Props = {
   error: NuxtError
-}
+};
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
 // This composable allows accessing the global error being handled.
 //
@@ -42,7 +42,7 @@ const listeners = {
   home() {
     clearError({
       redirect: '/',
-    })
+    });
   },
-}
+};
 </script>

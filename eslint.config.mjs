@@ -1,8 +1,8 @@
-import stylisticPlugin from '@stylistic/eslint-plugin'
-import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort'
-import tailwindCssPlugin from 'eslint-plugin-tailwindcss'
+import stylisticPlugin from '@stylistic/eslint-plugin';
+import eslintPluginSimpleImportSort from 'eslint-plugin-simple-import-sort';
+import tailwindCssPlugin from 'eslint-plugin-tailwindcss';
 
-import withNuxt from './.nuxt/eslint.config.mjs'
+import withNuxt from './.nuxt/eslint.config.mjs';
 
 // To debug this configuration file, run: `npx @eslint/config-inspector`.
 export default withNuxt([
@@ -15,6 +15,7 @@ export default withNuxt([
     },
     rules: {
       '@stylistic/indent': ['error', 2],
+      '@stylistic/semi': ['error', 'always'],
     },
   },
 
@@ -66,10 +67,18 @@ export default withNuxt([
           },
         },
       ],
+      'vue/multi-word-component-names': [
+        'error',
+        {
+          ignores: [
+            'index',
+          ],
+        },
+      ],
     },
   },
 ])
   .override('nuxt/typescript/rules', {
     // Ignores the submodules (like the React project).
     ignores: ['submodules/**'],
-  })
+  });

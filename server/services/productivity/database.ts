@@ -1,8 +1,8 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
-import { useAppConfig } from '#imports'
+import { useAppConfig } from '#imports';
 
-const config = useAppConfig()
+const config = useAppConfig();
 
 const supabaseClient = createClient(
   config.supabase.url,
@@ -12,8 +12,8 @@ const supabaseClient = createClient(
       schema: 'productivity',
     },
   },
-)
+);
 
 export function useProductivitySupabaseClient() {
-  return supabaseClient
+  return supabaseClient;
 }

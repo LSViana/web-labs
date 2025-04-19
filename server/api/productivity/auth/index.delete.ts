@@ -1,9 +1,9 @@
-import { defineEventHandler } from 'h3'
+import { defineEventHandler } from 'h3';
 
-import { useProductivityAuth } from '~/server/services/productivity/auth'
+import { useProductivityAuth } from '~~/server/services/productivity/auth';
 
 export default defineEventHandler(async (event) => {
-  const auth = useProductivityAuth()
+  const auth = useProductivityAuth();
 
-  auth.removeCredentials(event)
-})
+  auth.removeCredentials(event);
+});

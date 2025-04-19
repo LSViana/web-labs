@@ -1,30 +1,30 @@
-import { defineEventHandler, readBody, setResponseStatus } from 'h3'
+import { defineEventHandler, readBody, setResponseStatus } from 'h3';
 
-import { useProductivityAuth } from '~/server/services/productivity/auth'
-import { useProductivitySupabaseClient } from '~/server/services/productivity/database'
+import { useProductivityAuth } from '~~/server/services/productivity/auth';
+import { useProductivitySupabaseClient } from '~~/server/services/productivity/database';
 
-const supabaseClient = useProductivitySupabaseClient()
+const supabaseClient = useProductivitySupabaseClient();
 
 export default defineEventHandler(async (event) => {
   const {
     email,
     password,
-  } = await readBody(event, { strict: true })
+  } = await readBody(event, { strict: true });
 
   const existingCredentials = await supabaseClient
     .from('credentials')
     .select('*')
     .eq('email', email)
     .eq('password', password)
-    .single()
+    .single();
 
   if (!existingCredentials.data) {
-    setResponseStatus(event, 401)
+    setResponseStatus(event, 401);
 
-    return
+    return;
   }
 
-  const auth = useProductivityAuth()
+  const auth = useProductivityAuth();
 
-  auth.setCredentials(event, existingCredentials.data.id)
-})
+  auth.setCredentials(event, existingCredentials.data.id);
+});

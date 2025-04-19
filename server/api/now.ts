@@ -1,7 +1,7 @@
-import { defineEventHandler } from 'h3'
+import { defineEventHandler } from 'h3';
 
 export default defineEventHandler(() => {
-  const now = new Date()
+  const now = new Date();
 
   return {
     date: now,
@@ -17,5 +17,5 @@ export default defineEventHandler(() => {
       second: '2-digit',
       timeZone: 'UTC',
     }),
-  }
-})
+  };
+});
