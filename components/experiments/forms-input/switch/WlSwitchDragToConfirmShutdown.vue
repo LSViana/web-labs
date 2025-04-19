@@ -9,14 +9,14 @@ import WlSwitchDragToConfirm from '~/components/experiments/forms-input/switch/W
 import WlPowerOffIcon from '~/components/shared/icons/static/WlPowerOffIcon.vue'
 
 type Events = {
-  (e: 'confirm'): void;
-};
+  (e: 'confirm'): void
+}
 
 const emits = defineEmits<Events>()
 
 const methods = {
-  onConfirm (): void {
+  onConfirm(): void {
     emits('confirm')
-  }
+  },
 }
 </script>

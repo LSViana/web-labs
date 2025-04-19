@@ -1,15 +1,15 @@
 import { defineEventHandler, readBody } from 'h3'
 
 import type { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
-import { useWorklogAuth } from '~/composables/server/worklog-tracker/useWorklogAuth'
-import { useWorklogStorage } from '~/composables/server/worklog-tracker/useWorklogStorage'
+import { useProductivityAuth } from '~/server/services/productivity/auth'
+import { useWorklogStorage } from '~/server/services/worklog/storage'
 
 const storage = useWorklogStorage()
 
 export default defineEventHandler(async (event) => {
   const worklogItem = await readBody<WorklogItem>(event, { strict: true })
 
-  const auth = useWorklogAuth()
+  const auth = useProductivityAuth()
   const credentialsId = auth.getCredentials(event)
 
   return await storage.update(worklogItem, credentialsId)

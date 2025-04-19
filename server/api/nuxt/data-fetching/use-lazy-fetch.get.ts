@@ -7,6 +7,6 @@ export default defineEventHandler(async () => {
   await new Promise(resolve => setTimeout(resolve, 0))
 
   return {
-    value: 2
+    value: 2,
   }
 })

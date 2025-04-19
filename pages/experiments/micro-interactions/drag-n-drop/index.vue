@@ -42,6 +42,6 @@ const files = ref<FileList>()
 const methods = {
   onConfirm(): void {
     confirmed.value = true
-  }
+  },
 }
 </script>

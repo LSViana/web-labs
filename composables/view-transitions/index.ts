@@ -16,7 +16,8 @@ export function useCustomViewTransitions(): void {
   router.afterEach((to, from) => {
     if (useCustomTransitions(to) && useCustomTransitions(from)) {
       document.documentElement.classList.add('end')
-    } else {
+    }
+    else {
       document.documentElement.classList.remove('end')
     }
   })

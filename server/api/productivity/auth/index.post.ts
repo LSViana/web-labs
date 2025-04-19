@@ -1,14 +1,14 @@
 import { defineEventHandler, readBody, setResponseStatus } from 'h3'
 
-import { useWorklogAuth } from '~/composables/server/worklog-tracker/useWorklogAuth'
-import { useWorklogSupabaseClient } from '~/composables/server/worklog-tracker/useWorklogSupabaseClient'
+import { useProductivityAuth } from '~/server/services/productivity/auth'
+import { useProductivitySupabaseClient } from '~/server/services/productivity/database'
 
-const supabaseClient = useWorklogSupabaseClient()
+const supabaseClient = useProductivitySupabaseClient()
 
 export default defineEventHandler(async (event) => {
   const {
     email,
-    password
+    password,
   } = await readBody(event, { strict: true })
 
   const existingCredentials = await supabaseClient
@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
     return
   }
 
-  const auth = useWorklogAuth()
+  const auth = useProductivityAuth()
 
   auth.setCredentials(event, existingCredentials.data.id)
 })

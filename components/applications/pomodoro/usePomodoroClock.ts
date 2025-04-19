@@ -4,7 +4,7 @@ import { Interval } from '~/components/applications/pomodoro/types/interval'
 import {
   type PomodoroEventMap,
   PomodoroIntervalEvent,
-  PomodoroNotificationEvent
+  PomodoroNotificationEvent,
 } from '~/components/applications/pomodoro/types/pomodoroEvents'
 import { PomodoroInterval } from '~/components/applications/pomodoro/types/pomodoroInterval'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
@@ -41,7 +41,7 @@ export function usePomodoroClock() {
   const interval = computed(() => new PomodoroInterval(
     Interval.fromDates(startDate.value, endDate.value),
     periodInterval.value,
-    type.value
+    type.value,
   ))
 
   function start() {
@@ -91,7 +91,8 @@ export function usePomodoroClock() {
 
     if (type.value === PomodoroIntervalType.work) {
       type.value = PomodoroIntervalType.break
-    } else {
+    }
+    else {
       type.value = PomodoroIntervalType.work
     }
 
@@ -121,6 +122,6 @@ export function usePomodoroClock() {
     resume,
     skip,
     on,
-    off
+    off,
   }
 }

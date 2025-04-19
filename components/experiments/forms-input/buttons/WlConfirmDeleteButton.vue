@@ -1,12 +1,12 @@
 <template>
   <WlConfirmButton
-      variant="danger"
-      class="flex items-center gap-2"
-      @confirm="methods.onConfirm"
-      @start-confirm="methods.onStartConfirm"
-      @stop-confirm="methods.onStopConfirm"
+    variant="danger"
+    class="flex items-center gap-2"
+    @confirm="methods.onConfirm"
+    @start-confirm="methods.onStartConfirm"
+    @stop-confirm="methods.onStopConfirm"
   >
-    <WlTrashAnimatedIcon :progress="progress"/>
+    <WlTrashAnimatedIcon :progress="progress" />
     <slot>
       <span>Hold to Delete</span>
     </slot>
@@ -20,8 +20,8 @@ import WlConfirmButton from '~/components/experiments/forms-input/buttons/WlConf
 import WlTrashAnimatedIcon from '~/components/shared/icons/animated/WlTrashAnimatedIcon.vue'
 
 type Events = {
-  (e: 'confirm'): void;
-};
+  (e: 'confirm'): void
+}
 
 const emits = defineEmits<Events>()
 
@@ -37,6 +37,6 @@ const methods = {
   onConfirm(): void {
     progress.value = 1
     emits('confirm')
-  }
+  },
 }
 </script>

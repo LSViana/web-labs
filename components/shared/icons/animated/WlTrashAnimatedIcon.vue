@@ -14,13 +14,13 @@ import type { WlIconSize } from '~/components/shared/icons/WlIcon.vue'
 import WlIcon from '~/components/shared/icons/WlIcon.vue'
 
 type Props = {
-  progress?: number;
-  size?: WlIconSize;
-};
+  progress?: number
+  size?: WlIconSize
+}
 
 const props = withDefaults(defineProps<Props>(), {
   progress: 0,
-  size: 'md'
+  size: 'md',
 })
 
 const lidStyles = computed(() => `--tw-rotate: ${props.progress * -24}deg`)

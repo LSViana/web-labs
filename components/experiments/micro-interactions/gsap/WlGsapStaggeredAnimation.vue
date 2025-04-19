@@ -27,8 +27,8 @@ onMounted(async () => {
     stagger: {
       each: 1,
       repeat: -1,
-      yoyo: true
-    }
+      yoyo: true,
+    },
   })
 })
 </script>

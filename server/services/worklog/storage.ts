@@ -1,11 +1,11 @@
 import { WorklogItem } from '~/composables/server/worklog-tracker/types/worklogItem'
-import { useWorklogSupabaseClient } from '~/composables/server/worklog-tracker/useWorklogSupabaseClient'
+import { useProductivitySupabaseClient } from '~/server/services/productivity/database'
 
 function getWorklogUrl(ticket: string): string {
   return 'https://gemmeus.atlassian.net/rest/api/3/issue/' + ticket + '/worklog'
 }
 
-const supabaseClient = useWorklogSupabaseClient()
+const supabaseClient = useProductivitySupabaseClient()
 
 export function useWorklogStorage() {
   async function load(credentialsId: string, date: Date): Promise<WorklogItem[]> {
@@ -31,14 +31,14 @@ export function useWorklogStorage() {
       new Date(x.started_at),
       new Date(x.ended_at),
       x.id,
-      x.issue_id
+      x.issue_id,
     ))
   }
 
   async function save(worklogItem: WorklogItem, credentialsId: string): Promise<WorklogItem> {
     const {
       email,
-      api_password
+      api_password,
     } = await getCredentials(credentialsId)
 
     const startTime = new Date(worklogItem.startTime)
@@ -47,23 +47,23 @@ export function useWorklogStorage() {
     const startTimeString = startTime.toISOString().replace('Z', '-0000')
     const timeSpentSeconds = Math.floor((endTime.getTime() - startTime.getTime()) / 1000)
     const payload = {
-      'comment': {
-        'content': [
+      comment: {
+        content: [
           {
-            'content': [
+            content: [
               {
-                'text': worklogItem.content,
-                'type': 'text'
-              }
+                text: worklogItem.content,
+                type: 'text',
+              },
             ],
-            'type': 'paragraph'
-          }
+            type: 'paragraph',
+          },
         ],
-        'type': 'doc',
-        'version': 1
+        type: 'doc',
+        version: 1,
       },
-      'started': startTimeString,
-      'timeSpentSeconds': timeSpentSeconds
+      started: startTimeString,
+      timeSpentSeconds: timeSpentSeconds,
     }
 
     const response = await fetch(getWorklogUrl(worklogItem.ticket), {
@@ -71,25 +71,28 @@ export function useWorklogStorage() {
       body: JSON.stringify(payload),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Basic ${btoa(email + ':' + api_password)}`
-      }
+        'Authorization': `Basic ${btoa(email + ':' + api_password)}`,
+      },
     })
 
     if (response.status !== 201) {
       throw new Error('Failed to create worklog')
     }
 
-    const jiraResponseBody = await response.json() as { id: string; issueId: string; }
+    const jiraResponseBody = await response.json() as { id: string, issueId: string }
+    // const jiraResponseBody = { id: '123', issueId: '456' } // Mock response for testing
 
-    await supabaseClient.from('worklogs').insert({
+    const result = await supabaseClient.from('worklogs').insert({
       id: jiraResponseBody.id,
       issue_id: jiraResponseBody.issueId,
       ticket: worklogItem.ticket,
       content: worklogItem.content,
       started_at: worklogItem.startTime,
       ended_at: worklogItem.endTime,
-      credential_id: credentialsId
+      credential_id: credentialsId,
     })
+
+    console.log(result)
 
     return new WorklogItem(
       worklogItem.ticket,
@@ -97,34 +100,37 @@ export function useWorklogStorage() {
       worklogItem.startTime,
       worklogItem.endTime,
       jiraResponseBody.id,
-      jiraResponseBody.issueId
+      jiraResponseBody.issueId,
     )
   }
 
   async function remove(issueId: string, worklogId: string, credentialsId: string): Promise<void> {
     const {
       email,
-      api_password
+      api_password,
     } = await getCredentials(credentialsId)
 
     const response = await fetch(getWorklogUrl(issueId) + '/' + worklogId + '?adjustEstimate=leave', {
       method: 'DELETE',
       headers: {
-        'Authorization': `Basic ${btoa(email + ':' + api_password)}`
-      }
+        Authorization: `Basic ${btoa(email + ':' + api_password)}`,
+      },
     })
 
     if (response.status !== 204) {
       throw new Error('Failed to remove worklog')
     }
 
-    await supabaseClient.from('worklogs').delete().eq('id', worklogId)
+    await supabaseClient.from('worklogs')
+      .delete()
+      .eq('id', worklogId)
+      .eq('credential_id', credentialsId)
   }
 
   async function update(worklogItem: WorklogItem, credentialsId: string): Promise<void> {
     const {
       email,
-      api_password
+      api_password,
     } = await getCredentials(credentialsId)
 
     const startTime = new Date(worklogItem.startTime)
@@ -134,23 +140,23 @@ export function useWorklogStorage() {
     const timeSpentSeconds = Math.floor((endTime.getTime() - startTime.getTime()) / 1000)
 
     const payload = {
-      'comment': {
-        'content': [
+      comment: {
+        content: [
           {
-            'content': [
+            content: [
               {
-                'text': worklogItem.content,
-                'type': 'text'
-              }
+                text: worklogItem.content,
+                type: 'text',
+              },
             ],
-            'type': 'paragraph'
-          }
+            type: 'paragraph',
+          },
         ],
-        'type': 'doc',
-        'version': 1
+        type: 'doc',
+        version: 1,
       },
-      'started': startTimeString,
-      'timeSpentSeconds': timeSpentSeconds
+      started: startTimeString,
+      timeSpentSeconds: timeSpentSeconds,
     }
 
     const response = await fetch(getWorklogUrl(worklogItem.ticket) + '/' + worklogItem.id, {
@@ -158,15 +164,15 @@ export function useWorklogStorage() {
       body: JSON.stringify(payload),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Basic ${btoa(email + ':' + api_password)}`
-      }
+        'Authorization': `Basic ${btoa(email + ':' + api_password)}`,
+      },
     })
 
     if (response.status !== 200) {
       throw new Error('Failed to update worklog')
     }
 
-    const jiraResponseBody = await response.json() as { id: string; issueId: string; }
+    const jiraResponseBody = await response.json() as { id: string, issueId: string }
 
     await supabaseClient.from('worklogs')
       .update({
@@ -175,7 +181,7 @@ export function useWorklogStorage() {
         ticket: worklogItem.ticket,
         content: worklogItem.content,
         started_at: worklogItem.startTime,
-        ended_at: worklogItem.endTime
+        ended_at: worklogItem.endTime,
       })
       .eq('id', jiraResponseBody.id)
   }
@@ -186,10 +192,10 @@ export function useWorklogStorage() {
       .select('email, api_password')
       .eq('id', credentialsId)
       .single()
-      .then(x => {
+      .then((x) => {
         return {
           email: x.data!.email,
-          api_password: x.data!.api_password
+          api_password: x.data!.api_password,
         }
       })
   }
@@ -198,6 +204,6 @@ export function useWorklogStorage() {
     save,
     load,
     remove,
-    update
+    update,
   }
 }

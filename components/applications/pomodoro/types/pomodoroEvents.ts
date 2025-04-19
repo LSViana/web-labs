@@ -23,6 +23,6 @@ export class PomodoroNotificationEvent extends TypedEvent {
 }
 
 export interface PomodoroEventMap {
-  'interval': PomodoroIntervalEvent,
-  'notification': PomodoroNotificationEvent
+  interval: PomodoroIntervalEvent
+  notification: PomodoroNotificationEvent
 }

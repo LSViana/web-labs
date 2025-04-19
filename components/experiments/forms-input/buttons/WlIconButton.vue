@@ -8,7 +8,7 @@
 import WlButton, { type WlButtonVariant } from '~/components/experiments/forms-input/buttons/WlButton.vue'
 
 type Props = {
-  variant: WlButtonVariant;
+  variant: WlButtonVariant
 }
 
 defineProps<Props>()

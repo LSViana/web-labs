@@ -12,15 +12,15 @@
 import { computed } from 'vue'
 
 type Props = {
-  to?: string;
-};
+  to?: string
+}
 
 const props = defineProps<Props>()
 
-const linkClasses = 'transition-colors hover:border-slate-400 ' +
-    'active:bg-slate-300 dark:active:bg-slate-700 dark:active:text-slate-50'
+const linkClasses = 'transition-colors hover:border-slate-400 '
+  + 'active:bg-slate-300 dark:active:bg-slate-700 dark:active:text-slate-50'
 
 const classes = computed(() => ({
-  [linkClasses]: Boolean(props.to)
+  [linkClasses]: Boolean(props.to),
 }))
 </script>

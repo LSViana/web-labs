@@ -1,25 +1,33 @@
 <template>
   <NuxtLayout name="home">
     <WlContainer class="flex flex-col gap-3 p-3">
-      <h1 class="text-xl">Error Handling</h1>
+      <h1 class="text-xl">
+        Error Handling
+      </h1>
       <p>The <code>createError()</code> composable:</p>
       <WlExperimentCanvas>
         <div class="flex gap-3">
-          <WlButton variant="secondary" @click="listeners.throwError">Throw Error</WlButton>
-          <WlButton variant="secondary" @click="listeners.throwFatalError">Throw Fatal Error</WlButton>
+          <WlButton variant="secondary" @click="listeners.throwError">
+            Throw Error
+          </WlButton>
+          <WlButton variant="secondary" @click="listeners.throwFatalError">
+            Throw Fatal Error
+          </WlButton>
         </div>
       </WlExperimentCanvas>
       <p>The <code>showError()</code> composable:</p>
       <WlExperimentCanvas>
         <div class="flex gap-3">
-          <WlButton variant="secondary" @click="listeners.showError">Show Error</WlButton>
+          <WlButton variant="secondary" @click="listeners.showError">
+            Show Error
+          </WlButton>
         </div>
       </WlExperimentCanvas>
       <p>The <code>NuxtErrorBoundary</code> component:</p>
       <WlExperimentCanvas>
         <div class="flex gap-3">
           <NuxtErrorBoundary @error="listeners.logError">
-            <WlErrorBoundarySample/>
+            <WlErrorBoundarySample />
             <template #error="error">
               <div>
                 <p>Error details:</p>
@@ -41,13 +49,13 @@ import WlExperimentCanvas from '~/components/shared/experiments/WlExperimentCanv
 import WlContainer from '~/components/shared/layout/WlContainer.vue'
 
 const listeners = {
-  throwError () {
+  throwError() {
     methods.throwError()
   },
-  throwFatalError () {
+  throwFatalError() {
     methods.throwError(true)
   },
-  showError () {
+  showError() {
     throw showError({
       message: 'This is a regular error.',
       cause: 'The cause of the error.',
@@ -59,20 +67,20 @@ const listeners = {
       statusCode: 400,
       statusMessage: 'The status message.',
       statusText: 'The status text.',
-      unhandled: false
+      unhandled: false,
     })
   },
-  logError (error: unknown) {
+  logError(error: unknown) {
     if (!isNuxtError(error)) {
       throw error
     }
 
     console.log('logError', { error })
-  }
+  },
 }
 
 const methods = {
-  throwError (fatal = false) {
+  throwError(fatal = false) {
     throw createError({
       message: 'This is a regular error.',
       cause: 'The cause of the error.',
@@ -84,7 +92,7 @@ const methods = {
       statusCode: 400,
       statusMessage: 'The status message.',
       statusText: 'The status text.',
-      unhandled: false
+      unhandled: false,
     })
   },
 }

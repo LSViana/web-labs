@@ -15,10 +15,10 @@
       <div v-else-if="userInfo.value.value">
         <pre>{{ userInfo.value.value }}</pre>
         <img
-            class="my-3 rounded border"
-            alt="Profile image of the user"
-            :src="userInfo.value.value?.picture"
-            style="width: 72px; height: 72px;"
+          class="my-3 rounded border"
+          alt="Profile image of the user"
+          :src="userInfo.value.value?.picture"
+          style="width: 72px; height: 72px;"
         >
         <NuxtLink external :href="routes.discardUserInfo">
           <WlButton variant="primary">
@@ -46,24 +46,24 @@ import { useCookie } from '#app'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 
 const authentication = useCookie('google_auth', {
-  secure: !isDevelopment
+  secure: !isDevelopment,
 })
 
 const userInfo = {
   loading: ref(false),
-  value: ref<{ id: string; picture: string; }>()
+  value: ref<{ id: string, picture: string }>(),
 }
 
 const routes = {
   login: '/api/auth/google/login',
   getUserInfo: '/api/auth/google/user-info',
-  discardUserInfo: '/api/auth/google/discard'
+  discardUserInfo: '/api/auth/google/discard',
 }
 
 const listeners = {
   onGetUserInfo(): void {
     methods.getUserInfo()
-  }
+  },
 }
 
 const methods = {
@@ -71,6 +71,6 @@ const methods = {
     const response = await fetch('/api/auth/google/user-info')
 
     userInfo.value.value = await response.json()
-  }
+  },
 }
 </script>

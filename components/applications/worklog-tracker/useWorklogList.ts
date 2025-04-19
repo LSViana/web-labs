@@ -10,7 +10,8 @@ export function useWorklogList() {
 
     if (indexToAdd === -1) {
       value.unshift(item)
-    } else {
+    }
+    else {
       value.splice(indexToAdd + 1, 0, item)
     }
   }
@@ -40,6 +41,6 @@ export function useWorklogList() {
     add,
     update,
     load,
-    remove
+    remove,
   }
 }

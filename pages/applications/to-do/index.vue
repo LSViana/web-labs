@@ -1,9 +1,11 @@
 <template>
   <NuxtLayout name="home">
     <WlContainer class="flex flex-col gap-3 p-3">
-      <h2 class="text-2xl">To Do</h2>
-      <ToDoTaskForm/>
-      <ToDoTaskList/>
+      <h2 class="text-2xl">
+        To Do
+      </h2>
+      <ToDoTaskForm />
+      <ToDoTaskList />
     </WlContainer>
   </NuxtLayout>
 </template>

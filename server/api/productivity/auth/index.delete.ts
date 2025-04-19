@@ -1,9 +1,9 @@
 import { defineEventHandler } from 'h3'
 
-import { useWorklogAuth } from '~/composables/server/worklog-tracker/useWorklogAuth'
+import { useProductivityAuth } from '~/server/services/productivity/auth'
 
 export default defineEventHandler(async (event) => {
-  const auth = useWorklogAuth()
+  const auth = useProductivityAuth()
 
   auth.removeCredentials(event)
 })

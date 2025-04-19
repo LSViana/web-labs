@@ -4,7 +4,8 @@ export function usePomodoroNow() {
 
     if (now.getMilliseconds() < 500) {
       now.setMilliseconds(0)
-    } else {
+    }
+    else {
       now.setMilliseconds(1_000)
     }
 
@@ -12,6 +13,6 @@ export function usePomodoroNow() {
   }
 
   return {
-    get
+    get,
   }
 }

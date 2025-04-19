@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
 
   const response = await fetch(targetURL, {
     body: targetForm,
-    method: 'POST'
+    method: 'POST',
   })
 
   const responseData = await response.json()
@@ -30,12 +30,12 @@ export default defineEventHandler(async (event) => {
 
   setCookie(event, 'google_auth', 'true', {
     secure: !isDevelopment,
-    expires: cookieExpiration
+    expires: cookieExpiration,
   })
   setCookie(event, 'google_auth_access_token', responseData.access_token, {
     httpOnly: true,
     secure: !isDevelopment,
-    expires: cookieExpiration
+    expires: cookieExpiration,
   })
 
   return sendRedirect(event, '/experiments/authentication/third-party-login')

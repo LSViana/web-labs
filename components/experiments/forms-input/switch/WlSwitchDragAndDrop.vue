@@ -6,7 +6,7 @@
       class="flex size-9 cursor-pointer items-center justify-center rounded-full border-2 transition-colors"
       :class="[
         backgroundColors[(i - 1) % backgroundColors.length],
-        props.value === i ? borderColors[(i - 1) % borderColors.length] : 'border-transparent hover:border-white/25'
+        props.value === i ? borderColors[(i - 1) % borderColors.length] : 'border-transparent hover:border-white/25',
       ]"
       :data-value="i"
       @dragover="listeners.dragover"
@@ -16,7 +16,7 @@
       <div
         v-if="props.value === i"
         class="flex size-9 items-center justify-center rounded-full"
-        :class="[ foregroundColors[(i - 1) % foregroundColors.length] ]"
+        :class="[foregroundColors[(i - 1) % foregroundColors.length]]"
         draggable="true"
         :data-value="i"
         @dragstart="listeners.dragstart"
@@ -32,12 +32,12 @@
 
 <script lang="ts" setup>
 type Props = {
-  options: number;
-  value: number;
-};
+  options: number
+  value: number
+}
 type Events = {
-  (e: 'update:value', event: number): void;
-};
+  (e: 'update:value', event: number): void
+}
 
 const props = defineProps<Props>()
 const emits = defineEmits<Events>()
@@ -47,11 +47,11 @@ const borderColors = ['border-green-400', 'border-blue-400', 'border-yellow-400'
 const foregroundColors = ['bg-green-400 text-green-900', 'bg-blue-400 text-blue-900', 'bg-yellow-400 text-yellow-900', 'bg-red-400 text-red-900', 'bg-purple-400 text-purple-900']
 
 const listeners = {
-  click (event: MouseEvent): void {
+  click(event: MouseEvent): void {
     const newValue = Number.parseInt((event.target as HTMLElement).dataset.value ?? '0')
     methods.onInput(newValue)
   },
-  dragstart (event: DragEvent): void {
+  dragstart(event: DragEvent): void {
     if (!event.dataTransfer) {
       return
     }
@@ -60,10 +60,10 @@ const listeners = {
     event.dataTransfer.setData('text/plain', props.value.toString())
     event.dataTransfer.setDragImage(document.createElement('div'), 0, 0)
   },
-  dragover (event: DragEvent): void {
+  dragover(event: DragEvent): void {
     event.preventDefault()
   },
-  drop (event: DragEvent): void {
+  drop(event: DragEvent): void {
     if (!event.dataTransfer) {
       return
     }
@@ -74,12 +74,12 @@ const listeners = {
     }
 
     methods.onInput(Number.parseInt(newValueRaw))
-  }
+  },
 }
 
 const methods = {
-  onInput (value: number): void {
+  onInput(value: number): void {
     emits('update:value', value)
-  }
+  },
 }
 </script>

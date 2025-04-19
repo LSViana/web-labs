@@ -13,6 +13,6 @@ export function useLeaveConfirmation() {
 
   return {
     hold,
-    release
+    release,
   }
 }

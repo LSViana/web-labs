@@ -33,10 +33,10 @@
       <WlExperimentCanvas>
         <div class="inline-flex gap-2 rounded-full border bg-slate-200 p-1 dark:bg-slate-800">
           <WlIconButton variant="primary">
-            <WlStarIcon value/>
+            <WlStarIcon value />
           </WlIconButton>
           <WlIconButton variant="danger">
-            <WlTrashAnimatedIcon/>
+            <WlTrashAnimatedIcon />
           </WlIconButton>
         </div>
       </WlExperimentCanvas>
@@ -44,7 +44,7 @@
         The confirm button allows you to perform the main action with a confirmation step:
       </p>
       <WlExperimentCanvas>
-        <WlConfirmDeleteButton @confirm="listeners.confirm"/>
+        <WlConfirmDeleteButton @confirm="listeners.confirm" />
         <template #caption>
           Used to confirm important actions. Confirmed: <code>{{ confirmed }}</code>.
         </template>
@@ -57,7 +57,7 @@
           <WlButton variant="secondary">
             Cancel
           </WlButton>
-          <WlConfirmDeleteButton @confirm="listeners.confirm"/>
+          <WlConfirmDeleteButton @confirm="listeners.confirm" />
         </WlButtonGroup>
         <template #caption>
           Used to group actions.
@@ -67,7 +67,7 @@
         The rating button allows the user to rate something.
       </p>
       <WlExperimentCanvas>
-        <WlRatingButton v-model:value="rating"/>
+        <WlRatingButton v-model:value="rating" />
         <template #caption>
           Used to evaluate aspects of something. Rating: <code>{{ rating }}</code>.
         </template>
@@ -103,6 +103,6 @@ const listeners = {
   },
   confirm(): void {
     confirmed.value = true
-  }
+  },
 }
 </script>

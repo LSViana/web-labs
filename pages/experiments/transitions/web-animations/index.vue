@@ -3,7 +3,7 @@
     <WlContainer class="flex flex-col gap-3 p-3">
       <p>Animating an element to wherever the user clicks using Web Animations API:</p>
       <WlExperimentCanvas>
-        <WlMovableElementWebAnimationsApi/>
+        <WlMovableElementWebAnimationsApi />
       </WlExperimentCanvas>
     </WlContainer>
   </NuxtLayout>

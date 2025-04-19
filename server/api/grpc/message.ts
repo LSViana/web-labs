@@ -1,7 +1,7 @@
 import { defineEventHandler } from 'h3'
 
 interface Message {
-  content: string;
+  content: string
 }
 
 export default defineEventHandler(async () => {
@@ -11,7 +11,7 @@ export default defineEventHandler(async () => {
   const MessageType = root.lookupType('Message')
 
   const messageInstance: Message = {
-    content: 'This is a ProtoBuf message.'
+    content: 'This is a ProtoBuf message.',
   }
 
   const messagePayload = MessageType.create(messageInstance)

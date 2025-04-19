@@ -4,30 +4,36 @@
       <div class="flex flex-wrap justify-between gap-4 md:justify-start">
         <div class="flex flex-col">
           <WlLabel>Work</WlLabel>
-          <p class="text-4xl font-bold">{{ computedRecords.work }}</p>
+          <p class="text-4xl font-bold">
+            {{ computedRecords.work }}
+          </p>
         </div>
         <div class="flex flex-col">
           <WlLabel>Break</WlLabel>
-          <p class="text-4xl font-bold">{{ computedRecords.break }}</p>
+          <p class="text-4xl font-bold">
+            {{ computedRecords.break }}
+          </p>
         </div>
         <div class="flex grow items-end gap-3 sm:grow-0">
           <div class="flex grow flex-col">
-            <WlLabel for="pomodoro-overview-date">Date</WlLabel>
-            <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date"/>
+            <WlLabel for="pomodoro-overview-date">
+              Date
+            </WlLabel>
+            <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date" />
           </div>
           <WlButton variant="secondary" title="Select today (T)" @click="listeners.today">
             <span class="underline">T</span>oday
           </WlButton>
         </div>
       </div>
-      <WlPomodoroOverviewTimeline :records="records" @select="listeners.select"/>
+      <WlPomodoroOverviewTimeline :records="records" @select="listeners.select" />
       <template v-if="record">
         <WlPomodoroRecordDetails
-            v-model:record="record"
-            :new="isCreating"
-            @update:record="listeners.record"
-            @close="listeners.close"
-            @delete="listeners.delete"
+          v-model:record="record"
+          :new="isCreating"
+          @update:record="listeners.record"
+          @close="listeners.close"
+          @delete="listeners.delete"
         />
         <div v-if="!isCreating" class="flex items-center gap-3">
           <a href="#" class="underline" @click="listeners.previous">Previous</a>
@@ -44,7 +50,7 @@
         </WlButton>
       </div>
     </div>
-    <WlPomodoroRecordConflict :records="records" @select="listeners.select"/>
+    <WlPomodoroRecordConflict :records="records" @select="listeners.select" />
   </div>
 </template>
 
@@ -53,7 +59,6 @@ import { onKeyDown } from '@vueuse/core'
 import { computed, ref } from 'vue'
 
 import { Interval } from '~/components/applications/pomodoro/types/interval'
-import { PomodoroRecord } from '~/components/applications/pomodoro/types/pomodoroRecord'
 import { PomodoroIntervalType } from '~/components/applications/pomodoro/types/pomodoroType'
 import { usePomodoroNow } from '~/components/applications/pomodoro/usePomodoroNow'
 import { usePomodoroToday } from '~/components/applications/pomodoro/usePomodoroToday'
@@ -63,11 +68,12 @@ import WlPomodoroRecordDetails from '~/components/applications/pomodoro/WlPomodo
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 import WlDateInput from '~/components/experiments/forms-input/input/WlDateInput.vue'
 import WlLabel from '~/components/experiments/forms-input/WlLabel.vue'
+import { PomodoroRecord } from '~/composables/server/pomodoro/types/pomodoroRecord'
 
 type Emits = {
-  (e: 'create', record: PomodoroRecord): void;
-  (e: 'update', record: PomodoroRecord, index: number): void;
-  (e: 'remove', index: number): void;
+  (e: 'create', record: PomodoroRecord): void
+  (e: 'update', record: PomodoroRecord, index: number): void
+  (e: 'remove', index: number): void
 }
 
 const emits = defineEmits<Emits>()
@@ -82,11 +88,12 @@ const now = usePomodoroNow()
 
 const computedRecords = computed(() => {
   const workSeconds = records.value
-      .filter(x => x.type === PomodoroIntervalType.work)
-      .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0)
+    .filter(x => x.type === PomodoroIntervalType.work)
+    .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0)
+
   const breakSeconds = records.value
-      .filter(x => x.type === PomodoroIntervalType.break)
-      .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0)
+    .filter(x => x.type === PomodoroIntervalType.break)
+    .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0)
 
   const result: Record<PomodoroIntervalType, Interval> = {
     work: new Interval(0, 0, workSeconds),
@@ -110,15 +117,21 @@ const methods = {
 
     const previousRecord = records.value[records.value.length - 1]
 
-    return previousRecord.endDate
-  }
+    if (!previousRecord || previousRecord.endTime > now.get()) {
+      // If the previous record is in the future, use the current date.
+      return now.get()
+    }
+
+    return previousRecord.endTime
+  },
 }
 
 const listeners = {
   record(newRecord: PomodoroRecord): void {
     if (isCreating.value) {
       emits('create', newRecord)
-    } else {
+    }
+    else {
       emits('update', newRecord, recordIndex.value)
     }
   },
@@ -144,10 +157,10 @@ const listeners = {
     record.value = undefined
   },
   addWork(): void {
-    record.value = new PomodoroRecord(methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work)
+    record.value = new PomodoroRecord(0, methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work)
   },
   addBreak(): void {
-    record.value = new PomodoroRecord(methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break)
+    record.value = new PomodoroRecord(0, methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break)
   },
   previous(): void {
     if (recordIndex.value > 0) {
@@ -158,6 +171,6 @@ const listeners = {
     if (recordIndex.value < records.value.length - 1) {
       listeners.select(recordIndex.value + 1)
     }
-  }
+  },
 }
 </script>

@@ -9,13 +9,13 @@ import type { StyleValue } from 'vue'
 import { computed } from 'vue'
 
 type Props = {
-  value: number;
-  max: number;
-};
+  value: number
+  max: number
+}
 
 const props = defineProps<Props>()
 
 const trackStyles = computed<StyleValue>(() => ({
-  width: `${props.value / props.max * 100}%`
+  width: `${props.value / props.max * 100}%`,
 }))
 </script>

@@ -21,7 +21,7 @@ export async function getMessagesServer(): Promise<Server> {
         null,
         {
           id: messageReceiptId++,
-          length: call.request.content.length
+          length: call.request.content.length,
         })
     },
     sendMessageStream: () => {
@@ -29,7 +29,7 @@ export async function getMessagesServer(): Promise<Server> {
     },
     readMessageStream: () => {
       // TODO: Implement the handler.
-    }
+    },
   }
 
   server.addService(Service.service, handlers)

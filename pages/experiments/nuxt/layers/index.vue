@@ -1,10 +1,12 @@
 <template>
   <NuxtLayout name="home">
     <WlContainer class="flex flex-col gap-3 p-3">
-      <h1 class="text-xl">Layers</h1>
+      <h1 class="text-xl">
+        Layers
+      </h1>
       <p>A component from the <code>sample</code> layer:</p>
       <WlExperimentCanvas>
-        <WlComponentLayer/>
+        <WlComponentLayer />
       </WlExperimentCanvas>
     </WlContainer>
   </NuxtLayout>

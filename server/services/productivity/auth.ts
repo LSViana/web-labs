@@ -5,7 +5,7 @@ const millisecondsPerHour = 1000 * 60 * 60
 const millisecondsPerDay = millisecondsPerHour * 24
 const millisecondsPerWeek = millisecondsPerDay * 7
 
-export function useWorklogAuth() {
+export function useProductivityAuth() {
   function setCredentials(event: H3Event, credentialsId: string) {
     const expires = new Date(Date.now() + millisecondsPerWeek)
 
@@ -41,6 +41,6 @@ export function useWorklogAuth() {
   return {
     setCredentials,
     removeCredentials,
-    getCredentials
+    getCredentials,
   }
 }

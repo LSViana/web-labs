@@ -8,6 +8,6 @@ export function useWorklogNow() {
   }
 
   return {
-    get
+    get,
   }
 }

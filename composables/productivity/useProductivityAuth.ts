@@ -3,37 +3,40 @@ import { ref } from 'vue'
 
 import { useCookie } from '#app'
 
-export function useWorklogAuth() {
+export function useProductivityAuth() {
   const authenticated = ref(false)
   const invalidCredentials = ref(false)
 
   updateAuthenticated()
   useEventListener(window, 'focus', updateAuthenticated)
 
+  const url = '/api/productivity/auth'
+
   async function login(email: string, password: string) {
-    const response = await fetch('/api/worklog-tracker/worklogs/auth', {
+    const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
         email: email,
-        password: password
+        password: password,
       }),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        'Content-Type': 'application/json',
+      },
     })
 
     if (response.status !== 204) {
       invalidCredentials.value = true
       authenticated.value = false
-    } else {
+    }
+    else {
       invalidCredentials.value = false
       authenticated.value = true
     }
   }
 
   async function logout() {
-    await fetch('/api/worklog-tracker/worklogs/auth', {
-      method: 'DELETE'
+    await fetch(url, {
+      method: 'DELETE',
     })
 
     authenticated.value = false
@@ -47,6 +50,6 @@ export function useWorklogAuth() {
     authenticated,
     invalidCredentials,
     login,
-    logout
+    logout,
   }
 }

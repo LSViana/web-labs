@@ -1,7 +1,7 @@
 import { defineEventHandler, getQuery } from 'h3'
 
-import { useWorklogAuth } from '~/composables/server/worklog-tracker/useWorklogAuth'
-import { useWorklogStorage } from '~/composables/server/worklog-tracker/useWorklogStorage'
+import { useProductivityAuth } from '~/server/services/productivity/auth'
+import { useWorklogStorage } from '~/server/services/worklog/storage'
 
 const storage = useWorklogStorage()
 
@@ -10,18 +10,18 @@ export default defineEventHandler(async (event) => {
   const issueId = query.issueId
   const worklogId = query.worklogId
 
-  if (typeof issueId !== 'string' || typeof worklogId !== 'string' ||
-    issueId.trim().length === 0 || worklogId.trim().length === 0) {
+  if (typeof issueId !== 'string' || typeof worklogId !== 'string'
+    || issueId.trim().length === 0 || worklogId.trim().length === 0) {
     throw new Error('Invalid query')
   }
 
-  const auth = useWorklogAuth()
+  const auth = useProductivityAuth()
   const credentialsId = auth.getCredentials(event)
 
   await storage.remove(issueId, worklogId, credentialsId)
 
   return {
     status: 204,
-    valid: query
+    valid: query,
   }
 })

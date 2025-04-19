@@ -3,14 +3,14 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [
-    vuePlugin()
+    vuePlugin(),
   ],
   test: {
-    environment: 'happy-dom'
+    environment: 'happy-dom',
   },
   resolve: {
     alias: {
-      '~/': new URL('./', import.meta.url).pathname
-    }
-  }
+      '~/': new URL('./', import.meta.url).pathname,
+    },
+  },
 })

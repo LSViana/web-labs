@@ -1,19 +1,21 @@
 <template>
   <NuxtLayout name="home">
     <WlContainer class="flex flex-col gap-3 p-3">
-      <h1 class="text-xl">State Management</h1>
+      <h1 class="text-xl">
+        State Management
+      </h1>
       <p>Sharing state with the <code>ref()</code> (built-in) composable:</p>
       <WlExperimentCanvas>
         <div class="flex flex-col gap-3">
-          <WlNuxtRefCounter/>
-          <WlNuxtRefCounter/>
+          <WlNuxtRefCounter />
+          <WlNuxtRefCounter />
         </div>
       </WlExperimentCanvas>
       <p>Sharing state with the <code>useState()</code> (Nuxt-provided) composable:</p>
       <WlExperimentCanvas>
         <div class="flex flex-col gap-3">
-          <WlNuxtUseStateCounter/>
-          <WlNuxtUseStateCounter/>
+          <WlNuxtUseStateCounter />
+          <WlNuxtUseStateCounter />
         </div>
       </WlExperimentCanvas>
     </WlContainer>

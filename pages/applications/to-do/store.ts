@@ -5,35 +5,35 @@ export class TaskStore {
   items = reactive([
     {
       done: false,
-      text: 'Create blog website'
+      text: 'Create blog website',
     },
     {
       done: false,
-      text: 'Create to do app'
+      text: 'Create to do app',
     },
     {
       done: false,
-      text: 'Create blog article'
+      text: 'Create blog article',
     },
     {
       done: false,
-      text: 'Review blog article'
-    }
+      text: 'Review blog article',
+    },
   ])
 
-  add (task: string) {
+  add(task: string) {
     this.items.push({
       done: false,
-      text: task
+      text: task,
     })
   }
 }
 
-export function provideTaskStore () {
+export function provideTaskStore() {
   // Optionally return the new instance if you need it in the top-level component.
   provide('tasks', new TaskStore())
 }
 
-export function injectTaskStore () {
+export function injectTaskStore() {
   return inject<TaskStore>('tasks')!
 }

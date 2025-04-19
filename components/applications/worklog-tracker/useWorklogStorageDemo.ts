@@ -9,7 +9,7 @@ function buildWorklogStorage(): ReturnType<typeof useWorklogStorage> {
     load: () => Promise.resolve([]),
     save: (worklogItem: WorklogItem) => Promise.resolve(worklogItem),
     remove: () => Promise.resolve(),
-    update: () => Promise.resolve()
+    update: () => Promise.resolve(),
   }
 }
 

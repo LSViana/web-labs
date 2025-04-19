@@ -1,8 +1,12 @@
 <template>
   <div class="flex items-center gap-3">
     <p>Counter: <code>{{ counter }}</code></p>
-    <WlIconButton variant="secondary" class="size-6" @click="counter++">+</WlIconButton>
-    <WlIconButton variant="secondary" class="size-6" @click="counter--">-</WlIconButton>
+    <WlIconButton variant="secondary" class="size-6" @click="counter++">
+      +
+    </WlIconButton>
+    <WlIconButton variant="secondary" class="size-6" @click="counter--">
+      -
+    </WlIconButton>
   </div>
 </template>
 

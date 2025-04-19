@@ -21,61 +21,61 @@
           <li>
             <WlCard>
               <span>Chat</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Servers</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Notebooks</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Papers</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Posts</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Colors</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Inventory</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Newsletter</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Bookmarks</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
           <li>
             <WlCard>
               <span>Budget</span>
-              <WlTodoBadge class="ml-2"/>
+              <WlTodoBadge class="ml-2" />
             </WlCard>
           </li>
         </ul>

@@ -4,6 +4,6 @@ export default defineEventHandler(async () => {
   console.log(`[${new Date().toISOString()}] API - useFetch`)
 
   return {
-    value: 2
+    value: 2,
   }
 })

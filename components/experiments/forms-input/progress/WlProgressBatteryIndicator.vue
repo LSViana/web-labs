@@ -41,9 +41,9 @@
 import { computed } from 'vue'
 
 type Props = {
-  value: number;
-  charging: boolean;
-};
+  value: number
+  charging: boolean
+}
 
 const props = defineProps<Props>()
 
@@ -51,22 +51,25 @@ const classes = computed(() => {
   if (props.charging) {
     return {
       text: 'text-emerald-400',
-      illustration: 'fill-emerald-400 animate-pulse'
+      illustration: 'fill-emerald-400 animate-pulse',
     }
-  } else if (props.value < 10) {
+  }
+  else if (props.value < 10) {
     return {
       text: 'text-red-400',
-      illustration: 'fill-red-400'
+      illustration: 'fill-red-400',
     }
-  } else if (props.value < 20) {
+  }
+  else if (props.value < 20) {
     return {
       text: 'text-yellow-400',
-      illustration: 'fill-yellow-400'
+      illustration: 'fill-yellow-400',
     }
-  } else {
+  }
+  else {
     return {
       text: 'text-blue-400',
-      illustration: 'fill-blue-400'
+      illustration: 'fill-blue-400',
     }
   }
 })

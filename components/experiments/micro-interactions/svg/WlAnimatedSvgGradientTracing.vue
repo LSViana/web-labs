@@ -31,7 +31,12 @@
     </defs>
   </svg>
   <div class="mt-3">
-    <input v-model.number="progress" type="range" min="0" max="100">
+    <input
+      v-model.number="progress"
+      type="range"
+      min="0"
+      max="100"
+    >
   </div>
 </template>
 
@@ -40,13 +45,13 @@ import { computed, ref } from 'vue'
 
 const dimensions = {
   height: 80,
-  width: 317
+  width: 317,
 }
 
 const progress = ref(0)
 
 const computedDimensions = computed(() => ({
   height: progress.value / 100 * dimensions.height,
-  width: progress.value / 100 * dimensions.width
+  width: progress.value / 100 * dimensions.width,
 }))
 </script>

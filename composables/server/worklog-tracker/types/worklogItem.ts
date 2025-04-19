@@ -16,7 +16,7 @@ export class WorklogItem {
     startTime = worklogNow.get(),
     endTime = worklogNow.get(),
     workogId = '',
-    issueId = ''
+    issueId = '',
   ) {
     this.ticket = ticket
     this.content = content

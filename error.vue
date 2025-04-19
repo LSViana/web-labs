@@ -3,13 +3,17 @@
     <WlContainer class="p-3">
       <div class="flex items-start gap-3 rounded border border-warning-500 bg-amber-500/10 p-3">
         <span class="pt-0.5">
-          <WlTriangleExclamationIcon/>
+          <WlTriangleExclamationIcon />
         </span>
         <div class="flex flex-col">
-          <p class="font-bold">{{ props.error.statusCode }}</p>
+          <p class="font-bold">
+            {{ props.error.statusCode }}
+          </p>
           <p>{{ props.error.message }}</p>
           <div class="mt-3">
-            <WlButton variant="secondary" @click="listeners.home">Go Home</WlButton>
+            <WlButton variant="secondary" @click="listeners.home">
+              Go Home
+            </WlButton>
           </div>
         </div>
       </div>
@@ -35,11 +39,10 @@ const props = defineProps<Props>()
 // const globalError = useError()
 
 const listeners = {
-  home () {
+  home() {
     clearError({
-      redirect: '/'
+      redirect: '/',
     })
-  }
+  },
 }
 </script>
-

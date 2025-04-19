@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout name="home">
     <WlContainer class="p-3">
-      <WlWorklogAuthForm/>
+      <WlWorklogAuthForm />
     </WlContainer>
   </NuxtLayout>
 </template>

@@ -16,7 +16,7 @@ export default defineEventHandler(async (event): Promise<void> => {
   await supabase.channel.send({
     type: 'broadcast',
     event: 'value',
-    value: 'This value is from the server'
+    value: 'This value is from the server',
   })
 
   setResponseStatus(event, 200)

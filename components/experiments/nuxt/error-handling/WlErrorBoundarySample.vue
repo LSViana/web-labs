@@ -1,5 +1,7 @@
 <template>
-  <WlButton variant="secondary" @click="listeners.throwError()">Throw Handled Error</WlButton>
+  <WlButton variant="secondary" @click="listeners.throwError()">
+    Throw Handled Error
+  </WlButton>
 </template>
 
 <script lang="ts" setup>
@@ -7,7 +9,7 @@ import { createError } from '#app'
 import WlButton from '~/components/experiments/forms-input/buttons/WlButton.vue'
 
 const listeners = {
-  throwError () {
+  throwError() {
     throw createError({
       message: 'This is a regular error.',
       cause: 'The cause of the error.',
@@ -19,8 +21,8 @@ const listeners = {
       statusCode: 400,
       statusMessage: 'The status message.',
       statusText: 'The status text.',
-      unhandled: false
+      unhandled: false,
     })
-  }
+  },
 }
 </script>

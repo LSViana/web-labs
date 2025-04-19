@@ -4,7 +4,9 @@
       <p>The notification badge:</p>
       <WlExperimentCanvas>
         <div class="relative flex aspect-square size-12 items-center justify-center rounded bg-pink-300 text-pink-800">
-          <WlNotificationBadge v-model:value="badge">1</WlNotificationBadge>
+          <WlNotificationBadge v-model:value="badge">
+            1
+          </WlNotificationBadge>
           <span>BR</span>
         </div>
         <template #caption>

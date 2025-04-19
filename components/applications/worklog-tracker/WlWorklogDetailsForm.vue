@@ -1,30 +1,40 @@
 <template>
   <div class="flex flex-col gap-3 rounded border p-3">
     <div class="flex gap-3">
-      <WlInput v-model="ticket" placeholder="DEV-XXX" class="w-40"/>
+      <WlInput v-model="ticket" placeholder="DEV-XXX" class="w-40" />
       <div class="flex grow flex-col gap-1">
         <textarea
-            v-model="content"
-            class="wl-worklog-content overflow-y-hidden rounded border bg-slate-200 px-3 py-2 outline-0 focus:border-slate-400 dark:bg-slate-800"
-            placeholder="Enter worklog here..."
-            :rows="worklogLines"
+          v-model="content"
+          class="wl-worklog-content overflow-y-hidden rounded border bg-slate-200 px-3 py-2 outline-0 focus:border-slate-400 dark:bg-slate-800"
+          placeholder="Enter worklog here..."
+          :rows="worklogLines"
         />
       </div>
-      <WlTimeInput v-model="startTime"/>
-      <WlTimeInput v-model="endTime"/>
+      <WlTimeInput v-model="startTime" />
+      <WlTimeInput v-model="endTime" />
       <span class="w-16 shrink-0 pt-2 text-center">{{ worklogDuration }}</span>
     </div>
     <div class="flex gap-3">
       <template v-if="props.edit">
-        <WlButton variant="primary" :disabled="props.disabled" @click="listeners.save">Save</WlButton>
-        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.remove">Remove</WlButton>
-        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.close">Close</WlButton>
+        <WlButton variant="primary" :disabled="props.disabled" @click="listeners.save">
+          Save
+        </WlButton>
+        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.remove">
+          Remove
+        </WlButton>
+        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.close">
+          Close
+        </WlButton>
       </template>
       <template v-else>
-        <WlButton variant="primary" :disabled="props.disabled" @click="listeners.save">Save</WlButton>
-        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.clear">Clear</WlButton>
+        <WlButton variant="primary" :disabled="props.disabled" @click="listeners.save">
+          Save
+        </WlButton>
+        <WlButton variant="secondary" :disabled="props.disabled" @click="listeners.clear">
+          Clear
+        </WlButton>
       </template>
-      <div class="grow"/>
+      <div class="grow" />
       <div class="flex gap-1 self-center text-xs">
         <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome3849">TESTDOME-3849</a>
         <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome5928">TESTDOME-5928</a>
@@ -44,15 +54,15 @@ import { useWorklogDurationFormat } from '~/composables/server/worklog-tracker/u
 import { useWorklogNow } from '~/composables/server/worklog-tracker/useWorklogNow'
 
 type Props = {
-  item: WorklogItem;
-  edit: boolean;
-  disabled: boolean;
+  item: WorklogItem
+  edit: boolean
+  disabled: boolean
 }
 
 type Emits = {
-  (e: 'save', item: WorklogItem): void;
-  (e: 'remove'): void;
-  (e: 'close'): void;
+  (e: 'save', item: WorklogItem): void
+  (e: 'remove'): void
+  (e: 'close'): void
 }
 
 const props = defineProps<Props>()
@@ -70,13 +80,13 @@ const worklogDurationSeconds = computed(() => WorklogItem.calculateDuration(star
 const worklogDuration = useWorklogDurationFormat(worklogDurationSeconds)
 
 watch(
-    () => props.item,
-    (newItem) => {
-      ticket.value = newItem.ticket
-      content.value = newItem.content
-      startTime.value = newItem.startTime
-      endTime.value = newItem.endTime
-    }
+  () => props.item,
+  (newItem) => {
+    ticket.value = newItem.ticket
+    content.value = newItem.content
+    startTime.value = newItem.startTime
+    endTime.value = newItem.endTime
+  },
 )
 
 const listeners = {
@@ -106,7 +116,7 @@ const listeners = {
   clear(): void {
     ticket.value = ''
     content.value = ''
-  }
+  },
 }
 
 const methods = {
@@ -137,7 +147,7 @@ const methods = {
   },
   normalize(): void {
     ticket.value = ticket.value.trim().toUpperCase()
-  }
+  },
 }
 </script>
 

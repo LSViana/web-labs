@@ -166,7 +166,7 @@ describe('usePomodoroClock', () => {
     expect(pomodoroInterval).toStrictEqual(new PomodoroInterval(
       new Interval(0, 0, 25),
       new Interval(0, 25, 0),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
 
     // Clean-up
@@ -210,7 +210,7 @@ describe('usePomodoroClock', () => {
     expect(interval).toStrictEqual(new PomodoroInterval(
       new Interval(0, 0, 0),
       new Interval(0, 5, 0),
-      PomodoroIntervalType.break
+      PomodoroIntervalType.break,
     ))
     expect(remainingTime).toStrictEqual(new Interval(0, 5, 0))
 
@@ -256,7 +256,7 @@ describe('usePomodoroClock', () => {
     expect(interval).toStrictEqual(new PomodoroInterval(
       new Interval(1, 25, 1),
       new Interval(0, 25, 0),
-      PomodoroIntervalType.work
+      PomodoroIntervalType.work,
     ))
 
     // Act
