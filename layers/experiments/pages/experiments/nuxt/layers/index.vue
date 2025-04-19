@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import WlExperimentCanvas from '~~/layers/base/components/experiments/WlExperimentCanvas.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
+import WlExperimentCanvas from '~~/layers/experiments/components/experiments/WlExperimentCanvas.vue';
 import WlComponentLayer from '~~/layers/sample/components/WlComponentLayer.vue';
 </script>

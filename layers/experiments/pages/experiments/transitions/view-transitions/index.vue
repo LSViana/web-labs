@@ -38,8 +38,8 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 
-import WlExperimentCanvas from '~~/layers/base/components/experiments/WlExperimentCanvas.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
+import WlExperimentCanvas from '~~/layers/experiments/components/experiments/WlExperimentCanvas.vue';
 import WlButton from '~~/layers/experiments/components/forms-input/buttons/WlButton.vue';
 import { useCustomViewTransitions } from '~~/layers/experiments/composables/view-transitions';
 

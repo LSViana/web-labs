@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import WlExperimentCard from '~~/layers/base/components/experiments/WlExperimentCard.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
 import type { Experiment } from '~~/layers/base/types/experiments';
+import WlExperimentCard from '~~/layers/experiments/components/experiments/WlExperimentCard.vue';
 
 type ExperimentGroup = {
   target: string

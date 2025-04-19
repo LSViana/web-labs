@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import WlTodoBadge from '~~/layers/base/components/badge/WlTodoBadge.vue';
-import WlCard from '~~/layers/base/components/card/WlCard.vue';
+import WlCard from '~~/layers/base/components/layout/WlCard.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
+import WlTodoBadge from '~~/layers/experiments/components/forms-input/badge/WlTodoBadge.vue';
 </script>

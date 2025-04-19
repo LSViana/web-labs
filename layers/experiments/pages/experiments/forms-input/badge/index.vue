@@ -21,9 +21,9 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-import WlExperimentCanvas from '~~/layers/base/components/experiments/WlExperimentCanvas.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
-import WlNotificationBadge from '~~/layers/experiments/components/forms-input/badges/WlNotificationBadge.vue';
+import WlExperimentCanvas from '~~/layers/experiments/components/experiments/WlExperimentCanvas.vue';
+import WlNotificationBadge from '~~/layers/experiments/components/forms-input/badge/WlNotificationBadge.vue';
 
 const badge = ref(true);
 </script>

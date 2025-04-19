@@ -46,8 +46,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-import WlExperimentCanvas from '~~/layers/base/components/experiments/WlExperimentCanvas.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
+import WlExperimentCanvas from '~~/layers/experiments/components/experiments/WlExperimentCanvas.vue';
 import WlDateInput from '~~/layers/experiments/components/forms-input/input/WlDateInput.vue';
 import WlInput from '~~/layers/experiments/components/forms-input/input/WlInput.vue';
 import WlNumberDisplay from '~~/layers/experiments/components/forms-input/input/WlNumberDisplay.vue';

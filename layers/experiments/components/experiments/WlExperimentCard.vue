@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import WlCard from '~~/layers/base/components/card/WlCard.vue';
+import WlCard from '~~/layers/base/components/layout/WlCard.vue';
 import type { Experiment } from '~~/layers/base/types/experiments';
 
 const props = defineProps<{

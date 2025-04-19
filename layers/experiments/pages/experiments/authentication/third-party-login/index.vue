@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts" setup>
-import WlExperimentCanvas from '~~/layers/base/components/experiments/WlExperimentCanvas.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
 import GoogleAuth from '~~/layers/experiments/components/authentication/GoogleAuth.vue';
+import WlExperimentCanvas from '~~/layers/experiments/components/experiments/WlExperimentCanvas.vue';
 </script>

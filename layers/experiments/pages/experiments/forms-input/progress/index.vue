@@ -62,8 +62,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-import WlExperimentCanvas from '~~/layers/base/components/experiments/WlExperimentCanvas.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
+import WlExperimentCanvas from '~~/layers/experiments/components/experiments/WlExperimentCanvas.vue';
 import WlProgressBarTile from '~~/layers/experiments/components/forms-input/progress/WlProgressBarTile.vue';
 import WlProgressBarTrack from '~~/layers/experiments/components/forms-input/progress/WlProgressBarTrack.vue';
 import WlProgressBatteryIndicator from '~~/layers/experiments/components/forms-input/progress/WlProgressBatteryIndicator.vue';

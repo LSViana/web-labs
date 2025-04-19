@@ -79,10 +79,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-import WlExperimentCanvas from '~~/layers/base/components/experiments/WlExperimentCanvas.vue';
 import WlTrashAnimatedIcon from '~~/layers/base/components/icons/animated/WlTrashAnimatedIcon.vue';
 import WlStarIcon from '~~/layers/base/components/icons/static/WlStarIcon.vue';
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
+import WlExperimentCanvas from '~~/layers/experiments/components/experiments/WlExperimentCanvas.vue';
 import WlButton from '~~/layers/experiments/components/forms-input/buttons/WlButton.vue';
 import WlButtonGroup from '~~/layers/experiments/components/forms-input/buttons/WlButtonGroup.vue';
 import WlConfirmDeleteButton from '~~/layers/experiments/components/forms-input/buttons/WlConfirmDeleteButton.vue';
