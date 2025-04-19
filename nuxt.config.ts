@@ -1,14 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  extends: [
-    './layers/base',
-    './layers/experiments',
-    './layers/pomodoro',
-    './layers/productivity',
-    './layers/sample',
-    './layers/to-do',
-    './layers/worklog-tracker',
-  ],
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxt/eslint',
