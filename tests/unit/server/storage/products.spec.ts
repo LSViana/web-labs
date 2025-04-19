@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { useProductsStorage } from '~~/server/utils/products/productStorage';
+import { useProductsStorage } from '~~/layers/experiments/server/utils/products/productStorage';
 
 describe('Products Storage', () => {
   vi.useFakeTimers();
