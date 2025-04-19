@@ -82,13 +82,17 @@ const listeners = {
     selectedIndex.value = -1
     isEditing.value = false
 
-    if (worklogList.value.length > 0) {
+    if (worklogList.value[0]) {
       item.value.startTime = worklogList.value[0].endTime
     }
 
     item.value.endTime = item.value.startTime
   },
   select(index: number): void {
+    if (!worklogList.value[index]) {
+      return
+    }
+
     item.value = worklogList.value[index]
     selectedIndex.value = index
     isEditing.value = true
@@ -104,7 +108,7 @@ const methods = {
     const items = await worklogStorage.load(date.value)
     worklogList.load(items)
 
-    if (worklogList.value.length > 0) {
+    if (worklogList.value[0]) {
       const newValue = new WorklogItem()
       newValue.startTime = worklogList.value[0].endTime
       newValue.endTime = newValue.startTime

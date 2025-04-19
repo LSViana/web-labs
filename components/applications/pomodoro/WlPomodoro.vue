@@ -106,6 +106,10 @@ const listeners = {
   async remove(index: number): Promise<void> {
     const record = records.value[index]
 
+    if (!record) {
+      return
+    }
+
     records.remove(index)
     await storage.remove(record)
   },

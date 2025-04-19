@@ -8,7 +8,7 @@ export function usePomodoroRecords() {
   function add(record: PomodoroRecord) {
     let index = -1
 
-    if (value.length === 0) {
+    if (value.length === 0 || value[0] == null) {
       index = 0
     }
     else if (value[0].startTime >= record.endTime) {

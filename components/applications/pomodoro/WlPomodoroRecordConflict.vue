@@ -41,6 +41,10 @@ const conflictIndexes = computed(() => {
     const record = props.records[i]
     const nextRecord = props.records[i + 1]
 
+    if (!record || !nextRecord) {
+      continue
+    }
+
     if (record.endTime > nextRecord.startTime && record.startTime < nextRecord.endTime) {
       indexes.push(i)
     }

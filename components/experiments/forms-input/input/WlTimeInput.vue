@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue';
 
-import WlInput from '~/components/experiments/forms-input/input/WlInput.vue'
+import WlInput from '~/components/experiments/forms-input/input/WlInput.vue';
 
 type Props = {
   showSeconds?: boolean
@@ -78,6 +78,12 @@ const listeners = {
     }
 
     let [hours, minutes, seconds] = time.split(':').map(x => Number(x ?? 0))
+
+    if (hours == null || minutes == null) {
+      innerValue.value = methods.formatFromDate(model.value)
+
+      return
+    }
 
     hours = Math.min(23, Math.max(0, hours))
     minutes = Math.min(59, Math.max(0, minutes))

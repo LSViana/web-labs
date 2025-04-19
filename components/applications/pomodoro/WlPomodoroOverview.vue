@@ -117,6 +117,11 @@ const methods = {
 
     const previousRecord = records.value[records.value.length - 1]
 
+    if (!previousRecord || previousRecord.endTime > now.get()) {
+      // If the previous record is in the future, use the current date.
+      return now.get()
+    }
+
     return previousRecord.endTime
   },
 }
