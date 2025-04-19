@@ -19,6 +19,9 @@ export default defineNuxtConfig({
   devServer: {
     host: '0.0.0.0',
   },
+  future: {
+    compatibilityVersion: 4,
+  },
   experimental: {
     viewTransition: true,
   },
@@ -34,4 +37,4 @@ export default defineNuxtConfig({
   tailwindcss: {
     cssPath: '~/assets/styles/tailwind.scss',
   },
-})
+});

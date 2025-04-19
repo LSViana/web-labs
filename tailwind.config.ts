@@ -1,7 +1,11 @@
-import type { Config } from 'tailwindcss'
-import colors from 'tailwindcss/colors'
+import type { Config } from 'tailwindcss';
+import colors from 'tailwindcss/colors';
 
 const config: Partial<Config> = {
+  content: [
+    './app/**',
+    './layers/**',
+  ],
   theme: {
     fontFamily: {
       sans: ['Lato', 'sans-serif'],
@@ -21,6 +25,6 @@ const config: Partial<Config> = {
       },
     },
   },
-}
+};
 
-export default config
+export default config;
