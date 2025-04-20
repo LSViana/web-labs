@@ -2,11 +2,19 @@ import { defineVitestConfig } from '@nuxt/test-utils/config';
 
 export default defineVitestConfig({
   test: {
+    root: './',
     environment: 'happy-dom',
-    exclude: [
-      '**/node_modules',
-      '**/e2e',
-      '**/.assemblyscript',
+    coverage: {
+      include: [
+        'layers/pomodoro',
+        'layers/worklog-tracker',
+      ],
+      exclude: [
+        '**/*.config.ts',
+      ],
+    },
+    include: [
+      'layers/**/unit/*.spec.ts',
     ],
   },
 });
