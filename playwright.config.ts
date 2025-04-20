@@ -11,8 +11,11 @@ dotenv.config();
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests/e2e',
-  /* Run tests in files in parallel */
+  /* Find E2E tests in the `layers` directory. */
+  testDir: './layers',
+  /* Ignore unit test files. */
+  testIgnore: '**/tests/unit/**',
+  /* Run tests in files in parallel. */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
