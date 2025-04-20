@@ -14,17 +14,6 @@
             {{ computedRecords.break }}
           </p>
         </div>
-        <div class="flex grow items-end gap-3 sm:grow-0">
-          <div class="flex grow flex-col">
-            <WlLabel for="pomodoro-overview-date">
-              Date
-            </WlLabel>
-            <WlDateInput id="pomodoro-overview-date" v-model="date" @update:model-value="listeners.date" />
-          </div>
-          <WlButton variant="secondary" title="Select today (T)" @click="listeners.today">
-            <span class="underline">T</span>oday
-          </WlButton>
-        </div>
       </div>
       <WlPomodoroOverviewTimeline :records="records" @select="listeners.select" />
       <template v-if="record">
@@ -59,13 +48,11 @@ import { onKeyDown } from '@vueuse/core';
 import { computed, ref } from 'vue';
 
 import WlButton from '~~/layers/experiments/components/forms-input/buttons/WlButton.vue';
-import WlDateInput from '~~/layers/experiments/components/forms-input/input/WlDateInput.vue';
 import WlLabel from '~~/layers/experiments/components/forms-input/WlLabel.vue';
 import WlPomodoroOverviewTimeline from '~~/layers/pomodoro/components/WlPomodoroOverviewTimeline.vue';
 import WlPomodoroRecordConflict from '~~/layers/pomodoro/components/WlPomodoroRecordConflict.vue';
 import WlPomodoroRecordDetails from '~~/layers/pomodoro/components/WlPomodoroRecordDetails.vue';
 import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
-import { usePomodoroToday } from '~~/layers/pomodoro/composables/usePomodoroToday';
 import { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
 import { Interval } from '~~/layers/pomodoro/types/interval';
 import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
@@ -75,23 +62,25 @@ type Emits = {
   (e: 'update', record: PomodoroRecord, index: number): void
   (e: 'remove', index: number): void
 };
+type Props = {
+  records: PomodoroRecord[]
+  date: Date
+};
 
 const emits = defineEmits<Emits>();
+const props = defineProps<Props>();
 
-const records = defineModel<PomodoroRecord[]>('records', { required: true });
-const date = defineModel<Date>('date', { required: true });
 const recordIndex = ref<number>(-1);
 const record = ref<PomodoroRecord>();
 
-const today = usePomodoroToday();
 const now = usePomodoroNow();
 
 const computedRecords = computed(() => {
-  const workSeconds = records.value
+  const workSeconds = props.records
     .filter(x => x.type === PomodoroIntervalType.work)
     .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0);
 
-  const breakSeconds = records.value
+  const breakSeconds = props.records
     .filter(x => x.type === PomodoroIntervalType.break)
     .reduce((acc, value) => acc + value.elapsedInterval.totalSeconds, 0);
 
@@ -106,16 +95,15 @@ const isCreating = computed(() => Boolean(record.value && recordIndex.value === 
 
 onKeyDown('w', () => recordIndex.value === -1 ? listeners.addWork() : undefined);
 onKeyDown('b', () => recordIndex.value === -1 ? listeners.addBreak() : undefined);
-onKeyDown('t', () => listeners.today());
 
 const methods = {
   getEndDateOfPrevious(): Date {
-    if (records.value.length === 0) {
+    if (props.records.length === 0) {
       // If there are no records, the end date of the previous interval is the current date.
       return now.get();
     }
 
-    const previousRecord = records.value[records.value.length - 1];
+    const previousRecord = props.records[props.records.length - 1];
 
     if (!previousRecord || previousRecord.endTime > now.get()) {
       // If the previous record is in the future, use the current date.
@@ -143,14 +131,9 @@ const listeners = {
   date(): void {
     listeners.close();
   },
-  today(): void {
-    date.value = today.get();
-    recordIndex.value = -1;
-    record.value = undefined;
-  },
   select(index: number): void {
     recordIndex.value = index;
-    record.value = records.value[recordIndex.value];
+    record.value = props.records[recordIndex.value];
   },
   close(): void {
     recordIndex.value = -1;
@@ -168,7 +151,7 @@ const listeners = {
     }
   },
   next(): void {
-    if (recordIndex.value < records.value.length - 1) {
+    if (recordIndex.value < props.records.length - 1) {
       listeners.select(recordIndex.value + 1);
     }
   },

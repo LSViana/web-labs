@@ -4,13 +4,14 @@
       Pomodoro
     </h1>
     <div class="flex items-center gap-3">
+      <WlDateInput v-model="date" @update:model-value="listeners.date" />
       <a href="#" class="underline" @click="listeners.logout">Logout</a>
     </div>
   </div>
   <div class="flex gap-3 md:flex-row">
     <WlPomodoroClock @interval="listeners.interval" @play="listeners.play" @notification="listeners.notification" />
     <WlPomodoroOverview
-      v-model:date="date"
+      :date="date"
       :records="records.value"
       @update:date="listeners.date"
       @create="listeners.add"
@@ -25,6 +26,7 @@ import { useHead } from '@vueuse/head';
 import { onMounted, ref } from 'vue';
 
 import { useRouter } from '#app';
+import WlDateInput from '~~/layers/experiments/components/forms-input/input/WlDateInput.vue';
 import WlPomodoroClock from '~~/layers/pomodoro/components/WlPomodoroClock.vue';
 import WlPomodoroOverview from '~~/layers/pomodoro/components/WlPomodoroOverview.vue';
 import { useLeaveConfirmation } from '~~/layers/pomodoro/composables/useLeaveConfirmation';
