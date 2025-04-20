@@ -175,4 +175,102 @@ describe('Interval', () => {
     expect(interval.minutes).toBe(2);
     expect(interval.seconds).toBe(6);
   });
+
+  test('adds two intervals correctly', () => {
+    // Arrange
+    const interval1 = new Interval(1, 30, 45);
+    const interval2 = new Interval(2, 15, 30);
+
+    // Act
+    const result = interval1.addInterval(interval2);
+
+    // Assert
+    expect(result.hours).toBe(3);
+    expect(result.minutes).toBe(46);
+    expect(result.seconds).toBe(15);
+  });
+
+  test('subtracts two intervals correctly', () => {
+    // Arrange
+    const interval1 = new Interval(3, 45, 50);
+    const interval2 = new Interval(1, 30, 25);
+
+    // Act
+    const result = interval1.subtractInterval(interval2);
+
+    // Assert
+    expect(result.hours).toBe(2);
+    expect(result.minutes).toBe(15);
+    expect(result.seconds).toBe(25);
+  });
+
+  test('handles subtraction resulting in negative interval', () => {
+    // Arrange
+    const interval1 = new Interval(1, 0, 0);
+    const interval2 = new Interval(2, 30, 0);
+
+    // Act
+    const result = interval1.subtractInterval(interval2);
+
+    // Assert
+    expect(result.hours).toBe(-1);
+    expect(result.minutes).toBe(-30);
+    expect(result.seconds).toBe(-0);
+  });
+
+  test('handles addition with negative intervals', () => {
+    // Arrange
+    const interval1 = new Interval(1, 15, 30);
+    const interval2 = new Interval(-0, -45, -40);
+
+    // Act
+    const result = interval1.addInterval(interval2);
+
+    // Assert
+    expect(result.hours).toBe(0);
+    expect(result.minutes).toBe(29);
+    expect(result.seconds).toBe(50);
+  });
+
+  test('handles subtraction with negative intervals', () => {
+    // Arrange
+    const interval1 = new Interval(2, 0, 0);
+    const interval2 = new Interval(-1, -30, -30);
+
+    // Act
+    const result = interval1.subtractInterval(interval2);
+
+    // Assert
+    expect(result.hours).toBe(3);
+    expect(result.minutes).toBe(30);
+    expect(result.seconds).toBe(30);
+  });
+
+  test('handles zero interval addition', () => {
+    // Arrange
+    const interval1 = new Interval(1, 20, 30);
+    const interval2 = new Interval(0, 0, 0);
+
+    // Act
+    const result = interval1.addInterval(interval2);
+
+    // Assert
+    expect(result.hours).toBe(1);
+    expect(result.minutes).toBe(20);
+    expect(result.seconds).toBe(30);
+  });
+
+  test('handles zero interval subtraction', () => {
+    // Arrange
+    const interval1 = new Interval(1, 20, 30);
+    const interval2 = new Interval(0, 0, 0);
+
+    // Act
+    const result = interval1.subtractInterval(interval2);
+
+    // Assert
+    expect(result.hours).toBe(1);
+    expect(result.minutes).toBe(20);
+    expect(result.seconds).toBe(30);
+  });
 });
