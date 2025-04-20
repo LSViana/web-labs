@@ -51,9 +51,23 @@ test.describe('Button experiments page', () => {
     await expect(page.locator('text=Confirmed: true.')).toBeVisible();
   });
 
-  test.skip('has button group', () => {
+  test('has button group', async () => {
+    await expect(page.locator('text=The button group allows putting multiple actions together.')).toBeVisible();
+    await expect(page.locator('text=Used to group actions.')).toBeVisible();
+
+    await expect(page.locator('.wl-button-group').getByText('Cancel')).toBeVisible();
+    await expect(page.locator('.wl-button-group').getByText('Hold to Delete')).toBeVisible();
   });
 
-  test.skip('has rating button', () => {
+  test('has rating button', async () => {
+    const rating4 = page.locator('.wl-rating-button button').nth(3);
+
+    await expect(page.locator('text=The rating button allows the user to rate something.')).toBeVisible();
+    await expect(page.locator('text=Used to evaluate aspects of something. Rating: 3.')).toBeVisible();
+    await expect(rating4).toBeVisible();
+
+    await rating4.click();
+
+    await expect(page.locator('text=Used to evaluate aspects of something. Rating: 4.')).toBeVisible();
   });
 });
