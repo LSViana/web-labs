@@ -16,6 +16,20 @@
         },
         {
             "console": "integratedTerminal",
+            "name": "npm: test:unit",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "test:unit"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "console": "integratedTerminal",
             "name": "npm: test:e2e",
             "request": "launch",
             "runtimeArgs": [
