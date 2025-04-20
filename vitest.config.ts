@@ -1,16 +1,12 @@
-import vuePlugin from '@vitejs/plugin-vue';
-import { defineConfig } from 'vitest/config';
+import { defineVitestConfig } from '@nuxt/test-utils/config';
 
-export default defineConfig({
-  plugins: [
-    vuePlugin(),
-  ],
+export default defineVitestConfig({
   test: {
     environment: 'happy-dom',
-  },
-  resolve: {
-    alias: {
-      '~/': new URL('./', import.meta.url).pathname,
-    },
+    exclude: [
+      '**/node_modules',
+      '**/e2e',
+      '**/.assemblyscript',
+    ],
   },
 });
