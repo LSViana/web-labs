@@ -11,10 +11,12 @@ export default defineVitestConfig({
       ],
       exclude: [
         '**/*.config.ts',
+        '**/*.vue',
+        '**/server',
       ],
     },
     include: [
-      'layers/**/unit/*.spec.ts',
+      'layers/**/unit/**/*.spec.ts',
     ],
   },
 });
