@@ -13,6 +13,34 @@
                 "<node_internals>/**"
             ],
             "type": "node"
+        },
+        {
+            "console": "integratedTerminal",
+            "name": "npm: test:e2e",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "test:e2e"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "console": "integratedTerminal",
+            "name": "npm: test:e2e:headed",
+            "request": "launch",
+            "runtimeArgs": [
+                "run",
+                "test:e2e:headed"
+            ],
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
         }
     ],
     "version": "0.2.0"
