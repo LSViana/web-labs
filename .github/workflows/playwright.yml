@@ -20,7 +20,7 @@ jobs:
       - name: Run Playwright tests
         run: npm run test:e2e
         env:
-          BASE_URL: https://web-labs.vercel.app/
+          BASE_URL: https://web-labs.vercel.app
           USER1_EMAIL: ${{ secrets.USER1_EMAIL }}
           USER1_PASSWORD: ${{ secrets.USER1_PASSWORD }}
       - uses: actions/upload-artifact@v4
