@@ -26,9 +26,14 @@ function buildPomodoroStorage() {
       },
     });
 
-    const result = await response.json();
+    const rawRecord = await response.json();
 
-    return result;
+    return new PomodoroRecord(
+      rawRecord.id,
+      new Date(rawRecord.startTime),
+      new Date(rawRecord.endTime),
+      rawRecord.type,
+    );
   }
 
   async function update(record: PomodoroRecord): Promise<void> {

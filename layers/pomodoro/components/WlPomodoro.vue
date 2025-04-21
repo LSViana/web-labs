@@ -79,8 +79,8 @@ const listeners = {
       records.load(pomodoroRecords);
     }
 
-    records.add(record);
-    storage.save(record);
+    const newRecord = await storage.save(record);
+    records.add(newRecord);
 
     leaveConfirmation.release();
   },
@@ -97,9 +97,9 @@ const listeners = {
 
     records.load(pomodoroRecords);
   },
-  async add(newRecord: PomodoroRecord): Promise<void> {
+  async add(record: PomodoroRecord): Promise<void> {
+    const newRecord = await storage.save(record);
     records.add(newRecord);
-    await storage.save(newRecord);
   },
   async update(newRecord: PomodoroRecord, index: number): Promise<void> {
     records.update(newRecord, index);
