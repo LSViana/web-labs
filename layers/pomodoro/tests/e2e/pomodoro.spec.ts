@@ -40,17 +40,10 @@ test.describe('Pomodoro App', () => {
     });
   });
 
-  test.describe('authenticated', () => {
+  test.describe('authenticated', async () => {
     let page: Page;
 
     test.beforeAll(async ({ browser }) => {
-      const email = process.env.USER1_EMAIL;
-      const password = process.env.USER1_PASSWORD;
-
-      if (email == null || password == null) {
-        throw new Error('Please set USER1_EMAIL and USER1_PASSWORD environment variables.');
-      }
-
       page = await browser.newPage();
 
       const tomorrow = new Date();
@@ -58,15 +51,24 @@ test.describe('Pomodoro App', () => {
 
       await page.clock.install();
       await page.clock.pauseAt(tomorrow);
+    });
+
+    test.afterAll(async () => {
+      await page.close();
+    });
+
+    test('authentication works correctly', async () => {
+      const email = process.env.USER1_EMAIL;
+      const password = process.env.USER1_PASSWORD;
+
+      if (email == null || password == null) {
+        throw new Error('Please set USER1_EMAIL and USER1_PASSWORD environment variables.');
+      }
 
       await page.goto('/applications/pomodoro', { waitUntil: 'networkidle' });
       await page.fill('input[id="email"]', email);
       await page.fill('input[id="password"]', password);
       await page.click('text=Login');
-    });
-
-    test.afterAll(async () => {
-      await page.close();
     });
 
     test('has title', async () => {
