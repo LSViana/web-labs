@@ -49,16 +49,14 @@ export function usePomodoroStorage() {
   }
 
   async function remove(pomodoroRecordId: string, credentialsId: string): Promise<void> {
-    const result = await supabaseClient.from('pomodoros')
+    await supabaseClient.from('pomodoros')
       .delete()
       .eq('id', pomodoroRecordId)
       .eq('credential_id', credentialsId);
-
-    console.log(result);
   }
 
   async function update(pomodoroRecord: PomodoroRecord, credentialsId: string): Promise<void> {
-    const result = await supabaseClient.from('pomodoros')
+    await supabaseClient.from('pomodoros')
       .update({
         id: pomodoroRecord.id,
         started_at: pomodoroRecord.startTime,
@@ -67,8 +65,6 @@ export function usePomodoroStorage() {
       })
       .eq('id', pomodoroRecord.id)
       .eq('credential_id', credentialsId);
-
-    console.log(result);
   }
 
   return {
