@@ -97,7 +97,7 @@ const listeners = {
 
     methods.normalize();
 
-    emit('save', new WorklogItem(ticket.value, content.value, startTime.value, endTime.value, props.item.id, props.item.issueId));
+    emit('save', new WorklogItem('', ticket.value, content.value, startTime.value, endTime.value, props.item.issueId, props.item.worklogId));
   },
   remove(): void {
     emit('remove');

@@ -7,18 +7,16 @@ const storage = useWorklogStorage();
 
 export default defineEventHandler(async (event) => {
   const query = getQuery(event);
-  const issueId = query.issueId;
-  const worklogId = query.worklogId;
+  const id = query.id;
 
-  if (typeof issueId !== 'string' || typeof worklogId !== 'string'
-    || issueId.trim().length === 0 || worklogId.trim().length === 0) {
+  if (typeof id !== 'string' || id.trim().length === 0) {
     throw new Error('Invalid query');
   }
 
   const auth = useProductivityAuth();
   const credentialsId = auth.getCredentials(event);
 
-  await storage.remove(issueId, worklogId, credentialsId);
+  await storage.remove(id, credentialsId);
 
   return {
     status: 204,

@@ -26,168 +26,195 @@ export function useWorklogStorage() {
     }
 
     return result.data.map(x => new WorklogItem(
+      x.id,
       x.ticket,
       x.content,
       new Date(x.started_at),
       new Date(x.ended_at),
-      x.id,
       x.issue_id,
+      x.worklog_id,
     ));
   }
 
   async function save(worklogItem: WorklogItem, credentialsId: string): Promise<WorklogItem> {
-    const {
-      email,
-      api_password,
-    } = await getCredentials(credentialsId);
+    const credentials = await getCredentials(credentialsId);
 
-    const startTime = new Date(worklogItem.startTime);
-    const endTime = new Date(worklogItem.endTime);
+    let jiraResponseBody: { worklogId: string, issueId: string };
 
-    const startTimeString = startTime.toISOString().replace('Z', '-0000');
-    const timeSpentSeconds = Math.floor((endTime.getTime() - startTime.getTime()) / 1000);
-    const payload = {
-      comment: {
-        content: [
-          {
-            content: [
-              {
-                text: worklogItem.content,
-                type: 'text',
-              },
-            ],
-            type: 'paragraph',
-          },
-        ],
-        type: 'doc',
-        version: 1,
-      },
-      started: startTimeString,
-      timeSpentSeconds: timeSpentSeconds,
-    };
+    if (credentials.apiPassword) {
+      const startTime = new Date(worklogItem.startTime);
+      const endTime = new Date(worklogItem.endTime);
 
-    const response = await fetch(getWorklogUrl(worklogItem.ticket), {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${btoa(email + ':' + api_password)}`,
-      },
-    });
+      const startTimeString = startTime.toISOString().replace('Z', '-0000');
+      const timeSpentSeconds = Math.floor((endTime.getTime() - startTime.getTime()) / 1000);
+      const payload = {
+        comment: {
+          content: [
+            {
+              content: [
+                {
+                  text: worklogItem.content,
+                  type: 'text',
+                },
+              ],
+              type: 'paragraph',
+            },
+          ],
+          type: 'doc',
+          version: 1,
+        },
+        started: startTimeString,
+        timeSpentSeconds: timeSpentSeconds,
+      };
 
-    if (response.status !== 201) {
-      throw new Error('Failed to create worklog');
+      const response = await fetch(getWorklogUrl(worklogItem.ticket), {
+        method: 'POST',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${btoa(credentials.email + ':' + credentials.apiPassword)}`,
+        },
+      });
+
+      if (response.status !== 201) {
+        throw new Error('Failed to create worklog');
+      }
+
+      const responseBody = await response.json() as { id: string, issueId: string };
+
+      jiraResponseBody = {
+        worklogId: responseBody.id,
+        issueId: responseBody.issueId,
+      };
+    }
+    else {
+      jiraResponseBody = {
+        worklogId: '0',
+        issueId: '0',
+      };
     }
 
-    const jiraResponseBody = await response.json() as { id: string, issueId: string };
-    // const jiraResponseBody = { id: '123', issueId: '456' } // Mock response for testing
-
-    const result = await supabaseClient.from('worklogs').insert({
-      id: jiraResponseBody.id,
-      issue_id: jiraResponseBody.issueId,
-      ticket: worklogItem.ticket,
-      content: worklogItem.content,
-      started_at: worklogItem.startTime,
-      ended_at: worklogItem.endTime,
-      credential_id: credentialsId,
-    });
-
-    console.log(result);
+    const result = await supabaseClient
+      .from('worklogs')
+      .insert({
+        issue_id: jiraResponseBody.issueId,
+        worklog_id: jiraResponseBody.worklogId,
+        ticket: worklogItem.ticket,
+        content: worklogItem.content,
+        started_at: worklogItem.startTime,
+        ended_at: worklogItem.endTime,
+        credential_id: credentialsId,
+      })
+      .select();
 
     return new WorklogItem(
+      result.data![0].id,
       worklogItem.ticket,
       worklogItem.content,
       worklogItem.startTime,
       worklogItem.endTime,
-      jiraResponseBody.id,
       jiraResponseBody.issueId,
+      jiraResponseBody.worklogId,
     );
   }
 
-  async function remove(issueId: string, worklogId: string, credentialsId: string): Promise<void> {
-    const {
-      email,
-      api_password,
-    } = await getCredentials(credentialsId);
+  async function remove(id: string, credentialsId: string): Promise<void> {
+    const credentials = await getCredentials(credentialsId);
 
-    const response = await fetch(getWorklogUrl(issueId) + '/' + worklogId + '?adjustEstimate=leave', {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Basic ${btoa(email + ':' + api_password)}`,
-      },
-    });
+    const response = await supabaseClient
+      .from('worklogs')
+      .select('worklog_id, issue_id')
+      .eq('id', id)
+      .eq('credential_id', credentialsId)
+      .single();
 
-    if (response.status !== 204) {
-      throw new Error('Failed to remove worklog');
+    const worklog = response.data;
+
+    if (!worklog) {
+      throw new Error('Worklog not found');
+    }
+
+    if (credentials.apiPassword) {
+      const worklogId = worklog.worklog_id;
+      const issueId = worklog.issue_id;
+
+      const response = await fetch(getWorklogUrl(issueId) + '/' + worklogId + '?adjustEstimate=leave', {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Basic ${btoa(credentials.email + ':' + credentials.apiPassword)}`,
+        },
+      });
+
+      if (response.status !== 204) {
+        throw new Error('Failed to remove worklog');
+      }
     }
 
     await supabaseClient.from('worklogs')
       .delete()
-      .eq('id', worklogId)
+      .eq('id', id)
       .eq('credential_id', credentialsId);
   }
 
   async function update(worklogItem: WorklogItem, credentialsId: string): Promise<void> {
-    const {
-      email,
-      api_password,
-    } = await getCredentials(credentialsId);
+    const credentials = await getCredentials(credentialsId);
 
-    const startTime = new Date(worklogItem.startTime);
-    const endTime = new Date(worklogItem.endTime);
+    if (credentials.apiPassword) {
+      const startTime = new Date(worklogItem.startTime);
+      const endTime = new Date(worklogItem.endTime);
 
-    const startTimeString = startTime.toISOString().replace('Z', '-0000');
-    const timeSpentSeconds = Math.floor((endTime.getTime() - startTime.getTime()) / 1000);
+      const startTimeString = startTime.toISOString().replace('Z', '-0000');
+      const timeSpentSeconds = Math.floor((endTime.getTime() - startTime.getTime()) / 1000);
 
-    const payload = {
-      comment: {
-        content: [
-          {
-            content: [
-              {
-                text: worklogItem.content,
-                type: 'text',
-              },
-            ],
-            type: 'paragraph',
-          },
-        ],
-        type: 'doc',
-        version: 1,
-      },
-      started: startTimeString,
-      timeSpentSeconds: timeSpentSeconds,
-    };
+      const payload = {
+        comment: {
+          content: [
+            {
+              content: [
+                {
+                  text: worklogItem.content,
+                  type: 'text',
+                },
+              ],
+              type: 'paragraph',
+            },
+          ],
+          type: 'doc',
+          version: 1,
+        },
+        started: startTimeString,
+        timeSpentSeconds: timeSpentSeconds,
+      };
 
-    const response = await fetch(getWorklogUrl(worklogItem.ticket) + '/' + worklogItem.id, {
-      method: 'PUT',
-      body: JSON.stringify(payload),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Basic ${btoa(email + ':' + api_password)}`,
-      },
-    });
+      const response = await fetch(getWorklogUrl(worklogItem.ticket) + '/' + worklogItem.id, {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${btoa(credentials.email + ':' + credentials.apiPassword)}`,
+        },
+      });
 
-    if (response.status !== 200) {
-      throw new Error('Failed to update worklog');
+      if (response.status !== 200) {
+        throw new Error('Failed to update worklog');
+      }
     }
-
-    const jiraResponseBody = await response.json() as { id: string, issueId: string };
 
     await supabaseClient.from('worklogs')
       .update({
-        id: jiraResponseBody.id,
-        issue_id: jiraResponseBody.issueId,
+        id: worklogItem.id,
+        issue_id: worklogItem.issueId,
+        worklog_id: worklogItem.worklogId,
         ticket: worklogItem.ticket,
         content: worklogItem.content,
         started_at: worklogItem.startTime,
         ended_at: worklogItem.endTime,
       })
-      .eq('id', jiraResponseBody.id);
+      .eq('id', worklogItem.id);
   }
 
-  async function getCredentials(credentialsId: string): Promise<{ email: string, api_password: string }> {
-    return supabaseClient
+  async function getCredentials(credentialsId: string): Promise<{ email: string, apiPassword: string }> {
+    return await supabaseClient
       .from('credentials')
       .select('email, api_password')
       .eq('id', credentialsId)
@@ -195,7 +222,7 @@ export function useWorklogStorage() {
       .then((x) => {
         return {
           email: x.data!.email,
-          api_password: x.data!.api_password,
+          apiPassword: x.data!.api_password,
         };
       });
   }

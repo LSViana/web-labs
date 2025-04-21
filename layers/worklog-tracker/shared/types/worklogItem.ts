@@ -3,26 +3,29 @@ import { useWorklogNow } from '~~/layers/worklog-tracker/shared/useWorklogNow';
 const worklogNow = useWorklogNow();
 
 export class WorklogItem {
+  public id: string;
   public ticket: string;
   public content: string;
   public startTime: Date;
   public endTime: Date;
-  public id: string;
   public issueId: string;
+  public worklogId: string;
 
   constructor(
+    id = '',
     ticket = '',
     content = '',
     startTime = worklogNow.get(),
     endTime = worklogNow.get(),
-    workogId = '',
     issueId = '',
+    worklogId = '',
   ) {
+    this.id = id;
     this.ticket = ticket;
     this.content = content;
     this.startTime = startTime;
     this.endTime = endTime;
-    this.id = workogId;
+    this.worklogId = worklogId;
     this.issueId = issueId;
   }
 

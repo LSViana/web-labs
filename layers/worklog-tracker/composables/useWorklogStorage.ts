@@ -7,12 +7,13 @@ const url = '/api/worklog-tracker/worklogs';
 function transformWorklogItem(worklogItem: WorklogItem): WorklogItem {
   // TODO: Refactor this. It shouldn't be necessary to transform the date.
   return new WorklogItem(
+    worklogItem.id,
     worklogItem.ticket,
     worklogItem.content,
     new Date(worklogItem.startTime),
     new Date(worklogItem.endTime),
-    worklogItem.id,
     worklogItem.issueId,
+    worklogItem.worklogId,
   );
 }
 
@@ -56,8 +57,7 @@ function buildWorklogStorage() {
       operationLoading.value = true;
 
       const query = new URLSearchParams({
-        issueId: worklogItem.issueId,
-        worklogId: worklogItem.id,
+        id: worklogItem.id,
       });
 
       await fetch(`${url}?${query.toString()}`, {
