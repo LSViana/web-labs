@@ -21,6 +21,9 @@ jobs:
         run: npx playwright install chromium --with-deps
       - name: Run Playwright tests
         run: npm run test:e2e
+        env:
+          USER1_EMAIL: ${{ secrets.USER1_EMAIL }}
+          USER1_PASSWORD: ${{ secrets.USER1_PASSWORD }}
       - uses: actions/upload-artifact@v4
         with:
           name: playwright-report
