@@ -9,7 +9,7 @@ test.describe('Pomodoro App', () => {
 
     test.beforeAll(async ({ browser }) => {
       page = await browser.newPage();
-      await page.goto('/applications/pomodoro');
+      await page.goto('/applications/pomodoro', { waitUntil: 'networkidle' });
     });
 
     test.afterAll(async () => {
@@ -35,6 +35,7 @@ test.describe('Pomodoro App', () => {
       await page.fill('input[id="email"]', 'sample@email.com');
       await page.fill('input[id="password"]', 'samplepassword');
       await page.click('form button[type="submit"]');
+
       await expect(page.locator('text=Invalid credentials')).toBeVisible();
     });
   });
