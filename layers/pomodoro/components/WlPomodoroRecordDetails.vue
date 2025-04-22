@@ -64,8 +64,8 @@ import WlButton from '~~/layers/experiments/components/forms-input/buttons/WlBut
 import WlSelect from '~~/layers/experiments/components/forms-input/input/WlSelect.vue';
 import WlTimeInput from '~~/layers/experiments/components/forms-input/input/WlTimeInput.vue';
 import WlLabel from '~~/layers/experiments/components/forms-input/WlLabel.vue';
-import { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
-import { PomodoroIntervalType, PomodoroIntervalTypeLabels } from '~~/layers/pomodoro/types/pomodoroType';
+import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
+import { PomodoroIntervalType, PomodoroIntervalTypeLabels } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 type Emits = {
   (e: 'update:record', value: PomodoroRecord): void

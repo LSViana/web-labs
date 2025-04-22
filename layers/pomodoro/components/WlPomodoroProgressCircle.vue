@@ -31,8 +31,8 @@
 <script setup lang="ts">
 import { computed, type StyleValue } from 'vue';
 
-import type { PomodoroInterval } from '~~/layers/pomodoro/types/pomodoroInterval';
-import { getPomodoroTypeColor } from '~~/layers/pomodoro/types/pomodoroTypeColor';
+import type { PomodoroInterval } from '~~/layers/pomodoro/types/client/pomodoroInterval';
+import { getPomodoroTypeColor } from '~~/layers/pomodoro/types/client/pomodoroTypeColor';
 
 type Props = {
   interval: PomodoroInterval

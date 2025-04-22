@@ -1,4 +1,4 @@
-import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 export function usePomodoroNotification() {
   let granted = false;

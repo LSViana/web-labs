@@ -53,9 +53,9 @@ import WlPomodoroOverviewTimeline from '~~/layers/pomodoro/components/WlPomodoro
 import WlPomodoroRecordConflict from '~~/layers/pomodoro/components/WlPomodoroRecordConflict.vue';
 import WlPomodoroRecordDetails from '~~/layers/pomodoro/components/WlPomodoroRecordDetails.vue';
 import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
-import { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
-import { Interval } from '~~/layers/pomodoro/types/interval';
-import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import { Interval } from '~~/layers/pomodoro/types/client/interval';
+import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 type Emits = {
   (e: 'create', record: PomodoroRecord): void

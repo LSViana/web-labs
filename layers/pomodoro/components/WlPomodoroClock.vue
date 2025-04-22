@@ -49,10 +49,10 @@ import { usePomodoroClock } from '~~/layers/pomodoro/composables/usePomodoroCloc
 import type {
   PomodoroIntervalEvent,
   PomodoroNotificationEvent,
-} from '~~/layers/pomodoro/types/pomodoroEvents';
-import type { PomodoroInterval } from '~~/layers/pomodoro/types/pomodoroInterval';
-import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
-import { getPomodoroTypeColor } from '~~/layers/pomodoro/types/pomodoroTypeColor';
+} from '~~/layers/pomodoro/types/client/pomodoroEvents';
+import type { PomodoroInterval } from '~~/layers/pomodoro/types/client/pomodoroInterval';
+import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
+import { getPomodoroTypeColor } from '~~/layers/pomodoro/types/client/pomodoroTypeColor';
 
 type Events = {
   (e: 'interval', value: PomodoroInterval): void

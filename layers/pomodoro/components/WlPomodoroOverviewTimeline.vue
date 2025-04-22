@@ -26,8 +26,8 @@
 import { computed } from 'vue';
 
 import { usePomodoroToday } from '~~/layers/pomodoro/composables/usePomodoroToday';
-import type { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
-import { getPomodoroTypeColor } from '~~/layers/pomodoro/types/pomodoroTypeColor';
+import type { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
+import { getPomodoroTypeColor } from '~~/layers/pomodoro/types/client/pomodoroTypeColor';
 
 type Props = {
   records: PomodoroRecord[]

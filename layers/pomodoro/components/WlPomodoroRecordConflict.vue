@@ -17,7 +17,7 @@
 import { computed } from 'vue';
 
 import WlTriangleExclamationIcon from '~~/layers/base/components/icons/static/WlTriangleExclamationIcon.vue';
-import type { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
+import type { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 
 type Emits = {
   (e: 'select', index: number): void

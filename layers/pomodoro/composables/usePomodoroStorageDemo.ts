@@ -1,7 +1,7 @@
 import { provide } from 'vue';
 
 import type { usePomodoroStorage } from '~~/layers/pomodoro/composables/usePomodoroStorage';
-import type { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
+import type { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 
 function buildPomodoroStorage(): ReturnType<typeof usePomodoroStorage> {
   return {

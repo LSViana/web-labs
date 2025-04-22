@@ -1,6 +1,6 @@
 import { shallowReactive } from 'vue';
 
-import type { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
+import type { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 
 export function usePomodoroRecords() {
   const value = shallowReactive<PomodoroRecord[]>([]);

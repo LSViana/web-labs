@@ -1,16 +1,16 @@
 import { computed, ref } from 'vue';
 
 import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
-import { Interval } from '~~/layers/pomodoro/types/interval';
+import { Interval } from '~~/layers/pomodoro/types/client/interval';
 import {
   type PomodoroEventMap,
   PomodoroIntervalEvent,
   PomodoroNotificationEvent,
-} from '~~/layers/pomodoro/types/pomodoroEvents';
-import { PomodoroInterval } from '~~/layers/pomodoro/types/pomodoroInterval';
-import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
-import type { TypedEventHandler } from '~~/layers/pomodoro/types/typedEvent';
-import { TypedEventBus } from '~~/layers/pomodoro/types/typedEventBus';
+} from '~~/layers/pomodoro/types/client/pomodoroEvents';
+import { PomodoroInterval } from '~~/layers/pomodoro/types/client/pomodoroInterval';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
+import type { TypedEventHandler } from '~~/layers/pomodoro/types/client/typedEvent';
+import { TypedEventBus } from '~~/layers/pomodoro/types/client/typedEventBus';
 
 export function usePomodoroClock() {
   // Private

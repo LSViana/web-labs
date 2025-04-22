@@ -1,6 +1,6 @@
 import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
-import { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
-import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
+import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 export function usePomodoroRecorder() {
   const now = usePomodoroNow();

@@ -35,9 +35,9 @@ import { usePomodoroRecorder } from '~~/layers/pomodoro/composables/usePomodoroR
 import { usePomodoroRecords } from '~~/layers/pomodoro/composables/usePomodoroRecords';
 import { usePomodoroStorage } from '~~/layers/pomodoro/composables/usePomodoroStorage';
 import { usePomodoroToday } from '~~/layers/pomodoro/composables/usePomodoroToday';
-import type { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
-import type { PomodoroInterval } from '~~/layers/pomodoro/types/pomodoroInterval';
-import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import type { PomodoroInterval } from '~~/layers/pomodoro/types/client/pomodoroInterval';
+import type { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
+import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 import { useProductivityAuth } from '~~/layers/productivity/composables/useProductivityAuth';
 
 useHead({
