@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
-import { Interval } from '~~/layers/pomodoro/types/interval';
-import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import { Interval } from '~~/layers/pomodoro/types/client/interval';
+import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 describe('PomodoroRecord', () => {
   test('initializes correctly with valid data', () => {

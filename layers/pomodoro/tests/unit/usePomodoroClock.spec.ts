@@ -1,10 +1,10 @@
 import { describe, expect, test, vi } from 'vitest';
 
 import { usePomodoroClock } from '~~/layers/pomodoro/composables/usePomodoroClock';
-import { Interval } from '~~/layers/pomodoro/types/interval';
-import type { PomodoroIntervalEvent } from '~~/layers/pomodoro/types/pomodoroEvents';
-import { PomodoroInterval } from '~~/layers/pomodoro/types/pomodoroInterval';
-import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import { Interval } from '~~/layers/pomodoro/types/client/interval';
+import type { PomodoroIntervalEvent } from '~~/layers/pomodoro/types/client/pomodoroEvents';
+import { PomodoroInterval } from '~~/layers/pomodoro/types/client/pomodoroInterval';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 describe('usePomodoroClock', () => {
   test('starts with timer paused, set to 0 min, 25 min duration, and in work type', () => {

@@ -2,8 +2,8 @@ import { toRaw } from '@vue/reactivity';
 import { describe, expect, test } from 'vitest';
 
 import { usePomodoroRecords } from '~~/layers/pomodoro/composables/usePomodoroRecords';
-import { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
-import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 describe('usePomodoroRecords', () => {
   test('adds a record to the empty list', () => {

@@ -1,8 +1,8 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { PomodoroRecord } from '#imports';
 import { usePomodoroRecorder } from '~~/layers/pomodoro/composables/usePomodoroRecorder';
-import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 describe('usePomodoroRecorder', () => {
   test('should record and capture correctly', async () => {

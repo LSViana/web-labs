@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { Interval } from '~~/layers/pomodoro/types/interval';
+import { Interval } from '~~/layers/pomodoro/types/client/interval';
 
 describe('Interval', () => {
   test('formats zero interval correctly', () => {

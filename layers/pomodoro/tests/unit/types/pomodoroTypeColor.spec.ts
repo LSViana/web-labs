@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
-import { getPomodoroTypeColor } from '~~/layers/pomodoro/types/pomodoroTypeColor';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
+import { getPomodoroTypeColor } from '~~/layers/pomodoro/types/client/pomodoroTypeColor';
 
 describe('getPomodoroTypeColor', () => {
   test('should return correct colors for work interval type', () => {
