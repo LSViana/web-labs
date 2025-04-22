@@ -1,10 +1,11 @@
-import { PomodoroRecord } from '~~/layers/pomodoro/shared/types/pomodoroRecord';
+import type { PomodoroRecordDto } from '~~/layers/pomodoro/types/transfer/pomodoroRecordDto';
+import { PomodoroRecordMapper } from '~~/layers/pomodoro/types/transfer/pomodoroRecordMapper';
 import { useProductivitySupabaseClient } from '~~/layers/productivity/server/services/database';
 
 const supabaseClient = useProductivitySupabaseClient();
 
 export function usePomodoroStorage() {
-  async function load(credentialsId: string, date: Date): Promise<PomodoroRecord[]> {
+  async function load(credentialsId: string, date: Date): Promise<PomodoroRecordDto[]> {
     const startOfDay = date;
     const endOfDay = new Date(date);
     endOfDay.setHours(endOfDay.getHours() + 24);
@@ -21,15 +22,10 @@ export function usePomodoroStorage() {
       return [];
     }
 
-    return result.data.map(x => new PomodoroRecord(
-      x.id,
-      new Date(x.started_at),
-      new Date(x.ended_at),
-      x.type,
-    ));
+    return result.data.map(PomodoroRecordMapper.fromDb);
   }
 
-  async function save(pomodoroRecord: PomodoroRecord, credentialsId: string): Promise<PomodoroRecord> {
+  async function save(pomodoroRecord: PomodoroRecordDto, credentialsId: string): Promise<PomodoroRecordDto> {
     const result = await supabaseClient
       .from('pomodoros')
       .insert({
@@ -40,12 +36,7 @@ export function usePomodoroStorage() {
       })
       .select();
 
-    return new PomodoroRecord(
-      result.data![0].id,
-      pomodoroRecord.startTime,
-      pomodoroRecord.endTime,
-      pomodoroRecord.type,
-    );
+    return PomodoroRecordMapper.fromDb(result.data![0]);
   }
 
   async function remove(pomodoroRecordId: string, credentialsId: string): Promise<void> {
@@ -55,14 +46,11 @@ export function usePomodoroStorage() {
       .eq('credential_id', credentialsId);
   }
 
-  async function update(pomodoroRecord: PomodoroRecord, credentialsId: string): Promise<void> {
+  async function update(pomodoroRecord: PomodoroRecordDto, credentialsId: string): Promise<void> {
+    const pomodoroRecordDb = PomodoroRecordMapper.toDb(pomodoroRecord, credentialsId);
+
     await supabaseClient.from('pomodoros')
-      .update({
-        id: pomodoroRecord.id,
-        started_at: pomodoroRecord.startTime,
-        ended_at: pomodoroRecord.endTime,
-        type: pomodoroRecord.type,
-      })
+      .update(pomodoroRecordDb)
       .eq('id', pomodoroRecord.id)
       .eq('credential_id', credentialsId);
   }
