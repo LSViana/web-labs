@@ -1,5 +1,5 @@
-import type { Interval } from '~~/layers/pomodoro/types/interval';
-import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import type { Interval } from '~~/layers/pomodoro/types/client/interval';
+import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 export class PomodoroInterval {
   public readonly elapsedInterval: Interval;

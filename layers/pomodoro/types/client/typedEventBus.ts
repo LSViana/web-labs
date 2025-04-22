@@ -1,4 +1,4 @@
-import type { TypedEvent, TypedEventHandler } from '~~/layers/pomodoro/types/typedEvent';
+import type { TypedEvent, TypedEventHandler } from '~~/layers/pomodoro/types/client/typedEvent';
 
 export class TypedEventBus {
   private handlers: Map<string, TypedEventHandler[]>;

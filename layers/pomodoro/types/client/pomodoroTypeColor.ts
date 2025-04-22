@@ -1,4 +1,4 @@
-import { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 type PomodoroTypeColors = {
   backgroundInteractive: string

@@ -1,6 +1,6 @@
-import type { PomodoroInterval } from '~~/layers/pomodoro/types/pomodoroInterval';
-import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
-import { TypedEvent } from '~~/layers/pomodoro/types/typedEvent';
+import type { PomodoroInterval } from '~~/layers/pomodoro/types/client/pomodoroInterval';
+import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
+import { TypedEvent } from '~~/layers/pomodoro/types/client/typedEvent';
 
 export class PomodoroIntervalEvent extends TypedEvent {
   public readonly interval: PomodoroInterval;

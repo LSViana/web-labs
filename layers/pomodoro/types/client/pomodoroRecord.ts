@@ -1,7 +1,6 @@
-import { Interval } from '~~/layers/pomodoro/types/interval';
-import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/pomodoroType';
+import { Interval } from '~~/layers/pomodoro/types/client/interval';
+import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
-// TODO: Don't use the client-side type definition for the `type` property.
 export class PomodoroRecord {
   public readonly id: number;
   public readonly startTime: Date;
