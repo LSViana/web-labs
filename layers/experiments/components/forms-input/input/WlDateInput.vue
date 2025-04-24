@@ -35,9 +35,9 @@ const listeners = {
       return;
     }
 
-    const time = model.value.toLocaleTimeString();
+    const time = model.value.toISOString().split('T')[1];
 
-    model.value = new Date(`${date} ${time}`);
+    model.value = new Date(`${date}T${time}`);
   },
 };
 </script>
