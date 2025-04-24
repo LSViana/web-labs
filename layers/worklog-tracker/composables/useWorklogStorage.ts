@@ -22,7 +22,7 @@ function buildWorklogStorage() {
 
   async function load(date: Date): Promise<WorklogItem[]> {
     const query = new URLSearchParams({
-      date: date.toLocaleDateString(),
+      date: date.toISOString(),
     });
 
     const response = await fetch(`${url}?${query}`);
