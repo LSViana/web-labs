@@ -1,6 +1,6 @@
 import { inject, provide } from 'vue';
 
-import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
+import { usePomodoroToday } from '#imports';
 import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 
 const url = '/api/pomodoro/records';
@@ -15,7 +15,7 @@ function transform(record: PomodoroRecord): PomodoroRecord {
 }
 
 function buildPomodoroStorage() {
-  const now = usePomodoroNow();
+  const today = usePomodoroToday();
 
   async function save(record: PomodoroRecord): Promise<PomodoroRecord> {
     const response = await fetch(url, {
@@ -48,11 +48,10 @@ function buildPomodoroStorage() {
 
   async function load(date: Date): Promise<PomodoroRecord[]> {
     const query = new URLSearchParams({
-      date: date.toLocaleDateString(),
+      date: date.toISOString(),
     });
 
     const response = await fetch(`${url}?${query}`);
-
     const items = await response.json() as PomodoroRecord[];
 
     return items.map(transform);
@@ -69,7 +68,7 @@ function buildPomodoroStorage() {
   }
 
   async function loadToday(): Promise<PomodoroRecord[]> {
-    return load(now.get());
+    return load(today.get());
   }
 
   return {
