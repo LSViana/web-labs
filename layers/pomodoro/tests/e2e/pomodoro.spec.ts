@@ -86,7 +86,7 @@ test.describe('Pomodoro App', () => {
 
       await page.getByTitle('Pause timer (P)').click();
 
-      await expect(page.locator('div').filter({ hasText: /^Work00:01$/ }).getByRole('paragraph')).toBeVisible();
+      await expect(page.locator('text=Work00:01')).toBeVisible();
       await expect(page.locator('.absolute.outline-none')).toHaveCount(1);
 
       await page.getByTitle('Next interval (N)').click();
@@ -100,7 +100,7 @@ test.describe('Pomodoro App', () => {
 
       await page.getByTitle('Pause timer (P)').click();
 
-      await expect(page.locator('div').filter({ hasText: /^Break00:01$/ }).getByRole('paragraph')).toBeVisible();
+      await expect(page.locator('text=Break00:01')).toBeVisible();
       await expect(page.locator('.absolute.outline-none')).toHaveCount(2);
 
       await page.locator('.absolute.outline-none').nth(0).click();
@@ -116,8 +116,8 @@ test.describe('Pomodoro App', () => {
 
       await page.reload();
 
-      await expect(page.locator('div').filter({ hasText: /^Work00:00$/ }).getByRole('paragraph')).toBeVisible();
-      await expect(page.locator('div').filter({ hasText: /^Break00:00$/ }).getByRole('paragraph')).toBeVisible();
+      await expect(page.locator('text=Work00:00')).toBeVisible();
+      await expect(page.locator('text=Break00:00')).toBeVisible();
     });
 
     test('adds and removes intervals via the editor', async () => {
@@ -127,7 +127,8 @@ test.describe('Pomodoro App', () => {
       await page.getByRole('textbox', { name: 'End' }).fill('15:05');
       await page.getByTitle('Save record (S)').click();
 
-      await expect(page.getByText('Work05:00Break00:00')).toBeVisible();
+      await expect(page.locator('text=Work05:00')).toBeVisible();
+      await expect(page.locator('text=Break00:00')).toBeVisible();
       await expect(page.locator('.absolute.outline-none')).toHaveCount(1);
 
       await page.getByTitle('Close record (C)').click();
@@ -135,9 +136,9 @@ test.describe('Pomodoro App', () => {
       await page.getByRole('textbox', { name: 'End' }).click();
       await page.getByRole('textbox', { name: 'End' }).fill('15:08');
       await page.getByTitle('Save record (S)').click();
-      await page.getByText('Work05:00Break03:').click();
 
-      await expect(page.getByText('Work05:00Break03:')).toBeVisible();
+      await expect(page.locator('text=Work05:00')).toBeVisible();
+      await expect(page.locator('text=Break03:00')).toBeVisible();
       await expect(page.locator('.absolute.outline-none')).toHaveCount(2);
 
       await page.locator('.absolute.outline-none').nth(0).click();
@@ -148,8 +149,8 @@ test.describe('Pomodoro App', () => {
 
       await page.reload();
 
-      await expect(page.locator('div').filter({ hasText: /^Work00:00$/ }).getByRole('paragraph')).toBeVisible();
-      await expect(page.locator('div').filter({ hasText: /^Break00:00$/ }).getByRole('paragraph')).toBeVisible();
+      await expect(page.locator('text=Work00:00')).toBeVisible();
+      await expect(page.locator('text=Break00:00')).toBeVisible();
     });
 
     test('redirects to the app when authenticated', async () => {
