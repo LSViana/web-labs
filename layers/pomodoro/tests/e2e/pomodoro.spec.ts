@@ -89,7 +89,6 @@ test.describe('Pomodoro App', () => {
       await expect(page.locator('div').filter({ hasText: /^Work00:01$/ }).getByRole('paragraph')).toBeVisible();
       await expect(page.locator('.absolute.outline-none')).toHaveCount(1);
 
-      await page.getByText(':01').click();
       await page.getByTitle('Next interval (N)').click();
 
       await expect(page.getByText('05:00', { exact: true })).toBeVisible();
