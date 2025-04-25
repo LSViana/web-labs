@@ -122,7 +122,6 @@ test.describe('Pomodoro App', () => {
 
     test('adds and removes intervals via the editor', async () => {
       await page.getByRole('button', { name: 'Add Work' }).click();
-      await page.getByRole('textbox', { name: 'Start' }).click();
       await page.getByRole('textbox', { name: 'Start' }).fill('15:00');
       await page.getByRole('textbox', { name: 'End' }).fill('15:05');
       await page.getByTitle('Save record (S)').click();
@@ -133,7 +132,7 @@ test.describe('Pomodoro App', () => {
 
       await page.getByTitle('Close record (C)').click();
       await page.getByRole('button', { name: 'Add Break' }).click();
-      await page.getByRole('textbox', { name: 'End' }).click();
+      await page.getByRole('textbox', { name: 'Start' }).fill('15:05');
       await page.getByRole('textbox', { name: 'End' }).fill('15:08');
       await page.getByTitle('Save record (S)').click();
 
