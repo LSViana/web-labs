@@ -186,7 +186,7 @@ export function useWorklogStorage() {
         timeSpentSeconds: timeSpentSeconds,
       };
 
-      const response = await fetch(getWorklogUrl(worklogItem.ticket) + '/' + worklogItem.id, {
+      const response = await fetch(getWorklogUrl(worklogItem.ticket) + '/' + worklogItem.worklogId, {
         method: 'PUT',
         body: JSON.stringify(payload),
         headers: {
