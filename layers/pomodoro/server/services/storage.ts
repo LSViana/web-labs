@@ -26,14 +26,11 @@ export function usePomodoroStorage() {
   }
 
   async function save(pomodoroRecord: PomodoroRecordDto, credentialsId: string): Promise<PomodoroRecordDto> {
+    const pomodoroRecordDb = PomodoroRecordMapper.toDb(pomodoroRecord, credentialsId);
+
     const result = await supabaseClient
       .from('pomodoros')
-      .insert({
-        started_at: pomodoroRecord.startTime,
-        ended_at: pomodoroRecord.endTime,
-        type: pomodoroRecord.type,
-        credential_id: credentialsId,
-      })
+      .insert(pomodoroRecordDb)
       .select();
 
     return PomodoroRecordMapper.fromDb(result.data![0]);
