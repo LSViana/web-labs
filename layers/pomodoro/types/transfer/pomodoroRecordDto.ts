@@ -1,5 +1,5 @@
 export interface PomodoroRecordDto {
-  id: number
+  id: number | undefined
   startTime: string
   endTime: string
   type: 'work' | 'break'

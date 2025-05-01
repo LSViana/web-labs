@@ -58,6 +58,10 @@ function buildPomodoroStorage() {
   }
 
   async function remove(record: PomodoroRecord): Promise<void> {
+    if (record.id === undefined) {
+      throw new Error('Pomodoro record has no ID.');
+    }
+
     const query = new URLSearchParams({
       id: record.id.toString(),
     });

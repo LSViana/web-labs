@@ -140,10 +140,10 @@ const listeners = {
     record.value = undefined;
   },
   addWork(): void {
-    record.value = new PomodoroRecord(0, methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work);
+    record.value = new PomodoroRecord(undefined, methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work);
   },
   addBreak(): void {
-    record.value = new PomodoroRecord(0, methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break);
+    record.value = new PomodoroRecord(undefined, methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break);
   },
   previous(): void {
     if (recordIndex.value > 0) {
