@@ -1,4 +1,4 @@
-import { useWorklogNow } from '~~/layers/worklog-tracker/shared/useWorklogNow';
+import { useWorklogNow } from '~~/layers/worklog-tracker/composables/useWorklogNow';
 
 const worklogNow = useWorklogNow();
 
