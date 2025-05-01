@@ -1,5 +1,8 @@
+import { usePomodoroNow } from '#imports';
 import { Interval } from '~~/layers/pomodoro/types/client/interval';
-import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
+import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
+
+const pomodoroNow = usePomodoroNow();
 
 export class PomodoroRecord {
   public readonly id: number | undefined;
@@ -7,7 +10,12 @@ export class PomodoroRecord {
   public readonly endTime: Date;
   public readonly type: PomodoroIntervalType;
 
-  constructor(id: number | undefined, startDate: Date, endDate: Date, type: PomodoroIntervalType) {
+  constructor(
+    id: number | undefined = undefined,
+    startDate: Date = pomodoroNow.get(),
+    endDate: Date = pomodoroNow.get(),
+    type: PomodoroIntervalType = PomodoroIntervalType.work,
+  ) {
     this.id = id;
     this.startTime = startDate;
     this.endTime = endDate;
