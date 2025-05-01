@@ -24,7 +24,7 @@ describe('usePomodoroRecorder', () => {
 
     // Assert
     expect(result).toEqual(new PomodoroRecord(
-      0,
+      undefined,
       new Date(2023, 0, 1, 10, 0, 0),
       new Date(2023, 0, 1, 10, 25, 0, 0),
       PomodoroIntervalType.work,
