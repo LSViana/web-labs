@@ -5,6 +5,7 @@ import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 
 const url = '/api/pomodoro/records';
 
+// TODO: Refactor this. It shouldn't be necessary to transform the date.
 function transform(record: PomodoroRecord): PomodoroRecord {
   return new PomodoroRecord(
     record.id,
