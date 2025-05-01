@@ -1,4 +1,4 @@
-import { usePomodoroNow } from '#imports';
+import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
 import { Interval } from '~~/layers/pomodoro/types/client/interval';
 import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
