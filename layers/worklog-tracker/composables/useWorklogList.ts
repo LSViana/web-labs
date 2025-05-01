@@ -1,6 +1,6 @@
 import { shallowReactive } from 'vue';
 
-import type { WorklogItem } from '~~/layers/worklog-tracker/shared/types/worklogItem';
+import type { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklogItem';
 
 export function useWorklogList() {
   const value = shallowReactive<WorklogItem[]>([]);

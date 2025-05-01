@@ -31,7 +31,7 @@ import WlWorklogList from '~~/layers/worklog-tracker/components/WlWorklogList.vu
 import { useWorklogList } from '~~/layers/worklog-tracker/composables/useWorklogList';
 import { useWorklogStorage } from '~~/layers/worklog-tracker/composables/useWorklogStorage';
 import { useWorklogToday } from '~~/layers/worklog-tracker/composables/useWorklogToday';
-import { WorklogItem } from '~~/layers/worklog-tracker/shared/types/worklogItem';
+import { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklogItem';
 
 useHead({
   title: 'Worklog Tracker',

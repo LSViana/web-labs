@@ -50,8 +50,8 @@ import WlButton from '~~/layers/experiments/components/forms-input/buttons/WlBut
 import WlInput from '~~/layers/experiments/components/forms-input/input/WlInput.vue';
 import WlTimeInput from '~~/layers/experiments/components/forms-input/input/WlTimeInput.vue';
 import { useWorklogDurationFormat } from '~~/layers/worklog-tracker/composables/useWorklogDurationFormat';
-import { WorklogItem } from '~~/layers/worklog-tracker/shared/types/worklogItem';
-import { useWorklogNow } from '~~/layers/worklog-tracker/shared/useWorklogNow';
+import { useWorklogNow } from '~~/layers/worklog-tracker/composables/useWorklogNow';
+import { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklogItem';
 
 type Props = {
   item: WorklogItem

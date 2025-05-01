@@ -1,10 +1,12 @@
 import { inject, provide, ref } from 'vue';
 
-import { WorklogItem } from '~~/layers/worklog-tracker/shared/types/worklogItem';
+import { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklogItem';
+import type { WorklogItemDto } from '~~/layers/worklog-tracker/types/transfer/worklogItemDto';
+import { WorklogItemMapper } from '~~/layers/worklog-tracker/types/transfer/worklogItemMapper';
 
 const url = '/api/worklog-tracker/worklogs';
 
-function transformWorklogItem(worklogItem: WorklogItem): WorklogItem {
+function transformWorklogItem(worklogItem: WorklogItemDto): WorklogItem {
   // TODO: Refactor this. It shouldn't be necessary to transform the date.
   return new WorklogItem(
     worklogItem.id,
@@ -26,7 +28,7 @@ function buildWorklogStorage() {
     });
 
     const response = await fetch(`${url}?${query}`);
-    const items = await response.json() as WorklogItem[];
+    const items = await response.json() as WorklogItemDto[];
 
     return items.map(transformWorklogItem);
   }
@@ -37,13 +39,13 @@ function buildWorklogStorage() {
 
       const response = await fetch(url, {
         method: 'POST',
-        body: JSON.stringify(worklogItem),
+        body: JSON.stringify(WorklogItemMapper.fromClient(worklogItem)),
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-      const result = await response.json();
+      const result = await response.json() as WorklogItemDto;
 
       return transformWorklogItem(result);
     }
@@ -75,7 +77,7 @@ function buildWorklogStorage() {
 
       await fetch(url, {
         method: 'PUT',
-        body: JSON.stringify(worklogItem),
+        body: JSON.stringify(WorklogItemMapper.fromClient(worklogItem)),
         headers: {
           'Content-Type': 'application/json',
         },

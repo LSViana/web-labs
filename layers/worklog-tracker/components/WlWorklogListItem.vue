@@ -15,7 +15,7 @@
 import { computed } from 'vue';
 
 import { useWorklogDurationFormat } from '~~/layers/worklog-tracker/composables/useWorklogDurationFormat';
-import type { WorklogItem } from '~~/layers/worklog-tracker/shared/types/worklogItem';
+import type { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklogItem';
 
 type Props = {
   item: WorklogItem

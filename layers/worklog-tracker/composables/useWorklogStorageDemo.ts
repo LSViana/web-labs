@@ -1,7 +1,7 @@
 import { provide, ref } from 'vue';
 
 import type { useWorklogStorage } from '~~/layers/worklog-tracker/composables/useWorklogStorage';
-import type { WorklogItem } from '~~/layers/worklog-tracker/shared/types/worklogItem';
+import type { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklogItem';
 
 function buildWorklogStorage(): ReturnType<typeof useWorklogStorage> {
   return {
