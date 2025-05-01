@@ -14,7 +14,7 @@ describe('usePomodoroRecords', () => {
     expect(records.value).toHaveLength(0);
 
     // Act
-    const record = new PomodoroRecord(0, new Date(), new Date(), PomodoroIntervalType.work);
+    const record = new PomodoroRecord(1, new Date(), new Date(), PomodoroIntervalType.work);
     records.add(record);
 
     // Assert

@@ -114,7 +114,7 @@ test.describe('Pomodoro App', () => {
       await expect(page.getByText('Work', { exact: true })).toBeVisible();
       await expect(page.getByText('25:00', { exact: true })).toBeVisible();
 
-      await page.reload();
+      await page.reload({ waitUntil: 'networkidle' });
 
       await expect(page.locator('text=Work00:00')).toBeVisible();
       await expect(page.locator('text=Break00:00')).toBeVisible();
