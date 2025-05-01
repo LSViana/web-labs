@@ -1,5 +1,6 @@
 import { useProductivitySupabaseClient } from '~~/layers/productivity/server/services/database';
-import { WorklogItem } from '~~/layers/worklog-tracker/shared/types/worklogItem';
+import type { WorklogItemDto } from '~~/layers/worklog-tracker/types/transfer/worklogItemDto';
+import { WorklogItemMapper } from '~~/layers/worklog-tracker/types/transfer/worklogItemMapper';
 
 function getWorklogUrl(ticket: string): string {
   return 'https://gemmeus.atlassian.net/rest/api/3/issue/' + ticket + '/worklog';
@@ -8,7 +9,7 @@ function getWorklogUrl(ticket: string): string {
 const supabaseClient = useProductivitySupabaseClient();
 
 export function useWorklogStorage() {
-  async function load(credentialsId: string, date: Date): Promise<WorklogItem[]> {
+  async function load(credentialsId: string, date: Date): Promise<WorklogItemDto[]> {
     const startOfDay = date;
     const endOfDay = new Date(date);
     endOfDay.setHours(endOfDay.getHours() + 24);
@@ -25,25 +26,18 @@ export function useWorklogStorage() {
       return [];
     }
 
-    return result.data.map(x => new WorklogItem(
-      x.id,
-      x.ticket,
-      x.content,
-      new Date(x.started_at),
-      new Date(x.ended_at),
-      x.issue_id,
-      x.worklog_id,
-    ));
+    return result.data.map(WorklogItemMapper.fromDb);
   }
 
-  async function save(worklogItem: WorklogItem, credentialsId: string): Promise<WorklogItem> {
+  async function save(worklogItem: WorklogItemDto, credentialsId: string): Promise<WorklogItemDto> {
     const credentials = await getCredentials(credentialsId);
+    const worklogItemDb = WorklogItemMapper.toDb(worklogItem, credentialsId);
 
     let jiraResponseBody: { worklogId: string, issueId: string };
 
     if (credentials.apiPassword) {
-      const startTime = new Date(worklogItem.startTime);
-      const endTime = new Date(worklogItem.endTime);
+      const startTime = new Date(worklogItemDb.started_at);
+      const endTime = new Date(worklogItemDb.ended_at);
 
       const startTimeString = startTime.toISOString().replace('Z', '-0000');
       const timeSpentSeconds = Math.floor((endTime.getTime() - startTime.getTime()) / 1000);
@@ -53,7 +47,7 @@ export function useWorklogStorage() {
             {
               content: [
                 {
-                  text: worklogItem.content,
+                  text: worklogItemDb.content,
                   type: 'text',
                 },
               ],
@@ -67,7 +61,7 @@ export function useWorklogStorage() {
         timeSpentSeconds: timeSpentSeconds,
       };
 
-      const response = await fetch(getWorklogUrl(worklogItem.ticket), {
+      const response = await fetch(getWorklogUrl(worklogItemDb.ticket), {
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {
@@ -99,23 +93,15 @@ export function useWorklogStorage() {
       .insert({
         issue_id: jiraResponseBody.issueId,
         worklog_id: jiraResponseBody.worklogId,
-        ticket: worklogItem.ticket,
-        content: worklogItem.content,
-        started_at: worklogItem.startTime,
-        ended_at: worklogItem.endTime,
+        ticket: worklogItemDb.ticket,
+        content: worklogItemDb.content,
+        started_at: worklogItemDb.started_at,
+        ended_at: worklogItemDb.ended_at,
         credential_id: credentialsId,
       })
       .select();
 
-    return new WorklogItem(
-      result.data![0].id,
-      worklogItem.ticket,
-      worklogItem.content,
-      worklogItem.startTime,
-      worklogItem.endTime,
-      jiraResponseBody.issueId,
-      jiraResponseBody.worklogId,
-    );
+    return WorklogItemMapper.fromDb(result.data![0]);
   }
 
   async function remove(id: string, credentialsId: string): Promise<void> {
@@ -156,12 +142,13 @@ export function useWorklogStorage() {
       .eq('credential_id', credentialsId);
   }
 
-  async function update(worklogItem: WorklogItem, credentialsId: string): Promise<void> {
+  async function update(worklogItem: WorklogItemDto, credentialsId: string): Promise<void> {
     const credentials = await getCredentials(credentialsId);
+    const worklogItemDb = WorklogItemMapper.toDb(worklogItem, credentialsId);
 
     if (credentials.apiPassword) {
-      const startTime = new Date(worklogItem.startTime);
-      const endTime = new Date(worklogItem.endTime);
+      const startTime = new Date(worklogItemDb.started_at);
+      const endTime = new Date(worklogItemDb.ended_at);
 
       const startTimeString = startTime.toISOString().replace('Z', '-0000');
       const timeSpentSeconds = Math.floor((endTime.getTime() - startTime.getTime()) / 1000);
@@ -172,7 +159,7 @@ export function useWorklogStorage() {
             {
               content: [
                 {
-                  text: worklogItem.content,
+                  text: worklogItemDb.content,
                   type: 'text',
                 },
               ],
@@ -186,7 +173,7 @@ export function useWorklogStorage() {
         timeSpentSeconds: timeSpentSeconds,
       };
 
-      const response = await fetch(getWorklogUrl(worklogItem.ticket) + '/' + worklogItem.worklogId, {
+      const response = await fetch(getWorklogUrl(worklogItemDb.ticket) + '/' + worklogItemDb.worklog_id, {
         method: 'PUT',
         body: JSON.stringify(payload),
         headers: {
@@ -201,16 +188,8 @@ export function useWorklogStorage() {
     }
 
     await supabaseClient.from('worklogs')
-      .update({
-        id: worklogItem.id,
-        issue_id: worklogItem.issueId,
-        worklog_id: worklogItem.worklogId,
-        ticket: worklogItem.ticket,
-        content: worklogItem.content,
-        started_at: worklogItem.startTime,
-        ended_at: worklogItem.endTime,
-      })
-      .eq('id', worklogItem.id);
+      .update(worklogItemDb)
+      .eq('id', worklogItemDb.id);
   }
 
   async function getCredentials(credentialsId: string): Promise<{ email: string, apiPassword: string }> {
