@@ -12,11 +12,9 @@ export const PomodoroRecordMapper = {
       type: record.type,
     };
   },
-
   toClient(record: PomodoroRecordDto): PomodoroRecord {
     return new PomodoroRecord(record.id, new Date(record.startTime), new Date(record.endTime), record.type as PomodoroIntervalType);
   },
-
   fromDb(record: PomodoroRecordDb): PomodoroRecordDto {
     return {
       id: record.id,
@@ -25,7 +23,6 @@ export const PomodoroRecordMapper = {
       type: record.type,
     };
   },
-
   toDb(record: PomodoroRecordDto, credentialsId: string): PomodoroRecordDb {
     return {
       id: record.id,
