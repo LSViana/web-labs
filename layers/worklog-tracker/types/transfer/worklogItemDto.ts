@@ -1,5 +1,5 @@
 export interface WorklogItemDto {
-  id: string
+  id: string | undefined
   ticket: string
   content: string
   startTime: string

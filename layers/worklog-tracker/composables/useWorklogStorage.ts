@@ -7,7 +7,6 @@ import { WorklogItemMapper } from '~~/layers/worklog-tracker/types/transfer/work
 const url = '/api/worklog-tracker/worklogs';
 
 function transformWorklogItem(worklogItem: WorklogItemDto): WorklogItem {
-  // TODO: Refactor this. It shouldn't be necessary to transform the date.
   return new WorklogItem(
     worklogItem.id,
     worklogItem.ticket,
@@ -55,6 +54,10 @@ function buildWorklogStorage() {
   }
 
   async function remove(worklogItem: WorklogItem): Promise<void> {
+    if (worklogItem.id === undefined) {
+      throw new Error('Worklog item has no ID.');
+    }
+
     try {
       operationLoading.value = true;
 

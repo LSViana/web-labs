@@ -1,5 +1,5 @@
 export interface WorklogItemDb {
-  id: string
+  id: string | undefined
   ticket: string
   content: string
   started_at: string

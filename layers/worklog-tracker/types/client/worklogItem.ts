@@ -3,7 +3,7 @@ import { useWorklogNow } from '~~/layers/worklog-tracker/composables/useWorklogN
 const worklogNow = useWorklogNow();
 
 export class WorklogItem {
-  public id: string;
+  public id: string | undefined;
   public ticket: string;
   public content: string;
   public startTime: Date;
@@ -12,7 +12,7 @@ export class WorklogItem {
   public worklogId: string;
 
   constructor(
-    id = '',
+    id: string | undefined = undefined,
     ticket = '',
     content = '',
     startTime = worklogNow.get(),
