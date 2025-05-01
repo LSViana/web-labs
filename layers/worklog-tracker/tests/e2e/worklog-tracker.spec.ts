@@ -1,4 +1,3 @@
-import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 
 test.describe('Worklog Tracker App', () => {
@@ -40,35 +39,12 @@ test.describe('Worklog Tracker App', () => {
   });
 
   test.describe('authenticated', () => {
-    let page: Page;
-
+    test.use({ storageState: '.playwright/auth/user1.json' });
     test.describe.configure({ mode: 'serial' });
 
-    test.beforeAll(async ({ browser }) => {
-      page = await browser.newPage();
-      page.on('dialog', dialog => dialog.accept());
-
+    test('adds and removes worklog items', async ({ page }) => {
       await page.goto('/applications/worklog-tracker', { waitUntil: 'networkidle' });
 
-      const email = process.env.USER1_EMAIL;
-      const password = process.env.USER1_PASSWORD;
-
-      if (email == null || password == null) {
-        throw new Error('Please set USER1_EMAIL and USER1_PASSWORD environment variables.');
-      }
-
-      await page.fill('input[id="email"]', email);
-      await page.fill('input[id="password"]', password);
-      await page.click('text=Login');
-
-      await page.waitForLoadState('networkidle');
-    });
-
-    test.afterAll(async () => {
-      await page.close();
-    });
-
-    test('adds and removes worklog items', async () => {
       await expect(page.getByText('No worklogs found.')).toBeVisible();
       await expect(page.locator('li')).toHaveCount(0);
 
@@ -92,7 +68,7 @@ test.describe('Worklog Tracker App', () => {
       await expect(page.locator('li')).toHaveCount(0);
     });
 
-    test('redirects to the app when authenticated', async () => {
+    test('redirects to the app when authenticated', async ({ page }) => {
       await page.goto('/applications/worklog-tracker/login', { waitUntil: 'networkidle' });
 
       await expect(page.url()).toMatch(/applications\/worklog-tracker$/);

@@ -1,4 +1,3 @@
-import type { Page } from '@playwright/test';
 import { expect, test } from '@playwright/test';
 
 test.describe('Pomodoro App', () => {
@@ -41,42 +40,21 @@ test.describe('Pomodoro App', () => {
   });
 
   test.describe('authenticated', () => {
-    let page: Page;
-
+    test.use({ storageState: '.playwright/auth/user1.json' });
     test.describe.configure({ mode: 'serial' });
 
-    test.beforeAll(async ({ browser }) => {
-      page = await browser.newPage();
-      page.on('dialog', dialog => dialog.accept());
-
+    test.beforeEach(async ({ page }) => {
       const tomorrow = new Date();
       tomorrow.setDate(tomorrow.getDate() + 1);
 
       await page.clock.install();
       await page.clock.pauseAt(tomorrow);
-
-      await page.goto('/applications/pomodoro', { waitUntil: 'networkidle' });
-
-      const email = process.env.USER1_EMAIL;
-      const password = process.env.USER1_PASSWORD;
-
-      if (email == null || password == null) {
-        throw new Error('Please set USER1_EMAIL and USER1_PASSWORD environment variables.');
-      }
-
-      await page.goto('/applications/pomodoro', { waitUntil: 'networkidle' });
-      await page.fill('input[id="email"]', email);
-      await page.fill('input[id="password"]', password);
-      await page.click('text=Login');
-
-      await page.waitForLoadState('networkidle');
     });
 
-    test.afterAll(async () => {
-      await page.close();
-    });
+    test('adds and removes intervals via the timer', async ({ page }) => {
+      page.on('dialog', dialog => dialog.accept());
+      await page.goto('/applications/pomodoro', { waitUntil: 'networkidle' });
 
-    test('adds and removes intervals via the timer', async () => {
       await expect(page.getByText('25:00', { exact: true })).toBeVisible();
 
       await page.getByTitle('Start timer (P)').click();
@@ -120,7 +98,10 @@ test.describe('Pomodoro App', () => {
       await expect(page.locator('text=Break00:00')).toBeVisible();
     });
 
-    test('adds and removes intervals via the editor', async () => {
+    test('adds and removes intervals via the editor', async ({ page }) => {
+      page.on('dialog', dialog => dialog.accept());
+      await page.goto('/applications/pomodoro', { waitUntil: 'networkidle' });
+
       await page.getByRole('button', { name: 'Add Work' }).click();
       await page.getByRole('textbox', { name: 'Start' }).fill('15:00');
       await page.getByRole('textbox', { name: 'End' }).fill('15:05');
@@ -152,7 +133,7 @@ test.describe('Pomodoro App', () => {
       await expect(page.locator('text=Break00:00')).toBeVisible();
     });
 
-    test('redirects to the app when authenticated', async () => {
+    test('redirects to the app when authenticated', async ({ page }) => {
       await page.goto('/applications/pomodoro/login', { waitUntil: 'networkidle' });
 
       await expect(page.url()).toMatch(/applications\/pomodoro$/);
