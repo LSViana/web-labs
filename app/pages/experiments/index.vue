@@ -91,7 +91,7 @@ const groups: ExperimentGroup[] = [
     target: 'Authentication',
     experiments: [
       {
-        name: 'Third-party login',
+        name: 'Third-party Login',
         route: '/experiments/authentication/third-party-login',
       },
     ],
