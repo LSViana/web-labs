@@ -97,6 +97,15 @@ const groups: ExperimentGroup[] = [
     ],
   },
   {
+    target: 'Media Processing',
+    experiments: [
+      {
+        name: 'Video Recorder',
+        route: '/experiments/media-processing/video-recorder',
+      },
+    ],
+  },
+  {
     target: 'Real-time Communication',
     experiments: [
       {
