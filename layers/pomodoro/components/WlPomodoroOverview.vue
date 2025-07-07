@@ -100,7 +100,7 @@ const methods = {
   getEndDateOfPrevious(): Date {
     if (props.records.length === 0) {
       // If there are no records, the end date of the previous interval is the current date.
-      return pomodoroDate.getNow();
+      return pomodoroDate.getByDate(props.date);
     }
 
     const previousRecord = props.records[props.records.length - 1];
@@ -140,10 +140,20 @@ const listeners = {
     record.value = undefined;
   },
   addWork(): void {
-    record.value = new PomodoroRecord(undefined, methods.getEndDateOfPrevious(), pomodoroDate.getNow(), PomodoroIntervalType.work);
+    record.value = new PomodoroRecord(
+      undefined,
+      methods.getEndDateOfPrevious(),
+      pomodoroDate.getByDate(props.date),
+      PomodoroIntervalType.work,
+    );
   },
   addBreak(): void {
-    record.value = new PomodoroRecord(undefined, methods.getEndDateOfPrevious(), pomodoroDate.getNow(), PomodoroIntervalType.break);
+    record.value = new PomodoroRecord(
+      undefined,
+      methods.getEndDateOfPrevious(),
+      pomodoroDate.getByDate(props.date),
+      PomodoroIntervalType.break,
+    );
   },
   previous(): void {
     if (recordIndex.value > 0) {
