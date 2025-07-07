@@ -35,9 +35,11 @@ const listeners = {
       return;
     }
 
-    const time = model.value.toISOString().split('T')[1];
+    const differenceInMs = new Date(date).getTime() - new Date(computedValue.value).getTime();
+    const newDate = new Date(model.value);
 
-    model.value = new Date(`${date}T${time}`);
+    newDate.setTime(newDate.getTime() + differenceInMs);
+    model.value = newDate;
   },
 };
 </script>
