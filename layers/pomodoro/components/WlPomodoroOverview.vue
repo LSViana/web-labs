@@ -52,7 +52,7 @@ import WlLabel from '~~/layers/experiments/components/forms-input/WlLabel.vue';
 import WlPomodoroOverviewTimeline from '~~/layers/pomodoro/components/WlPomodoroOverviewTimeline.vue';
 import WlPomodoroRecordConflict from '~~/layers/pomodoro/components/WlPomodoroRecordConflict.vue';
 import WlPomodoroRecordDetails from '~~/layers/pomodoro/components/WlPomodoroRecordDetails.vue';
-import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
+import { usePomodoroDate } from '~~/layers/pomodoro/composables/usePomodoroDate';
 import { Interval } from '~~/layers/pomodoro/types/client/interval';
 import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
@@ -73,7 +73,7 @@ const props = defineProps<Props>();
 const recordIndex = ref<number>(-1);
 const record = ref<PomodoroRecord>();
 
-const now = usePomodoroNow();
+const pomodoroDate = usePomodoroDate();
 
 const computedRecords = computed(() => {
   const workSeconds = props.records
@@ -100,14 +100,14 @@ const methods = {
   getEndDateOfPrevious(): Date {
     if (props.records.length === 0) {
       // If there are no records, the end date of the previous interval is the current date.
-      return now.get();
+      return pomodoroDate.getNow();
     }
 
     const previousRecord = props.records[props.records.length - 1];
 
-    if (!previousRecord || previousRecord.endTime > now.get()) {
+    if (!previousRecord || previousRecord.endTime > pomodoroDate.getNow()) {
       // If the previous record is in the future, use the current date.
-      return now.get();
+      return pomodoroDate.getNow();
     }
 
     return previousRecord.endTime;
@@ -140,10 +140,10 @@ const listeners = {
     record.value = undefined;
   },
   addWork(): void {
-    record.value = new PomodoroRecord(undefined, methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.work);
+    record.value = new PomodoroRecord(undefined, methods.getEndDateOfPrevious(), pomodoroDate.getNow(), PomodoroIntervalType.work);
   },
   addBreak(): void {
-    record.value = new PomodoroRecord(undefined, methods.getEndDateOfPrevious(), now.get(), PomodoroIntervalType.break);
+    record.value = new PomodoroRecord(undefined, methods.getEndDateOfPrevious(), pomodoroDate.getNow(), PomodoroIntervalType.break);
   },
   previous(): void {
     if (recordIndex.value > 0) {

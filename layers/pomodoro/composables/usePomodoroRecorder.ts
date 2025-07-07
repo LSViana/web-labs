@@ -1,16 +1,16 @@
-import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
+import { usePomodoroDate } from '~~/layers/pomodoro/composables/usePomodoroDate';
 import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 import type { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
 
 export function usePomodoroRecorder() {
-  const now = usePomodoroNow();
+  const date = usePomodoroDate();
 
   let isRecording = false;
-  let startDate = now.get();
+  let startDate = date.getNow();
 
   function record() {
     isRecording = true;
-    startDate = now.get();
+    startDate = date.getNow();
   }
 
   function capture(type: PomodoroIntervalType): PomodoroRecord | undefined {
@@ -20,7 +20,7 @@ export function usePomodoroRecorder() {
 
     isRecording = false;
 
-    const endDate = now.get();
+    const endDate = date.getNow();
 
     return new PomodoroRecord(undefined, startDate, endDate, type);
   }

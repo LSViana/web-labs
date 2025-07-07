@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue';
 
-import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
+import { usePomodoroDate } from '~~/layers/pomodoro/composables/usePomodoroDate';
 import { Interval } from '~~/layers/pomodoro/types/client/interval';
 import {
   type PomodoroEventMap,
@@ -16,11 +16,11 @@ export function usePomodoroClock() {
   // Private
   let intervalId = -1;
   const eventBus = new TypedEventBus();
-  const now = usePomodoroNow();
+  const date = usePomodoroDate();
 
   const type = ref(PomodoroIntervalType.work);
-  const startDate = ref(now.get());
-  const endDate = ref(now.get());
+  const startDate = ref(date.getNow());
+  const endDate = ref(date.getNow());
   const notified = ref(false);
   const periodInterval = computed(() => getPeriodInterval(type.value));
 
@@ -47,15 +47,15 @@ export function usePomodoroClock() {
   function start() {
     pause();
 
-    startDate.value = now.get();
-    endDate.value = now.get();
+    startDate.value = date.getNow();
+    endDate.value = date.getNow();
 
     resume();
   }
 
   function resume(): void {
     intervalId = window.setInterval(() => {
-      endDate.value = now.get();
+      endDate.value = date.getNow();
 
       if (notified.value === false && interval.value.elapsedInterval.totalSeconds >= periodInterval.value.totalSeconds) {
         eventBus.trigger(new PomodoroNotificationEvent(type.value));
@@ -65,8 +65,8 @@ export function usePomodoroClock() {
 
     const totalMs = interval.value.elapsedInterval.totalSeconds * 1_000;
 
-    endDate.value = now.get();
-    startDate.value = new Date(now.get().getTime() - totalMs);
+    endDate.value = date.getNow();
+    startDate.value = new Date(date.getNow().getTime() - totalMs);
 
     isRunning.value = true;
   }
@@ -96,8 +96,8 @@ export function usePomodoroClock() {
       type.value = PomodoroIntervalType.work;
     }
 
-    startDate.value = now.get();
-    endDate.value = now.get();
+    startDate.value = date.getNow();
+    endDate.value = date.getNow();
 
     eventBus.trigger(new PomodoroIntervalEvent(pomodoroInterval));
 
