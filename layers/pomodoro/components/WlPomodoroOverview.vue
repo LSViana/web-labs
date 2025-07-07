@@ -52,7 +52,7 @@ import WlLabel from '~~/layers/experiments/components/forms-input/WlLabel.vue';
 import WlPomodoroOverviewTimeline from '~~/layers/pomodoro/components/WlPomodoroOverviewTimeline.vue';
 import WlPomodoroRecordConflict from '~~/layers/pomodoro/components/WlPomodoroRecordConflict.vue';
 import WlPomodoroRecordDetails from '~~/layers/pomodoro/components/WlPomodoroRecordDetails.vue';
-import { usePomodoroDate } from '~~/layers/pomodoro/composables/usePomodoroDate';
+import { usePomodoroNow } from '~~/layers/pomodoro/composables/usePomodoroNow';
 import { Interval } from '~~/layers/pomodoro/types/client/interval';
 import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 import { PomodoroIntervalType } from '~~/layers/pomodoro/types/client/pomodoroType';
@@ -73,7 +73,7 @@ const props = defineProps<Props>();
 const recordIndex = ref<number>(-1);
 const record = ref<PomodoroRecord>();
 
-const pomodoroDate = usePomodoroDate();
+const pomodoroDate = usePomodoroNow();
 
 const computedRecords = computed(() => {
   const workSeconds = props.records
@@ -105,9 +105,9 @@ const methods = {
 
     const previousRecord = props.records[props.records.length - 1];
 
-    if (!previousRecord || previousRecord.endTime > pomodoroDate.getNow()) {
+    if (!previousRecord || previousRecord.endTime > pomodoroDate.getToday()) {
       // If the previous record is in the future, use the current date.
-      return pomodoroDate.getNow();
+      return pomodoroDate.getToday();
     }
 
     return previousRecord.endTime;
