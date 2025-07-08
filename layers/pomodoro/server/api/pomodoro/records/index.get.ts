@@ -16,7 +16,5 @@ export default defineEventHandler(async (event) => {
     rawDate = new Date().toISOString();
   }
 
-  const date = new Date(new Date(rawDate).setHours(0, 0, 0, 0));
-
-  return await storage.load(credentialsId, date);
+  return await storage.load(credentialsId, new Date(rawDate));
 });
