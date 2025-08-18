@@ -37,11 +37,35 @@ export function usePomodoroRecords() {
     value.splice(0, value.length, ...records);
   }
 
+  function replaceById(oldId: number | undefined, newRecord: PomodoroRecord) {
+    const index = value.findIndex(r => r.id === oldId);
+
+    if (index !== -1) {
+      value.splice(index, 1);
+      add(newRecord);
+    }
+  }
+
+  function removeById(id: number | undefined) {
+    const index = value.findIndex(r => r.id === id);
+
+    if (index !== -1) {
+      value.splice(index, 1);
+    }
+  }
+
+  function findIndexById(id: number | undefined): number {
+    return value.findIndex(r => r.id === id);
+  }
+
   return {
     value,
     add,
     update,
     remove,
     load,
+    replaceById,
+    removeById,
+    findIndexById,
   };
 }

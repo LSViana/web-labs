@@ -79,8 +79,17 @@ const listeners = {
       records.load(pomodoroRecords);
     }
 
-    const newRecord = await storage.save(record);
-    records.add(newRecord);
+    const result = await storage.save(record);
+    records.add(result.optimisticValue);
+
+    try {
+      const newRecord = await result.confirmedValue;
+      records.replaceById(result.optimisticValue.id, newRecord);
+    }
+    catch (error) {
+      records.removeById(result.optimisticValue.id);
+      console.error('Failed to save pomodoro record:', error);
+    }
 
     leaveConfirmation.release();
   },
@@ -98,12 +107,27 @@ const listeners = {
     records.load(pomodoroRecords);
   },
   async add(record: PomodoroRecord): Promise<void> {
-    const newRecord = await storage.save(record);
-    records.add(newRecord);
+    const { optimisticValue: optimistic, confirmedValue: promise } = await storage.save(record);
+    records.add(optimistic);
+
+    try {
+      const newRecord = await promise;
+      records.replaceById(optimistic.id, newRecord);
+    }
+    catch (error) {
+      records.removeById(optimistic.id);
+      console.error('Failed to save pomodoro record', error);
+    }
   },
   async update(newRecord: PomodoroRecord, index: number): Promise<void> {
-    records.update(newRecord, index);
-    await storage.update(newRecord);
+    try {
+      records.update(newRecord, index);
+      console.log(1);
+      await storage.update(newRecord);
+    }
+    catch (error) {
+      console.error('Failed to update pomodoro record', error);
+    }
   },
   async remove(index: number): Promise<void> {
     const record = records.value[index];
@@ -112,8 +136,15 @@ const listeners = {
       return;
     }
 
-    records.remove(index);
-    await storage.remove(record);
+    try {
+      records.remove(index);
+      console.log(1);
+      await storage.remove(record);
+    }
+    catch (error) {
+      records.add(record);
+      console.error('Failed to remove pomodoro record', error);
+    }
   },
   async logout(): Promise<void> {
     await auth.logout();
