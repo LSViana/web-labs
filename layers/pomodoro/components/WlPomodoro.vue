@@ -19,7 +19,6 @@
       @remove="listeners.remove"
     />
   </div>
-  <pre>{{ records.value }}</pre>
 </template>
 
 <script lang="ts" setup>
