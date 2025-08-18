@@ -36,11 +36,33 @@ export function useWorklogList() {
     value.splice(0, value.length, ...items);
   }
 
+  function replaceById(oldId: string | undefined, newItem: WorklogItem) {
+    const index = value.findIndex(x => x.id === oldId);
+    if (index !== -1) {
+      value.splice(index, 1);
+      add(newItem);
+    }
+  }
+
+  function removeById(id: string | undefined) {
+    const index = value.findIndex(x => x.id === id);
+    if (index !== -1) {
+      value.splice(index, 1);
+    }
+  }
+
+  function findIndexById(id: string | undefined): number {
+    return value.findIndex(x => x.id === id);
+  }
+
   return {
     value,
     add,
     update,
     load,
     remove,
+    replaceById,
+    removeById,
+    findIndexById,
   };
 }

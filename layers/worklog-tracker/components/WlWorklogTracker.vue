@@ -61,19 +61,52 @@ const listeners = {
     newItem.endTime.setFullYear(date.value.getFullYear(), date.value.getMonth(), date.value.getDate());
 
     if (isEditing.value) {
-      await worklogStorage.update(newItem);
-      worklogList.update(newItem);
+      const originalItem = worklogList.value[selectedIndex.value];
+
+      try {
+        worklogList.update(newItem);
+        await worklogStorage.update(newItem);
+      }
+      catch (error) {
+        if (originalItem) {
+          worklogList.update(originalItem);
+        }
+
+        console.error('Failed to update worklog item:', error);
+      }
     }
     else {
-      const savedItem = await worklogStorage.save(newItem);
-      worklogList.add(savedItem);
+      const result = worklogStorage.save(newItem);
+
+      try {
+        worklogList.add(result.optimisticValue);
+
+        const savedItem = await result.confirmedValue;
+        worklogList.replaceById(result.optimisticValue.id, savedItem);
+      }
+      catch (error) {
+        worklogList.removeById(result.optimisticValue.id);
+        console.error('Failed to save worklog item:', error);
+
+        return;
+      }
     }
 
     listeners.close();
   },
   async remove(): Promise<void> {
-    await worklogStorage.remove(item.value);
-    worklogList.remove(item.value);
+    const itemToRemove = item.value;
+
+    try {
+      worklogList.remove(itemToRemove);
+      await worklogStorage.remove(itemToRemove);
+    }
+    catch (error) {
+      worklogList.add(itemToRemove);
+      console.error('Failed to remove worklog item:', error);
+
+      return;
+    }
 
     listeners.close();
   },
