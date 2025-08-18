@@ -66,7 +66,7 @@ function buildPomodoroStorage() {
       },
     });
 
-    if (response.status !== 204) {
+    if (!response.ok) {
       throw new Error('Failed to update pomodoro record.');
     }
   }
@@ -95,7 +95,7 @@ function buildPomodoroStorage() {
       method: 'DELETE',
     });
 
-    if (response.status !== 204) {
+    if (!response.ok) {
       throw new Error('Failed to delete pomodoro record.');
     }
   }

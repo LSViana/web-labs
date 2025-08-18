@@ -36,6 +36,11 @@ function buildWorklogStorage() {
     });
 
     const response = await fetch(`${url}?${query}`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to load worklog items: ${response.status} ${response.statusText}`);
+    }
+
     const items = await response.json() as WorklogItemDto[];
 
     return items.map(transformWorklogItem);
@@ -64,6 +69,10 @@ function buildWorklogStorage() {
           },
         });
 
+        if (!response.ok) {
+          throw new Error(`Failed to save worklog item: ${response.status} ${response.statusText}`);
+        }
+
         const result = await response.json() as WorklogItemDto;
 
         return transformWorklogItem(result);
@@ -88,9 +97,13 @@ function buildWorklogStorage() {
         id: worklogItem.id,
       });
 
-      await fetch(`${url}?${query.toString()}`, {
+      const response = await fetch(`${url}?${query.toString()}`, {
         method: 'DELETE',
       });
+
+      if (!response.ok) {
+        throw new Error(`Failed to remove worklog item: ${response.status} ${response.statusText}`);
+      }
     }
     finally {
       operationLoading.value = false;
@@ -101,13 +114,17 @@ function buildWorklogStorage() {
     try {
       operationLoading.value = true;
 
-      await fetch(url, {
+      const response = await fetch(url, {
         method: 'PUT',
         body: JSON.stringify(WorklogItemMapper.fromClient(worklogItem)),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+
+      if (!response.ok) {
+        throw new Error(`Failed to update worklog item: ${response.status} ${response.statusText}`);
+      }
     }
     finally {
       operationLoading.value = false;
