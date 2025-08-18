@@ -1,7 +1,7 @@
 import { inject, provide } from 'vue';
 
 import { usePomodoroToday } from '#imports';
-import { Optimistic } from '~~/layers/pomodoro/types/client/optimistic';
+import { Optimistic } from '~~/layers/base/types/client/optmistic';
 import { PomodoroRecord } from '~~/layers/pomodoro/types/client/pomodoroRecord';
 
 const url = '/api/pomodoro/records';
