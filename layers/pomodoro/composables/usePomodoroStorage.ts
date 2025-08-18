@@ -58,13 +58,17 @@ function buildPomodoroStorage() {
   }
 
   async function update(record: PomodoroRecord): Promise<void> {
-    await fetch(url, {
+    const response = await fetch(url, {
       method: 'PUT',
       body: JSON.stringify(record),
       headers: {
         'Content-Type': 'application/json',
       },
     });
+
+    if (response.status !== 204) {
+      throw new Error('Failed to update pomodoro record.');
+    }
   }
 
   async function load(date: Date): Promise<PomodoroRecord[]> {
@@ -87,9 +91,13 @@ function buildPomodoroStorage() {
       id: record.id.toString(),
     });
 
-    await fetch(`${url}?${query.toString()}`, {
+    const response = await fetch(`${url}?${query.toString()}`, {
       method: 'DELETE',
     });
+
+    if (response.status !== 204) {
+      throw new Error('Failed to delete pomodoro record.');
+    }
   }
 
   async function loadToday(): Promise<PomodoroRecord[]> {

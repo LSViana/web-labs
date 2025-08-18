@@ -19,6 +19,7 @@
       @remove="listeners.remove"
     />
   </div>
+  <pre>{{ records.value }}</pre>
 </template>
 
 <script lang="ts" setup>
@@ -138,7 +139,6 @@ const listeners = {
 
     try {
       records.remove(index);
-      console.log(1);
       await storage.remove(record);
     }
     catch (error) {
