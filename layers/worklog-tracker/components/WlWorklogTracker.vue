@@ -61,15 +61,18 @@ const listeners = {
     newItem.endTime.setFullYear(date.value.getFullYear(), date.value.getMonth(), date.value.getDate());
 
     if (isEditing.value) {
-      const originalItem = worklogList.value[selectedIndex.value];
+      const targetItem = worklogList.value[selectedIndex.value];
+      const targetIndex = selectedIndex.value;
+      listeners.close();
 
       try {
         worklogList.update(newItem);
         await worklogStorage.update(newItem);
       }
       catch (error) {
-        if (originalItem) {
-          worklogList.update(originalItem);
+        if (targetItem) {
+          worklogList.update(targetItem);
+          listeners.select(targetIndex);
         }
 
         console.error('Failed to update worklog item:', error);
@@ -77,6 +80,7 @@ const listeners = {
     }
     else {
       const result = worklogStorage.save(newItem);
+      listeners.close();
 
       try {
         worklogList.add(result.optimisticValue);
@@ -86,29 +90,29 @@ const listeners = {
       }
       catch (error) {
         worklogList.removeById(result.optimisticValue.id);
+        item.value = newItem;
         console.error('Failed to save worklog item:', error);
 
         return;
       }
     }
-
-    listeners.close();
   },
   async remove(): Promise<void> {
-    const itemToRemove = item.value;
+    const targetItem = item.value;
+    const targetIndex = selectedIndex.value;
+    listeners.close();
 
     try {
-      worklogList.remove(itemToRemove);
-      await worklogStorage.remove(itemToRemove);
+      worklogList.remove(targetItem);
+      await worklogStorage.remove(targetItem);
     }
     catch (error) {
-      worklogList.add(itemToRemove);
+      worklogList.add(targetItem);
+      listeners.select(targetIndex);
       console.error('Failed to remove worklog item:', error);
 
       return;
     }
-
-    listeners.close();
   },
   close(): void {
     item.value = new WorklogItem();
