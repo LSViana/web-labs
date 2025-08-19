@@ -60,6 +60,7 @@ test.describe('Worklog Tracker App', () => {
 
       await expect(page.locator('li')).toBeVisible();
       await expect(page.locator('li')).toHaveCount(1);
+      await expect(page.getByRole('button', { name: 'Save' })).toBeEnabled();
 
       await page.getByText('DEV-123').click();
       await page.getByRole('button', { name: 'Remove' }).click();

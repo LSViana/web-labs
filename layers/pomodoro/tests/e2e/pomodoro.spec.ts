@@ -77,15 +77,18 @@ test.describe('Pomodoro App', () => {
       await expect(page.getByText('04:59', { exact: true })).toBeVisible();
 
       await page.getByTitle('Pause timer (P)').click();
+      await page.waitForLoadState('networkidle');
 
       await expect(page.locator('text=Break00:01')).toBeVisible();
       await expect(page.locator('.absolute.outline-none')).toHaveCount(2);
 
       await page.locator('.absolute.outline-none').nth(0).click();
       await page.getByTitle('Delete record (D)').click();
+      await page.waitForLoadState('networkidle');
 
       await page.locator('.absolute.outline-none').nth(0).click();
       await page.getByTitle('Delete record (D)').click();
+      await page.waitForLoadState('networkidle');
 
       await page.getByRole('button', { name: 'Next interval (N)' }).click();
 
@@ -106,6 +109,7 @@ test.describe('Pomodoro App', () => {
       await page.getByRole('textbox', { name: 'Start' }).fill('15:00');
       await page.getByRole('textbox', { name: 'End' }).fill('15:05');
       await page.getByTitle('Save record (S)').click();
+      await page.waitForLoadState('networkidle');
 
       await expect(page.locator('text=Work05:00')).toBeVisible();
       await expect(page.locator('text=Break00:00')).toBeVisible();
@@ -116,6 +120,7 @@ test.describe('Pomodoro App', () => {
       await page.getByRole('textbox', { name: 'Start' }).fill('15:05');
       await page.getByRole('textbox', { name: 'End' }).fill('15:08');
       await page.getByTitle('Save record (S)').click();
+      await page.waitForLoadState('networkidle');
 
       await expect(page.locator('text=Work05:00')).toBeVisible();
       await expect(page.locator('text=Break03:00')).toBeVisible();
@@ -123,9 +128,11 @@ test.describe('Pomodoro App', () => {
 
       await page.locator('.absolute.outline-none').nth(0).click();
       await page.getByTitle('Delete record (D)').click();
+      await page.waitForLoadState('networkidle');
 
       await page.locator('.absolute.outline-none').nth(0).click();
       await page.getByTitle('Delete record (D)').click();
+      await page.waitForLoadState('networkidle');
 
       await page.reload();
 
