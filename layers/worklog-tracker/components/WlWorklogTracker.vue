@@ -63,10 +63,11 @@ const listeners = {
     if (isEditing.value) {
       const targetItem = worklogList.value[selectedIndex.value];
       const targetIndex = selectedIndex.value;
-      listeners.close();
 
       try {
         worklogList.update(newItem);
+        listeners.close();
+
         await worklogStorage.update(newItem);
       }
       catch (error) {
@@ -80,10 +81,10 @@ const listeners = {
     }
     else {
       const result = worklogStorage.save(newItem);
-      listeners.close();
 
       try {
         worklogList.add(result.optimisticValue);
+        listeners.close();
 
         const savedItem = await result.confirmedValue;
         worklogList.replaceById(result.optimisticValue.id, savedItem);
