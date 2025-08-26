@@ -1,9 +1,19 @@
-import { defineVitestConfig } from '@nuxt/test-utils/config';
+import { defineVitestProject } from '@nuxt/test-utils/config';
+import { defineConfig } from 'vitest/config';
 
-export default defineVitestConfig({
+export default defineConfig({
   test: {
-    root: './',
-    environment: 'happy-dom',
+    projects: [
+      await defineVitestProject({
+        test: {
+          root: './',
+          environment: 'happy-dom',
+          include: [
+            'layers/**/unit/**/*.spec.ts',
+          ],
+        },
+      }),
+    ],
     coverage: {
       include: [
         'layers/pomodoro',
@@ -15,8 +25,5 @@ export default defineVitestConfig({
         '**/server',
       ],
     },
-    include: [
-      'layers/**/unit/**/*.spec.ts',
-    ],
   },
 });
