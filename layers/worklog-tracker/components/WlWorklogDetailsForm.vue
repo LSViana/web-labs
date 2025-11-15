@@ -36,8 +36,30 @@
       </template>
       <div class="grow" />
       <div class="flex gap-1 self-center text-xs">
-        <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome3849">TESTDOME-3849</a>
-        <a href="#" class="rounded bg-slate-700 px-2 py-1" @click="listeners.testdome5928">TESTDOME-5928</a>
+        <a
+          href="#"
+          class="rounded bg-slate-700 px-2 py-1"
+          title="Pull request handling"
+          @click="listeners.devPullRequest()"
+        >PR</a>
+        <a
+          href="#"
+          class="rounded bg-slate-700 px-2 py-1"
+          title="Code review"
+          @click="listeners.devCodeReview"
+        >CR</a>
+        <a
+          href="#"
+          class="rounded bg-slate-700 px-2 py-1"
+          title="Worklog for TESTDOME-3849"
+          @click="listeners.testdome3849"
+        >T-3849</a>
+        <a
+          href="#"
+          class="rounded bg-slate-700 px-2 py-1"
+          title="Worklog for TESTDOME-5928"
+          @click="listeners.testdome5928"
+        >T-5928</a>
       </div>
     </div>
   </div>
@@ -105,9 +127,33 @@ const listeners = {
   close(): void {
     emit('close');
   },
+  devPullRequest(): void {
+    ticket.value = '';
+    content.value = [
+      '- Apply the requested changes',
+      '- Communication in the PR',
+      '- Update the conclusion notes to reflect the latest changes',
+      '- Send for testing (post the conclusion notes, deploy the QA env., etc.)',
+      '- Read the ticket & PR',
+    ].join('\n');
+  },
+  devCodeReview(): void {
+    ticket.value = '';
+    content.value = [
+      'Code review (round X):',
+      '- Read the ticket & PR',
+      '- Review the code changes',
+      '- Test the code changes locally',
+      '- Post comments in the PR',
+      '- Request changes in the PR',
+    ].join('\n');
+  },
   testdome3849(): void {
     ticket.value = 'TESTDOME-3849';
-    content.value = '- Check multiple mentions from Jira, Docs, and Gmail\n- Plan tasks for the day';
+    content.value = [
+      '- Check multiple mentions from Jira, Docs, and Gmail',
+      '- Plan tasks for the day',
+    ].join('\n');
   },
   testdome5928(): void {
     ticket.value = 'TESTDOME-5928';
