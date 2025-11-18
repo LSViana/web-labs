@@ -144,7 +144,7 @@ const listeners = {
       '- Read the ticket & PR',
       '- Review the code changes',
       '- Test the code changes locally',
-      '- Post comments in the PR',
+      '- Communication in the PR',
       '- Request changes in the PR',
     ].join('\n');
   },
