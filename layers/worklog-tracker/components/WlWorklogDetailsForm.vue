@@ -51,6 +51,18 @@
         <a
           href="#"
           class="rounded bg-slate-700 px-2 py-1"
+          title="Code review"
+          @click="listeners.qualityAssurance"
+        >QA</a>
+        <a
+          href="#"
+          class="rounded bg-slate-700 px-2 py-1"
+          title="Code review"
+          @click="listeners.support"
+        >Support</a>
+        <a
+          href="#"
+          class="rounded bg-slate-700 px-2 py-1"
           title="Worklog for TESTDOME-3849"
           @click="listeners.testdome3849"
         >T-3849</a>
@@ -140,12 +152,29 @@ const listeners = {
   devCodeReview(): void {
     ticket.value = '';
     content.value = [
-      'Code review (round X):',
+      'Code review (round #):',
       '- Read the ticket & PR',
       '- Review the code changes',
       '- Test the code changes locally',
       '- Communication in the PR',
       '- Request changes in the PR',
+    ].join('\n');
+  },
+  qualityAssurance(): void {
+    ticket.value = '';
+    content.value = [
+      'Testing round #:',
+      '- Investigate the failed requirements',
+      '- Apply & test the fixes',
+      '- Request another round of testing',
+      '- Request another round of code review',
+      '- Re-deploy the QA environment after fixes',
+    ].join('\n');
+  },
+  support(): void {
+    ticket.value = '';
+    content.value = [
+      'Handle support tickets (#)',
     ].join('\n');
   },
   testdome3849(): void {
