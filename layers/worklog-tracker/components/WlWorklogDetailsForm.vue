@@ -140,7 +140,6 @@ const listeners = {
     emit('close');
   },
   devPullRequest(): void {
-    ticket.value = '';
     content.value = [
       '- Apply the requested changes',
       '- Communication in the PR',
@@ -150,7 +149,6 @@ const listeners = {
     ].join('\n');
   },
   devCodeReview(): void {
-    ticket.value = '';
     content.value = [
       'Code review (round #):',
       '- Read the ticket & PR',
@@ -161,7 +159,6 @@ const listeners = {
     ].join('\n');
   },
   qualityAssurance(): void {
-    ticket.value = '';
     content.value = [
       'Testing round #:',
       '- Investigate the failed requirements',
@@ -172,7 +169,7 @@ const listeners = {
     ].join('\n');
   },
   support(): void {
-    ticket.value = '';
+    ticket.value = 'DEV-2934';
     content.value = [
       'Handle support tickets (#)',
     ].join('\n');
