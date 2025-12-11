@@ -145,7 +145,6 @@ const listeners = {
       '- Communication in the PR',
       '- Update the conclusion notes to reflect the latest changes',
       '- Send for testing (post the conclusion notes, deploy the QA env., etc.)',
-      '- Read the ticket & PR',
     ].join('\n');
   },
   devCodeReview(): void {
