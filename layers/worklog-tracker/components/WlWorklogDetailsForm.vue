@@ -39,6 +39,12 @@
         <a
           href="#"
           class="rounded bg-slate-700 px-2 py-1"
+          title="Development"
+          @click="listeners.dev()"
+        >DEV</a>
+        <a
+          href="#"
+          class="rounded bg-slate-700 px-2 py-1"
           title="Pull request handling"
           @click="listeners.devPullRequest()"
         >PR</a>
@@ -54,12 +60,14 @@
           title="Code review"
           @click="listeners.qualityAssurance"
         >QA</a>
+      </div>
+      <div class="flex gap-1 self-center text-xs">
         <a
           href="#"
           class="rounded bg-slate-700 px-2 py-1"
           title="Code review"
-          @click="listeners.support"
-        >Support</a>
+          @click="listeners.dev2934"
+        >D-2934</a>
         <a
           href="#"
           class="rounded bg-slate-700 px-2 py-1"
@@ -139,8 +147,25 @@ const listeners = {
   close(): void {
     emit('close');
   },
+  bug(): void {
+    content.value = [
+      '- Investigate & find the root cause',
+      '- Apply & test the fixes',
+    ].join('\n');
+  },
+  dev(): void {
+    content.value = [
+      'Development (round #):',
+      '- Read the ticket & attached resources',
+      '- Implement the changes',
+      '- Test the changes locally',
+      '- Update the QA documents',
+      '- Write & submit the PR',
+    ].join('\n');
+  },
   devPullRequest(): void {
     content.value = [
+      'Pull request handling (round #):',
       '- Apply the requested changes',
       '- Communication in the PR',
       '- Update the conclusion notes to reflect the latest changes',
@@ -159,7 +184,7 @@ const listeners = {
   },
   qualityAssurance(): void {
     content.value = [
-      'Testing round #:',
+      'Testing (round #):',
       '- Investigate the failed requirements',
       '- Apply & test the fixes',
       '- Request another round of testing',
@@ -167,7 +192,7 @@ const listeners = {
       '- Re-deploy the QA environment after fixes',
     ].join('\n');
   },
-  support(): void {
+  dev2934(): void {
     ticket.value = 'DEV-2934';
     content.value = [
       'Handle support tickets (#)',
