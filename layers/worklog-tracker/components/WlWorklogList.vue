@@ -33,7 +33,7 @@ import type { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklog
 type Props = {
   items: WorklogItem[]
   selectedIndex: number
-  currentItem?: WorklogItem
+  item?: WorklogItem
   isEditing?: boolean
 };
 
@@ -49,7 +49,7 @@ const totalDuration = useWorklogDurationFormat(totalDurationSeconds);
 
 // Calculate preview total if currentItem is provided
 const previewTotalSeconds = computed(() => {
-  if (!props.currentItem) {
+  if (!props.item) {
     return totalDurationSeconds.value;
   }
 
@@ -57,14 +57,16 @@ const previewTotalSeconds = computed(() => {
 
   // Add all existing worklogs except the one being edited
   for (const existingItem of props.items) {
-    if (props.isEditing && existingItem.id === props.currentItem.id) {
+    if (props.isEditing && existingItem.id === props.item.id) {
       continue; // Skip the item being edited
     }
     total += existingItem.durationSeconds;
   }
 
   // Add the current worklog duration
-  total += props.currentItem.durationSeconds;
+  total += props.item.durationSeconds;
+
+  console.log('duration', props.item.durationSeconds);
 
   return total;
 });
@@ -72,7 +74,7 @@ const previewTotalDuration = useWorklogDurationFormat(previewTotalSeconds);
 
 // Determine if preview is different from current total
 const showPreview = computed(() => {
-  return props.currentItem && previewTotalSeconds.value !== totalDurationSeconds.value;
+  return props.item && previewTotalSeconds.value !== totalDurationSeconds.value;
 });
 
 const listeners = {

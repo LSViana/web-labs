@@ -9,7 +9,7 @@
     </div>
   </div>
   <WlWorklogDetailsForm
-    :item="item"
+    v-model:item="item"
     :edit="isEditing"
     :disabled="worklogStorage.operationLoading.value"
     @save="listeners.save"
@@ -19,7 +19,7 @@
   <WlWorklogList
     :selected-index="selectedIndex"
     :items="worklogList.value"
-    :current-item="item"
+    :item="item"
     :is-editing="isEditing"
     @select="listeners.select"
   />
