@@ -22,39 +22,42 @@
   "devDependencies": {
     "@grpc/grpc-js": "^1.14.3",
     "@grpc/proto-loader": "^0.8.0",
-    "@nuxt/eslint": "^1.12.1",
-    "@nuxt/test-utils": "^3.21.0",
+    "@nuxt/eslint": "^1.15.1",
+    "@nuxt/test-utils": "^4.0.0",
     "@nuxtjs/tailwindcss": "^6.14.0",
-    "@playwright/test": "^1.57.0",
-    "@stylistic/eslint-plugin": "^5.6.1",
-    "@supabase/supabase-js": "^2.89.0",
-    "@types/node": "^25.0.3",
-    "@vitest/coverage-v8": "^4.0.16",
-    "@volar/language-server": "2.4.27",
-    "@vue/language-server": "3.2.1",
+    "@playwright/test": "^1.58.2",
+    "@stylistic/eslint-plugin": "^5.9.0",
+    "@supabase/supabase-js": "^2.97.0",
+    "@types/node": "^25.3.0",
+    "@vitest/coverage-v8": "^4.0.18",
+    "@volar/language-server": "2.4.28",
+    "@vue/language-server": "3.2.4",
     "@vue/test-utils": "^2.4.6",
-    "@vueuse/core": "^14.1.0",
+    "@vueuse/core": "^14.2.1",
     "@vueuse/head": "^2.0.0",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.3.1",
     "eslint": "^9.39.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-tailwindcss": "^3.18.2",
     "google-protobuf": "^4.0.1",
     "gsap": "^3.14.2",
-    "happy-dom": "^20.0.11",
-    "nuxt": "^4.2.2",
+    "happy-dom": "^20.6.3",
+    "nuxt": "^4.3.1",
     "protobufjs": "^8.0.0",
-    "sass": "^1.97.1",
+    "sass": "^1.97.3",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.50.1",
-    "vitest": "^4.0.16",
-    "vue-tsc": "^3.2.1"
+    "typescript-eslint": "^8.56.0",
+    "vitest": "^4.0.18",
+    "vue-tsc": "^3.2.4"
   },
   "overrides": {
+    "@bomb.sh/tab": {
+      "citty": "^0.1.6"
+    },
     "uri-js": "npm:uri-js-replace",
     "whatwg-url": "^14.0.0",
     "@nuxt/test-utils": {
-      "vitest": "^4.0.16"
+      "vitest": "^4.0.18"
     }
   }
 }
