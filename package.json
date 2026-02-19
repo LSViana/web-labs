@@ -54,6 +54,8 @@
     "@bomb.sh/tab": {
       "citty": "^0.1.6"
     },
+    "commander": "^13.1.0",
+    "crossws": "^0.4.1",
     "uri-js": "npm:uri-js-replace",
     "whatwg-url": "^14.0.0",
     "@nuxt/test-utils": {
