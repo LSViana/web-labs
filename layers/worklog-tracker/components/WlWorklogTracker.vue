@@ -9,14 +9,20 @@
     </div>
   </div>
   <WlWorklogDetailsForm
-    :item="item"
+    v-model:item="item"
     :edit="isEditing"
     :disabled="worklogStorage.operationLoading.value"
     @save="listeners.save"
     @remove="listeners.remove"
     @close="listeners.close"
   />
-  <WlWorklogList :selected-index="selectedIndex" :items="worklogList.value" @select="listeners.select" />
+  <WlWorklogList
+    :selected-index="selectedIndex"
+    :items="worklogList.value"
+    :item="item"
+    :is-editing="isEditing"
+    @select="listeners.select"
+  />
 </template>
 
 <script setup lang="ts">

@@ -1,7 +1,12 @@
 <template>
   <template v-if="props.items.length > 0">
     <p class="text-right">
-      {{ totalDuration }}
+      <template v-if="showPreview">
+        {{ totalDuration }} &gt; {{ previewTotalDuration }}
+      </template>
+      <template v-else>
+        {{ totalDuration }}
+      </template>
     </p>
     <ul>
       <WlWorklogListItem
@@ -28,6 +33,8 @@ import type { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklog
 type Props = {
   items: WorklogItem[]
   selectedIndex: number
+  item?: WorklogItem
+  isEditing?: boolean
 };
 
 type Emits = {
@@ -39,6 +46,36 @@ const emits = defineEmits<Emits>();
 
 const totalDurationSeconds = computed(() => props.items.reduce((acc, item) => acc + item.durationSeconds, 0));
 const totalDuration = useWorklogDurationFormat(totalDurationSeconds);
+
+// Calculate preview total if currentItem is provided
+const previewTotalSeconds = computed(() => {
+  if (!props.item) {
+    return totalDurationSeconds.value;
+  }
+
+  let total = 0;
+
+  // Add all existing worklogs except the one being edited
+  for (const existingItem of props.items) {
+    if (props.isEditing && existingItem.id === props.item.id) {
+      continue; // Skip the item being edited
+    }
+    total += existingItem.durationSeconds;
+  }
+
+  // Add the current worklog duration
+  total += props.item.durationSeconds;
+
+  console.log('duration', props.item.durationSeconds);
+
+  return total;
+});
+const previewTotalDuration = useWorklogDurationFormat(previewTotalSeconds);
+
+// Determine if preview is different from current total
+const showPreview = computed(() => {
+  return props.item && previewTotalSeconds.value !== totalDurationSeconds.value;
+});
 
 const listeners = {
   click(index: number): void {

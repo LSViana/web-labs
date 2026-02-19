@@ -10,8 +10,8 @@
           :rows="worklogLines"
         />
       </div>
-      <WlTimeInput v-model="startTime" />
-      <WlTimeInput v-model="endTime" />
+      <WlTimeInput v-model="startTime" @update:model-value="listeners.updateItem" />
+      <WlTimeInput v-model="endTime" @update:model-value="listeners.updateItem" />
       <span class="w-16 shrink-0 pt-2 text-center">{{ worklogDuration }}</span>
     </div>
     <div class="flex gap-3">
@@ -96,7 +96,6 @@ import { useWorklogNow } from '~~/layers/worklog-tracker/composables/useWorklogN
 import { WorklogItem } from '~~/layers/worklog-tracker/types/client/worklogItem';
 
 type Props = {
-  item: WorklogItem
   edit: boolean
   disabled: boolean
 };
@@ -109,6 +108,7 @@ type Emits = {
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
+const item = defineModel<WorklogItem>('item', { required: true });
 
 const worklogNow = useWorklogNow();
 
@@ -121,13 +121,22 @@ const worklogLines = computed(() => content.value.split('\n').length);
 const worklogDurationSeconds = computed(() => WorklogItem.calculateDuration(startTime.value, endTime.value));
 const worklogDuration = useWorklogDurationFormat(worklogDurationSeconds);
 
+const originalValues = {
+  startTime: item.value.startTime,
+  endTime: item.value.startTime,
+};
+
 watch(
-  () => props.item,
+  () => item.value,
   (newItem) => {
     ticket.value = newItem.ticket;
     content.value = newItem.content;
     startTime.value = newItem.startTime;
     endTime.value = newItem.endTime;
+
+    // Stores the original value to allow reverting when closing the edition without saving.
+    originalValues.startTime = newItem.startTime;
+    originalValues.endTime = newItem.endTime;
   },
 );
 
@@ -139,12 +148,16 @@ const listeners = {
 
     methods.normalize();
 
-    emit('save', new WorklogItem(props.item.id, ticket.value, content.value, startTime.value, endTime.value, props.item.issueId, props.item.worklogId));
+    emit('save', new WorklogItem(item.value.id, ticket.value, content.value, startTime.value, endTime.value, item.value.issueId, item.value.worklogId));
   },
   remove(): void {
     emit('remove');
   },
   close(): void {
+    // Restores the original values to prevent corrupt states.
+    item.value.startTime = originalValues.startTime;
+    item.value.endTime = originalValues.endTime;
+
     emit('close');
   },
   bug(): void {
@@ -212,6 +225,11 @@ const listeners = {
   clear(): void {
     ticket.value = '';
     content.value = '';
+  },
+  updateItem(): void {
+    // These updates aren't ideal but they're necessary to make the preview total work.
+    item.value.startTime = startTime.value;
+    item.value.endTime = endTime.value;
   },
 };
 
