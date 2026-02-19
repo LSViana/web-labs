@@ -15,10 +15,6 @@
       <span class="w-16 shrink-0 pt-2 text-center">{{ worklogDuration }}</span>
     </div>
     <div class="flex gap-3">
-      <div class="flex grow items-center gap-2 text-sm">
-        <span class="font-semibold">Preview total time:</span>
-        <span class="rounded bg-blue-600 px-2 py-1">{{ previewTotalDuration }}</span>
-      </div>
       <template v-if="props.edit">
         <WlButton variant="primary" :disabled="props.disabled" @click="listeners.save">
           Save
@@ -103,7 +99,6 @@ type Props = {
   item: WorklogItem
   edit: boolean
   disabled: boolean
-  existingItems: WorklogItem[]
 };
 
 type Emits = {
@@ -125,25 +120,6 @@ const endTime = ref(worklogNow.get());
 const worklogLines = computed(() => content.value.split('\n').length);
 const worklogDurationSeconds = computed(() => WorklogItem.calculateDuration(startTime.value, endTime.value));
 const worklogDuration = useWorklogDurationFormat(worklogDurationSeconds);
-
-// Calculate preview of total time for the day
-const previewTotalSeconds = computed(() => {
-  let total = 0;
-
-  // Add all existing worklogs except the one being edited
-  for (const existingItem of props.existingItems) {
-    if (props.edit && existingItem.id === props.item.id) {
-      continue; // Skip the item being edited
-    }
-    total += existingItem.durationSeconds;
-  }
-
-  // Add the current worklog duration
-  total += worklogDurationSeconds.value;
-
-  return total;
-});
-const previewTotalDuration = useWorklogDurationFormat(previewTotalSeconds);
 
 watch(
   () => props.item,

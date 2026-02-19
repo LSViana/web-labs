@@ -12,12 +12,17 @@
     :item="item"
     :edit="isEditing"
     :disabled="worklogStorage.operationLoading.value"
-    :existing-items="worklogList.value"
     @save="listeners.save"
     @remove="listeners.remove"
     @close="listeners.close"
   />
-  <WlWorklogList :selected-index="selectedIndex" :items="worklogList.value" @select="listeners.select" />
+  <WlWorklogList
+    :selected-index="selectedIndex"
+    :items="worklogList.value"
+    :current-item="item"
+    :is-editing="isEditing"
+    @select="listeners.select"
+  />
 </template>
 
 <script setup lang="ts">
