@@ -129,7 +129,7 @@ const worklogDuration = useWorklogDurationFormat(worklogDurationSeconds);
 // Calculate preview of total time for the day
 const previewTotalSeconds = computed(() => {
   let total = 0;
-  
+
   // Add all existing worklogs except the one being edited
   for (const existingItem of props.existingItems) {
     if (props.edit && existingItem.id === props.item.id) {
@@ -137,10 +137,10 @@ const previewTotalSeconds = computed(() => {
     }
     total += existingItem.durationSeconds;
   }
-  
+
   // Add the current worklog duration
   total += worklogDurationSeconds.value;
-  
+
   return total;
 });
 const previewTotalDuration = useWorklogDurationFormat(previewTotalSeconds);
