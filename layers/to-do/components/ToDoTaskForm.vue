@@ -37,7 +37,7 @@ import WlButton from '~~/layers/experiments/components/forms-input/buttons/WlBut
 import WlInput from '~~/layers/experiments/components/forms-input/input/WlInput.vue';
 
 const props = defineProps<{
-  store: ReturnType<typeof import('~~/layers/to-do/utils/store').useTaskStore>;
+  store: ReturnType<typeof import('~~/layers/to-do/utils/store').useTaskStore>
 }>();
 
 const taskText = ref('');

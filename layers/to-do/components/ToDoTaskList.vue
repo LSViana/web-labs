@@ -15,20 +15,24 @@
               @change="store.toggleDone(task.id)"
             >
             <span class="flex-1">{{ task.text }}</span>
-            <WlButton
-              variant="secondary"
+            <WlIconButton
               :disabled="store.loading.value"
-              @click="store.setEditing(task)"
+              :variant="'secondary'"
+              title="Edit"
+              aria-label="Edit task"
+              @click.stop="store.setEditing(task)"
             >
-              Edit
-            </WlButton>
-            <WlButton
-              variant="danger"
+              <WlEditIcon />
+            </WlIconButton>
+            <WlIconButton
               :disabled="store.loading.value"
-              @click="store.remove(task.id)"
+              :variant="'danger'"
+              title="Delete"
+              aria-label="Delete task"
+              @click.stop="store.remove(task.id)"
             >
-              Delete
-            </WlButton>
+              <WlTrashAnimatedIcon :progress="0" />
+            </WlIconButton>
           </label>
         </li>
       </ul>
@@ -49,26 +53,30 @@
               @change="store.toggleDone(task.id)"
             >
             <span class="flex-1 line-through opacity-60">{{ task.text }}</span>
-            <WlButton
-              variant="secondary"
+            <WlIconButton
               :disabled="store.loading.value"
-              @click="store.setEditing(task)"
+              :variant="'secondary'"
+              title="Edit"
+              aria-label="Edit task"
+              @click.stop="store.setEditing(task)"
             >
-              Edit
-            </WlButton>
-            <WlButton
-              variant="danger"
+              <WlEditIcon />
+            </WlIconButton>
+            <WlIconButton
               :disabled="store.loading.value"
-              @click="store.remove(task.id)"
+              :variant="'danger'"
+              title="Delete"
+              aria-label="Delete task"
+              @click.stop="store.remove(task.id)"
             >
-              Delete
-            </WlButton>
+              <WlTrashAnimatedIcon :progress="0" />
+            </WlIconButton>
           </label>
         </li>
       </ul>
     </div>
 
-    <div v-if="pendingTasks.length === 0 && completedTasks.length === 0" class="text-center text-gray-500 py-8">
+    <div v-if="pendingTasks.length === 0 && completedTasks.length === 0" class="py-8 text-center text-gray-500">
       No tasks yet. Add one above!
     </div>
   </div>
@@ -77,11 +85,13 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import WlButton from '~~/layers/experiments/components/forms-input/buttons/WlButton.vue';
+import WlTrashAnimatedIcon from '~~/layers/base/components/icons/animated/WlTrashAnimatedIcon.vue';
+import WlEditIcon from '~~/layers/base/components/icons/static/WlEditIcon.vue';
+import WlIconButton from '~~/layers/experiments/components/forms-input/buttons/WlIconButton.vue';
 import type { Task } from '~~/layers/to-do/utils/store';
 
 const props = defineProps<{
-  store: ReturnType<typeof import('~~/layers/to-do/utils/store').useTaskStore>;
+  store: ReturnType<typeof import('~~/layers/to-do/utils/store').useTaskStore>
 }>();
 
 const pendingTasks = computed(() => props.store.items.value.filter((task: Task) => !task.done));
