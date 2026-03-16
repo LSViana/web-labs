@@ -57,7 +57,7 @@ const props = defineProps<{
 const tasksRef = toRef(props, 'tasks');
 const storeRef = toRef(props, 'store');
 const completedRef = toRef(props, 'completed');
-const itemClass = computed(() => props.itemClass ?? '-mx-2 rounded px-2 hover:bg-slate-50 dark:hover:bg-slate-700');
+const itemClass = computed(() => props.itemClass ?? '-mx-2 rounded px-2 hover:bg-slate-200 dark:hover:bg-slate-700');
 
 // Expose local names used in template for clarity and helpers that call through to the passed store
 const tasksList = computed(() => tasksRef.value ?? []);
