@@ -21,17 +21,7 @@ import { useTaskStore } from '~~/layers/to-do/utils/store';
 
 const taskStore = useTaskStore();
 
-// Fetch tasks on the server when possible so the page is rendered with items
-// already populated on first load. Return the fetched todos so Nuxt serializes
-// them to the client and we can populate the client-side store with the
-// identical array to avoid hydration mismatches.
-const { data: serverTodos } = await useAsyncData('todos', async () => {
-  const todos = await $fetch('/api/todos');
-  return todos;
-});
+const result = await useAsyncData('todos', () => $fetch('/api/todos'));
 
-// Ensure the reactive store has the same items used for server rendering.
-if (serverTodos && serverTodos.value) {
-  taskStore.items.value = serverTodos.value;
-}
+taskStore.items.value = result.data.value;
 </script>

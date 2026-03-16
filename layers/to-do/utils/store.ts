@@ -1,16 +1,16 @@
 import { ref } from 'vue';
 
 export interface Task {
-  id: string;
-  text: string;
-  done: boolean;
-  created_at: string;
-  updated_at: string;
+  id: string
+  text: string
+  done: boolean
+  created_at: string
+  updated_at: string
 }
 
 export interface TaskEdit {
-  id: string;
-  text: string;
+  id: string
+  text: string
 }
 
 export function useTaskStore() {
@@ -50,7 +50,7 @@ export function useTaskStore() {
     }
   }
 
-  async function update(id: string, updates: Partial<{ text: string; done: boolean }>) {
+  async function update(id: string, updates: Partial<{ text: string, done: boolean }>) {
     loading.value = true;
     try {
       const updatedTask = await $fetch<Task>(`/api/todos/${id}`, {
