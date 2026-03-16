@@ -24,6 +24,8 @@ Core Patterns
 - Centralize API calls and document request/response shapes; handle 4xx/5xx failures gracefully.
 - Add unit tests for composables and key component logic; add E2E tests for cross-component flows.
 
+- Always render UI sections that affect layout even when empty, with clear empty-state messaging to avoid layout shift (for example: show both "Pending" and "Completed" columns at all responsive sizes and display a short hint when a section has no items).
+
 How to Apply (Checklist)
 -----------------------
 1. Add/modify a composable for client state and centralize fetch/update logic.
