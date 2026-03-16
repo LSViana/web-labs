@@ -6,6 +6,7 @@
       v-model="taskText"
       type="text"
       class="flex-1"
+      autocomplete="off"
       :placeholder="isEditing ? 'Edit task...' : 'New task...'"
       :disabled="store.loading.value"
       @keydown.enter="onSubmit"
