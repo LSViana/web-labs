@@ -3,11 +3,11 @@ import { useProductivitySupabaseClient } from '~~/layers/productivity/server/ser
 const supabaseClient = useProductivitySupabaseClient();
 
 export interface TodoDto {
-  id: string;
-  text: string;
-  done: boolean;
-  created_at: string;
-  updated_at: string;
+  id: string
+  text: string
+  done: boolean
+  created_at: string
+  updated_at: string
 }
 
 export function useToDoStorage() {
@@ -49,7 +49,7 @@ export function useToDoStorage() {
     return result.data[0];
   }
 
-  async function update(id: string, todo: Partial<{ text: string; done: boolean }>): Promise<TodoDto> {
+  async function update(id: string, todo: Partial<{ text: string, done: boolean }>): Promise<TodoDto> {
     const result = await supabaseClient
       .from('todos')
       .update(todo)
