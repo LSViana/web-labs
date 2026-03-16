@@ -1,12 +1,12 @@
 <template>
-  <div class="space-y-4">
+  <div class="space-y-4 md:grid md:grid-cols-2 md:gap-6 md:space-y-0">
     <div v-if="pendingTasks.length > 0">
       <h3 class="mb-2 text-lg font-semibold">
         Pending
       </h3>
       <ul class="space-y-1">
-        <li v-for="task in pendingTasks" :key="task.id">
-          <label :for="`input-${task.id}`" class="flex items-center gap-2 py-1">
+        <li v-for="task in pendingTasks" :key="task.id" class="-mx-2 rounded px-2 hover:bg-slate-50 dark:hover:bg-slate-700">
+          <label :for="`input-${task.id}`" class="flex cursor-pointer items-center gap-2 py-1">
             <input
               :id="`input-${task.id}`"
               type="checkbox"
@@ -15,24 +15,30 @@
               @change="store.toggleDone(task.id)"
             >
             <span class="flex-1">{{ task.text }}</span>
-            <WlIconButton
-              :disabled="store.loading.value"
-              :variant="'secondary'"
-              title="Edit"
-              aria-label="Edit task"
-              @click.stop="store.setEditing(task)"
-            >
-              <WlEditIcon />
-            </WlIconButton>
-            <WlIconButton
-              :disabled="store.loading.value"
-              :variant="'danger'"
-              title="Delete"
-              aria-label="Delete task"
-              @click.stop="store.remove(task.id)"
-            >
-              <WlTrashAnimatedIcon :progress="0" />
-            </WlIconButton>
+            <div class="flex items-center gap-1">
+              <a
+                href="#"
+                role="button"
+                title="Edit"
+                aria-label="Edit task"
+                :class="{ 'pointer-events-none opacity-50': store.loading.value }"
+                class="flex size-8 items-center justify-center rounded"
+                @click.stop.prevent="store.setEditing(task)"
+              >
+                <WlEditIcon />
+              </a>
+              <a
+                href="#"
+                role="button"
+                title="Delete"
+                aria-label="Delete task"
+                :class="{ 'pointer-events-none text-danger-700 opacity-50': store.loading.value, 'text-danger-700': !store.loading.value }"
+                class="flex size-8 items-center justify-center rounded"
+                @click.stop.prevent="store.remove(task.id)"
+              >
+                <WlTrashAnimatedIcon :progress="0" />
+              </a>
+            </div>
           </label>
         </li>
       </ul>
@@ -44,7 +50,7 @@
       </h3>
       <ul class="space-y-1">
         <li v-for="task in completedTasks" :key="task.id">
-          <label :for="`input-${task.id}`" class="flex items-center gap-2 py-1">
+          <label :for="`input-${task.id}`" class="flex cursor-pointer items-center gap-2 rounded py-1 hover:bg-slate-50 dark:hover:bg-slate-800">
             <input
               :id="`input-${task.id}`"
               type="checkbox"
@@ -53,24 +59,28 @@
               @change="store.toggleDone(task.id)"
             >
             <span class="flex-1 line-through opacity-60">{{ task.text }}</span>
-            <WlIconButton
-              :disabled="store.loading.value"
-              :variant="'secondary'"
+            <a
+              href="#"
+              role="button"
               title="Edit"
               aria-label="Edit task"
-              @click.stop="store.setEditing(task)"
+              :class="{ 'pointer-events-none opacity-50': store.loading.value }"
+              class="rounded p-1"
+              @click.stop.prevent="store.setEditing(task)"
             >
               <WlEditIcon />
-            </WlIconButton>
-            <WlIconButton
-              :disabled="store.loading.value"
-              :variant="'danger'"
+            </a>
+            <a
+              href="#"
+              role="button"
               title="Delete"
               aria-label="Delete task"
-              @click.stop="store.remove(task.id)"
+              :class="{ 'pointer-events-none text-danger-700 opacity-50': store.loading.value, 'text-danger-700': !store.loading.value }"
+              class="rounded p-1"
+              @click.stop.prevent="store.remove(task.id)"
             >
               <WlTrashAnimatedIcon :progress="0" />
-            </WlIconButton>
+            </a>
           </label>
         </li>
       </ul>
@@ -87,7 +97,6 @@ import { computed } from 'vue';
 
 import WlTrashAnimatedIcon from '~~/layers/base/components/icons/animated/WlTrashAnimatedIcon.vue';
 import WlEditIcon from '~~/layers/base/components/icons/static/WlEditIcon.vue';
-import WlIconButton from '~~/layers/experiments/components/forms-input/buttons/WlIconButton.vue';
 import type { Task, useTaskStore } from '~~/layers/to-do/utils/store';
 
 const props = defineProps<{
