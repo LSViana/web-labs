@@ -5,18 +5,24 @@
         To Do
       </h2>
       <div class="w-full rounded border p-3">
-        <ToDoTaskForm />
+        <ToDoTaskForm :store="taskStore" />
       </div>
-      <ToDoTaskList />
+      <ToDoTaskList :store="taskStore" />
     </WlContainer>
   </NuxtLayout>
 </template>
 
 <script lang="ts" setup>
+import { onMounted } from 'vue';
+
 import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
 import ToDoTaskForm from '~~/layers/to-do/components/ToDoTaskForm.vue';
 import ToDoTaskList from '~~/layers/to-do/components/ToDoTaskList.vue';
-import { provideTaskStore } from '~~/layers/to-do/utils/store';
+import { useTaskStore } from '~~/layers/to-do/utils/store';
 
-provideTaskStore();
+const taskStore = useTaskStore();
+
+onMounted(async () => {
+  await taskStore.load();
+});
 </script>
