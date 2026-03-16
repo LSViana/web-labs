@@ -88,10 +88,10 @@ import { computed } from 'vue';
 import WlTrashAnimatedIcon from '~~/layers/base/components/icons/animated/WlTrashAnimatedIcon.vue';
 import WlEditIcon from '~~/layers/base/components/icons/static/WlEditIcon.vue';
 import WlIconButton from '~~/layers/experiments/components/forms-input/buttons/WlIconButton.vue';
-import type { Task } from '~~/layers/to-do/utils/store';
+import type { Task, useTaskStore } from '~~/layers/to-do/utils/store';
 
 const props = defineProps<{
-  store: ReturnType<typeof import('~~/layers/to-do/utils/store').useTaskStore>
+  store: ReturnType<typeof useTaskStore>
 }>();
 
 const pendingTasks = computed(() => props.store.items.value.filter((task: Task) => !task.done));
