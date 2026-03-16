@@ -4,7 +4,9 @@
       <h2 class="text-2xl">
         To Do
       </h2>
-      <ToDoTaskForm />
+      <div class="w-full rounded border p-3">
+        <ToDoTaskForm />
+      </div>
       <ToDoTaskList />
     </WlContainer>
   </NuxtLayout>
