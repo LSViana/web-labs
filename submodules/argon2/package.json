@@ -1,0 +1,8 @@
+{
+  "name": "argon2",
+  "type": "module",
+  "main": "index.ts",
+  "dependencies": {
+    "argon2": "^0.44.0"
+  }
+}
