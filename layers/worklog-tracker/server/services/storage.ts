@@ -6,6 +6,7 @@ function getWorklogUrl(ticket: string): string {
   return 'https://gemmeus.atlassian.net/rest/api/3/issue/' + ticket + '/worklog';
 }
 
+const enableJiraIntegration = false;
 const supabaseClient = useProductivitySupabaseClient();
 
 export function useWorklogStorage() {
@@ -35,7 +36,7 @@ export function useWorklogStorage() {
 
     let jiraResponseBody: { worklogId: string, issueId: string };
 
-    if (credentials.apiPassword) {
+    if (enableJiraIntegration && credentials.apiPassword) {
       const startTime = new Date(worklogItemDb.started_at);
       const endTime = new Date(worklogItemDb.ended_at);
 
@@ -120,7 +121,7 @@ export function useWorklogStorage() {
       throw new Error('Worklog not found');
     }
 
-    if (credentials.apiPassword) {
+    if (enableJiraIntegration && credentials.apiPassword) {
       const worklogId = worklog.worklog_id;
       const issueId = worklog.issue_id;
 
@@ -146,7 +147,7 @@ export function useWorklogStorage() {
     const credentials = await getCredentials(credentialsId);
     const worklogItemDb = WorklogItemMapper.toDb(worklogItem, credentialsId);
 
-    if (credentials.apiPassword) {
+    if (enableJiraIntegration && credentials.apiPassword) {
       const startTime = new Date(worklogItemDb.started_at);
       const endTime = new Date(worklogItemDb.ended_at);
 
