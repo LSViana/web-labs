@@ -1,28 +1,28 @@
 <template>
   <div class="flex min-h-screen flex-col bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-100">
-    <NuxtLoadingIndicator />
-    <WlHeader />
+    <NuxtLoadingIndicator/>
+    <WlHeader/>
     <div class="flex-1">
-      <slot />
+      <slot/>
     </div>
-    <WlFooter />
+    <WlFooter/>
     <ClientOnly>
-      <span data-test="hydrated" />
+      <span data-test="hydrated"/>
     </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useHead } from '@vueuse/head';
+import { useHead } from '#unhead/composables'
 
-import WlFooter from '~~/layers/base/components/surroundings/WlFooter.vue';
-import WlHeader from '~~/layers/base/components/surroundings/WlHeader.vue';
+import WlFooter from '~~/layers/base/components/surroundings/WlFooter.vue'
+import WlHeader from '~~/layers/base/components/surroundings/WlHeader.vue'
 
 useHead({
   titleTemplate: (pageTitle) => {
     return pageTitle
-      ? `${pageTitle} - Web Labs`
-      : 'Web Labs';
+        ? `${pageTitle} - Web Labs`
+        : 'Web Labs'
   },
   meta: [
     {
@@ -49,5 +49,5 @@ useHead({
       href: 'https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Mono&display=swap',
     },
   ],
-});
+})
 </script>
