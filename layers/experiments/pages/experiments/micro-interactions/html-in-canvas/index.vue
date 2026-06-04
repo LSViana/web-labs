@@ -36,6 +36,16 @@ onMounted(() => {
     return
   }
 
+  const devicePixelRatio = window.devicePixelRatio || 1
+  const width = 300
+  const height = 150
+
+  canvas.value.style.width = `${width}px`
+  canvas.value.style.height = `${height}px`
+
+  canvas.value.width = width * devicePixelRatio
+  canvas.value.height = height * devicePixelRatio
+
   canvas.value.addEventListener('paint', (event) => {
     const canvasElement = canvas.value!
     const targetElement = target.value!
@@ -46,8 +56,8 @@ onMounted(() => {
     context.clearRect(0, 0, canvasElement.width, canvasElement.height)
     const targetTransform = context.drawElementImage(
         targetElement,
-        centerX - (targetElement.clientWidth / 2),
-        centerY - (targetElement.clientHeight / 2))
+        centerX - ((targetElement.clientWidth * devicePixelRatio) / 2),
+        centerY - ((targetElement.clientHeight * devicePixelRatio) / 2))
 
     targetElement.style.transform = targetTransform
   })
