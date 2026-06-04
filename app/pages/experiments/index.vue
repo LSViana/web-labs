@@ -5,7 +5,7 @@
         <p>{{ group.target }}</p>
         <ul class="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
           <li v-for="experiment in group.experiments" :key="experiment.route">
-            <WlExperimentCard :experiment="experiment" />
+            <WlExperimentCard :experiment="experiment"/>
           </li>
         </ul>
       </div>
@@ -14,9 +14,9 @@
 </template>
 
 <script lang="ts" setup>
-import WlContainer from '~~/layers/base/components/layout/WlContainer.vue';
-import type { Experiment } from '~~/layers/base/types/experiments';
-import WlExperimentCard from '~~/layers/experiments/components/experiments/WlExperimentCard.vue';
+import WlContainer from '~~/layers/base/components/layout/WlContainer.vue'
+import type { Experiment } from '~~/layers/base/types/experiments'
+import WlExperimentCard from '~~/layers/experiments/components/experiments/WlExperimentCard.vue'
 
 type ExperimentGroup = {
   target: string
@@ -71,6 +71,10 @@ const groups: ExperimentGroup[] = [
       {
         name: 'Abort Request',
         route: '/experiments/micro-interactions/abort-request',
+      },
+      {
+        name: 'HTML-in-Canvas',
+        route: '/experiments/micro-interactions/html-in-canvas',
       },
     ],
   },
@@ -144,5 +148,5 @@ const groups: ExperimentGroup[] = [
       },
     ],
   },
-];
+]
 </script>
