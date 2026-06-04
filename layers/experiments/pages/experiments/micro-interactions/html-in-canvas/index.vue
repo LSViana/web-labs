@@ -49,7 +49,6 @@ onMounted(() => {
         centerX - (targetElement.clientWidth / 2),
         centerY - (targetElement.clientHeight / 2))
 
-    console.log(targetTransform)
     targetElement.style.transform = targetTransform
   })
 
