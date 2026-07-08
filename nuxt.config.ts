@@ -1,3 +1,6 @@
+import { copyFile, mkdir } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -25,6 +28,7 @@ export default defineNuxtConfig({
   },
   experimental: {
     viewTransition: true,
+    externalVue: false,
   },
   compatibilityDate: '2024-08-04',
   typescript: {
